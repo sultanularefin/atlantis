@@ -11,6 +11,7 @@ import {
 // import { enableMapSet } from 'immer';
 // import toDoSlice from "../features/auth/todo_Slice.ts";
 import Scan_Slice from "../features/scan/scan_Slice.ts";
+import {productsApiSlice} from "../features/products/productsApiSlice.ts";
 
 
 
@@ -35,6 +36,8 @@ const combinedReducer = combineReducers({
 
     // todo_Reducer: toDoSlice,
     scan_Reducer: Scan_Slice,
+    [productsApiSlice.reducerPath]: productsApiSlice.reducer,
+
 
 
 
@@ -46,17 +49,20 @@ export const store = configureStore({
 
 
     reducer: rootReducer,
+    middleware: (getDefaultMiddleware) => {
+        return getDefaultMiddleware().concat(productsApiSlice.middleware);
+    },
     // OPTOIN 01
     // middleware: [...getDefaultMiddleware()]
 
     // 0PTION 02,
-    middleware: (getDefaultMiddleware) =>
+   /* middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware({
             // thunk: {
             //     extraArgument: myCustomApiService,
             // },
             serializableCheck: false,
-        }),
+        }),*/
 
 
 

@@ -15,6 +15,9 @@ const close_Button_Color = "rgba(255,0,0,0.15)";
 const ukbd_place_holder_TextColor="rgba(1, 41, 101, 0.5)";
 const very_light_blue_ukbd="rgba(1, 41, 101, 0.1)";
 
+
+const tripzchat_Top_BarBG_Color= "#f8f9f9";
+
 const drawer_BG_Color = 'rgba(230,233,237,0.97)';
 
 const color_For_Single_Item_In_LIst= "#012965";
@@ -44,6 +47,8 @@ const opacity_8_White_Overlay_Color = 'rgba(255, 255, 255, 0.7)'; // RGB(1,41,10
 
 const lightgrey= "#d3d3d3";
 
+const tripzchat_dimgrey ="#696969"; //dimgrey (#696969)
+
 
 // RGBA(Red-Green-Blue-Alpha)
 // The RGB color model is extended in this specification to include “alpha” to allow specification of the opacity of a color.
@@ -53,6 +58,7 @@ const cac_black = "#000000";//"#012169e6"; //#012965
 
 const cac_green_success= "rgba(67, 164, 34,1)";
 
+const tripzchat_lightsteelblue = "#b0c4de";// lightsteelblue;// lightsteelblue (#b0c4de)
 const cac_light_skyblue= "rgba(135,206,250,1)";
 const order_Tracking_Active_State_Color = "#b69329";
 
@@ -87,11 +93,10 @@ const backOverlayColor_Blue = 'rgba(38,192,211,0.2)';
 
 const backOverlayColor_Green_Dark = 'rgba(50, 198, 130, 1.2)';
 
+const btn_Press_Color ='#c8d6e5';
 
 
-const new_Theme_BG_Color= "#124071";
 
-const new_Theme_Place_Holder_Color= "#74b6e6";
 
 
 export {
@@ -141,8 +146,10 @@ export {
     cac_Disabled_Text_Input,
     cac_light_skyblue,
     lightgrey,
-    new_Theme_BG_Color,
-    new_Theme_Place_Holder_Color
+    tripzchat_dimgrey,
+    tripzchat_lightsteelblue,
+    tripzchat_Top_BarBG_Color,
+    btn_Press_Color,
 };
 
 

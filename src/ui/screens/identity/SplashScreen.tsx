@@ -85,7 +85,7 @@ const SplashScreen = ({
     return navigation.dispatch(
         CommonActions.reset({
           index: 0,
-          routes: [{name: 'Scanner_Root_Page'}],
+          routes: [{name: 'Catalog_Home_Page'}],
         }),
     );
   };

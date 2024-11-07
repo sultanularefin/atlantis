@@ -24,7 +24,7 @@ import {SafeAreaView, StatusBar, StyleSheet, View} from 'react-native';
 import {store} from "./appStore/app/store";
 import SplashScreen from "./ui/screens/identity/SplashScreen";
 
-import Scanner_Root_Page from "./ui/screens/Scanner_Root_Page.tsx";
+import Catalog_Home_Page from "./ui/screens/Catalog_Home_Page.tsx";
 import Logger_Scan_Page from "./ui/screens/Logger_Scan_Page.tsx";
 
 const Native_Root_Stack =
@@ -46,8 +46,19 @@ export type Native_Root_Stack_ParamList = {
     SplashScreen: {
         name: string,
     };
-    Scanner_Root_Page: undefined,
+    Catalog_Home_Page: undefined,
     Logger_Scan_Page: undefined,
+    // AnyUsersFeedz : undefined;
+    Product_Details_Page: {
+        single_Product_ID: string,//:number,
+
+
+        // single_Product_ID: item_Data._id,
+        add_Button_Pressed_State: boolean,//item_Data.btn_Pressed,
+        quantity: number,//item_Data.temp_Cart_Quantity,
+
+
+    };
 }
 export interface Props {
 
@@ -91,9 +102,25 @@ const App: React.FC<Props> = (props) => {
                                 />
 
 
+
                                 <Native_Root_Stack.Screen
-                                    name="Scanner_Root_Page"
-                                    component={Scanner_Root_Page}
+                                    name="Product_Details_Page"
+                                    component={Product_Details_Page}
+                                    options={{
+                                        headerShown: false,
+
+
+                                        // presentation: 'transparentModal',
+                                    }}
+
+                                    // initialParams={{single_Product_ID: "635f742ff26b331cb5dcf6ab"}}
+
+                                />
+
+
+                                <Native_Root_Stack.Screen
+                                    name="Catalog_Home_Page"
+                                    component={Catalog_Home_Page}
                                     options={{
                                         headerShown: false,
                                         // headerShown: true,
