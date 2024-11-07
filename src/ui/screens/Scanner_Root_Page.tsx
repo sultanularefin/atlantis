@@ -128,7 +128,7 @@ const Scanner_Root_Page: React.FC<Scanner_Root_Page_Props> = ({navigation}) => {
                 flexDirection: 'column',
             }}>
             <Custom_Header_Root_Scan_Page
-                page_title={'Scanned Items'}
+                page_title={'catalog'}
                 comp_Height={header__Height}
                 total_Width={deviceWidth}
                 // navigation={navigation}
