@@ -1,10 +1,12 @@
 import {Text, View} from "react-native";
-import Indicator_Common_Without_Params from "./Indicator_Common";
+// import Indicator_Common_Without_Params from "./Indicator_Common";
 import React from "react";
+import Indicator_Common from "./Indicator_Common";
+// import Indicator_Common from "./Indicator_Common";
 
 
 
-export interface Indicator_With_Loading_TextBottom_Props{
+interface Indicator_With_Loading_TextBottom_Props{
     device_width: number;
     device_height: number;
 }
@@ -30,7 +32,10 @@ const Indicator_With_Loading_TextBottom: React.FC<
                     flexDirection: 'column',
                 }
             }>
-            <Indicator_Common_Without_Params />
+            <Indicator_Common
+                color={'dodgerblue'}
+
+            />
             <Text
                 style={{
                     alignSelf: 'center',

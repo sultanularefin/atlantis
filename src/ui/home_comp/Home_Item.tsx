@@ -22,15 +22,15 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 
 import EvilIcons from "react-native-vector-icons/EvilIcons";
 
-import {Doc} from "../../../appStore/interfaces_Slice/product_Related_Interfaces";
+// import {Doc} from "../../../appStore/interfaces_Slice/product_Related_Interfaces";
 
-import {
+/*import {
     // convert_TO_BDT_From_GBP,
     monetary_Unit_Interface,
     // MonetaryUnits,
     // previousPrice,
     // priceConvertToAlternate
-} from "../../ui_Utils/localization_utils";
+} from "../../ui_Utils/localization_utils";*/
 
 const BagIcon = require("../../../assets/images/svg/bag-shopping.svg");
 const Bag = require("../../../assets/images/Bag.svg");
@@ -60,14 +60,14 @@ import {
     ukbd_red,
     very_light_red_ukbd
 } from "../../ui_Utils/important_Colors";*/
-import {useAppDispatch} from "../../../appStore/app/hooks";
-import {single_Product__Show_Details_Button_true} from "../../../appStore/Reducers/product_Slice";
-import {base_Image_URL} from "../../../utils_server/server_settings";
-import Add_Cart_OR_Favorite__Btn_Home_Page
-    from "../../screens/details_page/add_button/home_page/Add_Cart_OR_Favorite__Btn_Home_Page";
+// import {useAppDispatch} from "../../../appStore/app/hooks";
+// import {single_Product__Show_Details_Button_true} from "../../../appStore/Reducers/product_Slice";
+// import {base_Image_URL} from "../../../utils_server/server_settings";
+/*import Add_Cart_OR_Favorite__Btn_Home_Page
+    from "../../screens/details_page/add_button/home_page/Add_Cart_OR_Favorite__Btn_Home_Page";*/
 import Item_Detail from "./Item_Detail";
 import Ten_Off from "./Ten_Off";
-import WAS_Value from "./WAS_Value";
+// import WAS_Value from "./WAS_Value";
 import Ten_15_Days_Home from "./Ten_15_Days_Home";
 // import Feather from "react-native-vector-icons/Feather";
 // import MaterialIcons from "react-native-vector-icons/MaterialIcons";
@@ -86,8 +86,8 @@ import
 
 // import Vertical_Devider_Full_Width_Active_Order from "../misc/Vertical_Devider_Full_Width_Active_Order";
 import hairlineWidth = StyleSheet.hairlineWidth;
-import Item_Price_Related_Comps from "./Item_Price_Related_Comps";
-import Item_Source_Brand_Supplier from "./Item_Source_Brand_Supplier";
+// import Item_Price_Related_Comps from "./Item_Price_Related_Comps";
+// import Item_Source_Brand_Supplier from "./Item_Source_Brand_Supplier";
 // import FastImage from "react-native-fast-image";
 import {
     bag_Bg_Color_From_HSLA,
@@ -99,6 +99,14 @@ import {
 } from "../ui_utils/important_Colors.ts";
 import Vertical_Devider_Full_Width_Active_Order from "./misc/Vertical_Devider_Full_Width_Active_Order.tsx";
 import Image_Pre_Fetch_1 from "../ui_utils/Image_Pre_Fetch_1.tsx";
+import Item_Price_Related_Comps from "../comps/Item_Price_Related_Comps.tsx";
+import {monetary_Unit_Interface} from "../ui_utils/localization_utils.ts";
+import {useAppDispatch} from "../../lib/app/hooks.ts";
+import {image_base_url} from "../../config/Config.ts";
+import {single_Product__Show_Details_Button_true} from "../../lib/features/products/productSlice.ts";
+import {One_Product_for_Home_Page_Interface} from "../../interfaces/products/product.ts";
+import Add_Cart_OR_Favorite__Btn_Home_Page
+    from "../screens/details_page/add_button/home_page/Add_Cart_OR_Favorite__Btn_Home_Page.tsx";
 
 
 export interface Item_Interface {
@@ -108,16 +116,16 @@ export interface Item_Interface {
     item_Pressed: (itemID: string) => void,
     wish_Button_Pressed: (itemID: string) => void,
     */
-    item_Data: Doc,
+    item_Data: One_Product_for_Home_Page_Interface,
     comp_Height: number, // height is dynamic
     comp_Width: number,
     inner_Comp_Width_2: number,
 
     currency_Code_Delivery: monetary_Unit_Interface,
-    local_Currency_2: monetary_Unit_Interface,
+    // local_Currency_2: monetary_Unit_Interface,
     // exchange_Rate: number,
 
-    conversion_Rate: number, //={conversion_Rate}
+    // conversion_Rate: number, //={conversion_Rate}
     // show_Details_Btn: boolean,
     index_Value: number,
     is_Small_Device: boolean,
@@ -136,9 +144,9 @@ const Home_Item: React.FC<Item_Interface> = (
         comp_Width,
         inner_Comp_Width_2,
         currency_Code_Delivery,
-        local_Currency_2,
+        // local_Currency_2,
         // exchange_Rate,
-        conversion_Rate,//: number,
+        // conversion_Rate,//: number,
         // show_Details_Btn,
         index_Value,
         is_Small_Device,
@@ -148,7 +156,7 @@ const Home_Item: React.FC<Item_Interface> = (
     }) => {
 
 
-    // console.log("__item_Data.name: ", item_Data.name);
+    // console.log("__item_Data.title: ", item_Data.title);
     // console.log("__item_Data.price: ", item_Data.price);
     // console.log("__item_Data.item_Data.view_price: ", item_Data.view_price);
 
@@ -165,7 +173,7 @@ const Home_Item: React.FC<Item_Interface> = (
 
 
         return item_navigation.navigate('Product_Details_Page', {
-            single_Product_ID: item_Data._id,
+            single_Product_ID: item_Data.id,
         });
 
         /*
@@ -182,7 +190,7 @@ const Home_Item: React.FC<Item_Interface> = (
 
         console.log("___product_Details_Button_Pressed___");
         return item_navigation.navigate('Product_Details_Page', {
-            single_Product_ID: item_Data._id,
+            single_Product_ID: item_Data.id,
             add_Button_Pressed_State: item_Data.btn_Pressed,
             quantity: item_Data.temp_Cart_Quantity,
 
@@ -315,18 +323,15 @@ const Home_Item: React.FC<Item_Interface> = (
                         }}>
 
 
-                        {
 
-                            (item_Data.offer_percentage === 0)
-                                ? null : (
                                     <Ten_Off
                                         comp_Height={deail_BTN_10_P_Off_Height}
                                         // comp_Height={deail_BTN_10_P_Off_Height}
                                         comp_Width={deail_BTN_10_P_Off_Width}
                                     />
-                                )
 
-                        }
+
+
 
                         {
                             item_Data.show_Details_Btn ? (
@@ -361,9 +366,9 @@ const Home_Item: React.FC<Item_Interface> = (
 
                         {
 
-                            (!(item_Data.image_url[0]))
+                            (!(item_Data.image[0]))
                                 ? null
-                                : (item_Data.image_url[0] !== "") ? (
+                                : (item_Data.image[0] !== "") ? (
 
 
 
@@ -383,7 +388,7 @@ const Home_Item: React.FC<Item_Interface> = (
                                                    }}
 
                                                    source={{
-                                                       uri: `${base_Image_URL}${item_Data.image_url[0]}`,
+                                                       uri: `${base_image}${item_Data.image[0]}`,
 
                                                    }}
 
@@ -409,7 +414,7 @@ const Home_Item: React.FC<Item_Interface> = (
                                             }}
 
                                             source={{
-                                                uri: `${base_Image_URL}${item_Data.image_url[0]}`,
+                                                uri: `${base_image}${item_Data.image[0]}`,
                                                 priority: FastImage.priority.normal,
                                             }}
 
@@ -428,9 +433,9 @@ const Home_Item: React.FC<Item_Interface> = (
                                             // inner_Comp_Width_2
 
 
-                                            imageUrl={`${base_Image_URL}${item_Data.image_url[0]}`}
+                                            imageUrl={`${image_base_url}${item_Data.image[0]}`}
                                             // id_temp={`${props.index}+${props.index}+${props.item.oneURI}`}
-                                            id_temp={item_Data.image_url[0]}
+                                            id_temp={item_Data.image[0]}
 
                                             resizeMode={(Platform.OS==='android')
                                                 ?"center" :"contain"
@@ -480,7 +485,7 @@ const Home_Item: React.FC<Item_Interface> = (
                                   }
                                   ellipsizeMode="tail"
 
-                            >{item_Data.name}
+                            >{item_Data.title}
                                 {/*{index_Value}*/}
 
                             </Text>
@@ -490,21 +495,20 @@ const Home_Item: React.FC<Item_Interface> = (
                         <Item_Price_Related_Comps
 
                             item_Data__price={item_Data.price}
-                            item_Data__offer_percentage={item_Data.offer_percentage}
+                            // item_Data__offer_percentage={item_Data.offer_percentage}
                             comp_Height={gesture_Detector_Height/ 4}
                             inner_Comp_Width_2={inner_Comp_Width_2}
                             currency_Code_Delivery={currency_Code_Delivery}
-                            local_Currency_2={local_Currency_2}
-                            conversion_Rate={conversion_Rate}
+                            // local_Currency_2={local_Currency_2}
+                            // conversion_Rate={conversion_Rate}
                             index_Value={index_Value}
                         />
 
 
-                        {
-                            (item_Data.delivery_time_static !== "") ? (
+
                                     <Ten_15_Days_Home
                                         comp_Height_2={gesture_Detector_Height / 16}
-                                        content={item_Data.delivery_time_static}
+                                        content={"Delivers within 10 to 15 days"}
                                         comp_Width={inner_Comp_Width_2}
 
                                         bg_Color=
@@ -512,9 +516,7 @@ const Home_Item: React.FC<Item_Interface> = (
                                             {'transparent'}
 
                                         //{'tomato'}
-                                    />)
-                                : null
-                        }
+                                    />
 
                         {/*  // Details || 10 % off button + image background +  name + Item_Price_Related_Comps
 
@@ -544,7 +546,7 @@ const Home_Item: React.FC<Item_Interface> = (
                         }
 
 
-                        <Item_Source_Brand_Supplier
+                        {/*<Item_Source_Brand_Supplier
 
                             supplier_icon= {item_Data.supplier_icon}
                             brand_icon= {item_Data.brand_icon}
@@ -558,7 +560,7 @@ const Home_Item: React.FC<Item_Interface> = (
                             //{'transparent'}
                             //{'tomato'}
 
-                        />
+                        />*/}
 
                         {/*  // Details || 10 % off button + image background +  name + Item_Price_Related_Comps
 
@@ -653,7 +655,7 @@ const Home_Item: React.FC<Item_Interface> = (
                 t_Height={deail_BTN_10_P_Off_Height}
                 // t_Height={gesture_Detector_Height-deail_BTN_10_P_Off_Height}
                 t_Width={width_Without_Padding} // padding 5*2,
-                product_Id={item_Data._id}
+                product_Id={item_Data.id}
                 index={index_Value}
                 quantity={item_Data.temp_Cart_Quantity}
                 add_Button_Pressed_State={item_Data.btn_Pressed}

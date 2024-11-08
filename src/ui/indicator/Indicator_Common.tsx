@@ -5,16 +5,25 @@ import {
 
 import React from "react";
 
+interface Indicator_Common_Props {
+    color: string
+}
 
-const Indicator_Common_Without_Params=()=>{
+const Indicator_Common: React.FC<
+    Indicator_Common_Props
+> = ({
+    color,
+})=>{
+
 
     return(
+
         <ActivityIndicator
             size="large"
-            color="dodgerblue"
+            color={color}
         />
     );
 
 
 };
-export default Indicator_Common_Without_Params;
+export default Indicator_Common;

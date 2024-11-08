@@ -10,9 +10,10 @@ import {
 } from '@reduxjs/toolkit';
 // import { enableMapSet } from 'immer';
 // import toDoSlice from "../features/auth/todo_Slice.ts";
-import Scan_Slice from "../features/scan/scan_Slice.ts";
+// import Scan_Slice from "../features/scan/scan_Slice.ts";
 import {productsApiSlice} from "../features/products/productsApiSlice.ts";
-
+import { setupListeners } from '@reduxjs/toolkit/query';
+import productSlice from "../features/products/productSlice.ts";
 
 
 
@@ -35,8 +36,9 @@ const combinedReducer = combineReducers({
 
 
     // todo_Reducer: toDoSlice,
-    scan_Reducer: Scan_Slice,
+    // scan_Reducer: Scan_Slice,
     [productsApiSlice.reducerPath]: productsApiSlice.reducer,
+    product_Reducer: productSlice,
 
 
 
@@ -96,6 +98,10 @@ const rootReducer = (state, action) => {
  */
 
 
+
+// optional, but required for refetchOnFocus/refetchOnReconnect behaviors
+// see `setupListeners` docs - takes an optional callback as the 2nd arg for customization
+setupListeners(store.dispatch);
 
 export type AppDispatch = typeof store.dispatch;
 export type RootState = ReturnType<typeof store.getState>;
