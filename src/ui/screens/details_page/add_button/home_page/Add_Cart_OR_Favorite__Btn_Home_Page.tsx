@@ -19,7 +19,7 @@ import EvilIcons from "react-native-vector-icons/EvilIcons";
 import hairlineWidth = StyleSheet.hairlineWidth;
 
 
-import {
+/*import {
     decrement_Item_From_Home,
 
     increment_Decrement_Single_Item_Payload_Interface,
@@ -37,19 +37,28 @@ import {
     select_Country_ID,
     export_Unique_Cart_ID, select_Store_Data,
     // diable_Btn_Pressed_State_In_Home_Page_0
-} from "../../../../../appStore/Reducers/product_Slice";
+} from "../../../../../appStore/Reducers/product_Slice";*/
 import Decrement_Btn_Home_Page from "./Decrement_Btn_Home_Page";
 import Increment_Button_Home_Page from "./Increment_Button_Home_Page";
 import Love_Button_Home_Page from "./Love_Button_Home_Page";
-import {Store} from "../../../../../appStore/interfaces_Slice/product_Related_Interfaces";
-import {get_Detail_By_User_ID_server_Token} from "../../../../../appStore/interfaces_Slice/user_Related_Interfaces";
-import {select_Logger_Data_BY_ID} from "../../../../../appStore/Reducers/authSlice";
-import {
+// import {Store} from "../../../../../appStore/interfaces_Slice/product_Related_Interfaces";
+// import {get_Detail_By_User_ID_server_Token} from "../../../../../appStore/interfaces_Slice/user_Related_Interfaces";
+// import {select_Logger_Data_BY_ID} from "../../../../../appStore/Reducers/authSlice";
+/*import {
     add_Item_To_Cart_Payload_Interface,
     add_To_Cart_API,
     select_Cart_ID
-} from "../../../../../appStore/Reducers/cart_order_Slice";
+} from "../../../../../appStore/Reducers/cart_order_Slice";*/
 import {useAppDispatch, useAppSelector} from "../../../../../lib/app/hooks.ts";
+import {
+    decrement_Item_From_Home,
+    disable_Btn_Pressed_State_In_Home_Page_0,
+    increment_Item_From_Home,
+    select_Local_Cart,
+    select_Local_Cart_Price_Localized_Monetary_Unit,
+    update_All_Products_Add_BTN_Pressed_State__And_Single_Product_Add_Btn_Pressed_State
+} from "../../../../../lib/features/products/productSlice.ts";
+import {local_Cart_Item} from "../../../../../interfaces/products/product.ts";
 
 
 interface Add_Cart_OR_Favorite__Btn_Home_Page {
@@ -133,16 +142,16 @@ const Add_Cart_OR_Favorite__Btn_Home_Page: React.FC<Add_Cart_OR_Favorite__Btn_Ho
 
     const local_Cart: local_Cart_Item[] = useAppSelector(select_Local_Cart);
 
-    const localStorage: get_Detail_By_User_ID_server_Token = useAppSelector(select_Logger_Data_BY_ID);
-    const product_Store_ID: string = useAppSelector(select_Store_ID);
-    const city_ID: string = useAppSelector(select_City_ID);
-    const country_ID: string = useAppSelector(select_Country_ID);
+    // const localStorage: get_Detail_By_User_ID_server_Token = useAppSelector(select_Logger_Data_BY_ID);
+    // const product_Store_ID: string = useAppSelector(select_Store_ID);
+    // const city_ID: string = useAppSelector(select_City_ID);
+    // const country_ID: string = useAppSelector(select_Country_ID);
 
-    const cart_ID: string = useAppSelector(select_Cart_ID);
+    // const cart_ID: string = useAppSelector(select_Cart_ID);
 
-    const unique_Cart_ID  = useAppSelector(export_Unique_Cart_ID);
+    // const unique_Cart_ID  = useAppSelector(export_Unique_Cart_ID);
 
-    const store_Data:Store = useAppSelector(select_Store_Data);
+    // const store_Data:Store = useAppSelector(select_Store_Data);
 
 
 
@@ -165,7 +174,7 @@ const Add_Cart_OR_Favorite__Btn_Home_Page: React.FC<Add_Cart_OR_Favorite__Btn_Ho
         dispatch(increment_Item_From_Home(index));
 
 
-        const payload:add_Item_To_Cart_Payload_Interface= {
+       /* const payload:add_Item_To_Cart_Payload_Interface= {
 
 
             items: local_Cart,//local_Ca
@@ -177,10 +186,10 @@ const Add_Cart_OR_Favorite__Btn_Home_Page: React.FC<Add_Cart_OR_Favorite__Btn_Ho
             server_token: null,
             user_id: null,  // localStorage.user._id,
 
-            /*
+            /!*
             server_token: (localStorage.user.server_token==="")?null:localStorage.user.server_token,
             user_id: (localStorage.user._id==="")?null:localStorage.user._id,  // localStorage.user._id,
-            */
+            *!/
 
 
 
@@ -195,21 +204,21 @@ const Add_Cart_OR_Favorite__Btn_Home_Page: React.FC<Add_Cart_OR_Favorite__Btn_Ho
 
 
 
-            /*
+            /!*
             cart_id: null|string,//cart_id ? cart_id : null,
             server_token: null|string,
             user_id: null|string,
 
             user_type_id: null| number,
 
-            */
-            /*
+            *!/
+            /!*
             store_details,
             product_details,
             city,
             country,
 
-            */
+            *!/
             // q: q
             quantity: quantity,
 
@@ -242,7 +251,7 @@ const Add_Cart_OR_Favorite__Btn_Home_Page: React.FC<Add_Cart_OR_Favorite__Btn_Ho
 
         dispatch(add_To_Cart_API(payload));
 
-        return;
+        return;*/
 
     };
 

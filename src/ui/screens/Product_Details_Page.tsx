@@ -86,7 +86,12 @@ import Detail_Page_Image_VList_Comp from "../details_page/image_part/Detail_Page
 import hairlineWidth = StyleSheet.hairlineWidth;
 import {Native_Root_Stack_ParamList} from "../../App.tsx";
 import {useAppDispatch, useAppSelector} from "../../lib/app/hooks.ts";
-import {One_Product_for_Home_Page_Interface} from "../../interfaces/products/product.ts";
+import {
+    get_One_Product_Payload__Interface,
+    One_Product_for_Home_Page_Interface
+} from "../../interfaces/products/product.ts";
+import {export_Single_Product_Details} from "../../lib/features/products/productSlice.ts";
+import {useGetOneProductQuery, useGetProductsQuery} from "../../lib/features/products/productsApiSlice.ts";
 /*import Vertical_Devider_Full_Width_Active_Order from "../../components/misc/Vertical_Devider_Full_Width_Active_Order";
 import {Doc} from "../../../appStore/interfaces_Slice/product_Related_Interfaces";*/
 // import {iImageURIStringWithKey} from "./multiple_Image_/MultipleImageHeaderNull";
@@ -128,7 +133,7 @@ const Product_Details_Page = ({
 
 
     // redux related codes begins here
-    const localStorage: get_Detail_By_User_ID_server_Token = useAppSelector(select_Logger_Data_BY_ID);
+    // const localStorage: get_Detail_By_User_ID_server_Token = useAppSelector(select_Logger_Data_BY_ID);
 
     // const selected_Tab_Product_Detail_Page_State: number = useAppSelector(select_product_Detail_Tab_Index);
 
@@ -153,81 +158,66 @@ const Product_Details_Page = ({
     };
     // redux related codes ends here
 
+    const add_button_already_pressed_previously=()=>{
+
+        /*
+                   dispatch(update_single_Product_Add_Btn_Pressed_State(true));
+
+                   if (route.params.quantity){
+
+                       dispatch(update_single_Product_Quantity(route.params.quantity));
+                   }
+                   */
+
+
+
+
+
+        const main_F1 = async () => {
+
+
+            const payload_for_fetching_Single_Prod: get_One_Product_Payload__Interface = {
+
+                product_Id: route.params.single_Product_ID,
+                btn_Pressed_State: route.params.add_Button_Pressed_State,
+                prev_Quantity: route.params.add_Button_Pressed_State?route.params.quantity:0,
+            };
+
+            console.log("__payload_for_fetching_Single_Prod__:",payload_for_fetching_Single_Prod);
+
+            // useGetOneProductQuery
+            // await dispatch(get_single_item_Async(payload_for_fetching_Single_Prod));
+
+
+            const {
+                data: detail_of_product,
+                isLoading: is_detail_of_product_Loading,
+                isError: detail_of_product_load_Error,
+            } = useGetOneProductQuery(
+                product_Id: route.params.single_Product_ID,
+                btn_Pressed_State: route.params.add_Button_Pressed_State,
+                prev_Quantity: route.params.add_Button_Pressed_State?route.params.quantity:0,
+            );
+            // = useGetProductsQuery({
+            //     limit: 10,
+            //     // offset: 1,
+            // });
+
+
+        };
+
 
     useFocusEffect(
         useCallback(() => {
 
 
-            const main_F1 = async () => {
 
-
-                // console.log("postID: ", "SSS");
-
-                // await AsyncStorage.getItem('user_id');
-
-
-                // console.log("dispatch(add_To_Cart_Pressed pressed)");
-
-                // set_Add_Button_Pressed_State(true);
-
-
-                if (route.params.add_Button_Pressed_State) {
-
-                    /*
-                    dispatch(update_single_Product_Add_Btn_Pressed_State(true));
-
-                    if (route.params.quantity){
-
-                        dispatch(update_single_Product_Quantity(route.params.quantity));
-                    }
-                    */
-
-
-                    const payload_for_fetching_Single_Prod: get_One_Product_Payload__Interface = {
-                        // userID: localStorage.user_id?localStorage.user_id:0,
-                        userID: localStorage?.user?._id ? localStorage.user._id : "",
-                        product_Id: route.params.single_Product_ID,
-
-                        btn_Pressed_State: true,
-                        prev_Quantity: route.params.quantity,
-                    };
-
-                    console.log("__payload_for_fetching_Single_Prod__:",payload_for_fetching_Single_Prod);
-
-
-                    await dispatch(get_single_item_Async(payload_for_fetching_Single_Prod));
-
-                }
-
-
-                else {
-
-
-                        const payload_for_fetching_Single_Prod: get_One_Product_Payload__Interface = {
-                            // userID: localStorage.user_id?localStorage.user_id:0,
-                            userID: localStorage?.user?._id ? localStorage.user._id : "",
-                            product_Id: route.params.single_Product_ID,
-                            btn_Pressed_State: false,
-                            prev_Quantity: 0,//route.params.quantity,
-                        };
-
-                        console.log("__payload_for_fetching_Single_Prod__:",payload_for_fetching_Single_Prod);
-
-
-                        await dispatch(get_single_item_Async(payload_for_fetching_Single_Prod));
-                        // await dispatch(get_All_Products(payLoad_postID_userID));
-
-                        // await main_F1();
-
-                }
-
-            };
 
             main_F1();
 
 
         }, [
-            route.params.single_Product_ID,
+            // route.params.single_Product_ID,
         ]),
     );
 

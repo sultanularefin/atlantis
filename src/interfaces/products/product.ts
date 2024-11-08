@@ -60,10 +60,22 @@ interface local_Cart_Item /*extends Doc*/
 };
 
 
+interface get_One_Product_Payload__Interface {
+    // userID: string,//number; ///string;
+    // user_Interest_data: string;
+    product_Id: string,
+
+    btn_Pressed_State: boolean,
+    prev_Quantity: number,
+
+}
+
+
 export type {
     One_Product_for_Home_Page_Interface,
     product_Rating_Interface,
     local_Cart_Item,
     One_Product_Item_For_Detail_Interface,
+    get_One_Product_Payload__Interface,
 };
 
