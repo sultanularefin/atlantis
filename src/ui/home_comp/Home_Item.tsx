@@ -97,7 +97,7 @@ import {
     ukbd_red,
     very_light_red_ukbd
 } from "../ui_utils/important_Colors.ts";
-import Vertical_Devider_Full_Width_Active_Order from "./misc/Vertical_Devider_Full_Width_Active_Order.tsx";
+// import Vertical_Devider_Full_Width_Active_Order from "./misc/Vertical_Devider_Full_Width_Active_Order.tsx";
 import Image_Pre_Fetch_1 from "../ui_utils/Image_Pre_Fetch_1.tsx";
 import Item_Price_Related_Comps from "../comps/Item_Price_Related_Comps.tsx";
 import {monetary_Unit_Interface} from "../ui_utils/localization_utils.ts";
@@ -107,6 +107,7 @@ import {single_Product__Show_Details_Button_true} from "../../lib/features/produ
 import {One_Product_for_Home_Page_Interface} from "../../interfaces/products/product.ts";
 import Add_Cart_OR_Favorite__Btn_Home_Page
     from "../screens/details_page/add_button/home_page/Add_Cart_OR_Favorite__Btn_Home_Page.tsx";
+import Vertical_Devider_Full_Width_Active_Order from "../../divider/Vertical_Divider_Full_Width_Active_Order.tsx";
 
 
 export interface Item_Interface {

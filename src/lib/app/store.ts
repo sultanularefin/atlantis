@@ -14,6 +14,7 @@ import {
 import {productsApiSlice} from "../features/products/productsApiSlice.ts";
 import { setupListeners } from '@reduxjs/toolkit/query';
 import productSlice from "../features/products/productSlice.ts";
+import auth_Slice from "../features/auth/auth_Slice.ts";
 
 
 
@@ -39,6 +40,7 @@ const combinedReducer = combineReducers({
     // scan_Reducer: Scan_Slice,
     [productsApiSlice.reducerPath]: productsApiSlice.reducer,
     product_Reducer: productSlice,
+    auth_Reducer: auth_Slice,
 
 
 

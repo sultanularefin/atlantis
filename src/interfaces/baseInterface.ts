@@ -1,13 +1,13 @@
 
 export interface baseInterface {
 
-    api_Inovocation_Status: string;
+    /*api_Inovocation_Status: string;
     isFetching: boolean,
     isSuccess: boolean,
     isError: boolean,
     errorMessage: string,           //5
 
-    isComplete: boolean,
+    isComplete: boolean,*/
 
 }
 

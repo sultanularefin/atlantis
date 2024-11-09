@@ -12,28 +12,36 @@ import EvilIcons from "react-native-vector-icons/EvilIcons";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import Feather from "react-native-vector-icons/Feather";
-import {ukbd_navy_blue, ukbd_red, ukbd_red_light} from "../ui_Utils/important_Colors";
-import {
+// import {ukbd_navy_blue, ukbd_red, ukbd_red_light} from "../ui_Utils/important_Colors";
+/*import {
     select_Logger_Data_BY_ID,
     UKBD_App_Login_Response_With_Password
 } from "../../appStore/Reducers/authSlice";
-import {useAppSelector} from "../../appStore/app/hooks";
-import {get_Detail_By_User_ID_server_Token} from "../../appStore/interfaces_Slice/user_Related_Interfaces";
+import {useAppSelector} from "../../appStore/app/hooks";*/
+// import {get_Detail_By_User_ID_server_Token} from "../../appStore/interfaces_Slice/user_Related_Interfaces";
 import hairlineWidth = StyleSheet.hairlineWidth;
 import SimpleLineIcons from "react-native-vector-icons/SimpleLineIcons";
-import AppStack from "../../navigation/AppStack";
+// import AppStack from "../../navigation/AppStack";
 import Home_Button from "./sub_Comps/Home_Button";
 import Search_Button from "./sub_Comps/Search_Button";
-import Horizontal_Divider_Given_Height_Active_Order
-    from "../components/misc/Horizontal_Divider_Given_Height_Active_Order";
+/*import Horizontal_Divider_Given_Height_Active_Order
+    from "../components/misc/Horizontal_Divider_Given_Height_Active_Order";*/
 import User_Button from "./sub_Comps/User_Button";
-import {
+/*import {
     select_Local_Cart,
     select_Local_Cart_Price_Localized_Monetary_Unit
-} from "../../appStore/Reducers/product_Slice";
+} from "../../appStore/Reducers/product_Slice";*/
+
 import Bag_Button, {Monetary_Header_Text_Style} from "./sub_Comps/Bag_Button";
 import Monetary_Value_OF_Cart from "./sub_Comps/Monetary_Value_OF_Cart";
-import {base_Image_URL} from "../../utils_server/server_settings";
+import Horizontal_Divider_Given_Height_Active_Order
+    from "../../divider/Horizontal_Divider_Given_Height_Active_Order.tsx";
+import {
+    ukbd_navy_blue,
+    ukbd_red,
+    ukbd_red_light
+} from "../ui_utils/important_Colors.ts";
+// import {base_Image_URL} from "../../utils_server/server_settings";
 
 const Bag = require("../../assets/images/Bag.svg");
 const ukbd_image = require("../../assets/images/UKBD.png");
@@ -46,7 +54,7 @@ export interface Header_Props {
     // bg_Color: string,
 
 }
-import { useDrawerStatus } from '@react-navigation/drawer';
+// import { useDrawerStatus } from '@react-navigation/drawer';
 const Header_DashBoard_Home: React.FC<Header_Props> = ({
                                                            nav,
                                                            comp_Height,
@@ -65,15 +73,18 @@ const Header_DashBoard_Home: React.FC<Header_Props> = ({
 
 // ...
 
-    const isDrawerOpen = useDrawerStatus() === 'open';
+    // const isDrawerOpen = useDrawerStatus() === 'open';
 
 
     const nav_Icon_Pressed=()=>{
 
-        console.log("navicon pressed",isDrawerOpen);
+        // console.log("navicon pressed",isDrawerOpen);
         // navigation.toggleDrawer();
         // return nav.toggleDrawer();
-        return nav.openDrawer();
+        // return nav.openDrawer();
+
+        console.log("at nav_Icon_Pressed");
+
     };
 
     return (

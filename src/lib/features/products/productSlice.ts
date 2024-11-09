@@ -13,6 +13,10 @@ import {
     One_Product_Item_For_Detail_Interface
 } from "../../../interfaces/products/product.ts";
 import {increment_Decrement_Single_Item_Payload_Interface} from "../../../interfaces/products/increment.ts";
+import {
+  // MultipleImageHeaderNull_route_date_interface,
+  MultipleImageHeaderNull_route_date_interface,
+} from '../../../ui/screens/MultipleImageHeaderNull.tsx';
 interface products_State_Interface {
     // value: number
 
@@ -24,6 +28,8 @@ interface products_State_Interface {
     local_Cart_Weight_Total: number,
 
     single_Product_State: One_Product_Item_For_Detail_Interface,
+    two_Image__data_For_Tag_State: MultipleImageHeaderNull_route_date_interface,
+
 }
 
 
@@ -46,6 +52,28 @@ const initialState: products_State_Interface = {
     local_Cart_Weight_Total: 0,
 
     single_Product_State: {} as One_Product_Item_For_Detail_Interface,
+
+    two_Image__data_For_Tag_State:
+        {
+            /*
+            date:  '',//string, //props.date,
+            feedOwnerName: '', //string,
+            */
+            some_uris: [], //string[],
+            tapIndex: 0, //number,
+            title: '', //string,//props.content,
+            //ADDED FOR TAGGING ON NOVEMBER__22_MONDAY_2021
+            /*
+            feedId: -1, //number,// string, // number
+            id : -1, //number,//string, // number,
+            loggerID: '',//string,
+            postUserID: '',// string,
+
+             */
+
+        },
+
+
 };
 
 
@@ -293,7 +321,16 @@ const return_modified_Doc = (
 };
 
 
+const populateTag_data_for_multiple_Images_2 = (state: any,
+                                                action: PayloadAction<MultipleImageHeaderNull_route_date_interface>) => {
 
+
+    // const temp_Multiple_2__Image_data: MultipleImageHeaderNull_route_date_interface = action.payload;
+
+    state.two_Image__data_For_Tag_State = action.payload;//temp_Multiple_2__Image_data;
+
+
+};
 
 const disable_Btn_Pressed_State_In_Home_Page = (state: any,
                                                 action: PayloadAction<number>) => {
@@ -697,6 +734,9 @@ export const productSlice = createSlice({
         decrement_Item_From_Home: decrement_Single_Cart_Item_2_For_Home_Page,
         increment_Item_From_Home: increment_Single_Cart_Item_2__For_Home_Page,
         disable_Btn_Pressed_State_In_Home_Page_0: disable_Btn_Pressed_State_In_Home_Page,
+        populateTag_data_for_multiple_Images: populateTag_data_for_multiple_Images_2,
+
+
 
 
 
@@ -741,6 +781,7 @@ export const {
     decrement_Item_From_Home,
     increment_Item_From_Home,
     disable_Btn_Pressed_State_In_Home_Page_0,
+    populateTag_data_for_multiple_Images,
 
 } = productSlice.actions;
 
@@ -758,6 +799,7 @@ export const select_Local_Cart_Length = (state: RootState) => state.product_Redu
 export const select_Local_Cart_Price_Localized_Monetary_Unit = (state: RootState) => state.product_Reducer.local_Cart_Price_Total;
 export const export_Single_Product_Details = (state: RootState) => state.product_Reducer.single_Product_State;
 
+export const multiple_image_route_data_through_redux = (state: RootState) => state.product_Reducer.two_Image__data_For_Tag_State;
 
 
 export default productSlice.reducer;

@@ -221,6 +221,8 @@ const Catalog_Home_Page: React.FC<Catalog_Home_Page_Props> = ({navigation}) => {
     // partner_name
   };
 
+
+  const header_Home_Height = displayHeight / 15;
   return (
     <SafeAreaView
       style={
@@ -248,12 +250,12 @@ const Catalog_Home_Page: React.FC<Catalog_Home_Page_Props> = ({navigation}) => {
 
       <View
         style={{
-          height: displayHeight / 15,
+          height: header_Home_Height,
           flexDirection: 'column',
           justifyContent: 'flex-start',
         }}>
         <Header_DashBoard_Home
-          comp_Height={displayHeight / 15}
+          comp_Height={header_Home_Height}
           nav={navigation}
           comp_Width={displayWidth}
           // exchang_Rage={exchange_Rate}

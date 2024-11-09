@@ -13,7 +13,7 @@ import {
     useWindowDimensions,
     ActivityIndicator,
     Image,
-    Pressable,
+    Pressable, Platform,
 } from "react-native";
 
 
@@ -29,12 +29,12 @@ import {RouteProp, useFocusEffect} from "@react-navigation/native";
 import {useAppDispatch, useAppSelector} from "../../../appStore/app/hooks";*/
 
 
-const master_img = require('../../../assets/pay/masterCard.png');
-const visa_img = require('../../../assets/pay/visa.png');
-const bkash_img = require('../../../assets/pay/bkash.webp');
-const nagad_img = require('../../../assets/pay/NagadLogo.webp');
-const american_exp_img = require('../../../assets/pay/Amex.webp');
-const cod_img = require('../../../assets/pay/COD.webp');
+const master_img = require('../../assets/pay/masterCard.png');
+const visa_img = require('../../assets/pay/visa.png');
+const bkash_img = require('../../assets/pay/bkash.webp');
+const nagad_img = require('../../assets/pay/NagadLogo.webp');
+const american_exp_img = require('../../assets/pay/Amex.webp');
+const cod_img = require('../../assets/pay/COD.webp');
 
 
 /*import {
@@ -87,11 +87,34 @@ import hairlineWidth = StyleSheet.hairlineWidth;
 import {Native_Root_Stack_ParamList} from "../../App.tsx";
 import {useAppDispatch, useAppSelector} from "../../lib/app/hooks.ts";
 import {
-    get_One_Product_Payload__Interface,
-    One_Product_for_Home_Page_Interface
+    get_One_Product_Payload__Interface, One_Product_Item_For_Detail_Interface,
+    // One_Product_for_Home_Page_Interface
 } from "../../interfaces/products/product.ts";
-import {export_Single_Product_Details} from "../../lib/features/products/productSlice.ts";
+import {
+    export_Single_Product_Details, populateTag_data_for_multiple_Images,
+    select_Shipped_From_State_Or_Delivery_Currency
+} from "../../lib/features/products/productSlice.ts";
 import {useGetOneProductQuery, useGetProductsQuery} from "../../lib/features/products/productsApiSlice.ts";
+import {
+    monetary_Unit_Interface,
+    MonetaryUnits,
+    previousPrice,
+    priceConvertToAlternate
+} from "../ui_utils/localization_utils.ts";
+import {
+    ukbd_navy_blue,
+    ukbd_red,
+    ukbd_red_light
+} from "../ui_utils/important_Colors.ts";
+import Header_Product_Details_Page from "../header/Header_Product_Details_Page.tsx";
+import {image_base_url} from "../../config/Config.ts";
+import Image_Pre_Fetch_1 from "../ui_utils/Image_Pre_Fetch_1.tsx";
+import Add_Favorite_Details_Btn from "./details_page/add_button/details_Page/Add_Favorite_Details_Btn.tsx";
+import Horizontal_First_Top_Tabs from "./details_page/Horizontal_First_Top_Tabs.tsx";
+import Horizontal_Second_and_Last_Tab_View from "./details_page/Horizontal_Second_and_Last_Tab_View.tsx";
+import Detail_Page_Image_VList_Comp from "./details_page/image_part/Detail_Page_Image_VList_Comp.tsx";
+import Vertical_Devider_Full_Width_Active_Order from "../../divider/Vertical_Divider_Full_Width_Active_Order.tsx";
+import Ten_15_Days_Home from "../home_comp/Ten_15_Days_Home.tsx";
 /*import Vertical_Devider_Full_Width_Active_Order from "../../components/misc/Vertical_Devider_Full_Width_Active_Order";
 import {Doc} from "../../../appStore/interfaces_Slice/product_Related_Interfaces";*/
 // import {iImageURIStringWithKey} from "./multiple_Image_/MultipleImageHeaderNull";
@@ -99,12 +122,7 @@ import {Doc} from "../../../appStore/interfaces_Slice/product_Related_Interfaces
 
 // const Top_Tab = createMaterialTopTabNavigator();
 
-export interface Product_Details_Page_Props {
 
-    navigation: any,
-
-
-}
 
 
 const Product_Details_Page = ({
@@ -113,17 +131,13 @@ const Product_Details_Page = ({
                               }: NativeStackScreenProps<Native_Root_Stack_ParamList, 'Product_Details_Page'>) => {
 
 
-    // export_Single_Product_Add_BTN_Pressed_State;
-// export_Single_Product_Quantity_Value_State;
 
-
-    // const [value, setValue] = useState("");
 
 
     const [isPopupTrue_State, set_IsPopupTrue_State] = useState<boolean>(false);
 
 
-    const single_Product_Detail: One_Product_for_Home_Page_Interface = useAppSelector(export_Single_Product_Details);
+    const single_Product_Detail: One_Product_Item_For_Detail_Interface = useAppSelector(export_Single_Product_Details);
 
 
     // console.log("__<<single_Product_Detail>>: ",single_Product_Detail);
@@ -158,56 +172,33 @@ const Product_Details_Page = ({
     };
     // redux related codes ends here
 
-    const add_button_already_pressed_previously=()=>{
-
-        /*
-                   dispatch(update_single_Product_Add_Btn_Pressed_State(true));
-
-                   if (route.params.quantity){
-
-                       dispatch(update_single_Product_Quantity(route.params.quantity));
-                   }
-                   */
 
 
 
 
 
-        const main_F1 = async () => {
 
 
-            const payload_for_fetching_Single_Prod: get_One_Product_Payload__Interface = {
 
-                product_Id: route.params.single_Product_ID,
+        const {
+            data: detail_of_product,
+            isLoading: is_detail_of_product_Loading,
+            isError: detail_of_product_load_Error,
+        } = useGetOneProductQuery(
+            {
+                product_Id: Number(route.params.single_Product_ID),
                 btn_Pressed_State: route.params.add_Button_Pressed_State,
                 prev_Quantity: route.params.add_Button_Pressed_State?route.params.quantity:0,
-            };
-
-            console.log("__payload_for_fetching_Single_Prod__:",payload_for_fetching_Single_Prod);
-
-            // useGetOneProductQuery
-            // await dispatch(get_single_item_Async(payload_for_fetching_Single_Prod));
+            });
 
 
-            const {
-                data: detail_of_product,
-                isLoading: is_detail_of_product_Loading,
-                isError: detail_of_product_load_Error,
-            } = useGetOneProductQuery(
-                product_Id: route.params.single_Product_ID,
-                btn_Pressed_State: route.params.add_Button_Pressed_State,
-                prev_Quantity: route.params.add_Button_Pressed_State?route.params.quantity:0,
-            );
-            // = useGetProductsQuery({
-            //     limit: 10,
-            //     // offset: 1,
-            // });
+
+        console.log("detail_of_product: ",detail_of_product);
+        console.log("is_detail_of_product_Loading: ",is_detail_of_product_Loading);
+        console.log("detail_of_product_load_Error: ",detail_of_product_load_Error);
 
 
-        };
-
-
-    useFocusEffect(
+    /*useFocusEffect(
         useCallback(() => {
 
 
@@ -219,7 +210,7 @@ const Product_Details_Page = ({
         }, [
             // route.params.single_Product_ID,
         ]),
-    );
+    );*/
 
 
     // status bar related comps  ---begins here
@@ -250,11 +241,11 @@ const Product_Details_Page = ({
 
     const payICon_Size = displayHeight / 29;
     const Home_State_Delivery_Currency: monetary_Unit_Interface = useAppSelector(select_Shipped_From_State_Or_Delivery_Currency);
-    const local_Currency: monetary_Unit_Interface = useAppSelector(select_Local_Currency);
+    // const local_Currency: monetary_Unit_Interface = useAppSelector(select_Local_Currency);
 
 
     // const Home_State_Delivery_Currency_Code: string = useAppSelector(select_Delivery_Currency_Code);
-    const exchange_Rate: number = useAppSelector(select_Exchange_Rate);
+    // const exchange_Rate: number = useAppSelector(select_Exchange_Rate);
 
 
     const product_Wish_Button_Pressed = (/*productID: string*/) => {
@@ -275,10 +266,12 @@ const Product_Details_Page = ({
     // console.log("inner_Width_withIN_Box:", inner_Width_withIN_Box);
 
 
+    const img_width= displayWidth / 7;
+
     const single_Image_pressed = () => {
 
 
-        console.log("__single_Product_Detail.item.image_url__:", single_Product_Detail.item.image_url);
+        console.log("__single_Product_Detail.item.image_url__:", single_Product_Detail.image);
 
         // return;
 
@@ -289,10 +282,10 @@ const Product_Details_Page = ({
                 //__single_Product_Detail.item.image_url__: ["store_items/634e9e1b72205ac7b909a273IvsW.jpg"]
                 // uri: `${base_Image_URL}${single_Product_Detail.item.image_url[0]}`,
                 // some_uris: single_Product_Detail.item.image_url[0],
-                some_uris: single_Product_Detail.item.image_url,
+                some_uris: single_Product_Detail.image,
                 //imgsOFThisFeed,//props.all_images_string,//props.imgsOFThisFeed,
                 tapIndex: 0,//1,//idx,//props.idx,
-                title: single_Product_Detail.item.name.toString(),//content,//props.content,
+                title: single_Product_Detail.title.toString(),//content,//props.content,
                 //ADDED FOR TAGGING ON NOVEMBER__22_MONDAY_2021
 
             },
@@ -380,8 +373,8 @@ const Product_Details_Page = ({
 
 
                     {
-                        (!single_Product_Detail.item.image_url)
-                            ? null : ((single_Product_Detail.item.image_url.length === 1) && (single_Product_Detail.item.image_url[0] !== ""))
+                        (!single_Product_Detail.image)
+                            ? null : ((single_Product_Detail.image.length === 1) && (single_Product_Detail.image[0] !== ""))
                                 ? (
                                     <Pressable
                                         style={{
@@ -417,7 +410,7 @@ const Product_Details_Page = ({
                                             }}
 
                                             source={{
-                                                uri: `${base_Image_URL}${single_Product_Detail.item.image_url[0]}`,
+                                                uri: `${image_base_url}${single_Product_Detail.image[0]}`,
                                                 //props.oneItem_url,
                                                 // headers: { Authorization: 'someAuthToken' },
                                                 // priority: FastImage.priority.normal,
@@ -426,19 +419,19 @@ const Product_Details_Page = ({
                                             resizeMode={"contain"}
                                         />
                                     </Pressable>
-                                ) : (single_Product_Detail.item.image_url.length > 1)
+                                ) : (single_Product_Detail.image.length > 1)
                                     ?
 
 
                                     (
 
                                         <Detail_Page_Image_VList_Comp
-                                            imgsOFThisFeed={single_Product_Detail.item.image_url}
+                                            imgsOFThisFeed={single_Product_Detail.image}
                                             // indexPrimary= {0}
                                             comp_Width={inner_Width}
                                             comp_Height={image_Container_Height} // marginVertical 5+5= 10
                                             navigationProp={navigation}
-                                            feedContent={single_Product_Detail.item.name.toString()}
+                                            feedContent={single_Product_Detail.title.toString()}
                                         />
 
                                     ) : null
@@ -468,7 +461,7 @@ const Product_Details_Page = ({
 
 
                 }}>
-                    <Text style={Product_Details_Page_Styles.title_}>{single_Product_Detail.item.name}</Text>
+                    <Text style={Product_Details_Page_Styles.title_}>{single_Product_Detail.title}</Text>
 
                 </View>
 
@@ -515,15 +508,15 @@ const Product_Details_Page = ({
                         >
 
 
-                            <WAS_Value
+                           {/* <WAS_Value
                                 // comp_Width= {displayWidth / 2.7}
                                 was_Val={previousPrice(
-                                    single_Product_Detail.item.view_price,
+                                    single_Product_Detail.price,
                                     single_Product_Detail.item.offer_percentage
                                 )}
                                 monetary_Sign={MonetaryUnits[3].unicode}
                                 bg_Color={'transparent'}
-                            />
+                            />*/}
 
 
                             {/*was strikethrough value value ends here*/}
@@ -551,7 +544,7 @@ const Product_Details_Page = ({
                                         fontFamily: "RobotoCondensed-Regular",
                                         // textDecorationLine: "line-through"
                                     }}
-                                >{MonetaryUnits[3].unicode} {single_Product_Detail.item.view_price}</Text>
+                                >{MonetaryUnits[3].unicode} {single_Product_Detail.price}</Text>
 
                             </View>
                             {/*new value ends here*/}
@@ -618,9 +611,9 @@ const Product_Details_Page = ({
                             fontFamily: "RobotoCondensed-Regular"
                         }}>
                             {MonetaryUnits[4].unicode} {priceConvertToAlternate(
-                            single_Product_Detail.item.view_price,
+                            single_Product_Detail.price,
                             Home_State_Delivery_Currency.Currency_Code,
-                            exchange_Rate,
+                            1,
                             // "BDT",
                             // 0.0076,
                             // props.activeDelivery.exchange_rate_website
@@ -697,7 +690,7 @@ const Product_Details_Page = ({
 
                             {/*brand icon supplier icon begins here*/}
                             {/*1ST ROW ENDS HERE 40%, THIS 40% CONTAINS BRAND ICON(!) AND SUPPLIER ICON AND "SOURCE" TEXT*/}
-                            <View
+                            {/*<View
 
                                 style={{
                                     flexDirection: 'column',
@@ -710,7 +703,7 @@ const Product_Details_Page = ({
                                 }}
                             >
 
-                                {/*souce begins below*/}
+                                souce begins below
                                 <View
                                     style={{
                                         flexDirection: 'column',
@@ -730,7 +723,7 @@ const Product_Details_Page = ({
 
                                 </View>
 
-                                {/*souce ends above*/}
+                                souce ends above
 
                                 <View
                                     style={{
@@ -767,13 +760,13 @@ const Product_Details_Page = ({
                                             }><FastImage
                                                 style={{
 
-                                                    width: displayWidth / 7,//displayWidth/6,//displayHeight/20,
-                                                    height: displayWidth / 7,//displayHeight/20,
+                                                    width: img_width,//displayWidth/6,//displayHeight/20,
+                                                    height: img_width,//displayHeight/20,
 
                                                 }
                                                 }
                                                 source={{
-                                                    uri: `${base_Image_URL}${single_Product_Detail.item.supplier_icon}`,
+                                                    uri: `${image_base_url}${single_Product_Detail.item.supplier_icon}`,
 
                                                     priority: FastImage.priority.normal,
                                                 }}
@@ -786,9 +779,9 @@ const Product_Details_Page = ({
                                         ) : null
 
                                         }
-                                        {/*supplier_icon above*/}
+                                        supplier_icon above
 
-                                        {/*brand_icon below*/}
+                                        brand_icon below
 
                                         {(single_Product_Detail.item.brand_icon !== '') ? (<View style={{
 
@@ -814,37 +807,49 @@ const Product_Details_Page = ({
                                                         color: ukbd_navy_blue,
                                                     }}>|</Text>
                                                 </View>
+
+                                                <Image_Pre_Fetch_1
+                                                    img_height={img_width}
+                                                    img_width={img_width}
+
+                                                    // img_height
+                                                    // inner_Comp_Width_2
+
+
+                                                    imageUrl={`${image_base_url}${single_Product_Detail.image[0]}`}
+                                                    // id_temp={`${props.index}+${props.index}+${props.item.oneURI}`}
+                                                    id_temp={single_Product_Detail.image[0]}
+
+                                                    resizeMode={(Platform.OS==='android')
+                                                        ?"center" :"contain"
+                                                    }
+                                                />
                                                 <FastImage
 
                                                     style={{
 
-                                                        width: displayWidth / 7,//displayWidth/6,//displayHeight/20,
-                                                        height: displayWidth / 7,//displayHeight/20,
-
-
-                                                        // width:  '100%',// displayWidth/5,//'100%',//total_Width / 2.5,//'100%',
-                                                        // height: '100%',// displayWidth/5,//'100%', //'100%',
+                                                        width: img_width,//displayWidth/6,//displayHeight/20,
+                                                        height: img_width,//displayHeight/20,
 
                                                     }
                                                     }
                                                     source={{
-                                                        uri: `${base_Image_URL}${single_Product_Detail.item.brand_icon}`,
+                                                        uri: `${image_base_url}${single_Product_Detail.item.brand_icon}`,
 
                                                         priority: FastImage.priority.normal,
                                                     }}
                                                     resizeMode={FastImage.resizeMode.contain}
-
-
                                                 />
+
                                             </View>
                                         ) : null}
 
-                                        {/*brand_icon ends above*/}
+                                        brand_icon ends above
 
                                     </View>
                                 </View>
-                                {/*brand icon supplier icon ends here*/}
-                            </View>
+                                brand icon supplier icon ends here
+                            </View>*/}
                             {/*1ST ROW ENDS HERE 40%, THIS 40% CONTAINS BRAND ICON(!) AND SUPPLIER ICON AND "SOURCE" TEXT*/}
 
                             {/*2ND ROW BEGINS HERE 60% ABOVE IS 40%, THIS 60% CONTAINS IMAGES OF PAY WITH */}
@@ -1027,11 +1032,11 @@ const Product_Details_Page = ({
 
 
                         quantity={
-                            single_Product_Detail.item.single_Prod_Quantity
+                            single_Product_Detail.single_Prod_Quantity
                             // route.params.quantity
                         }
                         add_Button_Pressed_State={
-                            single_Product_Detail.item.single_Prod_Add_Btn_Pressed_State
+                            single_Product_Detail.single_Prod_Add_Btn_Pressed_State
                             // route.params.add_Button_Pressed_State
                         }
 

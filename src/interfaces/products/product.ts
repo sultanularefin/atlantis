@@ -16,7 +16,7 @@ interface One_Product_Base_Interface{
     price: number
     description: string
     category: string
-    image: string
+    image: string[],//string
     rating: product_Rating_Interface
 }
 interface One_Product_for_Home_Page_Interface extends One_Product_Base_Interface{

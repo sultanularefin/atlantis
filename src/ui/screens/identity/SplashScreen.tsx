@@ -17,7 +17,7 @@ import {CommonActions, useFocusEffect} from '@react-navigation/native';
 import Snackbar from 'react-native-snackbar';
 // import {useNetInfo} from "@react-native-community/netinfo";
 
-import {useAppDispatch, useAppSelector} from '../../../appStore/app/hooks';
+// import {useAppDispatch, useAppSelector} from '../../../appStore/app/hooks';
 
 import {RouteProp} from '@react-navigation/core/src/types';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
@@ -28,6 +28,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import Indicator_With_Loading_TextBottom from '../../indicator/Indicator_With_Loading_TextBottom.tsx';
 import {ukbd_navy_blue} from '../../ui_utils/important_Colors.ts';
+import {useAppDispatch} from "../../../lib/app/hooks.ts";
 
 export interface AuthStateInterface {
   apiInovocatoinStatus: string;
@@ -127,7 +128,7 @@ const SplashScreen = ({
 
   useFocusEffect(
     useCallback(() => {
-      const main = async () => {
+      const main = /*async*/ () => {
         check_local_Storage();
       };
       main();

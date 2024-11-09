@@ -21,11 +21,13 @@ import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {ActionSheetProvider} from '@expo/react-native-action-sheet';
 import {NavigationContainer} from '@react-navigation/native';
 import {SafeAreaView, StatusBar, StyleSheet, View} from 'react-native';
-import {store} from "./appStore/app/store";
+import {store} from "./lib/app/store";
 import SplashScreen from "./ui/screens/identity/SplashScreen";
 
 import Catalog_Home_Page from "./ui/screens/Catalog_Home_Page.tsx";
-import Logger_Scan_Page from "./ui/screens/Logger_Scan_Page.tsx";
+// import Logger_Scan_Page from "./ui/screens/Logger_Scan_Page.tsx";
+import MultipleImageHeaderNull from "./ui/screens/MultipleImageHeaderNull.tsx";
+import Product_Details_Page from "./ui/screens/Product_Details_Page.tsx";
 
 const Native_Root_Stack =
     createNativeStackNavigator<Native_Root_Stack_ParamList>();
@@ -47,7 +49,7 @@ export type Native_Root_Stack_ParamList = {
         name: string,
     };
     Catalog_Home_Page: undefined,
-    Logger_Scan_Page: undefined,
+    // Logger_Scan_Page: undefined,
     // AnyUsersFeedz : undefined;
     Product_Details_Page: {
         single_Product_ID: string,//:number,
@@ -59,6 +61,8 @@ export type Native_Root_Stack_ParamList = {
 
 
     };
+
+    MultipleImageHeaderNull: undefined,
 }
 export interface Props {
 
@@ -101,6 +105,16 @@ const App: React.FC<Props> = (props) => {
 
                                 />
 
+                                <Native_Root_Stack.Screen
+                                    name="MultipleImageHeaderNull"
+                                    component={MultipleImageHeaderNull}
+
+                                    options={{
+                                        // screenOptions={{
+                                        headerShown: false,
+                                    }}
+                                />
+
 
 
                                 <Native_Root_Stack.Screen
@@ -127,7 +141,7 @@ const App: React.FC<Props> = (props) => {
                                     }}
                                 />
 
-                                <Native_Root_Stack.Screen
+                            {/*    <Native_Root_Stack.Screen
                                     name="Logger_Scan_Page"
                                     component={Logger_Scan_Page}
                                     options={{
@@ -135,7 +149,7 @@ const App: React.FC<Props> = (props) => {
 
 
                                     }}
-                                />
+                                />*/}
 
                             </Native_Root_Stack.Navigator>
                         </NavigationContainer>

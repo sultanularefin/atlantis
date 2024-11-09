@@ -1,16 +1,14 @@
 import {View} from "react-native";
 import React from "react";
-import {
-    One_Pending_Pickup_Point_Single_Order_Props
-} from "../../single_Active_Order/One_Pending_Pickup_Point_Single_Order";
 
 
-export interface Vertical_Devider_Full_Width_Active_Order{
+
+ interface Vertical_Divider_Full_Width_Active_Order_Props {
 
     compHeight: number,
 
 }
-const Vertical_Devider_Full_Width_Active_Order: React.FC<Vertical_Devider_Full_Width_Active_Order> = (
+const Vertical_Divider_Full_Width_Active_Order: React.FC<Vertical_Divider_Full_Width_Active_Order_Props> = (
     {
         compHeight,
 
@@ -37,5 +35,5 @@ const Vertical_Devider_Full_Width_Active_Order: React.FC<Vertical_Devider_Full_W
     );
 };
 
-export default Vertical_Devider_Full_Width_Active_Order;
+export default Vertical_Divider_Full_Width_Active_Order;
 
