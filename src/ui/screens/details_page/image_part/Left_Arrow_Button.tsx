@@ -4,7 +4,7 @@ import {
     View,
 } from "react-native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import {ukbd_navy_blue, ukbd_red, ukbd_red_light} from "../../../ui_Utils/important_Colors";
+import {ukbd_navy_blue, ukbd_red, ukbd_red_light} from "../../../ui_utils/important_Colors";
 import {Feedz_Image_L_Grater_Than_2_Props} from "./Detail_Page_Image_VList_Comp";
 
 

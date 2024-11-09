@@ -2,7 +2,7 @@ import {Modal, Pressable, StyleSheet, Text, View} from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 /*import {
 
-} from "../../ui_Utils/important_Colors";*/
+} from "../../ui_utils/important_Colors";*/
 import React, {useState} from "react";
 import {Header_Props} from "../Header_DashBoard_Home";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
@@ -11,7 +11,7 @@ import Feather from "react-native-vector-icons/Feather";
 import {useSafeAreaInsets} from "react-native-safe-area-context";
 import Single_Bag_Row from "./Single_Bag_Row";
 
-import {MonetaryUnits} from "../../ui_Utils/localization_utils";
+import {MonetaryUnits} from "../../ui_utils/localization_utils";
 import hairlineWidth = StyleSheet.hairlineWidth;
 import {useAppSelector} from "../../../lib/app/hooks.ts";
 import Vertical_Divider_Full_Width_Active_Order from "../../../divider/Vertical_Divider_Full_Width_Active_Order.tsx";

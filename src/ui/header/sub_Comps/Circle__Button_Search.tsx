@@ -18,7 +18,7 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import EvilIcons from "react-native-vector-icons/EvilIcons";
 import hairlineWidth = StyleSheet.hairlineWidth;
 import AntDesign from "react-native-vector-icons/AntDesign";
-import {bag_Bg_Color_From_HSLA, ukbd_red} from "../../ui_Utils/important_Colors";
+import {bag_Bg_Color_From_HSLA, ukbd_red} from "../../ui_utils/important_Colors";
 
 
 export interface Circle__Button_Search_Props{

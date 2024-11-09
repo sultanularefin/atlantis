@@ -30,7 +30,7 @@ import EvilIcons from "react-native-vector-icons/EvilIcons";
     // MonetaryUnits,
     // previousPrice,
     // priceConvertToAlternate
-} from "../../ui_Utils/localization_utils";*/
+} from "../../ui_utils/localization_utils";*/
 
 const BagIcon = require("../../../assets/images/svg/bag-shopping.svg");
 const Bag = require("../../../assets/images/Bag.svg");
@@ -38,12 +38,12 @@ import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 // import {faBagShopping} from '@fortawesome/free-solid-svg-icons/faBagShopping';
 // import {faBagShopping} from '@fortawesome/free-solid-svg-icons/faBagShopping';
 const product1 = require("../../../assets/images/p1.jpg");
-import
+/*import
     // Animated,
 {
     runOnJS,
     // useAnimatedStyle
-} from 'react-native-reanimated';
+} from 'react-native-reanimated';*/
 
 // import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import {
@@ -59,7 +59,7 @@ import {
     ukbd_overlay_Color, ukbd_place_holder_TextColor,
     ukbd_red,
     very_light_red_ukbd
-} from "../../ui_Utils/important_Colors";*/
+} from "../../ui_utils/important_Colors";*/
 // import {useAppDispatch} from "../../../appStore/app/hooks";
 // import {single_Product__Show_Details_Button_true} from "../../../appStore/Reducers/product_Slice";
 // import {base_Image_URL} from "../../../utils_server/server_settings";
@@ -103,6 +103,13 @@ import Add_Cart_OR_Favorite__Btn_Home_Page
     from "../screens/details_page/add_button/home_page/Add_Cart_OR_Favorite__Btn_Home_Page.tsx";
 import Vertical_Divider_Full_Width_Active_Order from "../../divider/Vertical_Divider_Full_Width_Active_Order.tsx";
 import hairlineWidth = StyleSheet.hairlineWidth;
+
+import
+  // Animated,
+{
+  runOnJS,
+  // useAnimatedStyle
+} from 'react-native-reanimated';
 
 
 

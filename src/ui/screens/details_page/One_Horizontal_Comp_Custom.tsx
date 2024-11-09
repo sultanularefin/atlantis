@@ -13,7 +13,7 @@ import App_Store_Button from "./App_Store_Button";
 import Google_PLay_Store_Button from "./Google_PLay_Store_Button";
 import Support_Comp from "./Support_Comp";
 import Social_Links from "./Social_Links";
-import {ukbd_navy_blue} from "../../ui_Utils/important_Colors";
+import {ukbd_navy_blue} from "../../ui_utils/important_Colors";
 
 
 interface One_Horizontal_Comp_Custom_Interface{

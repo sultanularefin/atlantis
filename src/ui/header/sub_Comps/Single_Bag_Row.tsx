@@ -1,7 +1,7 @@
 import {StyleSheet, Text, View} from "react-native";
-import {ukbd_navy_blue, ukbd_red} from "../../ui_Utils/important_Colors";
+import {ukbd_navy_blue, ukbd_red} from "../../ui_utils/important_Colors";
 import SimpleLineIcons from "react-native-vector-icons/SimpleLineIcons";
-import {MonetaryUnits} from "../../ui_Utils/localization_utils";
+import {MonetaryUnits} from "../../ui_utils/localization_utils";
 import React from "react";
 import {Monetary_Header_Text_Style, numberWithCommas} from "./Bag_Button";
 import hairlineWidth = StyleSheet.hairlineWidth;

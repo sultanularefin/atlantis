@@ -13,14 +13,17 @@ import {
 import React, {useState} from "react";
 
 
-import FastImage from 'react-native-fast-image';
+// import FastImage from 'react-native-fast-image';
 
-import {base_Image_URL} from "../../../../utils_server/server_settings";
+// import {base_Image_URL} from "../../../../utils_server/server_settings";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import {ukbd_navy_blue, ukbd_red} from "../../../ui_Utils/important_Colors";
+import {ukbd_navy_blue, ukbd_red} from "../../../ui_utils/important_Colors";
 
-import {useAppDispatch} from "../../../../appStore/app/hooks";
-import {populateTag_data_for_multiple_Images} from "../../../../appStore/Reducers/product_Slice";
+// import {useAppDispatch} from "../../../../appStore/app/hooks";
+// import {populateTag_data_for_multiple_Images} from "../../../../appStore/Reducers/product_Slice";
+import {image_base_url} from '../../../../config/Config.ts';
+import {useAppDispatch} from '../../../../lib/app/hooks.ts';
+import {populateTag_data_for_multiple_Images} from '../../../../lib/features/products/productSlice.ts';
 
 export interface OneImageProps {
     oneItem_url: string,
@@ -125,7 +128,7 @@ const ONEImage: React.FC<OneImageProps> = ({
                 // onLoadEnd={image_Loaded_done}
                 source={{
                     // uri: oneItem_url,
-                    uri: `${base_Image_URL}${oneItem_url}`,
+                    uri: `${image_base_url}${oneItem_url}`,
                     // headers: { Authorization: 'someAuthToken' },
                     // priority: FastImage.priority.normal,
                 }}

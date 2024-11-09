@@ -11,7 +11,7 @@ import {
     close_Button_Color,
     ukbd_navy_blue, ukbd_red,
     ukbd_red_light
-} from "../ui_Utils/important_Colors";*/
+} from "../ui_utils/important_Colors";*/
 
 import Identity_Circle_Button from "./sub_Comps/Identity_Circle_Button";
 import Horizontal_Divider_Given_Height_Active_Order

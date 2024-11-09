@@ -1,11 +1,11 @@
 import {StyleSheet, Text, View} from "react-native";
 // import WAS_Value from "./WAS_Value";
-// import {convert_TO_BDT_From_GBP, monetary_Unit_Interface, previousPrice} from "../../ui_Utils/localization_utils";
+// import {convert_TO_BDT_From_GBP, monetary_Unit_Interface, previousPrice} from "../../ui_utils/localization_utils";
 // import Excluding_Shipping_and_Duties from "./Excluding_Shipping_and_Duties";
 import React from "react";
 // import {Item_Interface} from "./Item";
 // import {Doc} from "../../../appStore/interfaces_Slice/product_Related_Interfaces";
-// import {ukbd_navy_blue} from "../../ui_Utils/important_Colors";
+// import {ukbd_navy_blue} from "../../ui_utils/important_Colors";
 import hairlineWidth = StyleSheet.hairlineWidth;
 import {convert_TO_BDT_From_GBP, monetary_Unit_Interface} from "../ui_utils/localization_utils.ts";
 import {ukbd_navy_blue} from "../ui_utils/important_Colors.ts";

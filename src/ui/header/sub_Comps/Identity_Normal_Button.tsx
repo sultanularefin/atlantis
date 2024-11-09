@@ -1,6 +1,6 @@
 import React from "react";
 import {FlexAlignType, Pressable, StyleSheet} from "react-native";
-// import {ukbd_navy_blue, ukbd_red_light, very_light_red_ukbd} from "../../../../ui_Utils/important_Colors";
+// import {ukbd_navy_blue, ukbd_red_light, very_light_red_ukbd} from "../../../../ui_utils/important_Colors";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import EvilIcons from "react-native-vector-icons/EvilIcons";
 import hairlineWidth = StyleSheet.hairlineWidth;

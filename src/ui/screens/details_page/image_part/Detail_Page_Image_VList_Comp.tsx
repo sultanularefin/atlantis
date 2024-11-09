@@ -5,9 +5,12 @@ import {
 import React, {useRef, useState} from "react";
 import Inner_Comp_Imgs_Detail_Page from "./Inner_Comp_Imgs_Detail_Page";
 import ONEImage from "./ONEImage";
-import {reg__Page_SubComp_interface} from "../../../../appStore/Reducers/authSlice";
+// import {reg__Page_SubComp_interface} from "../../../../appStore/Reducers/authSlice";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import {ukbd_navy_blue, ukbd_red} from "../../../ui_Utils/important_Colors";
+import {
+  ukbd_navy_blue,
+  ukbd_red
+} from "../../../ui_utils/important_Colors";
 import Left_Arrow_Button from "./Left_Arrow_Button";
 import Right_Arrow_Button_Mult_Image from "./Right_Arrow_Button_Mult_Image";
 

@@ -5,7 +5,7 @@ import {
     View
 } from "react-native";
 
-// import {ukbd_navy_blue, ukbd_red, ukbd_red_light, ukbd_Text_Navy_Blue_color} from "../../../../ui_Utils/important_Colors";
+// import {ukbd_navy_blue, ukbd_red, ukbd_red_light, ukbd_Text_Navy_Blue_color} from "../../../../ui_utils/important_Colors";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import SimpleLineIcons from "react-native-vector-icons/SimpleLineIcons";
 import EvilIcons from "react-native-vector-icons/EvilIcons";

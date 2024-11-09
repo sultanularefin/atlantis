@@ -4,8 +4,8 @@ import {
     // TouchableOpacity,
     Pressable, StyleSheet, Platform,
 } from "react-native";
-import {tab_Arrays} from "../../ui_Utils/tab_Arrays";
-import {ukbd_navy_blue, ukbd_overlay_Color} from "../../ui_Utils/important_Colors";
+import {tab_Arrays} from "../../ui_utils/tab_Arrays";
+import {ukbd_navy_blue, ukbd_overlay_Color} from "../../ui_utils/important_Colors";
 // import hairlineWidth = StyleSheet.hairlineWidth;
 // import {tab_Arrays} from "./Horizontal_First_Top_Tabs";
 

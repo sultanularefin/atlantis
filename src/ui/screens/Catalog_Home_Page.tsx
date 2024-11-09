@@ -41,7 +41,7 @@ import {
 } from '../../lib/features/scan/scan_Slice.ts';
 */
 
-import Custom_Header_Root_Scan_Page from '../header/Custom_Header_Root_Scan_Page.tsx';
+// import Custom_Header_Root_Scan_Page from '../header/Custom_Header_Root_Scan_Page.tsx';
 import Indicator_Common from '../indicator/Indicator_Common.tsx';
 import One_Scan_Item from '../list_comp/One_Scan_Item.tsx';
 import {useGetProductsQuery} from '../../lib/features/products/productsApiSlice.ts';

@@ -1,5 +1,5 @@
 import {Pressable, StyleSheet, View} from "react-native";
-import {ukbd_red} from "../../../../ui_Utils/important_Colors";
+import {ukbd_red} from "../../../../ui_utils/important_Colors";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import React from "react";
 import hairlineWidth = StyleSheet.hairlineWidth;

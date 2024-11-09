@@ -4,8 +4,8 @@ import {StyleSheet, Text, View} from "react-native";
     ukbd_overlay_Color,
     ukbd_place_holder_TextColor,
     ukbd_Text_Navy_Blue_color
-} from "../../ui_Utils/important_Colors";
-import {previousPrice} from "../../ui_Utils/localization_utils";*/
+} from "../../ui_utils/important_Colors";
+import {previousPrice} from "../../ui_utils/localization_utils";*/
 import React from "react";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import {

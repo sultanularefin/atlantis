@@ -1,6 +1,6 @@
 import {Pressable, StyleSheet, Text, View} from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import {ukbd_navy_blue, ukbd_red, ukbd_red_light} from "../../ui_Utils/important_Colors";
+import {ukbd_navy_blue, ukbd_red, ukbd_red_light} from "../../ui_utils/important_Colors";
 import React from "react";
 import {Header_Props} from "../Header_DashBoard_Home";
 import SimpleLineIcons from "react-native-vector-icons/SimpleLineIcons";
@@ -12,7 +12,7 @@ import SimpleLineIcons from "react-native-vector-icons/SimpleLineIcons";
 } from "../../../appStore/Reducers/product_Slice";*/
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import {Monetary_Header_Text_Style} from "./Bag_Button";
-import {MonetaryUnits} from "../../ui_Utils/localization_utils";
+import {MonetaryUnits} from "../../ui_utils/localization_utils";
 import {useAppSelector} from "../../../lib/app/hooks.ts";
 import {select_Local_Cart_Price_Localized_Monetary_Unit} from "../../../lib/features/products/productSlice.ts";
 

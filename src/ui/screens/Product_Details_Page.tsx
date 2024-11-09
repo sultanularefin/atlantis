@@ -58,7 +58,7 @@ import {NativeStackScreenProps} from "@react-navigation/native-stack";
 import {Native_Root_Stack_ParamList} from "../../../App";
 import {base_Image_URL} from "../../../utils_server/server_settings";
 import FastImage from "react-native-fast-image";
-import {ukbd_navy_blue, ukbd_red, ukbd_red_light} from "../../ui_Utils/important_Colors";
+import {ukbd_navy_blue, ukbd_red, ukbd_red_light} from "../../ui_utils/important_Colors";
 */
 
 /*import {
@@ -66,7 +66,7 @@ import {ukbd_navy_blue, ukbd_red, ukbd_red_light} from "../../ui_Utils/important
     MonetaryUnits,
     previousPrice,
     priceConvertToAlternate
-} from "../../ui_Utils/localization_utils";*/
+} from "../../ui_utils/localization_utils";*/
 
 
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";

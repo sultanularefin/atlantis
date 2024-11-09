@@ -57,6 +57,6 @@ export const {
   state.auth_Reducer;*/
 
 export const select_Logger_Data_BY_ID = (state: RootState) =>
-  state.authReducer.user_Data_By_ID;
+  state.auth_Reducer.user_Data_By_ID;
 
 export default auth_Slice.reducer;

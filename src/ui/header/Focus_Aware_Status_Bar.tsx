@@ -2,7 +2,7 @@ import * as React from 'react';
 import {StatusBar, StatusBarStyle} from 'react-native';
 import {useIsFocused} from '@react-navigation/native';
 // import {One_Reg_Page_Comp_Props} from "../components/identity/reg_Page/One_Reg_Page_Comp";
-import {ukbd_navy_blue} from "../ui_Utils/important_Colors";
+import {ukbd_navy_blue} from "../ui_utils/important_Colors";
 import {useState} from "react";
 
 /*function FocusAwareStatusBar(props) {

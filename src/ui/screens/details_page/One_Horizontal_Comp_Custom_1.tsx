@@ -7,7 +7,7 @@ import {
     // Pressable,
     View,
 } from "react-native";
-import {ukbd_navy_blue} from "../../ui_Utils/important_Colors";
+import {ukbd_navy_blue} from "../../ui_utils/important_Colors";
 
 
 interface One_Horizontal_Comp_Custom_1_Interface{
