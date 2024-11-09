@@ -34,10 +34,13 @@ import List_Empty_Comp from '../comps/List_Empty_Comp.tsx';
 
 import FloatingButton_Scan_New from '../floating_comp/FloatingButton_Scan_New.tsx';
 import {old_scan_result_data_interface} from '../../interfaces/scan/scan_interfaces.ts';
+/*
 import {
   all_items_where_scan_worked,
   delete_all_scan_items,
 } from '../../lib/features/scan/scan_Slice.ts';
+*/
+
 import Custom_Header_Root_Scan_Page from '../header/Custom_Header_Root_Scan_Page.tsx';
 import Indicator_Common from '../indicator/Indicator_Common.tsx';
 import One_Scan_Item from '../list_comp/One_Scan_Item.tsx';
@@ -70,9 +73,9 @@ const Catalog_Home_Page: React.FC<Catalog_Home_Page_Props> = ({navigation}) => {
   const Home_State_Delivery_Currency: monetary_Unit_Interface = useAppSelector(
     select_Shipped_From_State_Or_Delivery_Currency,
   );
-  const all_scanned_items: old_scan_result_data_interface[] = useAppSelector(
+/*  const all_scanned_items: old_scan_result_data_interface[] = useAppSelector(
     all_items_where_scan_worked,
-  );
+  );*/
 
   const {
     data: home_products,
@@ -121,11 +124,11 @@ const Catalog_Home_Page: React.FC<Catalog_Home_Page_Props> = ({navigation}) => {
     // setTimeout()
   };
 
-  const delete_all_Button_Pressed_0 = /*async*/ () => {
+ /* const delete_all_Button_Pressed_0 = /!*async*!/ () => {
     dispatch(delete_all_scan_items(true));
 
     return;
-  };
+  };*/
 
   const comp_Height = deviceHeight / 10;
   const header__Height = deviceHeight / 16;

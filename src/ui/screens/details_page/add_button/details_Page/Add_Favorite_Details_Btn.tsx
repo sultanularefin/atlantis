@@ -5,19 +5,19 @@ import {
     View
 } from "react-native";
 
-import {ukbd_navy_blue, ukbd_red, ukbd_red_light, ukbd_Text_Navy_Blue_color} from "../../../../ui_Utils/important_Colors";
+// import {ukbd_navy_blue, ukbd_red, ukbd_red_light, ukbd_Text_Navy_Blue_color} from "../../../../ui_Utils/important_Colors";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import SimpleLineIcons from "react-native-vector-icons/SimpleLineIcons";
 import EvilIcons from "react-native-vector-icons/EvilIcons";
 
-import {useAppDispatch, useAppSelector} from "../../../../../appStore/app/hooks";
+// import {useAppDispatch, useAppSelector} from "../../../../../appStore/app/hooks";
 import hairlineWidth = StyleSheet.hairlineWidth;
 import Ionicons from "react-native-vector-icons/Ionicons";
 import Entypo from "react-native-vector-icons/Entypo";
 import Love_Button from "./Love_Button";
 import Increment_Button from "./Increment_Button";
 import Decrement_Btn from "./Decrement_Btn";
-import {
+/*import {
     // add_Item_To_Cart_Payload_Interface,
     // add_To_Cart_API,
     decrement_Single_Product_For_Details_Page, disable_Btn_Pressed_State_In_Home_Page_0,
@@ -28,7 +28,9 @@ import {
     increment_Single_Product_For_Details_Page,
     local_Cart_Item, select_City_ID, select_Country_ID,
     select_Local_Cart,
-    select_Local_Cart_Price_Localized_Monetary_Unit, select_Store_Data, select_Store_ID,
+    select_Local_Cart_Price_Localized_Monetary_Unit,
+    select_Store_Data,
+    select_Store_ID,
     update_single_Product_Add_Btn_Pressed_State
 } from "../../../../../appStore/Reducers/product_Slice";
 import {get_Detail_By_User_ID_server_Token} from "../../../../../appStore/interfaces_Slice/user_Related_Interfaces";
@@ -37,14 +39,31 @@ import {
     add_Item_To_Cart_Payload_Interface,
     add_To_Cart_API,
     select_Cart_ID
-} from "../../../../../appStore/Reducers/cart_order_Slice";
-import {Store} from "../../../../../appStore/interfaces_Slice/product_Related_Interfaces";
+} from "../../../../../appStore/Reducers/cart_order_Slice";*/
+// import {Store} from "../../../../../appStore/interfaces_Slice/product_Related_Interfaces";
+import {useAppDispatch, useAppSelector} from "../../../../../lib/app/hooks.ts";
+import {
+    decrement_Single_Product_For_Details_Page,
+    increment_Single_Product_For_Details_Page,
+    select_Local_Cart,
+    select_Local_Cart_Price_Localized_Monetary_Unit, update_single_Product_Add_Btn_Pressed_State
+} from "../../../../../lib/features/products/productSlice.ts";
+import {local_Cart_Item} from "../../../../../interfaces/products/product.ts";
+import {select_Logger_Data_BY_ID} from "../../../../../lib/features/auth/auth_Slice.ts";
+import {get_Detail_By_User_ID_server_Token} from "../../../../../interfaces/user/user_data.ts";
+import {increment_Decrement_Single_Item_Payload_Interface} from "../../../../../interfaces/products/increment.ts";
+import {
+    ukbd_navy_blue,
+    ukbd_red,
+    ukbd_red_light,
+    ukbd_Text_Navy_Blue_color
+} from "../../../../ui_utils/important_Colors.ts";
 
 
 interface Add_Favorite_Details_Props {
     comp_Height: number,
     t_Width: number,
-    product_Id: string,
+    product_Id: number,//string,
 
     quantity: number,
     add_Button_Pressed_State: boolean,
@@ -97,15 +116,15 @@ const Add_Favorite_Details_Btn: React.FC<Add_Favorite_Details_Props> = (
     const local_Cart: local_Cart_Item[] = useAppSelector(select_Local_Cart);
 
     const localStorage: get_Detail_By_User_ID_server_Token = useAppSelector(select_Logger_Data_BY_ID);
-    const product_Store_ID: string = useAppSelector(select_Store_ID);
-    const city_ID: string = useAppSelector(select_City_ID);
-    const country_ID: string = useAppSelector(select_Country_ID);
+    // const product_Store_ID: string = useAppSelector(select_Store_ID);
+    // const city_ID: string = useAppSelector(select_City_ID);
+    // const country_ID: string = useAppSelector(select_Country_ID);
 
-    const cart_ID: string = useAppSelector(select_Cart_ID);
+    // const cart_ID: string = useAppSelector(select_Cart_ID);
 
-    const unique_Cart_ID  = useAppSelector(export_Unique_Cart_ID);
+    // const unique_Cart_ID  = useAppSelector(export_Unique_Cart_ID);
 
-    const store_Data:Store = useAppSelector(select_Store_Data);
+    // const store_Data:Store = useAppSelector(select_Store_Data);
 
 
     const dispatch = useAppDispatch();
@@ -151,70 +170,6 @@ const Add_Favorite_Details_Btn: React.FC<Add_Favorite_Details_Props> = (
 
 
 
-
-
-
-        const payload:add_Item_To_Cart_Payload_Interface = {
-
-
-            items: local_Cart,//local_Ca
-            total_Price: local_Cart_Price,
-
-
-            // always null, may be the business logic is as such
-
-            server_token: null,
-            user_id: null,  // localStorage.user._id,
-
-            /*
-            server_token: (localStorage.user.server_token==="")?null:localStorage.user.server_token,
-            user_id: (localStorage.user._id==="")?null:localStorage.user._id,  // localStorage.user._id,
-            */
-            user_type_id: null,
-
-
-            store_id: product_Store_ID,//params_data.item.store_id,
-            cart_id: cart_ID,//cart_id ? cart_id : null,
-            city_ID: city_ID,/// params_data.city._id,
-            country_ID: country_ID,// params_data.country._id,
-            cart_unique_token: unique_Cart_ID,//getUniqCartId(),
-
-            /*
-            store_details,
-            product_details,
-            city,
-            country,
-
-            */
-            // q: q
-            quantity: quantity,
-
-
-            // user_details, or customer details ---
-            country_phone_code: localStorage.user.country_phone_code,
-            email: localStorage.user.email,
-            name: localStorage.user.first_name + localStorage.user.last_name,
-            phone: localStorage.user.phone,
-
-            // store_details: store_Data,
-
-
-            store_Address: store_Data.address,//string,
-            store_City_ID: store_Data.city_id,
-            store_Location: [store_Data.location[0],store_Data.location[1]],//number[],
-            store_address_Note: "",//store_Data.
-
-            store_User_details_Name : store_Data.name,//string,
-            store_User_details_Country : store_Data.country_phone_code, //string,
-            store_User_details_Phone : store_Data.phone,
-            store_User_details_Email: store_Data.email,
-
-        };
-
-        // console.log("__add_To_Cart_API__", JSON.stringify(payload));
-
-
-        dispatch(add_To_Cart_API(payload));
 
 
     };

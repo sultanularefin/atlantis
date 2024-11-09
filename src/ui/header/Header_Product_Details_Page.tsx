@@ -6,13 +6,21 @@ import {
     View,
 } from "react-native";
 
-import {
+/*import {
     bg_Color_List_And_Phone_BG,
     close_Button_Color,
     ukbd_navy_blue, ukbd_red,
     ukbd_red_light
-} from "../ui_Utils/important_Colors";
+} from "../ui_Utils/important_Colors";*/
 import Identity_Circle_Button from "./sub_Comps/Identity_Circle_Button.tsx";
+import {
+    // close_Button_Color,
+    bg_Color_List_And_Phone_BG,
+    close_Button_Color,
+    ukbd_navy_blue, ukbd_red,
+    ukbd_red_light
+
+} from "../ui_utils/important_Colors.ts";
 
 // import Identity_Circle_Button from "./sub_Comps/Identity_Circle_Button";
 

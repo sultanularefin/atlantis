@@ -110,17 +110,11 @@ import Header_Product_Details_Page from "../header/Header_Product_Details_Page.t
 import {image_base_url} from "../../config/Config.ts";
 import Image_Pre_Fetch_1 from "../ui_utils/Image_Pre_Fetch_1.tsx";
 import Add_Favorite_Details_Btn from "./details_page/add_button/details_Page/Add_Favorite_Details_Btn.tsx";
-import Horizontal_First_Top_Tabs from "./details_page/Horizontal_First_Top_Tabs.tsx";
-import Horizontal_Second_and_Last_Tab_View from "./details_page/Horizontal_Second_and_Last_Tab_View.tsx";
+
 import Detail_Page_Image_VList_Comp from "./details_page/image_part/Detail_Page_Image_VList_Comp.tsx";
-import Vertical_Devider_Full_Width_Active_Order from "../../divider/Vertical_Divider_Full_Width_Active_Order.tsx";
+
 import Ten_15_Days_Home from "../home_comp/Ten_15_Days_Home.tsx";
-/*import Vertical_Devider_Full_Width_Active_Order from "../../components/misc/Vertical_Devider_Full_Width_Active_Order";
-import {Doc} from "../../../appStore/interfaces_Slice/product_Related_Interfaces";*/
-// import {iImageURIStringWithKey} from "./multiple_Image_/MultipleImageHeaderNull";
-
-
-// const Top_Tab = createMaterialTopTabNavigator();
+import Vertical_Divider_Full_Width_Active_Order from "../../divider/Vertical_Divider_Full_Width_Active_Order.tsx";
 
 
 
@@ -440,7 +434,7 @@ const Product_Details_Page = ({
 
                 </View>
 
-                <Vertical_Devider_Full_Width_Active_Order
+                <Vertical_Divider_Full_Width_Active_Order
                     compHeight={10}
                 />
 
@@ -466,7 +460,7 @@ const Product_Details_Page = ({
                 </View>
 
 
-                <Vertical_Devider_Full_Width_Active_Order
+                <Vertical_Divider_Full_Width_Active_Order
                     compHeight={10}
                 />
                 {/*boxed section begins here*/}
@@ -1028,7 +1022,7 @@ const Product_Details_Page = ({
                         // update_UI={is_Item_Added_To_Cart_Previously}
                         comp_Height={30}
                         t_Width={displayWidth / 2.4}
-                        product_Id={route.params.single_Product_ID}
+                        product_Id={Number(route.params.single_Product_ID)}
 
 
                         quantity={
@@ -1103,23 +1097,23 @@ const Product_Details_Page = ({
                     >
 
 
-                        <Horizontal_First_Top_Tabs
+                       {/* <Horizontal_First_Top_Tabs
                             comp_Width={inner_Width}
 
                             comp_Height={displayHeight / 17}
                             // current_Selected_Tab={selected_Tab_Product_Detail_Page_State}
 
                             // const selected_Tab_Product_Detail_Page_State: number = useAppSelector(select_product_Detail_Tab_Index);
-                        />
+                        />*/}
 
 
-                        <Horizontal_Second_and_Last_Tab_View
+                       {/* <Horizontal_Second_and_Last_Tab_View
                             comp_Width={inner_Width}
                             // current_Selected_Tab= {selected_Tab_Product_Detail_Page_State}
                             // tab_Pressed= {update_Selected_Tab}
                             comp_Height={(displayHeight / 4) - (displayHeight / 17)}
 
-                        />
+                        />*/}
 
 
                     </View>

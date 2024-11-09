@@ -18,17 +18,7 @@ import {
 } from "../../ui_Utils/important_Colors";
 // import {Header_Props} from "../Header_DashBoard_Home";
 import SimpleLineIcons from "react-native-vector-icons/SimpleLineIcons";
-// import {useAppDispatch, useAppSelector} from "../../../appStore/app/hooks";
-/*import {
-    select_Conversion_Rate,
-    // local_Currency,
-    select_Exchange_Rate,
-    // select_Local_Cart,
-    select_Local_Cart_Length,
-    select_Local_Cart_Price_Localized_Monetary_Unit,
-    select_Local_Currency,
-    select_Shipped_From_State_Or_Delivery_Currency
-} from "../../../appStore/Reducers/product_Slice";*/
+
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import Foundation from "react-native-vector-icons/Foundation";
 
@@ -36,19 +26,19 @@ import {
     convert_TO_BDT_From_GBP,
     monetary_Unit_Interface,
     // MonetaryUnits,
-    priceConvertToAlternate
+
 } from "../../ui_Utils/localization_utils";
 import hairlineWidth = StyleSheet.hairlineWidth;
 import Single_Bag_Row from "./Single_Bag_Row";
-// import Vertical_Devider_Full_Width_Active_Order from "../../components/misc/Vertical_Devider_Full_Width_Active_Order";
+
 import {useSafeAreaInsets} from "react-native-safe-area-context";
-import Vertical_Devider_Full_Width_Active_Order
-    from "../../home_comp/misc/Vertical_Devider_Full_Width_Active_Order.tsx";
+
 import {useAppSelector} from "../../../lib/app/hooks.ts";
 import {
     select_Local_Cart_Length,
     select_Local_Cart_Price_Localized_Monetary_Unit, select_Shipped_From_State_Or_Delivery_Currency
 } from "../../../lib/features/products/productSlice.ts";
+import Vertical_Divider_Full_Width_Active_Order from "../../../divider/Vertical_Divider_Full_Width_Active_Order.tsx";
 
 interface Bag_Button_Props {
     nav: any,
@@ -165,7 +155,7 @@ const Bag_Button: React.FC<Bag_Button_Props> = ({
                             comp_Width_Single_ROw={comp_Width / 2.5}
                         />
 
-                        <Vertical_Devider_Full_Width_Active_Order
+                        <Vertical_Divider_Full_Width_Active_Order
                             compHeight={10}
                         />
 
@@ -186,7 +176,7 @@ const Bag_Button: React.FC<Bag_Button_Props> = ({
                         {/*<Text style={modal_Styles.modalText}>Hello World!</Text>*/}
 
 
-                        <Vertical_Devider_Full_Width_Active_Order
+                        <Vertical_Divider_Full_Width_Active_Order
                             compHeight={20}
                         />
 

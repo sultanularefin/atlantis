@@ -77,6 +77,152 @@ const initialState: products_State_Interface = {
 };
 
 
+const update_single_Product_Add_Btn_Pressed_State_2 = (state: any,
+                                                       action: PayloadAction<boolean>) => {
+
+
+    state.single_Product_State.item.single_Prod_Add_Btn_Pressed_State = action.payload;// false;// action.payload;
+
+
+    state.single_Product_State.item.single_Prod_Quantity = 0;
+
+
+    // state.single_Product_Add_Btn_Pressed_State= action.payload;
+
+
+};
+
+
+
+
+
+const decrement_Single_Product_2_For_Details_Page = (state: any,
+                                                     action: PayloadAction<increment_Decrement_Single_Item_Payload_Interface>) => {
+
+
+    const decrement_Payload = action.payload;
+    const temp_Product_ID = decrement_Payload.product_ID;
+    const updated_Quantity = decrement_Payload.quantity_Single_Product;
+
+    if (decrement_Payload.quantity_Single_Product === 0) {
+        // state.single_Product_Add_Btn_Pressed_State = false;
+
+        state.single_Product_State.item.single_Prod_Add_Btn_Pressed_State = false;// action.payload;
+
+    }
+
+    state.single_Product_State.item.single_Prod_Quantity = updated_Quantity;//  decrement_Payload.quantity_Single_Product;// action.payload;
+    // state.single_Product_Quantity__State = action.payload;
+
+
+    const temp_Cart = state.local_Cart_Array;
+
+
+    //  TEMP CART  LENGTH 0
+
+
+    // SEARCH FIRST IN TEMP CART IF EXIST THEN INCREMENT
+    const foundIndex_Already_In_Cart_Decrement = temp_Cart.findIndex((one_Product: local_Cart_Item) =>
+        one_Product.id === temp_Product_ID);
+
+
+    // console.log("__foundIndex_Already_In_Cart_Decrement__: ", foundIndex_Already_In_Cart_Decrement);
+
+    // console.log("(temp_Cart[foundIndex_Already_In_Cart_Decrement].quantity): ",(temp_Cart[foundIndex_Already_In_Cart_Decrement].quantity));
+
+    // temp_Cart[foundIndex_Already_In_Cart].quantity= (temp_Cart[foundIndex_Already_In_Cart].quantity) + 1;
+
+
+    // ORDER IS IMPORTANT ORDER:2
+    // eslint-disable-next-line operator-assignment
+    temp_Cart[foundIndex_Already_In_Cart_Decrement].quantity = (temp_Cart[foundIndex_Already_In_Cart_Decrement].quantity) - 1;
+
+
+    // state.product_State.[foundIndex_read].temp_Cart_Quantity = 1;
+
+
+    // ORDER IS IMPORTANT ORDER:1
+    // eslint-disable-next-line operator-assignment
+    temp_Cart[foundIndex_Already_In_Cart_Decrement].weight =
+        (temp_Cart[foundIndex_Already_In_Cart_Decrement].quantity) * (temp_Cart[foundIndex_Already_In_Cart_Decrement].weight);
+
+
+    /* state.product_State.[temp_Cart[foundIndex_Already_In_Cart].index].weight
+         = ((temp_Cart[foundIndex_Already_In_Cart].quantity) + 1)*(temp_Cart[foundIndex_Already_In_Cart].weight);*/
+
+
+    // price decrement begins
+    state.local_Cart_Price_Total -= temp_Cart[foundIndex_Already_In_Cart_Decrement].price;
+
+    // price decrement ends
+
+
+    state.local_Cart_Weight_Total -= temp_Cart[foundIndex_Already_In_Cart_Decrement].weight;
+
+
+    // state.product_State.[foundIndex_read].temp_Cart_Quantity = 1;
+    state.product_State[temp_Cart[foundIndex_Already_In_Cart_Decrement].index].temp_Cart_Quantity
+        = (temp_Cart[foundIndex_Already_In_Cart_Decrement].quantity);
+
+
+    if (temp_Cart[foundIndex_Already_In_Cart_Decrement].quantity === 0) {
+        if (temp_Cart.length === 1) {
+
+            state.local_Cart_Array = [];
+            state.product_State[temp_Cart[foundIndex_Already_In_Cart_Decrement].index].temp_Cart_Quantity = 0;//
+            state.product_State[temp_Cart[foundIndex_Already_In_Cart_Decrement].index].btn_Pressed = false;
+            // (temp_Cart[foundIndex_Already_In_Cart_Decrement].quantity) - 1;
+
+
+        } else if (temp_Cart.length === 2) {
+
+
+            // extra [] added to save it as an array.
+
+            state.local_Cart_Array = [temp_Cart[(foundIndex_Already_In_Cart_Decrement === 1)
+                ? 0
+                : 1
+                ]
+            ];
+
+
+            state.product_State[temp_Cart[(foundIndex_Already_In_Cart_Decrement === 1)
+                ? 0
+                : 1].index].temp_Cart_Quantity = 0;//
+            state.product_State[temp_Cart[(foundIndex_Already_In_Cart_Decrement === 1)
+                ? 0
+                : 1].index].btn_Pressed = false;
+
+
+            // state.product_State.[temp_Cart[foundIndex_Already_In_Cart_Decrement].index].temp_Cart_Quantity = 0;//
+            // state.product_State.[temp_Cart[foundIndex_Already_In_Cart_Decrement].index].btn_Pressed = false;
+        } else if (temp_Cart.length > 2) {
+
+            state.local_Cart_Array = (foundIndex_Already_In_Cart_Decrement === 0)
+                ? (temp_Cart.slice(1, temp_Cart.length))
+                : (temp_Cart.slice(0, foundIndex_Already_In_Cart_Decrement)).concat(temp_Cart.slice(foundIndex_Already_In_Cart_Decrement + 1, temp_Cart.length));
+
+
+            state.product_State[temp_Cart[foundIndex_Already_In_Cart_Decrement].index].temp_Cart_Quantity = 0;//
+            state.product_State[temp_Cart[foundIndex_Already_In_Cart_Decrement].index].btn_Pressed = false;
+
+
+        }
+
+    }
+        // state.local_Cart_Array= state.local_Cart_Array.concat(temp_Cart_Item);
+
+    // updated_Quantity
+
+    else {
+
+        console.log("decrement_Single_Product_2_For_Details_Page>>>> [temp_Cart]: -- ", temp_Cart);
+
+        state.local_Cart_Array = temp_Cart;
+    }
+
+
+};
 
 
 
@@ -735,6 +881,11 @@ export const productSlice = createSlice({
         increment_Item_From_Home: increment_Single_Cart_Item_2__For_Home_Page,
         disable_Btn_Pressed_State_In_Home_Page_0: disable_Btn_Pressed_State_In_Home_Page,
         populateTag_data_for_multiple_Images: populateTag_data_for_multiple_Images_2,
+        update_single_Product_Add_Btn_Pressed_State: update_single_Product_Add_Btn_Pressed_State_2,
+        increment_Single_Product_For_Details_Page: increment_Single_Product_2_For_Details_Page,
+        decrement_Single_Product_For_Details_Page: decrement_Single_Product_2_For_Details_Page,
+
+
 
 
 
@@ -782,6 +933,10 @@ export const {
     increment_Item_From_Home,
     disable_Btn_Pressed_State_In_Home_Page_0,
     populateTag_data_for_multiple_Images,
+    update_single_Product_Add_Btn_Pressed_State,
+    increment_Single_Product_For_Details_Page,
+    decrement_Single_Product_For_Details_Page,
+
 
 } = productSlice.actions;
 

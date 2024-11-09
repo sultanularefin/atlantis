@@ -1,13 +1,19 @@
 import {StyleSheet, Text, View} from "react-native";
-import {
+/*import {
     ukbd_navy_blue,
     ukbd_overlay_Color,
     ukbd_place_holder_TextColor,
     ukbd_Text_Navy_Blue_color
 } from "../../ui_Utils/important_Colors";
-import {previousPrice} from "../../ui_Utils/localization_utils";
+import {previousPrice} from "../../ui_Utils/localization_utils";*/
 import React from "react";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import {
+    ukbd_navy_blue,
+    ukbd_overlay_Color,
+    ukbd_place_holder_TextColor,
+    ukbd_Text_Navy_Blue_color
+} from "../ui_utils/important_Colors.ts";
 
 
 export interface Ten_15_Days_Interface{

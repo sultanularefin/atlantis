@@ -4,11 +4,15 @@ import {
     Text,
     View,
 } from "react-native";
+/*import {
+    ukbd_overlay_Color,
+    ukbd_red
+} from "../../ui_Utils/important_Colors";*/
+import hairlineWidth = StyleSheet.hairlineWidth;
 import {
     ukbd_overlay_Color,
     ukbd_red
-} from "../../ui_Utils/important_Colors";
-import hairlineWidth = StyleSheet.hairlineWidth;
+} from "../ui_utils/important_Colors.ts";
 
 
 
