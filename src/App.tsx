@@ -29,6 +29,7 @@ import Catalog_Home_Page from './ui/screens/Catalog_Home_Page.tsx';
 import MultipleImageHeaderNull from './ui/screens/MultipleImageHeaderNull.tsx';
 import Product_Details_Page from './ui/screens/Product_Details_Page.tsx';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
+import Login_Page from './ui/screens/identity/Login_Page.tsx';
 
 const Native_Root_Stack =
   createNativeStackNavigator<Native_Root_Stack_ParamList>();
@@ -46,6 +47,7 @@ export type Native_Root_Stack_ParamList = {
   SplashScreen: {
     name: string,
   };
+  Login_Page: undefined,
   Catalog_Home_Page: undefined,
   // Logger_Scan_Page: undefined,
   // AnyUsersFeedz : undefined;
@@ -148,6 +150,21 @@ const App: React.FC<Props> = (props) => {
 
                                     }}
                                 />*/}
+
+
+                <Native_Root_Stack.Screen
+                  name="Login_Page"
+                  component={Login_Page}
+                  options={{
+                    headerShown: false,
+                    // presentation: 'transparentModal',
+                    // presentation: 'modal',
+                    presentation: 'fullScreenModal',
+
+                    // presentation: "card", // Very very important. "Double screen problem was due to this".
+
+                  }}
+                />
 
               </Native_Root_Stack.Navigator>
             </NavigationContainer>
