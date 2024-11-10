@@ -5,7 +5,7 @@ import {
 import React, {useRef, useState} from "react";
 import Inner_Comp_Imgs_Detail_Page from "./Inner_Comp_Imgs_Detail_Page";
 import ONEImage from "./ONEImage";
-// import {reg__Page_SubComp_interface} from "../../../../appStore/Reducers/authSlice";
+// import {reg__Page_SubComp_interface} from "../../../../lib/Reducers/authSlice";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import {
   ukbd_navy_blue,

@@ -10,7 +10,7 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 import SimpleLineIcons from "react-native-vector-icons/SimpleLineIcons";
 import EvilIcons from "react-native-vector-icons/EvilIcons";
 
-// import {useAppDispatch, useAppSelector} from "../../../../../appStore/app/hooks";
+// import {useAppDispatch, useAppSelector} from "../../../../../lib/app/hooks";
 import hairlineWidth = StyleSheet.hairlineWidth;
 import Ionicons from "react-native-vector-icons/Ionicons";
 import Entypo from "react-native-vector-icons/Entypo";
@@ -32,15 +32,15 @@ import Decrement_Btn from "./Decrement_Btn";
     select_Store_Data,
     select_Store_ID,
     update_single_Product_Add_Btn_Pressed_State
-} from "../../../../../appStore/Reducers/product_Slice";
-import {get_Detail_By_User_ID_server_Token} from "../../../../../appStore/interfaces_Slice/user_Related_Interfaces";
-import {select_Logger_Data_BY_ID} from "../../../../../appStore/Reducers/authSlice";
+} from "../../../../../lib/Reducers/product_Slice";
+import {get_Detail_By_User_ID_server_Token} from "../../../../../lib/interfaces_Slice/user_Related_Interfaces";
+import {select_Logger_Data_BY_ID} from "../../../../../lib/Reducers/authSlice";
 import {
     add_Item_To_Cart_Payload_Interface,
     add_To_Cart_API,
     select_Cart_ID
-} from "../../../../../appStore/Reducers/cart_order_Slice";*/
-// import {Store} from "../../../../../appStore/interfaces_Slice/product_Related_Interfaces";
+} from "../../../../../lib/Reducers/cart_order_Slice";*/
+// import {Store} from "../../../../../lib/interfaces_Slice/product_Related_Interfaces";
 import {useAppDispatch, useAppSelector} from "../../../../../lib/app/hooks.ts";
 import {
     decrement_Single_Product_For_Details_Page,

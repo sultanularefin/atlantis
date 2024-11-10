@@ -12,10 +12,24 @@ import {
   get_Detail_By_User_ID_server_Token,
   User_BY_UserID,
 } from '../../../interfaces/user/user_data.ts';
+import {Region} from 'react-native-maps';
+import {
+
+  longitude_Latitude_Delta_Interface,
+} from '../../../interfaces/location/location.ts';
 
 export interface todo__State_Interface extends baseInterface {
   user_Data_By_ID: get_Detail_By_User_ID_server_Token;
+  map_Position_Respective_to_Driver: Region,
 }
+
+
+const longitude_Latitude_Delta_For_Few_Blocks_In_Dhaka: longitude_Latitude_Delta_Interface = {
+
+  longitudeDelta: 0.0421,
+  latitudeDelta: 0.0922,
+};
+
 
 const initialState: todo__State_Interface = {
   user_Data_By_ID: {
@@ -24,6 +38,15 @@ const initialState: todo__State_Interface = {
       last_name: 'last_name',
     },
   } as get_Detail_By_User_ID_server_Token,
+  map_Position_Respective_to_Driver: {
+    longitude: 0,//temp_One_Order_Details.order.destination_addresses[0].location[1],
+
+    latitude: 20,//temp_One_Order_Details.order.destination_addresses[0].location[0],
+    // longitudeDelta: 0.0421,
+    // latitudeDelta: 0.0922,
+    ...longitude_Latitude_Delta_For_Few_Blocks_In_Dhaka,
+
+  },
 };
 
 const initial_State0 = initialState;
@@ -56,7 +79,7 @@ export const {
 /*export const select_logger_person_data = (state: RootState) =>
   state.auth_Reducer;*/
 
-export const select_Logger_Data_BY_ID = (state: RootState) =>
-  state.auth_Reducer.user_Data_By_ID;
+export const select_Logger_Data_BY_ID = (state: RootState) => state.auth_Reducer.user_Data_By_ID;
+export const select_Map_Region_Respective_to_Driver_Location = (state: RootState) => state.auth_Reducer.map_Position_Respective_to_Driver;
 
 export default auth_Slice.reducer;

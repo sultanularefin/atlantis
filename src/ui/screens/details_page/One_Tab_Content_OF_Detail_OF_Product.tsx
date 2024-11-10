@@ -12,8 +12,8 @@ import {
 import {
     export_Single_Product_Details,
     single_Product_Item_Root_Interface
-} from "../../../appStore/Reducers/product_Slice";
-import {useAppSelector} from "../../../appStore/app/hooks";
+} from "../../../lib/Reducers/product_Slice";
+import {useAppSelector} from "../../../lib/app/hooks";
 import One_Horizontal_Comp_Custom from "./One_Horizontal_Comp_Custom";
 import One_Horizontal_Comp_Custom_1 from "./One_Horizontal_Comp_Custom_1";
 // import {One__Letter__FlatList_Item__Props} from "./Horizontal_First_Top_Tabs";

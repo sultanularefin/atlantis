@@ -23,10 +23,10 @@ import {RouteProp, useFocusEffect} from "@react-navigation/native";
 /*import {
     select_Logger_Data_BY_ID,
     UKBD_App_Login_Response_With_Password
-} from "../../../appStore/Reducers/authSlice";
+} from "../../../lib/Reducers/authSlice";
 
 
-import {useAppDispatch, useAppSelector} from "../../../appStore/app/hooks";*/
+import {useAppDispatch, useAppSelector} from "../../../lib/app/hooks";*/
 
 
 const master_img = require('../../assets/pay/masterCard.png');
@@ -50,7 +50,7 @@ const cod_img = require('../../assets/pay/COD.webp');
     single_Product_Item_Root_Interface,
     update_single_Product_Add_Btn_Pressed_State,
     update_single_Product_Quantity
-} from "../../../appStore/Reducers/product_Slice";*/
+} from "../../../lib/Reducers/product_Slice";*/
 
 
 import {NativeStackScreenProps} from "@react-navigation/native-stack";
@@ -77,7 +77,7 @@ import EvilIcons from "react-native-vector-icons/EvilIcons";
 /*import {createMaterialTopTabNavigator} from "@react-navigation/material-top-tabs";
 import Horizontal_First_Top_Tabs from "../details_page/Horizontal_First_Top_Tabs";
 import Horizontal_Second_and_Last_Tab_View from "../details_page/Horizontal_Second_and_Last_Tab_View";
-import {get_Detail_By_User_ID_server_Token} from "../../../appStore/interfaces_Slice/user_Related_Interfaces";
+import {get_Detail_By_User_ID_server_Token} from "../../../lib/interfaces_Slice/user_Related_Interfaces";
 import Header_Product_Details_Page from "../../headers/Header_Product_Details_Page";
 import Add_Favorite_Details_Btn from "../details_page/add_button/details_Page/Add_Favorite_Details_Btn";
 import WAS_Value from "../../components/item/WAS_Value";

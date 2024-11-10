@@ -38,7 +38,7 @@ import FontAwesome5Icons from "react-native-vector-icons/FontAwesome5";
 import {RouteProp} from "@react-navigation/core/src/types";
 
 import {NativeStackScreenProps} from "@react-navigation/native-stack";
-// import {useAppDispatch, useAppSelector} from "../../../appStore/app/hooks";
+// import {useAppDispatch, useAppSelector} from "../../../lib/app/hooks";
 // import {Native_Root_Stack_ParamList} from "../../../App";
 // import {base_Image_URL} from "../../../utils_server/server_settings";
 
@@ -48,7 +48,7 @@ import Custom_Header__Multiple_Image_Header_Null_Page
     */
 
 
-// import {multiple_image_route_data_through_redux} from "../../../appStore/Reducers/product_Slice";
+// import {multiple_image_route_data_through_redux} from "../../../lib/Reducers/product_Slice";
 // import OneOFManyImageItem from "../multiple_Image_/OneOFManyImageItem";
 
 // import Header_Login_Page from "../headers/Header_Login_Page";

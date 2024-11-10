@@ -25,7 +25,8 @@ const Item_Detail: React.FC<Item_Detail_Interface> = (
 
 
     }) => {
-// const Item_Detail = ()=>{
+
+    console.log("at Item_Detail <<zIndex_1>> :", zIndex_1);
 
     return(
         <Pressable

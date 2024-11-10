@@ -52,7 +52,7 @@
     "func-names": "error",
     "func-style": "error",
     "generator-star-spacing": "error",
-    "global-require": "error",
+    "global-require": "off",
     "grouped-accessor-pairs": "error",
     "guard-for-in": "off",
     "handle-callback-err": "error",

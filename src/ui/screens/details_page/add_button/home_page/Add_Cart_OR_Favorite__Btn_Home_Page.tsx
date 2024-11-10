@@ -15,7 +15,7 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 import SimpleLineIcons from "react-native-vector-icons/SimpleLineIcons";
 import EvilIcons from "react-native-vector-icons/EvilIcons";
 
-// import {useAppDispatch, useAppSelector} from "../../../../../appStore/app/hooks";
+// import {useAppDispatch, useAppSelector} from "../../../../../lib/app/hooks";
 import hairlineWidth = StyleSheet.hairlineWidth;
 
 
@@ -37,18 +37,18 @@ import hairlineWidth = StyleSheet.hairlineWidth;
     select_Country_ID,
     export_Unique_Cart_ID, select_Store_Data,
     // diable_Btn_Pressed_State_In_Home_Page_0
-} from "../../../../../appStore/Reducers/product_Slice";*/
+} from "../../../../../lib/Reducers/product_Slice";*/
 import Decrement_Btn_Home_Page from "./Decrement_Btn_Home_Page";
 import Increment_Button_Home_Page from "./Increment_Button_Home_Page";
 import Love_Button_Home_Page from "./Love_Button_Home_Page";
-// import {Store} from "../../../../../appStore/interfaces_Slice/product_Related_Interfaces";
-// import {get_Detail_By_User_ID_server_Token} from "../../../../../appStore/interfaces_Slice/user_Related_Interfaces";
-// import {select_Logger_Data_BY_ID} from "../../../../../appStore/Reducers/authSlice";
+// import {Store} from "../../../../../lib/interfaces_Slice/product_Related_Interfaces";
+// import {get_Detail_By_User_ID_server_Token} from "../../../../../lib/interfaces_Slice/user_Related_Interfaces";
+// import {select_Logger_Data_BY_ID} from "../../../../../lib/Reducers/authSlice";
 /*import {
     add_Item_To_Cart_Payload_Interface,
     add_To_Cart_API,
     select_Cart_ID
-} from "../../../../../appStore/Reducers/cart_order_Slice";*/
+} from "../../../../../lib/Reducers/cart_order_Slice";*/
 import {useAppDispatch, useAppSelector} from "../../../../../lib/app/hooks.ts";
 import {
     decrement_Item_From_Home,
@@ -65,6 +65,7 @@ import {
     ukbd_red_light,
     ukbd_Text_Navy_Blue_color
 } from "../../../../ui_utils/important_Colors.ts";
+import {productsApiSlice} from '../../../../../lib/features/products/productsApiSlice.ts';
 
 
 interface Add_Cart_OR_Favorite__Btn_Home_Page {
@@ -122,7 +123,22 @@ const Add_Cart_OR_Favorite__Btn_Home_Page: React.FC<Add_Cart_OR_Favorite__Btn_Ho
             // set_add_Button_Pressed_State_State(true);
 
             // 999
-            dispatch(update_All_Products_Add_BTN_Pressed_State__And_Single_Product_Add_Btn_Pressed_State(index));
+            // dispatch(update_All_Products_Add_BTN_Pressed_State__And_Single_Product_Add_Btn_Pressed_State(index));
+
+
+          // Manually update the query cache
+          dispatch(
+            productsApiSlice.util.updateQueryData('getProducts', {limit:10}, (draftUsers) => {
+
+              draftUsers[index].btn_Pressed = true;
+              draftUsers[index].temp_Cart_Quantity = 0;
+
+             /* const user = draftUsers.find((u) => u.id === id);
+              if (user) {
+                user.name = newName;
+              }*/
+            })
+          );
 
         }
 

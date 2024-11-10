@@ -19,8 +19,8 @@ import React, {useState} from "react";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import {ukbd_navy_blue, ukbd_red} from "../../../ui_utils/important_Colors";
 
-// import {useAppDispatch} from "../../../../appStore/app/hooks";
-// import {populateTag_data_for_multiple_Images} from "../../../../appStore/Reducers/product_Slice";
+// import {useAppDispatch} from "../../../../lib/app/hooks";
+// import {populateTag_data_for_multiple_Images} from "../../../../lib/Reducers/product_Slice";
 import {image_base_url} from '../../../../config/Config.ts';
 import {useAppDispatch} from '../../../../lib/app/hooks.ts';
 import {populateTag_data_for_multiple_Images} from '../../../../lib/features/products/productSlice.ts';

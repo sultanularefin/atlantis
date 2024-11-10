@@ -16,7 +16,7 @@ interface One_Product_Base_Interface{
     price: number
     description: string
     category: string
-    image: string[],//string
+    image: string,//string[],//string
     rating: product_Rating_Interface
 }
 interface One_Product_for_Home_Page_Interface extends One_Product_Base_Interface{
@@ -77,5 +77,6 @@ export type {
     local_Cart_Item,
     One_Product_Item_For_Detail_Interface,
     get_One_Product_Payload__Interface,
+    One_Product_Base_Interface,
 };
 

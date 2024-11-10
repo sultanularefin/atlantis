@@ -12,12 +12,8 @@ import {
   // AsyncStorage,
 } from 'react-native';
 import {CommonActions, useFocusEffect} from '@react-navigation/native';
-// import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import Snackbar from 'react-native-snackbar';
-// import {useNetInfo} from "@react-native-community/netinfo";
-
-// import {useAppDispatch, useAppSelector} from '../../../appStore/app/hooks';
 
 import {RouteProp} from '@react-navigation/core/src/types';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';

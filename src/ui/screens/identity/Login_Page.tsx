@@ -48,7 +48,7 @@ import {
     very_light_blue_ukbd,
     very_light_red_ukbd, map_overlay_Color_Blue
 
-} from "../../ui_Utils/important_Colors";
+} from "../../ui_utils/important_Colors";
 /*import InputField_Email_Phone, {InputField_Email_Phone_Styles} from "../../components/identity/login_comps/InputField_Email_Phone";
 import InputField_Email_Phone_Original_Nayeem_Vai from "../../components/InputField_Email_Phone_Original_Nayeem_Vai";
 import {one_Country_Interface} from "../../components/identity/login_comps/login_interface";
@@ -66,8 +66,8 @@ import {
     select_Login_Data,
     select_Map_Region_Respective_to_Driver_Location,
     UKBD_App_Login_Response_With_Password
-} from "../../../appStore/Reducers/authSlice";
-import {useAppDispatch, useAppSelector} from "../../../appStore/app/hooks";*/
+} from "../../../lib/Reducers/authSlice";
+import {useAppDispatch, useAppSelector} from "../../../lib/app/hooks";*/
 
 
 export interface Login_Page_Props {
@@ -94,13 +94,20 @@ import Loading_Comp from "../../components/loading_Comp/Loading_Comp";
 import Header_Login_Page from "../../headers/Header_Login_Page";
 import Header_Login_Absolute_With_Map_Page from "../../headers/Header_Login_Absolute_With_Map_Page";
 */
-
+import MapView, {Region} from "react-native-maps";
 import {useSafeAreaInsets} from "react-native-safe-area-context";
 import {useAppDispatch, useAppSelector} from '../../../lib/app/hooks.ts';
 import {login_Request_API__interface, one_Country_Interface} from '../../../interfaces/user/login.ts';
 
-
-// const tempPhone_Countries_State:one_Country_Interface[] = Limited_Coutries_With_Phone_Flag;
+import NetInfo, {useNetInfo} from "@react-native-community/netinfo";
+import Header_Login_Absolute_With_Map_Page from '../../header/Header_Login_Absolute_With_Map_Page.tsx';
+import You_Are_Offline_Comp from '../../ui_utils/You_Are_Offline_Comp.tsx';
+import {Limited_Countries_With_Phone_Flag} from '../../comps/identity/Limited_Countries_With_Phone_Flag.ts';
+import Indicator_Common from '../../indicator/Indicator_Common.tsx';
+import InputField_Email_Phone from '../../comps/identity/login/InputField_Email_Phone.tsx';
+import One_Country_Item_Phone_Input from '../../comps/identity/login/One_Country_Item_Phone_Input.tsx';
+import {select_Map_Region_Respective_to_Driver_Location} from '../../../lib/features/auth/auth_Slice.ts';
+const tempPhone_Countries_State:one_Country_Interface[] = Limited_Countries_With_Phone_Flag;
 
 
 const Login_Page: React.FC<Login_Page_Props> = ({
@@ -129,7 +136,10 @@ const Login_Page: React.FC<Login_Page_Props> = ({
     const map_View_Ref_At_Login_Page = useRef<MapView>(null);
 
 
-    const netInfo = useNetInfo();*/
+    */
+
+    const netInfo = useNetInfo();
+    const map_View_Ref_At_Login_Page = useRef<MapView>(null);
     const update_CheckBox = (new_Value: boolean) => {
 
         setToggleCheckBox(new_Value);
@@ -389,6 +399,7 @@ const Login_Page: React.FC<Login_Page_Props> = ({
     };
 
 
+    const map_Region_Respective_to_Driver_Location_2: Region = useAppSelector(select_Map_Region_Respective_to_Driver_Location);
 
 
 
@@ -513,10 +524,10 @@ const Login_Page: React.FC<Login_Page_Props> = ({
 
 
 
-                <Show_Driver_Position_Home_Screen
+               {/* <Show_Driver_Position_Home_Screen
 
                     comp_Height={displayHeight}
-                />
+                />*/}
 
 
             </MapView>
@@ -552,8 +563,8 @@ const Login_Page: React.FC<Login_Page_Props> = ({
                 {
                     /*(!netInfo?.isConnected === false)*/
                     (netInfo?.isConnected === false)?(
-                            <Show_OffLine
-                                comp_Width={displayWidth}
+                            <You_Are_Offline_Comp
+                                comp_width={displayWidth}
                             />)
                         :null
 
@@ -859,6 +870,8 @@ const Login_Page: React.FC<Login_Page_Props> = ({
                                     />
 
 
+
+
                                 </View>
 
 
@@ -1042,9 +1055,9 @@ const Login_Page: React.FC<Login_Page_Props> = ({
 
 
                         {
-                            (loadingState && (<Loading_Comp
+                            (loadingState && (<Indicator_Common
 
-                                    t_Height={displayHeight}
+                                    // t_Height={displayHeight}
                                     color={ukbd_red}
                                 />)
                             )
@@ -1211,3 +1224,16 @@ const Login_Page_styles = StyleSheet.create({
 });
 
 export default Login_Page;
+
+export const common_Container_in_Identity_Page_Styles = StyleSheet.create({
+
+    Reg_Page: {
+        // flex: 10,
+        width: '100%',
+        // backgroundColor: '#fff',
+        // alignItems: 'center',
+        justifyContent: 'center',
+        position: 'relative',
+    },
+});
+

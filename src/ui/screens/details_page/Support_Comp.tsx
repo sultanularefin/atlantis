@@ -9,7 +9,7 @@ import {ukbd_navy_blue, ukbd_red} from "../../ui_utils/important_Colors";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import EvilIcons from "react-native-vector-icons/EvilIcons";
 
-import {useAppDispatch} from "../../../appStore/app/hooks";
+import {useAppDispatch} from "../../../lib/app/hooks";
 import FontAwesome5Icon from "react-native-vector-icons/FontAwesome5";
 
 

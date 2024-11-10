@@ -25,6 +25,7 @@ const rootReducer: Reducer = (state: RootState, action: AnyAction) => {
 
     if (action.type === "auth/clearState") {
 
+        // eslint-disable-next-line no-param-reassign
         state = {} as RootState;
     }
     return combinedReducer(state, action);
@@ -38,9 +39,10 @@ const combinedReducer = combineReducers({
 
     // todo_Reducer: toDoSlice,
     // scan_Reducer: Scan_Slice,
-    [productsApiSlice.reducerPath]: productsApiSlice.reducer,
+
     product_Reducer: productSlice,
     auth_Reducer: auth_Slice,
+    [productsApiSlice.reducerPath]: productsApiSlice.reducer,
 
 
 

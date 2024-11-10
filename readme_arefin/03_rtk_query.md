@@ -1,3 +1,10 @@
+
+
+## prodctsApiSlice.ts.md
+
+
+```ts
+
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
 import {
   get_One_Product_Payload__Interface,
@@ -6,10 +13,7 @@ import {
   One_Product_for_Home_Page_Interface,
 } from '../../../interfaces/products/product.ts';
 import {RootState} from '../../app/store.ts';
-import {
-  // productSlice,
-  // test_4_letters
-} from './productSlice.ts';
+import {productSlice, test_4_letters} from './productSlice.ts';
 // import {Post_of_Json_PlaceHolder_interface} from "@/types/Post";
 
 // One_Product_Interface
@@ -26,10 +30,10 @@ const return_modified_Doc = (
       (one_Product: local_Cart_Item) => one_Product.id === one_Doc.id,
     );
 
-  /*  console.log(
-      'local_Cart[foundIndex_Already_In_Cart].quantity: ',
-      local_Cart[foundIndex_Already_In_Cart].quantity,
-    );*/
+    /*  console.log(
+        'local_Cart[foundIndex_Already_In_Cart].quantity: ',
+        local_Cart[foundIndex_Already_In_Cart].quantity,
+      );*/
 
     // console.log('at if');
     return {
@@ -53,16 +57,20 @@ const return_modified_Doc = (
 
 export const productsApiSlice = createApi({
   reducerPath: "products",
-
+  // reducerPath: 'product_Reducer',
+  /* baseQuery: fetchBaseQuery({
+     baseUrl: 'https://fakestoreapi.com',
+   }),*/
   baseQuery: fetchBaseQuery({
-
+    // baseUrl: '/api',
     baseUrl: 'https://fakestoreapi.com',
-
+    // Make sure to pass `getState` to `baseQuery`
+    /* prepareHeaders: (headers, { getState }) => {
+ 
+ 
+       return headers;
+     },*/
   }),
-
-
-  // baseQuery: customFetchBase,
-
   endpoints: (builder) => {
     return {
       getProducts: builder.query<
@@ -77,7 +85,7 @@ export const productsApiSlice = createApi({
         // transformResponse: (response: { sideA: Tracks; sideB: Tracks }, meta, arg) => {
         // async onQueryStarted(id, { dispatch, queryFulfilled }) {
         // async onQueryStarted(arg, { dispatch, getState, queryFulfilled }) {
-          async onQueryStarted(arg, { dispatch,getState, queryFulfilled }) {
+        async onQueryStarted(arg, { dispatch,getState, queryFulfilled }) {
           try {
 
             const { data } = await queryFulfilled;
@@ -124,7 +132,7 @@ export const productsApiSlice = createApi({
             // await queryFulfilled;
 
             // `onSuccess` side-effect
-            // dispatch(test_4_letters(yourData));
+            dispatch(test_4_letters(33));
 
             return { yourData: data };
             // return yourData;
@@ -135,47 +143,25 @@ export const productsApiSlice = createApi({
 
 
         },
-        transformResponse: (
-          response: One_Product_for_Home_Page_Interface[],
-          meta:unknown,
-          arg:unknown,
-
-
-
-        ): One_Product_for_Home_Page_Interface[] => {
-
-          console.log("inside transformResponse section (response): ", response);
-          console.log("inside transformResponse section (meta): ", meta);
-          console.log("inside transformResponse section (arg): ", arg);
-          // const state:any = getState() as RootState;
-          // console.log("state: ",state.product_Reducer);
-          // state.product_State product_Reducer
-
-
-          // let data2:One_Product_for_Home_Page_Interface[]=[];
-
-        /*  const local_Cart_IDs: number[] = (state.product_Reducer.local_Cart_Array.length === 0)
-            ? []
-            : state.product_Reducer.local_Cart_Array.map((one_Product: local_Cart_Item) => one_Product.id);
-*/
-          // if(data?.length>0){
-
-
-          // const yourData = data.map((one_Product: One_Product_for_Home_Page_Interface, index:number) => (
-
-
-
-
-          // 999
-         return response.map((item:One_Product_for_Home_Page_Interface,index:number) => ({
-             ...item,
-             show_Details_Btn: false,
-             btn_Pressed: false,
-           }
-         ));
-
-
-        },
+        /*  transformResponse: (
+            response: One_Product_for_Home_Page_Interface[],
+            meta:unknown,
+            arg:unknown,
+  
+  
+  
+          ): One_Product_for_Home_Page_Interface[] => {
+  
+            console.log("inside transformResponse section (response): ", response);
+            console.log("inside transformResponse section (meta): ", meta);
+            console.log("inside transformResponse section (arg): ", arg);
+  
+  
+  
+  
+  
+            return response;
+          },*/
 
         queryFn: (arg, queryApi, extraOptions, baseQuery) => {
           const one_Prod: One_Product_for_Home_Page_Interface = {
@@ -214,7 +200,7 @@ export const productsApiSlice = createApi({
       getOneProduct: builder.query<
         One_Product_for_Home_Page_Interface,
         {
-          //one_product_payload: get_One_Product_Payload__Interface
+          /*one_product_payload: get_One_Product_Payload__Interface */
 
           product_Id: number;
           btn_Pressed_State: boolean;
@@ -223,7 +209,16 @@ export const productsApiSlice = createApi({
       >({
         query: ({product_Id}) => `/products?${product_Id}`,
       }),
-
+      /* createPost: builder.mutation<
+         One_Product_for_Home_Page_Interface,
+         Omit<One_Product_for_Home_Page_Interface, 'id'>
+       >({
+         query: post => ({
+           url: '/products',
+           method: 'POST',
+           body: post,
+         }),
+       }),*/
     };
   },
 
@@ -237,9 +232,4 @@ export const {
   // useCreatePostMutation,
 } = productsApiSlice;
 
-
-
-
-// export const { useGetUsersQuery } = api; // for use in React components
-export const { getProducts } = productsApiSlice.endpoints; // for accessing in slice or middleware
-export const apiReducer = productsApiSlice.reducer;
+```

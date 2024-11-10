@@ -43,7 +43,7 @@ import {
 
 // import Custom_Header_Root_Scan_Page from '../header/Custom_Header_Root_Scan_Page.tsx';
 import Indicator_Common from '../indicator/Indicator_Common.tsx';
-import One_Scan_Item from '../list_comp/One_Scan_Item.tsx';
+// import One_Scan_Item from '../list_comp/One_Scan_Item.tsx';
 import {useGetProductsQuery} from '../../lib/features/products/productsApiSlice.ts';
 import Focus_Aware_Status_Bar from '../header/Focus_Aware_Status_Bar.tsx';
 import {
@@ -387,10 +387,26 @@ const Catalog_Home_Page: React.FC<Catalog_Home_Page_Props> = ({navigation}) => {
           // removeClippedSubviews
 
           // ItemSeparatorComponent={item_Separator_Component}
+        /*  refreshControl={
+            <RefreshControl
+              refreshing={refreshingState}
+              onRefresh={onRefresh}
+            />
+          }*/
+
+
           refreshControl={
             <RefreshControl
               refreshing={refreshingState}
               onRefresh={onRefresh}
+              title={"Refreshing"}// ios
+              titleColor={'blue'} // ios
+              tintColor={'lightskyblue'}// ios
+              colors={['dimgrey']/*["wheat","steelblue"]*/} // android
+              //@ts-ignore
+              size={'large'} //android
+              enabled={true} //android
+
             />
           }
         />

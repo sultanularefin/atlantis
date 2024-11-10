@@ -10,7 +10,7 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 import EvilIcons from "react-native-vector-icons/EvilIcons";
 import {useAppDispatch} from "../../../lib/app/hooks.ts";
 
-// import {useAppDispatch} from "../../../appStore/app/hooks";
+// import {useAppDispatch} from "../../../lib/app/hooks";
 
 
 
