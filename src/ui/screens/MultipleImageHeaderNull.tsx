@@ -82,7 +82,7 @@ export interface iImageURIStringWithKey {
 export interface MultipleImageHeaderNull_route_date_interface {
 
 
-    some_uris: string[],
+    some_uris: string,//string[],
     tapIndex: number,
     title: string,//props.content,
 

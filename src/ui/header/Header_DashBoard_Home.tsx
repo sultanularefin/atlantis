@@ -37,10 +37,13 @@ import Monetary_Value_OF_Cart from "./sub_Comps/Monetary_Value_OF_Cart";
 import Horizontal_Divider_Given_Height_Active_Order
     from "../../divider/Horizontal_Divider_Given_Height_Active_Order.tsx";
 import {
-    ukbd_navy_blue,
-    ukbd_red,
-    ukbd_red_light
-} from "../ui_utils/important_Colors.ts";
+  cac_green_success,
+  ukbd_navy_blue,
+  ukbd_red,
+  ukbd_red_light,
+} from '../ui_utils/important_Colors.ts';
+import Menu_Icon_SVG from '../../assets/svgs/menu/Menu_Icon_SVG.tsx';
+// import Driver_Icon_SVG from '../../assets/svgs/driver/Driver_Icon_SVG.tsx';
 // import {base_Image_URL} from "../../utils_server/server_settings";
 
 const Bag = require("../../assets/images/Bag.svg");
@@ -54,7 +57,7 @@ export interface Header_Props {
     // bg_Color: string,
 
 }
-// import { useDrawerStatus } from '@react-navigation/drawer';
+
 const Header_DashBoard_Home: React.FC<Header_Props> = ({
                                                            nav,
                                                            comp_Height,
@@ -63,25 +66,11 @@ const Header_DashBoard_Home: React.FC<Header_Props> = ({
                                                        }) => {
 
 
-    // const localStorage: get_Detail_By_User_ID_server_Token = useAppSelector(select_Logger_Data_BY_ID);
 
-
-    // const local_Cart = useAppSelector(select_Local_Cart);
-
-
-
-
-// ...
-
-    // const isDrawerOpen = useDrawerStatus() === 'open';
 
 
     const nav_Icon_Pressed=()=>{
 
-        // console.log("navicon pressed",isDrawerOpen);
-        // navigation.toggleDrawer();
-        // return nav.toggleDrawer();
-        // return nav.openDrawer();
 
         console.log("at nav_Icon_Pressed");
 
@@ -101,16 +90,7 @@ const Header_DashBoard_Home: React.FC<Header_Props> = ({
             borderBottomColor: ukbd_navy_blue,//"rgba(1, 41, 101, 0.03)"
 
 
-            /* shadowColor: "aliceblue",
-             shadowOffset: {
-                 width: 1,
-                 height: 1,
-             },
-             shadowOpacity: 1,
-             shadowRadius: 2,
 
-
-             elevation: 5,*/
 
             flex: 10,
         }}>
@@ -142,8 +122,8 @@ const Header_DashBoard_Home: React.FC<Header_Props> = ({
                                 // ...styles.addButton,
 
                                 backgroundColor: pressed
-                                    ? ukbd_navy_blue
-                                    : "white",//"transparent", "transparent caused issues:
+                                    ? cac_green_success
+                                    : ukbd_red,//"transparent", "transparent caused issues:
                                 // (ADVICE) View #47 of type RCTView has a shadow set but cannot calculate
                                 // shadow efficiently. Consider setting a background color to fix this, or apply the shadow to a more specific component.
                                 justifyContent: "center",
@@ -178,27 +158,11 @@ const Header_DashBoard_Home: React.FC<Header_Props> = ({
                         ]}>
 
 
-                        <Image
-                            style={{
-                                height: comp_Height * 0.70,
-                                width: comp_Height * 0.70,
-                                // borderRadius: 5,//image_Height,
-                                // backgroundColor: "#f2f2f2"
-                            }}
-                           source={
-                                ukbd_image
-                            }
 
-                            /*
-                            source={{
-                                uri: require("../../assets/images/UKBD.png"),//ukbd_image,
-                                cache: 'only-if-cached',
-
-                            }}
-                            */
-                            resizeMode={'contain'}
-
-                        />
+                      <Menu_Icon_SVG
+                      width= {40}
+                      height={40}
+                      />
                     </Pressable>
 
 

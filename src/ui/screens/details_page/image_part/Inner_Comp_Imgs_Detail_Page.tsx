@@ -65,7 +65,7 @@ const Inner_Comp_Imgs_Detail_Page: React.FC<FeedImage_Props_For_Image_Display_an
             comp_Width_2={displayWidth}
             navigationProp={navigationProp}
             rootIndex={rootIndex}
-            imgsOFThisFeed={imgsOFThisFeed}
+            images_OFThis_Feed={imgsOFThisFeed}
             all_images_string={all_images}
             content={content}
         />

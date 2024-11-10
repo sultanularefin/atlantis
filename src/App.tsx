@@ -80,6 +80,8 @@ const App: React.FC<Props> = (props) => {
 
           <ActionSheetProvider>
             <NavigationContainer>
+              <StatusBar barStyle="dark-content"
+                         backgroundColor="#00bfff" />
               <Native_Root_Stack.Navigator
                 initialRouteName={
                   'SplashScreen'
@@ -87,6 +89,9 @@ const App: React.FC<Props> = (props) => {
                 screenOptions={{
                   // cardOverlayEnabled: true,
 
+                  headerStyle: {
+                    backgroundColor: '#6a51ae', // This will affect the StatusBar background on iOS
+                  },
                   headerTitleStyle: {
                     fontWeight: 'bold',
                     // fontSize: rdx_dimension.width>360? 16:14,
@@ -98,7 +103,11 @@ const App: React.FC<Props> = (props) => {
                 <Native_Root_Stack.Screen
                   name="SplashScreen"
                   component={SplashScreen}
+
                   options={{
+                    headerStyle: {
+                      backgroundColor: '#6a51ae', // This will affect the StatusBar background on iOS
+                    },
 
                     headerShown: false,
 
@@ -111,6 +120,9 @@ const App: React.FC<Props> = (props) => {
                   component={MultipleImageHeaderNull}
 
                   options={{
+                    headerStyle: {
+                      backgroundColor: '#6a51ae', // This will affect the StatusBar background on iOS
+                    },
                     // screenOptions={{
                     headerShown: false,
                   }}
@@ -121,6 +133,9 @@ const App: React.FC<Props> = (props) => {
                   name="Product_Details_Page"
                   component={Product_Details_Page}
                   options={{
+                    headerStyle: {
+                      backgroundColor: '#6a51ae', // This will affect the StatusBar background on iOS
+                    },
                     headerShown: false,
 
 
@@ -136,6 +151,9 @@ const App: React.FC<Props> = (props) => {
                   name="Catalog_Home_Page"
                   component={Catalog_Home_Page}
                   options={{
+                    headerStyle: {
+                      backgroundColor: '#6a51ae', // This will affect the StatusBar background on iOS
+                    },
                     headerShown: false,
                     // headerShown: true,
                   }}
@@ -156,6 +174,9 @@ const App: React.FC<Props> = (props) => {
                   name="Login_Page"
                   component={Login_Page}
                   options={{
+                    headerStyle: {
+                      backgroundColor: '#6a51ae', // This will affect the StatusBar background on iOS
+                    },
                     headerShown: false,
                     // presentation: 'transparentModal',
                     // presentation: 'modal',

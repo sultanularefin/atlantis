@@ -87,7 +87,7 @@ const populate_all_product_data_2 = (
 ) => {
   // console.log('action.payload: ', action.payload);
 
-  // 999
+
   state.product_State = action.payload;
 };
 
@@ -251,7 +251,7 @@ const increment_Single_Product_2_For_Details_Page = (
       image: one_Item.image_url[0],
       id: one_Item._id,
       index: foundIndex_read,
-      weight: one_Item.item_weight,
+      // weight: one_Item.item_weight,
     };
 
     state.product_State[foundIndex_read].temp_Cart_Quantity = 1;
@@ -261,7 +261,7 @@ const increment_Single_Product_2_For_Details_Page = (
     // state.local_Cart_Price_Total = one_Item.view_price;
     state.local_Cart_Price_Total = one_Item.price;
 
-    state.local_Cart_Weight_Total = one_Item.item_weight;
+    // state.local_Cart_Weight_Total = one_Item.item_weight;
 
     // price ends
 
@@ -363,32 +363,20 @@ const increment_Single_Product_2_For_Details_Page = (
         image: one_Item.image_url[0],
         id: one_Item._id,
         index: foundIndex_read,
-        weight: one_Item.item_weight,
+        // weight: one_Item.item_weight,
       };
 
       state.product_State[foundIndex_read].temp_Cart_Quantity = 1;
       state.product_State[foundIndex_read].btn_Pressed = true;
-      // temp_Cart_Quantity: number,
-      //     btn_Pressed: boolean,
 
-      // price begins
-      // state.local_Cart_Price_Total += one_Item.view_price;
       state.local_Cart_Price_Total += one_Item.price;
       // price ends
 
       state.local_Cart_Weight_Total += one_Item.item_weight;
 
-      // common code ----------------add temp_cart_item__ends here
 
-      // const temp_Cart_Item:local_Cart_Item= add_New_Item_In_Cart(state.product_State,temp_Product_ID);
-
-      // temp_Cart.concat(temp_Cart_Item);
       state.local_Cart_Array = state.local_Cart_Array.concat(cart_Item);
-      // temp_Cart.concat(cart_Item);
 
-      // foundIndex_Already_In_Cart
-
-      // state.local_Cart_Array=[...temp_Cart];
 
       return;
     }
@@ -413,10 +401,36 @@ const disable_Btn_Pressed_State_In_Home_Page = (
   state.product_State[action.payload].temp_Cart_Quantity = 0;
 };
 
+
+const store_temp_Cart_2=(
+  state: any,
+  action: PayloadAction<local_Cart_Item[]>,
+)=>{
+
+
+  // 999
+
+  state.local_Cart_Array = action.payload;
+
+
+
+  state.local_Cart_Price_Total = action.payload.reduce((accumulator:number, one_Cart_Item:local_Cart_Item) => accumulator + one_Cart_Item.price, 0);
+
+
+
+
+};
 const increment_Single_Cart_Item_2__For_Home_Page = (
   state: any,
   action: PayloadAction<number>,
 ) => {
+
+
+  // ----..
+
+
+
+  // ----...
   const home_Item_Index = action.payload;
 
   const temp_Cart = state.local_Cart_Array;
@@ -433,7 +447,7 @@ const increment_Single_Cart_Item_2__For_Home_Page = (
       image: one_Item.image_url[0],
       id: one_Item._id,
       index: home_Item_Index, //foundIndex_read,
-      weight: one_Item.item_weight,
+      // weight: one_Item.item_weight,
     };
 
     state.product_State[home_Item_Index].temp_Cart_Quantity = 1;
@@ -446,23 +460,7 @@ const increment_Single_Cart_Item_2__For_Home_Page = (
 
     state.local_Cart_Weight_Total = one_Item.item_weight;
 
-    // price ends
 
-    // common code ----------------add temp_cart_item__ends here
-
-    // console.log("__temp_Cart_Item__ length(0):", cart_Item);
-
-    // temp_Cart.concat({...temp_Cart_Item});
-    // temp_Cart.concat({...temp_Cart_Item});
-    // state.read_follower_data = state.read_follower_data.concat(newData);
-
-    // state.local_Cart_Array.concat(temp_Cart_Item);
-
-    // temp_Cart.concat([...temp_Cart_Item]);
-
-    // console.log("---at 0 and temp_Cart.length: ",temp_Cart.length);
-
-    // state.local_Cart_Array=[{...temp_Cart_Item}];
 
     state.local_Cart_Array = state.local_Cart_Array.concat(cart_Item);
 
@@ -508,21 +506,7 @@ const increment_Single_Cart_Item_2__For_Home_Page = (
 
       return;
     } else {
-      // -1;
-      // foundIndex_Already_In_Cart === -1;
 
-      // const temp_Cart_Item:local_Cart_Item= add_Item_To_Cart_33(temp_Product_ID);
-
-      // common code -----------------------------add temp_cart_item___begins here
-      //  TEMP CART  LENGTH 0
-      /* const foundIndex_read = state.product_State.findIndex((one_Product: Doc) =>
-           one_Product._id === temp_Product_ID);*/
-
-      // state.product_State[one_Product_Index].
-
-      // if (foundIndex_read){
-
-      // const one_Item = state.product_State[foundIndex_read];
 
       const cart_Item: local_Cart_Item = {
         name: one_Item.name.toString(), // one_Item.name,
@@ -532,17 +516,12 @@ const increment_Single_Cart_Item_2__For_Home_Page = (
         image: one_Item.image_url[0],
         id: one_Item._id,
         index: home_Item_Index,
-        weight: one_Item.item_weight,
+        // weight: one_Item.item_weight,
       };
 
       state.product_State[home_Item_Index].temp_Cart_Quantity = 1;
 
-      // state.product_State[foundIndex_read].btn_Pressed = true;
-      // temp_Cart_Quantity: number,
-      //     btn_Pressed: boolean,
 
-      // price begins
-      // state.local_Cart_Price_Total += one_Item.view_price;
 
       state.local_Cart_Price_Total += one_Item.price;
 
@@ -550,7 +529,7 @@ const increment_Single_Cart_Item_2__For_Home_Page = (
 
       // price ends
 
-      state.local_Cart_Weight_Total += one_Item.item_weight;
+      // state.local_Cart_Weight_Total += one_Item.item_weight;
 
       // common code ----------------add temp_cart_item__ends here
 
@@ -776,22 +755,35 @@ export const productSlice = createSlice({
   reducers: {
     single_Product__Show_Details_Button_true:
       single_Product__Show_Details_Button_true_2,
+
     // added on may 8, 2023
     update_All_Products_Add_BTN_Pressed_State__And_Single_Product_Add_Btn_Pressed_State:
       update_All_Products_Add_BTN_Pressed_State__And_Single_Product_Add_Btn_Pressed_State_2,
+
     decrement_Item_From_Home: decrement_Single_Cart_Item_2_For_Home_Page,
     increment_Item_From_Home: increment_Single_Cart_Item_2__For_Home_Page,
+
     disable_Btn_Pressed_State_In_Home_Page_0:
       disable_Btn_Pressed_State_In_Home_Page,
+
+
     populateTag_data_for_multiple_Images:
       populateTag_data_for_multiple_Images_2,
+
+
     update_single_Product_Add_Btn_Pressed_State:
       update_single_Product_Add_Btn_Pressed_State_2,
+
     increment_Single_Product_For_Details_Page:
       increment_Single_Product_2_For_Details_Page,
+
     decrement_Single_Product_For_Details_Page:
       decrement_Single_Product_2_For_Details_Page,
+
     populate_all_product_data: populate_all_product_data_2,
+
+    // added newly
+    store_temp_cart:store_temp_Cart_2,
   },
   extraReducers: (builder) => {
     /* builder
@@ -838,6 +830,9 @@ export const {
   increment_Single_Product_For_Details_Page,
   decrement_Single_Product_For_Details_Page,
   populate_all_product_data,
+
+  // added on 10th november
+  store_temp_cart,
 } = productSlice.actions;
 
 // export const selectCount = (state: RootState) => state.products.value; scan_Reducer

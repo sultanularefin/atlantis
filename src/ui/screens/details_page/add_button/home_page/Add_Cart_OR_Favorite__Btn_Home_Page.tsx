@@ -51,13 +51,13 @@ import Love_Button_Home_Page from "./Love_Button_Home_Page";
 } from "../../../../../lib/Reducers/cart_order_Slice";*/
 import {useAppDispatch, useAppSelector} from "../../../../../lib/app/hooks.ts";
 import {
-    decrement_Item_From_Home,
-    disable_Btn_Pressed_State_In_Home_Page_0,
-    increment_Item_From_Home,
-    select_Local_Cart,
-    select_Local_Cart_Price_Localized_Monetary_Unit,
-    update_All_Products_Add_BTN_Pressed_State__And_Single_Product_Add_Btn_Pressed_State
-} from "../../../../../lib/features/products/productSlice.ts";
+  decrement_Item_From_Home,
+  disable_Btn_Pressed_State_In_Home_Page_0,
+  increment_Item_From_Home,
+  select_Local_Cart,
+  select_Local_Cart_Price_Localized_Monetary_Unit, store_temp_cart,
+  update_All_Products_Add_BTN_Pressed_State__And_Single_Product_Add_Btn_Pressed_State,
+} from '../../../../../lib/features/products/productSlice.ts';
 import {local_Cart_Item} from "../../../../../interfaces/products/product.ts";
 import {
     ukbd_navy_blue,
@@ -120,10 +120,6 @@ const Add_Cart_OR_Favorite__Btn_Home_Page: React.FC<Add_Cart_OR_Favorite__Btn_Ho
 
         if (!add_Button_Pressed_State) {
 
-            // set_add_Button_Pressed_State_State(true);
-
-            // 999
-            // dispatch(update_All_Products_Add_BTN_Pressed_State__And_Single_Product_Add_Btn_Pressed_State(index));
 
 
           // Manually update the query cache
@@ -132,11 +128,6 @@ const Add_Cart_OR_Favorite__Btn_Home_Page: React.FC<Add_Cart_OR_Favorite__Btn_Ho
 
               draftUsers[index].btn_Pressed = true;
               draftUsers[index].temp_Cart_Quantity = 0;
-
-             /* const user = draftUsers.find((u) => u.id === id);
-              if (user) {
-                user.name = newName;
-              }*/
             })
           );
 
@@ -164,133 +155,126 @@ const Add_Cart_OR_Favorite__Btn_Home_Page: React.FC<Add_Cart_OR_Favorite__Btn_Ho
 
     const local_Cart: local_Cart_Item[] = useAppSelector(select_Local_Cart);
 
-    // const localStorage: get_Detail_By_User_ID_server_Token = useAppSelector(select_Logger_Data_BY_ID);
-    // const product_Store_ID: string = useAppSelector(select_Store_ID);
-    // const city_ID: string = useAppSelector(select_City_ID);
-    // const country_ID: string = useAppSelector(select_Country_ID);
 
-    // const cart_ID: string = useAppSelector(select_Cart_ID);
-
-    // const unique_Cart_ID  = useAppSelector(export_Unique_Cart_ID);
-
-    // const store_Data:Store = useAppSelector(select_Store_Data);
+  // const local_Cart: local_Cart_Item[] = useAppSelector(select_Local_Cart);
 
 
+
+    const increment_from_home=(home_Item_Index:number)=>{
+
+
+
+
+      const temp_Cart:local_Cart_Item[] = local_Cart;//state.local_Cart_Array;
+
+
+
+      dispatch(
+        productsApiSlice.util.updateQueryData('getProducts', {limit:10}, (draft_Products) => {
+
+
+          const temp_Product_ID = draft_Products[home_Item_Index].id;
+          const one_Item = draft_Products[home_Item_Index];
+
+
+
+          if (temp_Cart.length === 0) {
+            const cart_Item: local_Cart_Item = {
+              name: one_Item.title.toString(), // one_Item.name,
+              quantity: 1,
+              // price: one_Item.view_price,
+              price: one_Item.price,
+              image: one_Item.image[0],
+              id: one_Item.id,
+              index: home_Item_Index, //foundIndex_read,
+              // weight: one_Item.item_weight,
+            };
+
+            draft_Products[home_Item_Index].temp_Cart_Quantity = 1;
+            draft_Products[home_Item_Index].btn_Pressed = true;
+
+            temp_Cart.concat(cart_Item);
+
+
+
+            return;
+          } else {
+            // else if (temp_Cart.length > 0) {
+            //  TEMP CART  LENGTH  > 0
+
+            console.log('___at TEMP CART  LENGTH  > 0 ');
+
+
+
+            // SEARCH FIRST IN TEMP CART IF EXIST THEN INCREMENT
+            const foundIndex_Already_In_Cart = temp_Cart.findIndex(
+              (one_Product: local_Cart_Item) => one_Product.id === temp_Product_ID,
+            );
+
+            // console.log("__foundIndex_Already_In_Cart__: ", foundIndex_Already_In_Cart);
+            if (foundIndex_Already_In_Cart !== -1) {
+
+              console.log("foundIndex_Already_In_Cart: ",foundIndex_Already_In_Cart);
+
+              // eslint-disable-next-line operator-assignment
+              temp_Cart[foundIndex_Already_In_Cart].quantity =
+                temp_Cart[foundIndex_Already_In_Cart].quantity + 1;
+
+              draft_Products[home_Item_Index].temp_Cart_Quantity =
+                temp_Cart[foundIndex_Already_In_Cart].quantity;
+
+              // temp_Cart = temp_Cart; //[...temp_Cart];
+
+              return;
+            } else {
+
+
+              const cart_Item: local_Cart_Item = {
+                name: one_Item.title.toString(), // one_Item.name,
+                quantity: 1,
+                // price: one_Item.view_price,
+                price: one_Item.price,
+                image: one_Item.image[0],
+                id: one_Item.id,
+                index: home_Item_Index,
+                // weight: one_Item.item_weight,
+              };
+
+              draft_Products[home_Item_Index].temp_Cart_Quantity = 1;
+              temp_Cart.concat(cart_Item);
+
+              return;
+            }
+
+          }
+
+        })
+
+      );
+
+      dispatch(store_temp_cart(temp_Cart));
+
+      // temp_Cart = temp_Cart.concat(cart_Item); // to do add item to cart
+
+    };
 
     const increment_button_Pressed = () => {
 
-        // console.log("__increment_button_Pressed__");
-        // set_value_State(value_State + 1);
-        // console.log("increment_button_Pressed pressed For Item in Home)");
 
 
-        // return;
+      // 999
 
-        /*
-        const increment_Payload: increment_Decrement_Single_Item_Payload_Interface = {
-            quantity_Single_Product: 1 + quantity, // not used...
-            product_ID: product_Id,
-        };
-        */
-
-        dispatch(increment_Item_From_Home(index));
-
-
-       /* const payload:add_Item_To_Cart_Payload_Interface= {
-
-
-            items: local_Cart,//local_Ca
-            total_Price: local_Cart_Price,
-
-
-            // always null, may be the business logic is as such
-
-            server_token: null,
-            user_id: null,  // localStorage.user._id,
-
-            /!*
-            server_token: (localStorage.user.server_token==="")?null:localStorage.user.server_token,
-            user_id: (localStorage.user._id==="")?null:localStorage.user._id,  // localStorage.user._id,
-            *!/
+      increment_from_home(index);
 
 
 
-            cart_id: (cart_ID==="")?null:cart_ID, //cart_ID,//cart_id ? cart_id : null,
-            user_type_id: null,
-
-            store_id: product_Store_ID,//params_data.item.store_id,
-
-            city_ID: city_ID,/// params_data.city._id,
-            country_ID: country_ID,// params_data.country._id,
-            cart_unique_token: unique_Cart_ID,//getUniqCartId(),
 
 
-
-            /!*
-            cart_id: null|string,//cart_id ? cart_id : null,
-            server_token: null|string,
-            user_id: null|string,
-
-            user_type_id: null| number,
-
-            *!/
-            /!*
-            store_details,
-            product_details,
-            city,
-            country,
-
-            *!/
-            // q: q
-            quantity: quantity,
-
-
-            // user_details, or customer details ---
-            country_phone_code: localStorage.user.country_phone_code,
-            email: localStorage.user.email,
-            name: localStorage.user.first_name + localStorage.user.last_name,
-            phone: localStorage.user.phone,
-
-            // store_details: store_Data,
-
-
-            store_Address: store_Data.address,//string,
-            store_City_ID: store_Data.city_id,
-            store_Location: [store_Data.location[0],store_Data.location[1]],//number[],
-            store_address_Note: "",//store_Data.
-
-            store_User_details_Name : store_Data.name,//string,
-            store_User_details_Country : store_Data.country_phone_code, //string,
-            store_User_details_Phone : store_Data.phone,
-            store_User_details_Email: store_Data.email,
-
-        };
-
-        // console.log("__add_To_Cart_API__", JSON.stringify(payload));
-
-
-        console.log("__unique_Cart_ID__: ",unique_Cart_ID);
-
-        dispatch(add_To_Cart_API(payload));
-
-        return;*/
 
     };
 
     const decrement_button_Pressed = () => {
-        // console.log("__decrement_button_Pressed__ pressed For Item in Home)");
 
-
-        // return;
-        // set_value_State(value_State-1);
-
-
-        /*
-        const decrement_Payload: increment_Decrement_Single_Item_Payload_Interface = {
-            quantity_Single_Product: quantity - 1, //used
-            product_ID: product_Id,
-        };
-        */
 
         if (quantity === 0) {
 
@@ -314,7 +298,7 @@ const Add_Cart_OR_Favorite__Btn_Home_Page: React.FC<Add_Cart_OR_Favorite__Btn_Ho
 
     const box_Height = t_Height;//t_Width/4;
     const heart_Width = t_Height;//t_Width / 5;
-    const add_Width = t_Width - (heart_Width);
+    const add_Width = t_Width - (t_Height);
 
     return (
 

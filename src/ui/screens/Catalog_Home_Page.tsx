@@ -20,7 +20,7 @@ import {
   VirtualizedList,
   BackHandler,
   StatusBarStyle,
-  FlatList,
+  FlatList, StatusBar,
 } from 'react-native';
 
 import {useFocusEffect, useIsFocused} from '@react-navigation/native';
@@ -82,7 +82,7 @@ const Catalog_Home_Page: React.FC<Catalog_Home_Page_Props> = ({navigation}) => {
     isLoading: is_home_products_Loading,
     isError: home_products_load_Error,
   } = useGetProductsQuery({
-    limit: 10,
+    limit: 1000,
     // offset: 1,
   });
 
@@ -132,41 +132,12 @@ const Catalog_Home_Page: React.FC<Catalog_Home_Page_Props> = ({navigation}) => {
 
   const comp_Height = deviceHeight / 10;
   const header__Height = deviceHeight / 16;
-  /* return (
-         <SafeAreaView
-             style={{
-                 flex: 1,
-                 flexDirection: 'column',
-             }}>
-             <Custom_Header_Root_Scan_Page
-                 page_title={'catalog'}
-                 comp_Height={header__Height}
-                 total_Width={deviceWidth}
-                 // navigation={navigation}
-                 read_all_Button_Pressed={delete_all_Button_Pressed_0}
-                 save_before_Leave={save__Before_Close_In_Notifications_Page}
-                 show_back_button={false}
-             />
 
-             <FloatingButton_Scan_New
-                 // showFloatingButtonBoolean={true}
-                 isKeyboardVisibleStateBoolean={false}
-                 deviceHeightFB={deviceHeight}
-                 navigation={navigation}
-                 comp_width={65}
-                 comp_Height={94}
-             />
-
-
-         </SafeAreaView>
-     );*/
-
-  // status bar related comps  ---begins here
   const STYLES = ['default', 'dark-content', 'light-content'] as const;
   const TRANSITIONS = ['fade', 'slide', 'none'] as const;
   const [hidden, setHidden] = useState(false);
   const [statusBarStyle, setStatusBarStyle] = useState<StatusBarStyle>(
-    STYLES[0],
+    STYLES[1],
   );
   const [statusBarTransition, setStatusBarTransition] = useState<
     'fade' | 'slide' | 'none'
@@ -178,7 +149,7 @@ const Catalog_Home_Page: React.FC<Catalog_Home_Page_Props> = ({navigation}) => {
   const displayHeight = useWindowDimensions().height;
   const Home_Page_FlatList_Ref = useRef<FlatList<any>>(null);
 
-  const comp_Height_1 = displayHeight / 2.5;
+  const comp_Height_1 = displayHeight / 3.5;
   // comp_Height_1 = (displayHeight / 2); GOOD FOR ANDROID physical device
   // comp_Height_1 = (displayHeight / 2.5); GOOD FOR iPhone simulators
 
@@ -234,20 +205,16 @@ const Catalog_Home_Page: React.FC<Catalog_Home_Page_Props> = ({navigation}) => {
           flex: 10,
           flexDirection: 'column',
           justifyContent: 'flex-start',
-          backgroundColor: '#ECF0F1',
+          display: 'flex',
+          // height: '100%',
 
-          /*
-                    backgroundColor: ukbd_navy_blue,//'white',//ukbd_navy_blue,//ukbd_place_holder_TextColor,// very_light_blue_ukbd,//ukbd_navy_blue,//'#6a51ae',
-                    paddingTop: insets.top,
-                    paddingBottom: insets.bottom,
-                    paddingLeft: insets.left,
-                    paddingRight: insets.right,
-                    */
         }
       }>
+
+      {/*<StatusBar barStyle="light-content" backgroundColor="dodgerblue" />*/}
       <Focus_Aware_Status_Bar
         barStyle={statusBarStyle}
-        backgroundColor={ukbd_place_holder_TextColor}
+        backgroundColor={"deepskyblue"}
         // backgroundColor only available in android not in iOS
       />
 
@@ -271,17 +238,20 @@ const Catalog_Home_Page: React.FC<Catalog_Home_Page_Props> = ({navigation}) => {
           width: displayWidth,
           paddingTop: 10,
         }}>
+
+        {
+
+          (is_home_products_Loading ) && (
+
+            <Indicator_Common
+              color={ukbd_navy_blue}
+            />
+          )
+        }
         <FlatList
           style={
             {
-              // marginVertical: 5,
-              // backgroundColor: "lightsalmon",
-              // marginHorizontal: 10,//displayWidth / 373
-              // paddingHorizontal: 5,
-              // backgroundColor: 'blue',
-              // scaleY: -1, // ANDROID PERFORMANCE ISSUE https://github.com/facebook/react-native/issues/30034
-            }
-          }
+            }}
           contentContainerStyle={{
             // marginTop: 10,
             alignItems: 'center',
@@ -412,21 +382,7 @@ const Catalog_Home_Page: React.FC<Catalog_Home_Page_Props> = ({navigation}) => {
         />
       </View>
 
-      {
-        // is_home_products_Loading
 
-        // home_products
-        (is_home_products_Loading || !home_products_load_Error) && (
-          // ||
-          // masterLoadingState
-          // ||
-          // !Home__Data_Loaded_State
-          <Indicator_Common
-            // t_Height={displayHeight}
-            color={ukbd_navy_blue}
-          />
-        )
-      }
     </SafeAreaView>
   );
 };

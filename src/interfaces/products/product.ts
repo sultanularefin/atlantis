@@ -8,6 +8,7 @@ interface One_Product_Item_For_Detail_Interface extends One_Product_Base_Interfa
 
     single_Prod_Quantity: number,
     single_Prod_Add_Btn_Pressed_State: boolean,
+    mage: string[],
 }
 
 interface One_Product_Base_Interface{
@@ -16,7 +17,7 @@ interface One_Product_Base_Interface{
     price: number
     description: string
     category: string
-    image: string,//string[],//string
+    image: string,//string,//string[],//string
     rating: product_Rating_Interface
 }
 interface One_Product_for_Home_Page_Interface extends One_Product_Base_Interface{
@@ -55,7 +56,7 @@ interface local_Cart_Item /*extends Doc*/
     image: string,
     id: number,//string,
     index: number,
-    weight: number,
+    // weight: number,
 
 };
 

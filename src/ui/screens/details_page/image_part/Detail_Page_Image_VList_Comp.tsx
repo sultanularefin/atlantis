@@ -18,7 +18,7 @@ import Right_Arrow_Button_Mult_Image from "./Right_Arrow_Button_Mult_Image";
 export interface Feedz_Image_L_Grater_Than_2_Props {
 
 
-    imgsOFThisFeed: string[],
+    images_OFThisFeed: string[],//string,//string[],
 
 
     // indexPrimary: number,
@@ -33,7 +33,7 @@ export interface Feedz_Image_L_Grater_Than_2_Props {
 }
 
 const Detail_Page_Image_VList_Comp: React.FC<Feedz_Image_L_Grater_Than_2_Props> = ({
-                                                                                       imgsOFThisFeed,
+                                                                                       images_OFThisFeed,
 
                                                                                        // indexPrimary,
                                                                                        comp_Width,
@@ -108,7 +108,7 @@ const Detail_Page_Image_VList_Comp: React.FC<Feedz_Image_L_Grater_Than_2_Props> 
             // Expected output: -3
 
             const pageNumber = Math.min(Math.max(Math.floor(event.nativeEvent.contentOffset.x / Vlist_Width + 0.5) + 1, 0),
-                imgsOFThisFeed.length);
+                images_OFThisFeed.length);
 
             console.log("event.nativeEvent.contentOffset.x: ", event.nativeEvent.contentOffset.x);
             console.log("Vlist_Width: ", Vlist_Width);
@@ -175,12 +175,7 @@ const Detail_Page_Image_VList_Comp: React.FC<Feedz_Image_L_Grater_Than_2_Props> 
 
 
                     <VirtualizedList
-                        data={imgsOFThisFeed}
-                        // data={imgsOFThisFeed.slice(0,2)}
-                        // data={itemAlias.feed_photos.slice(0,(itemAlias.feed_photos.length <= 4)?itemAlias.feed_photos.length: 4)}
-                        // data={imgsOFThisFeed.slice(0,(imgsOFThisFeed?.length <= 4)?imgsOFThisFeed?.length: 4)}
-                        // data={animalImages.slice(0, 4)}
-                        // data= {imgsOFThisFeed.slice(0,(imgsOFThisFeed?.length <= 4)?imgsOFThisFeed?.length: 4)}
+                        data={images_OFThisFeed}
 
                         getItemCount={(data) => data.length}
                         // keyExtractor={(item: string) => `${item}${inde}`}
@@ -189,12 +184,7 @@ const Detail_Page_Image_VList_Comp: React.FC<Feedz_Image_L_Grater_Than_2_Props> 
                         getItem={(data2, index) => {
 
                             return data2[index];
-                            /*const item = data2[index];
 
-                            return {
-                                // ...item,
-                                item
-                            };*/
                         }}
                         /*getItemLayout={(data, index) => ({
 
@@ -252,7 +242,7 @@ const Detail_Page_Image_VList_Comp: React.FC<Feedz_Image_L_Grater_Than_2_Props> 
                                 comp_Height_3={comp_Height}
                                 navigationProp={navigationProp}
                                 // rootIndex={indexPrimary}
-                                imgsOFThisFeed={imgsOFThisFeed}
+                                images_OFThis_Feed={images_OFThisFeed}
                                 // all_images_string={imgsOFThisFeed}
                                 content={feedContent}
 
@@ -292,7 +282,7 @@ const Detail_Page_Image_VList_Comp: React.FC<Feedz_Image_L_Grater_Than_2_Props> 
                         comp_Height={comp_Height}
                         // bg_Color={'teal'}
                         bg_Color={'transparent'}
-                        disabled_State={(currentIndexState === (imgsOFThisFeed.length - 1))}
+                        disabled_State={(currentIndexState === (images_OFThisFeed.length - 1))}
                     />
                     {/*right arrow ends here*/}
 

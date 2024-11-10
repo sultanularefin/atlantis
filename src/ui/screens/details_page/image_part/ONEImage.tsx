@@ -25,7 +25,7 @@ import {image_base_url} from '../../../../config/Config.ts';
 import {useAppDispatch} from '../../../../lib/app/hooks.ts';
 import {populateTag_data_for_multiple_Images} from '../../../../lib/features/products/productSlice.ts';
 
-export interface OneImageProps {
+interface OneImageProps {
     oneItem_url: string,
     // date: string,
     content: string,
@@ -34,7 +34,7 @@ export interface OneImageProps {
     comp_Height_3: number,
     navigationProp: any,
     // rootIndex: number,
-    imgsOFThisFeed: string[],
+    images_OFThis_Feed: string[],
     // all_images_string:string[],
 
     // left_Pressed:()=>void,
@@ -53,7 +53,7 @@ const ONEImage: React.FC<OneImageProps> = ({
                                                comp_Height_3,
                                                navigationProp,
 
-                                               imgsOFThisFeed,
+                                               images_OFThis_Feed,
 
                                            }) => {
 
@@ -63,6 +63,7 @@ const ONEImage: React.FC<OneImageProps> = ({
     console.log("__oneItem_url__:",oneItem_url);
     */
 
+  console.log("__oneItem_url__:",oneItem_url);
 
 
     // Redux related code above render begins here...
@@ -78,7 +79,7 @@ const ONEImage: React.FC<OneImageProps> = ({
         dispatch(populateTag_data_for_multiple_Images(
             {
 
-                some_uris: imgsOFThisFeed,//props.all_images_string,//props.imgsOFThisFeed,
+                some_uris: images_OFThis_Feed[0],//props.all_images_string,//props.imgsOFThisFeed,
                 tapIndex: idx,//props.idx,
                 title: content,//props.content,
                 //ADDED FOR TAGGING ON NOVEMBER__22_MONDAY_2021
@@ -117,56 +118,19 @@ const ONEImage: React.FC<OneImageProps> = ({
                     height: comp_Height_3, //'100%',//((displayWidth - 43) / 2), // -6 for border color padding
 
                     width: comp_Width_2,   //'100%',//((displayWidth -  43) / 2),
-
-
-                    // height: ((displayWidth - 43) / 2), // -6 for border color padding
-                    // width: ((displayWidth -  43) / 2),  // -6 for border color padding
-
                 }}
 
                 key={`${oneItem_url}+ ${idx}`}
-                // onLoadEnd={image_Loaded_done}
+
                 source={{
                     // uri: oneItem_url,
-                    uri: `${image_base_url}${oneItem_url}`,
-                    // headers: { Authorization: 'someAuthToken' },
-                    // priority: FastImage.priority.normal,
-                }}
+                    uri: `${oneItem_url}`,
 
-                // resizeMode={FastImage.resizeMode.contain}
+                }}
                 resizeMode={'contain'}
             />
 
-          {/*  {
-                !image_Loaded_State && (
-                    <View style={{
-                        ...ONEImage_Style.Pressable_Image_Holder_Style,
-                        width: comp_Width_2,//'100%',//comp_Width_2 - ((comp_Width_2 / 7) * 2),
-                        //minWidth: ((comp_Width_2 -  41) / 2),
 
-                        height: comp_Height_3,
-                    }}>
-                        {oneItem_url ?
-                            <ActivityIndicator size="large" color="#ffffff"/> :
-                            <FastImage style={{
-
-                                height: comp_Height_3,
-                                width: comp_Width_2,
-                            }}
-                                       onLoadEnd={image_Loaded_done}
-                                       source={{
-                                           // uri: oneItem_url,
-                                           uri: `${base_Image_URL}${oneItem_url}`,
-                                           // headers: { Authorization: 'someAuthToken' },
-                                           priority: FastImage.priority.normal,
-                                       }}
-
-                                       resizeMode={FastImage.resizeMode.contain}
-                            />
-                        }
-                    </View>
-                )
-            }*/}
 
 
         </Pressable>

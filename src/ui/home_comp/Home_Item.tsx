@@ -65,6 +65,7 @@ import {
   runOnJS,
   // useAnimatedStyle
 } from 'react-native-reanimated';
+import {productsApiSlice} from '../../lib/features/products/productsApiSlice.ts';
 
 export interface Item_Interface {
   item_navigation: any;
@@ -146,7 +147,39 @@ const Home_Item: React.FC<Item_Interface> = ({
     */
   };
   const externalLibraryFunction = (index_Value_2: number) => {
-    return dispatch(single_Product__Show_Details_Button_true(index_Value_2));
+    // return dispatch(single_Product__Show_Details_Button_true(index_Value_2));
+
+    const one_Product_Index = index_Value_2;//action.payload; //state.editing_Product_Info;
+
+
+    dispatch(
+      productsApiSlice.util.updateQueryData('getProducts', {limit:10}, (draft_Products) => {
+
+
+        // const temp_Product_ID = draft_Products[one_Product_Index].id;
+        const one_Item = draft_Products[one_Product_Index];
+
+
+        const value_boolean = draft_Products[one_Product_Index].show_Details_Btn;
+
+        draft_Products[one_Product_Index].show_Details_Btn = !value_boolean;
+
+       /* const prev_index = state.previous_Show_Detail_Button_Index_for_Item;
+        if (prev_index !== -1 && one_Product_Index !== prev_index) {
+          state.product_State[prev_index].show_Details_Btn = false;
+        }
+
+        state.previous_Show_Detail_Button_Index_for_Item = one_Product_Index;*/
+
+
+
+      })
+    );
+
+    return;
+    // one_Product_Index
+
+
   };
 
   const singleTap = Gesture.Tap().onEnd((_event, success) => {
@@ -175,17 +208,13 @@ const Home_Item: React.FC<Item_Interface> = ({
 
   const taps = Gesture.Exclusive(doubleTap, singleTap);
 
-  const deail_BTN_10_P_Off_Width = comp_Width / 2.4;
-  const deail_BTN_10_P_Off_Height = 30; //24;//30; //35;//comp_Height / 10;
+  const detail_BTN_10_P_Off_Width = comp_Width / 2.4;
+  const detail_BTN_10_P_Off_Height = 30; //24;//30; //35;//comp_Height / 10;
 
   const gesture_Detector_Height =
-    comp_Height - (deail_BTN_10_P_Off_Height + 10);
+    comp_Height - (detail_BTN_10_P_Off_Height + 10);
 
   const img_height = gesture_Detector_Height / 3;
-
-  // console.log("item_Data.show_Details_Btn: ",item_Data.show_Details_Btn);
-
-  // console.log("gesture_Detector_Height : ",gesture_Detector_Height);
 
   const width_Without_Padding = comp_Width - 14;
   // console.log("__item_Data.view_price__: ", item_Data.view_price);
@@ -214,9 +243,6 @@ const Home_Item: React.FC<Item_Interface> = ({
             ...Item_Styles.item_Style_With_Gesture,
             height: gesture_Detector_Height,
             width: width_Without_Padding, //comp_Width-10,
-            // backgroundColor: 'teal',
-            // height: comp_Height- (deail_BTN_10_P_Off_Height + vertical pdding 5+5),
-            //'90%',
             flexDirection: 'column',
             justifyContent: 'flex-start',
           }}>
@@ -226,12 +252,8 @@ const Home_Item: React.FC<Item_Interface> = ({
             style={{
               ...Item_Styles.item_Top_Section,
               width: width_Without_Padding, //comp_Width-10,//inner_Comp_Width_2,// - 10,
-              // height: comp_Height / 30,
-              height: deail_BTN_10_P_Off_Height, //'30%',//deail_BTN_10_P_Off_Height * 1.5,
 
-              // Details || 10 % off button + image background +  name + Item_Price_Related_Comps
-
-              // (deail_BTN_10_P_Off_Height) + (gesture_Detector_Height/3) + (gesture_Detector_Height/5)+ (gesture_Detector_Height/ 4)
+              height: detail_BTN_10_P_Off_Height, //'30%',//deail_BTN_10_P_Off_Height * 1.5,
 
               alignItems: 'flex-start',
               justifyContent: 'space-between',
@@ -240,9 +262,9 @@ const Home_Item: React.FC<Item_Interface> = ({
               zIndex: 15,
             }}>
             <Ten_Off
-              comp_Height={deail_BTN_10_P_Off_Height}
-              // comp_Height={deail_BTN_10_P_Off_Height}
-              comp_Width={deail_BTN_10_P_Off_Width}
+              comp_Height={detail_BTN_10_P_Off_Height}
+
+              comp_Width={detail_BTN_10_P_Off_Width}
             />
 
             {item_Data.show_Details_Btn ? (
@@ -250,9 +272,9 @@ const Home_Item: React.FC<Item_Interface> = ({
                 product_Details_Button_Pressed_2={
                   product_Details_Button_Pressed
                 }
-                // comp_Height={deail_BTN_10_P_Off_Height}
-                comp_Height={deail_BTN_10_P_Off_Height}
-                comp_Width={deail_BTN_10_P_Off_Width}
+
+                comp_Height={detail_BTN_10_P_Off_Height}
+                comp_Width={detail_BTN_10_P_Off_Width}
                 zIndex_1={15}
               />
             ) : null}
@@ -265,7 +287,7 @@ const Home_Item: React.FC<Item_Interface> = ({
               ...Item_Styles.itemImgHolder,
               width: inner_Comp_Width_2,
               // paddingTop: 1,
-              height: gesture_Detector_Height / 3, //comp_Height / 3,
+              height: gesture_Detector_Height / 3,
             }}>
             {!item_Data.image[0] ? null : item_Data.image[0] !== '' ? (
 
@@ -365,11 +387,6 @@ const Home_Item: React.FC<Item_Interface> = ({
                 //
 
                 height: gesture_Detector_Height, //'100',//'45%',//'90%', //HIEGHT IS AUTO NOW
-
-                // 999
-
-                /*paddingHorizontal: 5,
-                paddingVertical: 5,*/
                 left: 0,
                 // customer_Reg_Response_Interface
                 flexDirection: 'column',
@@ -382,16 +399,10 @@ const Home_Item: React.FC<Item_Interface> = ({
                 zIndex: 14,
               }}>
               <Svg
-                // version="1.1"
-                // id="Layer_1"
-                // xmlns="http://www.w3.org/2000/svg"
-                // xmlns:xlink="http://www.w3.org/1999/xlink"
-                width={deail_BTN_10_P_Off_Height * 2}
-                height={deail_BTN_10_P_Off_Height * 2}
-                // viewBox="0 0 32 32"
+
+                width={detail_BTN_10_P_Off_Height * 2}
+                height={detail_BTN_10_P_Off_Height * 2}
                 viewBox="0 0 52 52"
-                // enable-background="new 0 0 32 32"
-                // xml:space="preserve"
               >
                 <G>
                   <Path
@@ -415,7 +426,7 @@ const Home_Item: React.FC<Item_Interface> = ({
       <Add_Cart_OR_Favorite__Btn_Home_Page
         //t_Height= {comp_Height / 30}
         // t_Height={deail_BTN_10_P_Off_Height}
-        t_Height={deail_BTN_10_P_Off_Height}
+        t_Height={detail_BTN_10_P_Off_Height}
         // t_Height={gesture_Detector_Height-deail_BTN_10_P_Off_Height}
         t_Width={width_Without_Padding} // padding 5*2,
         product_Id={item_Data.id}

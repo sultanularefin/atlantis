@@ -50,7 +50,7 @@ const Increment_Button_Home_Page: React.FC<Increment_Button_Home_Page_Props> = (
 
 
             <Ionicons
-                name={"ios-add-sharp"}
+                name={"add-sharp"}
                 size={comp_Height_2 / 2}
                 color={icon_Color} //"red"
                 style={{
