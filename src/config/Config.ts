@@ -24,7 +24,7 @@ export {
     baseURL,
     appStatic,
     is_use_aws_bucket,
-
+    backend_server,
     backend_port,
     host_address,
 

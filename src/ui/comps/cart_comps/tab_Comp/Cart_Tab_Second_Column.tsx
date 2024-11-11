@@ -38,9 +38,11 @@ import {
 import Cart_Box_Returns from "../cart_Boxes/Cart_Box_Returns";
 import Cart_Box_Delivery from "../cart_Boxes/Cart_Box_Delivery";
 import Cart_Box_UKBD from "../cart_Boxes/Cart_Box_UKBD";
-import {useAppSelector} from "../../../../appStore/app/hooks";
-import {select_product_Detail_Tab_Index} from "../../../../appStore/Reducers/product_Slice";
-import {select_Cart_Page_Tab_Index} from "../../../../appStore/Reducers/cart_order_Slice";
+import {useAppSelector} from "../../../../lib/app/hooks.ts";
+import {select_Cart_Page_Tab_Index} from "../../../../lib/features/cart_order/cart_order_Slice.ts";
+// import {useAppSelector} from "../../../../appStore/app/hooks";
+// import {select_product_Detail_Tab_Index} from "../../../../appStore/Reducers/product_Slice";
+// import {select_Cart_Page_Tab_Index} from "../../../../appStore/Reducers/cart_order_Slice";
 // import sanitizeHtml from "sanitize-html";
 // import One_Horizontal_Comp_Custom_1 from "./One_Horizontal_Comp_Custom_1";
 // import One_Horizontal_Comp_Custom from "./One_Horizontal_Comp_Custom";

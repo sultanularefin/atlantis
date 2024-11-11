@@ -364,10 +364,14 @@ const disable_Btn_Pressed_State_In_Home_Page = (
 export const populate_Cart_Data_to_realm = createAsyncThunk(
   'products/populate_Cart_Data_to_realm',
   async (data_not_reached: null, {getState}) => {
+
+
+    /*
     const state = getState();
 
     // @ts-ignore
     // const temp_Connect_Now_Data:one_Tripz_connect_now_Data_interface[]= state.tripzReducer.all_connect_now_Data;
+
 
     const temp_carts: local_Cart_Item[] =
       state.product_Reducer.local_Cart_Array;
@@ -385,9 +389,9 @@ export const populate_Cart_Data_to_realm = createAsyncThunk(
         realm_For_Cart_Save?.close();
         return;
       } else {
-        /* realm.write(() => {
-                     realm.create("Task", Task.generate(newDescription));
-                 });*/
+        // realm.write(() => {
+        //              realm.create("Task", Task.generate(newDescription));
+        //          });
 
         realm_For_Cart_Save?.write(() => {
           realm_For_Cart_Save.delete(
@@ -421,12 +425,11 @@ export const populate_Cart_Data_to_realm = createAsyncThunk(
             },
           );
 
-          /*
-                    const _connect_now_data_Results: Realm.Results<Local_Cart_Schema> = realm_For_Cart_Save.objects('RealmOneCartItem');
 
-                    console.log("_connect_now_data_Results: in [save_connect_now_data] ", _connect_now_data_Results.length);
+                    // const _connect_now_data_Results: Realm.Results<Local_Cart_Schema> = realm_For_Cart_Save.objects('RealmOneCartItem');
+                    // console.log("_connect_now_data_Results: in [save_connect_now_data] ", _connect_now_data_Results.length);
 
-                    */
+
         });
 
         realm_For_Cart_Save?.close();
@@ -438,11 +441,14 @@ export const populate_Cart_Data_to_realm = createAsyncThunk(
       );
       // console.error('error in saving but can be ignored I think>>(arefin)', error.message);
     }
+    */
   },
 );
 
 const delete_One_Cart_Item_2 = (state: any, action: PayloadAction<number>) => {
   const cart_index = action.payload;
+
+  /*
 
   const temp_Cart = state.local_Cart_Array;
 
@@ -457,11 +463,11 @@ const delete_One_Cart_Item_2 = (state: any, action: PayloadAction<number>) => {
 
   const temp_Price_to_Be_deducted = deleted_Item.quantity * deleted_Item.price;
 
-  /*
-    console.log("__temp_weight_to_Be_deducted__: ",temp_weight_to_Be_deducted);
-    console.log("__temp_Price_to_Be_deducted__: ",temp_Price_to_Be_deducted);
 
-    */
+    // console.log("__temp_weight_to_Be_deducted__: ",temp_weight_to_Be_deducted);
+    // console.log("__temp_Price_to_Be_deducted__: ",temp_Price_to_Be_deducted);
+
+
 
   // IF HOME STATE CONTAINS THE DELETE D ITEM REMOVE IT. TOO.
 
@@ -484,29 +490,18 @@ const delete_One_Cart_Item_2 = (state: any, action: PayloadAction<number>) => {
   let old_total_Price = state.local_Cart_Price_Total;
   let old_total_Weight = state.local_Cart_Weight_Total;
 
-  /*
-
-    console.log("old_total_Price: ",old_total_Price);
-    console.log("old_total_Weight: ",old_total_Weight);
-
-    */
-
-  /*
-
-    IMP PLEASE DON'T UNCOMMENT THEM.
-
-    state.local_Cart_Price_Total = state.local_Cart_Price_Total - temp_Price_to_Be_deducted;
-    state.local_Cart_Weight_Total = state.local_Cart_Weight_Total- temp_weight_to_Be_deducted;
-
-    */
-
-  /*
 
 
-    state.local_Cart_Price_Total  -= temp_Price_to_Be_deducted;
-    state.local_Cart_Weight_Total -= temp_weight_to_Be_deducted;
 
-    */
+
+    // IMP PLEASE DON'T UNCOMMENT THEM.
+
+    // state.local_Cart_Price_Total = state.local_Cart_Price_Total - temp_Price_to_Be_deducted;
+    // state.local_Cart_Weight_Total = state.local_Cart_Weight_Total- temp_weight_to_Be_deducted;
+
+
+
+
 
   if (temp_Cart.length === 1) {
     // now 0 then return absolute value
@@ -528,20 +523,7 @@ const delete_One_Cart_Item_2 = (state: any, action: PayloadAction<number>) => {
       Math.abs(old_total_Weight - temp_weight_to_Be_deducted),
     ); // state.local_Cart_Weight_Total;
 
-    /*
-        console.log(Math.floor(1.7763568394002505e-15));
-        // > 0
 
-        console.log(Math.floor(0.0000000000000017763568394002505));
-        // > 0
-        */
-
-    /*
-
-        console.log("new (old_total_Price): ",old_total_Price);
-        console.log("new (old_total_Weight): ",old_total_Weight);
-
-        */
 
     state.local_Cart_Price_Total = old_total_Price;
     state.local_Cart_Weight_Total = old_total_Weight;
@@ -553,24 +535,15 @@ const delete_One_Cart_Item_2 = (state: any, action: PayloadAction<number>) => {
     old_total_Price -= temp_Price_to_Be_deducted; //state.local_Cart_Price_Total;
     old_total_Weight -= temp_weight_to_Be_deducted; // state.local_Cart_Weight_Total;
 
-    /*
-        console.log("new (old_total_Price): ",old_total_Price);
-        console.log("new (old_total_Weight): ",old_total_Weight);
-
-        */
 
     state.local_Cart_Price_Total = old_total_Price;
     state.local_Cart_Weight_Total = old_total_Weight;
 
     return;
   }
+  */
 
-  /*
-    data_Source_State.slice().filter((item:one_Data_Source_Interface,index:number) => index !== cart_index)
 
-    state.ca
-
-    */
 };
 
 const decrement_cart_item_for_home_index_0_2 = (

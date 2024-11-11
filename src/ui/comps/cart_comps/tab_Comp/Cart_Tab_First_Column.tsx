@@ -16,27 +16,32 @@ import {
 
 
 
-import {
+/*import {
     useAppDispatch,
     useAppSelector
-} from "../../../../appStore/app/hooks";
+} from "../../../../appStore/app/hooks";*/
 
 
-import {
+/*import {
     select_product_Detail_Tab_Index,
     // select_product_Detail_Tab_Index,
     // tab_Arrays,
     update_Product_Detail_Current_Tab_Index
 } from "../../../../appStore/Reducers/product_Slice";
-import {tab_Arrays} from "../../../ui_utils/tab_Arrays";
+import {tab_Arrays} from "../../../ui_utils/tab_Arrays";*/
 import {ukbd_navy_blue} from "../../../ui_utils/important_Colors";
 import hairlineWidth = StyleSheet.hairlineWidth;
+/*import {
+    select_Cart_Page_Tab_Index,
+    update_Cart_Pages_Current_Tab_Index
+} from "../../../../appStore/Reducers/cart_order_Slice";*/
+import One_Comp_FlatList from "../../../screens/details_page/one_Comp_FlatList";
+import One_Pressable_Tab_In_Cart_Page, {tab_Arrays} from "./One_Pressable_Tab_In_Cart_Page";
+import {useAppDispatch, useAppSelector} from "../../../../lib/app/hooks.ts";
 import {
     select_Cart_Page_Tab_Index,
     update_Cart_Pages_Current_Tab_Index
-} from "../../../../appStore/Reducers/cart_order_Slice";
-import One_Comp_FlatList from "../../../screens/details_page/one_Comp_FlatList";
-import One_Pressable_Tab_In_Cart_Page from "./One_Pressable_Tab_In_Cart_Page";
+} from "../../../../lib/features/cart_order/cart_order_Slice.ts";
 
 
 
