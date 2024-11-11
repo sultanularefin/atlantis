@@ -1,4 +1,4 @@
-import {createSlice, PayloadAction} from '@reduxjs/toolkit';
+import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit';
 // import type { PayloadAction } from '@reduxjs/toolkit';
 // import {RootState} from "@/lib/store";
 import {useSelector} from 'react-redux';
@@ -19,6 +19,7 @@ import {
 import {home_page_product_limit} from '../../../config/business_constants.ts';
 import {MaybeDrafted} from '@reduxjs/toolkit/dist/query/core/buildThunks';
 import Snackbar from 'react-native-snackbar';
+import Local_Cart_Schema from '../../../realm_Models/Local_Cart_Schema.ts';
 
 interface products_State_Interface {
   // value: number
@@ -59,30 +60,26 @@ const initialState: products_State_Interface = {
   single_Product_State: {} as One_Product_Item_For_Detail_Interface,
 
   two_Image__data_For_Tag_State:
-      {} as MultipleImageHeaderNull_route_date_interface,
+    {} as MultipleImageHeaderNull_route_date_interface,
 
   detail_navigation_double_tap_message_displayed: false,
 
   single_product_extra_data: {} as single_product_other_extra_data_interface,
 };
 
-
-
-
 const update_product_detail_extra_data_2 = (
-    state: any,
-    action: PayloadAction<single_product_other_extra_data_interface>,
+  state: any,
+  action: PayloadAction<single_product_other_extra_data_interface>,
 ) => {
   state.single_product_extra_data = action.payload;
 };
 
-
 const update_single_Product_Add_Btn_Pressed_State_2 = (
-    state: any,
-    action: PayloadAction<boolean>,
+  state: any,
+  action: PayloadAction<boolean>,
 ) => {
   state.single_Product_State.item.single_Prod_Add_Btn_Pressed_State =
-      action.payload; // false;// action.payload;
+    action.payload; // false;// action.payload;
 
   state.single_Product_State.item.single_Prod_Quantity = 0;
 
@@ -90,8 +87,8 @@ const update_single_Product_Add_Btn_Pressed_State_2 = (
 };
 
 const populate_all_product_data_2 = (
-    state: any,
-    action: PayloadAction<One_Product_for_Home_Page_Interface[]>,
+  state: any,
+  action: PayloadAction<One_Product_for_Home_Page_Interface[]>,
 ) => {
   // console.log('action.payload: ', action.payload);
 
@@ -99,8 +96,8 @@ const populate_all_product_data_2 = (
 };
 
 const decrement_Single_Product_2_For_Details_Page = (
-    state: any,
-    action: PayloadAction<increment_Decrement_Single_Item_Payload_Interface>,
+  state: any,
+  action: PayloadAction<increment_Decrement_Single_Item_Payload_Interface>,
 ) => {
   const decrement_Payload = action.payload;
   const temp_Product_ID = decrement_Payload.product_ID;
@@ -121,7 +118,7 @@ const decrement_Single_Product_2_For_Details_Page = (
 
   // SEARCH FIRST IN TEMP CART IF EXIST THEN INCREMENT
   const foundIndex_Already_In_Cart_Decrement = temp_Cart.findIndex(
-      (one_Product: local_Cart_Item) => one_Product.id === temp_Product_ID,
+    (one_Product: local_Cart_Item) => one_Product.id === temp_Product_ID,
   );
 
   // console.log("__foundIndex_Already_In_Cart_Decrement__: ", foundIndex_Already_In_Cart_Decrement);
@@ -133,43 +130,42 @@ const decrement_Single_Product_2_For_Details_Page = (
   // ORDER IS IMPORTANT ORDER:2
   // eslint-disable-next-line operator-assignment
   temp_Cart[foundIndex_Already_In_Cart_Decrement].quantity =
-      temp_Cart[foundIndex_Already_In_Cart_Decrement].quantity - 1;
+    temp_Cart[foundIndex_Already_In_Cart_Decrement].quantity - 1;
 
   // state.product_State.[foundIndex_read].temp__Quantity = 1;
 
   // ORDER IS IMPORTANT ORDER:1
   // eslint-disable-next-line operator-assignment
   temp_Cart[foundIndex_Already_In_Cart_Decrement].weight =
-      temp_Cart[foundIndex_Already_In_Cart_Decrement].quantity *
-      temp_Cart[foundIndex_Already_In_Cart_Decrement].weight;
+    temp_Cart[foundIndex_Already_In_Cart_Decrement].quantity *
+    temp_Cart[foundIndex_Already_In_Cart_Decrement].weight;
 
   /* state.product_State.[temp_Cart[foundIndex_Already_In_Cart].index].weight
-       = ((temp_Cart[foundIndex_Already_In_Cart].quantity) + 1)*(temp_Cart[foundIndex_Already_In_Cart].weight);*/
+         = ((temp_Cart[foundIndex_Already_In_Cart].quantity) + 1)*(temp_Cart[foundIndex_Already_In_Cart].weight);*/
 
   // price decrement begins
   state.local_Cart_Price_Total -=
-      temp_Cart[foundIndex_Already_In_Cart_Decrement].price;
+    temp_Cart[foundIndex_Already_In_Cart_Decrement].price;
 
   // price decrement ends
 
   state.local_Cart_Weight_Total -=
-      temp_Cart[foundIndex_Already_In_Cart_Decrement].weight;
+    temp_Cart[foundIndex_Already_In_Cart_Decrement].weight;
 
   // state.product_State.[foundIndex_read].temp__Quantity = 1;
   state.product_State[
-      temp_Cart[foundIndex_Already_In_Cart_Decrement].index
-      ].temp__Quantity =
-      temp_Cart[foundIndex_Already_In_Cart_Decrement].quantity;
+    temp_Cart[foundIndex_Already_In_Cart_Decrement].index
+  ].temp__Quantity = temp_Cart[foundIndex_Already_In_Cart_Decrement].quantity;
 
   if (temp_Cart[foundIndex_Already_In_Cart_Decrement].quantity === 0) {
     if (temp_Cart.length === 1) {
       state.local_Cart_Array = [];
       state.product_State[
-          temp_Cart[foundIndex_Already_In_Cart_Decrement].index
-          ].temp__Quantity = 0; //
+        temp_Cart[foundIndex_Already_In_Cart_Decrement].index
+      ].temp__Quantity = 0; //
       state.product_State[
-          temp_Cart[foundIndex_Already_In_Cart_Decrement].index
-          ].btn_Pressed = false;
+        temp_Cart[foundIndex_Already_In_Cart_Decrement].index
+      ].btn_Pressed = false;
       // (temp_Cart[foundIndex_Already_In_Cart_Decrement].quantity) - 1;
     } else if (temp_Cart.length === 2) {
       // extra [] added to save it as an array.
@@ -179,42 +175,42 @@ const decrement_Single_Product_2_For_Details_Page = (
       ];
 
       state.product_State[
-          temp_Cart[foundIndex_Already_In_Cart_Decrement === 1 ? 0 : 1].index
-          ].temp__Quantity = 0; //
+        temp_Cart[foundIndex_Already_In_Cart_Decrement === 1 ? 0 : 1].index
+      ].temp__Quantity = 0; //
       state.product_State[
-          temp_Cart[foundIndex_Already_In_Cart_Decrement === 1 ? 0 : 1].index
-          ].btn_Pressed = false;
+        temp_Cart[foundIndex_Already_In_Cart_Decrement === 1 ? 0 : 1].index
+      ].btn_Pressed = false;
 
       // state.product_State.[temp_Cart[foundIndex_Already_In_Cart_Decrement].index].temp__Quantity = 0;//
       // state.product_State.[temp_Cart[foundIndex_Already_In_Cart_Decrement].index].btn_Pressed = false;
     } else if (temp_Cart.length > 2) {
       state.local_Cart_Array =
-          foundIndex_Already_In_Cart_Decrement === 0
-              ? temp_Cart.slice(1, temp_Cart.length)
-              : temp_Cart
-                  .slice(0, foundIndex_Already_In_Cart_Decrement)
-                  .concat(
-                      temp_Cart.slice(
-                          foundIndex_Already_In_Cart_Decrement + 1,
-                          temp_Cart.length,
-                      ),
-                  );
+        foundIndex_Already_In_Cart_Decrement === 0
+          ? temp_Cart.slice(1, temp_Cart.length)
+          : temp_Cart
+              .slice(0, foundIndex_Already_In_Cart_Decrement)
+              .concat(
+                temp_Cart.slice(
+                  foundIndex_Already_In_Cart_Decrement + 1,
+                  temp_Cart.length,
+                ),
+              );
 
       state.product_State[
-          temp_Cart[foundIndex_Already_In_Cart_Decrement].index
-          ].temp__Quantity = 0; //
+        temp_Cart[foundIndex_Already_In_Cart_Decrement].index
+      ].temp__Quantity = 0; //
       state.product_State[
-          temp_Cart[foundIndex_Already_In_Cart_Decrement].index
-          ].btn_Pressed = false;
+        temp_Cart[foundIndex_Already_In_Cart_Decrement].index
+      ].btn_Pressed = false;
     }
   }
-      // state.local_Cart_Array= state.local_Cart_Array.concat(temp_Cart_Item);
+  // state.local_Cart_Array= state.local_Cart_Array.concat(temp_Cart_Item);
 
   // updated_Quantity
   else {
     console.log(
-        'decrement_Single_Product_2_For_Details_Page>>>> [temp_Cart]: -- ',
-        temp_Cart,
+      'decrement_Single_Product_2_For_Details_Page>>>> [temp_Cart]: -- ',
+      temp_Cart,
     );
 
     state.local_Cart_Array = temp_Cart;
@@ -222,8 +218,8 @@ const decrement_Single_Product_2_For_Details_Page = (
 };
 
 const increment_Single_Product_2_For_Details_Page = (
-    state: any,
-    action: PayloadAction<increment_Decrement_Single_Item_Payload_Interface>,
+  state: any,
+  action: PayloadAction<increment_Decrement_Single_Item_Payload_Interface>,
 ) => {
   const increment_Payload = action.payload;
   const temp_Product_ID = increment_Payload.product_ID;
@@ -240,8 +236,8 @@ const increment_Single_Product_2_For_Details_Page = (
     // common code -----------------------------add temp_cart_item___begins here
     //  TEMP CART  LENGTH 0
     const foundIndex_read = state.product_State.findIndex(
-        (one_Product: One_Product_Item_For_Detail_Interface) =>
-            one_Product.id === temp_Product_ID,
+      (one_Product: One_Product_Item_For_Detail_Interface) =>
+        one_Product.id === temp_Product_ID,
     );
 
     // state.product_State[one_Product_Index].
@@ -274,7 +270,7 @@ const increment_Single_Product_2_For_Details_Page = (
   } else {
     // SEARCH FIRST IN TEMP CART IF EXIST THEN INCREMENT
     const foundIndex_Already_In_Cart = temp_Cart.findIndex(
-        (one_Product: local_Cart_Item) => one_Product.id === temp_Product_ID,
+      (one_Product: local_Cart_Item) => one_Product.id === temp_Product_ID,
     );
 
     // console.log("__foundIndex_Already_In_Cart__: ", foundIndex_Already_In_Cart);
@@ -285,33 +281,33 @@ const increment_Single_Product_2_For_Details_Page = (
 
       // eslint-disable-next-line operator-assignment
       temp_Cart[foundIndex_Already_In_Cart].quantity =
-          temp_Cart[foundIndex_Already_In_Cart].quantity + 1;
+        temp_Cart[foundIndex_Already_In_Cart].quantity + 1;
 
       // price begins
       state.local_Cart_Price_Total +=
-          temp_Cart[foundIndex_Already_In_Cart].price;
+        temp_Cart[foundIndex_Already_In_Cart].price;
 
       // price ends
 
       state.local_Cart_Weight_Total +=
-          temp_Cart[foundIndex_Already_In_Cart].weight;
+        temp_Cart[foundIndex_Already_In_Cart].weight;
 
       state.local_Cart_Array = temp_Cart; //[...temp_Cart];
 
       // state.product_State[foundIndex_read].temp__Quantity = 1;
       state.product_State[
-          temp_Cart[foundIndex_Already_In_Cart].index
-          ].temp__Quantity = temp_Cart[foundIndex_Already_In_Cart].quantity;
+        temp_Cart[foundIndex_Already_In_Cart].index
+      ].temp__Quantity = temp_Cart[foundIndex_Already_In_Cart].quantity;
       state.product_State[temp_Cart[foundIndex_Already_In_Cart].index].weight =
-          temp_Cart[foundIndex_Already_In_Cart].quantity *
-          temp_Cart[foundIndex_Already_In_Cart].weight;
+        temp_Cart[foundIndex_Already_In_Cart].quantity *
+        temp_Cart[foundIndex_Already_In_Cart].weight;
 
       return;
     } else {
       //  TEMP CART  LENGTH 0
       const foundIndex_read = state.product_State.findIndex(
-          (one_Product: One_Product_Item_For_Detail_Interface) =>
-              one_Product.id === temp_Product_ID,
+        (one_Product: One_Product_Item_For_Detail_Interface) =>
+          one_Product.id === temp_Product_ID,
       );
 
       // state.product_State[one_Product_Index].
@@ -347,8 +343,8 @@ const increment_Single_Product_2_For_Details_Page = (
 };
 
 const populateTag_data_for_multiple_Images_2 = (
-    state: any,
-    action: PayloadAction<MultipleImageHeaderNull_route_date_interface>,
+  state: any,
+  action: PayloadAction<MultipleImageHeaderNull_route_date_interface>,
 ) => {
   // const temp_Multiple_2__Image_data: MultipleImageHeaderNull_route_date_interface = action.payload;
 
@@ -356,27 +352,241 @@ const populateTag_data_for_multiple_Images_2 = (
 };
 
 const disable_Btn_Pressed_State_In_Home_Page = (
-    state: any,
-    action: PayloadAction<number>,
+  state: any,
+  action: PayloadAction<number>,
 ) => {
   // state.product_State[action.payload].temp__Quantity = 1;
   state.product_State[action.payload].btn_Pressed = false;
   state.product_State[action.payload].temp__Quantity = 0;
 };
 
-const decrement_cart_item_for_home_index_0_2 = (
-    state: any,
-    action: PayloadAction<number>,
-) => {
+// export const Save_Connect_Now_Data_to_realm_before_close = createAsyncThunk(
+export const populate_Cart_Data_to_realm = createAsyncThunk(
+  'products/populate_Cart_Data_to_realm',
+  async (data_not_reached: null, {getState}) => {
+    const state = getState();
 
-  const foundIndex_Already_In_Cart_Decrement= action.payload;
+    // @ts-ignore
+    // const temp_Connect_Now_Data:one_Tripz_connect_now_Data_interface[]= state.tripzReducer.all_connect_now_Data;
+
+    const temp_carts: local_Cart_Item[] =
+      state.product_Reducer.local_Cart_Array;
+    // console.log("requestId: ",requestId);
+
+    console.log('at_______--save_connect_now_data');
+    try {
+      // PROBLEM AFTER CHANGED TO THIS.. 21st december__2021...
+
+      const realm_For_Cart_Save = await Realm.open({
+        schema: [Local_Cart_Schema.schema],
+      });
+
+      if (temp_carts.length === 0) {
+        realm_For_Cart_Save?.close();
+        return;
+      } else {
+        /* realm.write(() => {
+                     realm.create("Task", Task.generate(newDescription));
+                 });*/
+
+        realm_For_Cart_Save?.write(() => {
+          realm_For_Cart_Save.delete(
+            realm_For_Cart_Save.objects('RealmOneCartItem'),
+          );
+          // console.log("temp_Connect_Now_Data.____length:______ in [save_connect_now_data] ", temp_Connect_Now_Data.length);
+          temp_carts.forEach(
+            (
+              // one_Cart_Item: one_Tripz_connect_now_Data_interface,
+              one_Rdx_Cart_Item: local_Cart_Item,
+              index: number,
+            ) => {
+              realm_For_Cart_Save?.create(
+                // @ts-ignore
+                'RealmOneCartItem',
+                {
+                  _id: new Realm.BSON.ObjectId(),
+                  id: one_Rdx_Cart_Item.id, // oneFeed.id,
+
+                  name: one_Rdx_Cart_Item.name,
+                  // dislike: "int",
+                  // name: "string",
+                  quantity: one_Rdx_Cart_Item.quantity, //"int",
+                  price: one_Rdx_Cart_Item.price, //"int",
+                  image: one_Rdx_Cart_Item.image, //"string",
+                  index: one_Rdx_Cart_Item.index, //"int",
+                  weight: one_Rdx_Cart_Item.weight, //"int",
+                },
+                'modified',
+              );
+            },
+          );
+
+          /*
+                    const _connect_now_data_Results: Realm.Results<Local_Cart_Schema> = realm_For_Cart_Save.objects('RealmOneCartItem');
+
+                    console.log("_connect_now_data_Results: in [save_connect_now_data] ", _connect_now_data_Results.length);
+
+                    */
+        });
+
+        realm_For_Cart_Save?.close();
+      }
+    } catch (error: any) {
+      console.log(
+        'error in saving but can be ignored I think>>(arefin)',
+        error.message,
+      );
+      // console.error('error in saving but can be ignored I think>>(arefin)', error.message);
+    }
+  },
+);
+
+const delete_One_Cart_Item_2 = (state: any, action: PayloadAction<number>) => {
+  const cart_index = action.payload;
+
+  const temp_Cart = state.local_Cart_Array;
+
+  const deleted_Item = temp_Cart[cart_index];
+
+  state.local_Cart_Array = temp_Cart.filter(
+    (item: local_Cart_Item, index: number) => index !== cart_index,
+  );
+
+  const temp_weight_to_Be_deducted =
+    deleted_Item.quantity * deleted_Item.weight;
+
+  const temp_Price_to_Be_deducted = deleted_Item.quantity * deleted_Item.price;
+
+  /*
+    console.log("__temp_weight_to_Be_deducted__: ",temp_weight_to_Be_deducted);
+    console.log("__temp_Price_to_Be_deducted__: ",temp_Price_to_Be_deducted);
+
+    */
+
+  // IF HOME STATE CONTAINS THE DELETE D ITEM REMOVE IT. TOO.
+
+  // IF HOME STATE CONTAINS THE DELETE D ITEM REMOVE IT. TOO.
+
+  // IF HOME STATE CONTAINS THE DELETE D ITEM REMOVE IT. TOO.
+
+  const foundIndex_read = state.home_State.paginate_data.docs.findIndex(
+    (one_Product: Doc) => one_Product._id === deleted_Item.id,
+  );
+
+  if (foundIndex_read !== -1) {
+    // it may nOT BE PRESENT IF ,PRESENT THEN DO THIS, OTHER WISE DON'T DO THIS
+
+    state.home_State.paginate_data.docs[foundIndex_read].btn_Pressed = false;
+    state.home_State.paginate_data.docs[foundIndex_read].temp_Cart_Quantity = 0;
+    state.home_State.paginate_data.docs[foundIndex_read].show_Details_Btn = 0;
+  }
+
+  let old_total_Price = state.local_Cart_Price_Total;
+  let old_total_Weight = state.local_Cart_Weight_Total;
+
+  /*
+
+    console.log("old_total_Price: ",old_total_Price);
+    console.log("old_total_Weight: ",old_total_Weight);
+
+    */
+
+  /*
+
+    IMP PLEASE DON'T UNCOMMENT THEM.
+
+    state.local_Cart_Price_Total = state.local_Cart_Price_Total - temp_Price_to_Be_deducted;
+    state.local_Cart_Weight_Total = state.local_Cart_Weight_Total- temp_weight_to_Be_deducted;
+
+    */
+
+  /*
+
+
+    state.local_Cart_Price_Total  -= temp_Price_to_Be_deducted;
+    state.local_Cart_Weight_Total -= temp_weight_to_Be_deducted;
+
+    */
+
+  if (temp_Cart.length === 1) {
+    // now 0 then return absolute value
+    // 4.999998 -4.999999 === -0.000001
+
+    // IMPORTANT DON'T UNCOMMENT THIS LOGS  BELOW
+
+    // LOG  __temp_weight_to_Be_deducted__:  0.76
+    // LOG  __temp_Price_to_Be_deducted__:  5
+    // LOG  old_total_Price:  4.999999999999998
+    // LOG  old_total_Weight:  0.7600000000000003
+
+    // IMPORTANT DON'T UNCOMMENT THIS LOGS  ABOVE
+
+    old_total_Price = Math.floor(
+      Math.abs(old_total_Price - temp_Price_to_Be_deducted),
+    ); //state.local_Cart_Price_Total;
+    old_total_Weight = Math.floor(
+      Math.abs(old_total_Weight - temp_weight_to_Be_deducted),
+    ); // state.local_Cart_Weight_Total;
+
+    /*
+        console.log(Math.floor(1.7763568394002505e-15));
+        // > 0
+
+        console.log(Math.floor(0.0000000000000017763568394002505));
+        // > 0
+        */
+
+    /*
+
+        console.log("new (old_total_Price): ",old_total_Price);
+        console.log("new (old_total_Weight): ",old_total_Weight);
+
+        */
+
+    state.local_Cart_Price_Total = old_total_Price;
+    state.local_Cart_Weight_Total = old_total_Weight;
+
+    // https://stackoverflow.com/questions/1685680/how-to-avoid-scientific-notation-for-large-numbers-in-javascript
+
+    return;
+  } else {
+    old_total_Price -= temp_Price_to_Be_deducted; //state.local_Cart_Price_Total;
+    old_total_Weight -= temp_weight_to_Be_deducted; // state.local_Cart_Weight_Total;
+
+    /*
+        console.log("new (old_total_Price): ",old_total_Price);
+        console.log("new (old_total_Weight): ",old_total_Weight);
+
+        */
+
+    state.local_Cart_Price_Total = old_total_Price;
+    state.local_Cart_Weight_Total = old_total_Weight;
+
+    return;
+  }
+
+  /*
+    data_Source_State.slice().filter((item:one_Data_Source_Interface,index:number) => index !== cart_index)
+
+    state.ca
+
+    */
+};
+
+const decrement_cart_item_for_home_index_0_2 = (
+  state: any,
+  action: PayloadAction<number>,
+) => {
+  const foundIndex_Already_In_Cart_Decrement = action.payload;
   // 999
   state.local_Cart_Array[foundIndex_Already_In_Cart_Decrement].quantity -= 1;
   // 999
 
   // ---begins
 
-  if (state.local_Cart_Array[foundIndex_Already_In_Cart_Decrement].quantity === 0) {
+  if (
+    state.local_Cart_Array[foundIndex_Already_In_Cart_Decrement].quantity === 0
+  ) {
     // const temp_local_Cart = state.local_Cart_Array;
 
     // console.log("temp_Cart: (when 0) ", temp_Cart);
@@ -392,7 +602,9 @@ const decrement_cart_item_for_home_index_0_2 = (
       // extra [] added to save it as an array.
 
       state.local_Cart_Array = [
-        state.local_Cart_Array[foundIndex_Already_In_Cart_Decrement === 1 ? 0 : 1],
+        state.local_Cart_Array[
+          foundIndex_Already_In_Cart_Decrement === 1 ? 0 : 1
+        ],
       ];
 
       // state.product_State[home_Item_Index].temp__Quantity = 0;//
@@ -405,16 +617,16 @@ const decrement_cart_item_for_home_index_0_2 = (
       // state.product_State[temp_Cart[foundIndex_Already_In_Cart_Decrement].index].btn_Pressed = false;
     } else if (state.local_Cart_Array.length > 2) {
       state.local_Cart_Array =
-          foundIndex_Already_In_Cart_Decrement === 0
-              ? state.local_Cart_Array.slice(1, state.local_Cart_Array.length)
-              : state.local_Cart_Array
-                  .slice(0, foundIndex_Already_In_Cart_Decrement)
-                  .concat(
-                      state.local_Cart_Array.slice(
-                          foundIndex_Already_In_Cart_Decrement + 1,
-                          state.local_Cart_Array.length,
-                      ),
-                  );
+        foundIndex_Already_In_Cart_Decrement === 0
+          ? state.local_Cart_Array.slice(1, state.local_Cart_Array.length)
+          : state.local_Cart_Array
+              .slice(0, foundIndex_Already_In_Cart_Decrement)
+              .concat(
+                state.local_Cart_Array.slice(
+                  foundIndex_Already_In_Cart_Decrement + 1,
+                  state.local_Cart_Array.length,
+                ),
+              );
 
       // state.product_State[home_Item_Index].temp__Quantity = 0; //
       // state.product_State[temp_Cart[foundIndex_Already_In_Cart_Decrement].index].btn_Pressed = false;
@@ -423,28 +635,27 @@ const decrement_cart_item_for_home_index_0_2 = (
       // state.local_Cart_Array = temp_Cart;
     }
   }
-      // state.local_Cart_Array= state.local_Cart_Array.concat(temp_Cart_Item);
+  // state.local_Cart_Array= state.local_Cart_Array.concat(temp_Cart_Item);
 
   // updated_Quantity
- /* else {
-    // console.log("decrement_Single_Cart_Item_2_For_Home_Page >> [temp_Cart]: at else -- ", temp_Cart);
+  /* else {
+       // console.log("decrement_Single_Cart_Item_2_For_Home_Page >> [temp_Cart]: at else -- ", temp_Cart);
 
-    state.local_Cart_Array = temp_Cart;
-  }*/
+       state.local_Cart_Array = temp_Cart;
+     }*/
   // ---ends
-
 };
 
 const increment_cart_item_for_home_index_2 = (
-    state: any,
-    action: PayloadAction<number>,
+  state: any,
+  action: PayloadAction<number>,
 ) => {
   state.local_Cart_Array[action.payload].quantity += 1;
 };
 
 const store_temp_cart_array_2 = (
-    state: any,
-    action: PayloadAction<local_Cart_Item[]>,
+  state: any,
+  action: PayloadAction<local_Cart_Item[]>,
 ) => {
   // object for new item, or first item, then concat, for array no concat. array when incremented an existing item
 
@@ -455,33 +666,33 @@ const store_temp_cart_array_2 = (
   state.local_Cart_Array = action.payload; //state.local_Cart_Array.concat(action.payload);
 
   state.local_Cart_Price_Total = state.local_Cart_Array.reduce(
-      (accumulator: number, one_Cart_Item: local_Cart_Item) =>
-          accumulator + one_Cart_Item.price,
-      0,
+    (accumulator: number, one_Cart_Item: local_Cart_Item) =>
+      accumulator + one_Cart_Item.price,
+    0,
   );
 };
 
 const store_temp_cart_object_2 = (
-    state: any,
-    action: PayloadAction<local_Cart_Item>,
+  state: any,
+  action: PayloadAction<local_Cart_Item>,
 ) => {
   // object for new item, or first item, then concat, for array no concat. array when incremented an existing item
 
   state.local_Cart_Array = state.local_Cart_Array.concat(action.payload); //state.local_Cart_Array.concat(action.payload);
 
   console.log(
-      'state.local_Cart_Array :  in << store_temp_cart_object_2 >>: ',
-      state.local_Cart_Array,
+    'state.local_Cart_Array :  in << store_temp_cart_object_2 >>: ',
+    state.local_Cart_Array,
   );
   state.local_Cart_Price_Total = state.local_Cart_Array.reduce(
-      (accumulator: number, one_Cart_Item: local_Cart_Item) =>
-          accumulator + one_Cart_Item.price,
-      0,
+    (accumulator: number, one_Cart_Item: local_Cart_Item) =>
+      accumulator + one_Cart_Item.price,
+    0,
   );
 };
 const increment_Single_Cart_Item_2__For_Home_Page = (
-    state: any,
-    action: PayloadAction<number>,
+  state: any,
+  action: PayloadAction<number>,
 ) => {
   // ----..
 
@@ -529,7 +740,7 @@ const increment_Single_Cart_Item_2__For_Home_Page = (
 
     // SEARCH FIRST IN TEMP CART IF EXIST THEN INCREMENT
     const foundIndex_Already_In_Cart = temp_Cart.findIndex(
-        (one_Product: local_Cart_Item) => one_Product.id === temp_Product_ID,
+      (one_Product: local_Cart_Item) => one_Product.id === temp_Product_ID,
     );
 
     // console.log("__foundIndex_Already_In_Cart__: ", foundIndex_Already_In_Cart);
@@ -540,22 +751,22 @@ const increment_Single_Cart_Item_2__For_Home_Page = (
 
       // eslint-disable-next-line operator-assignment
       temp_Cart[foundIndex_Already_In_Cart].quantity =
-          temp_Cart[foundIndex_Already_In_Cart].quantity + 1;
+        temp_Cart[foundIndex_Already_In_Cart].quantity + 1;
 
       // price begins
       state.local_Cart_Price_Total +=
-          temp_Cart[foundIndex_Already_In_Cart].price;
+        temp_Cart[foundIndex_Already_In_Cart].price;
 
       // price ends
 
       state.local_Cart_Weight_Total +=
-          temp_Cart[foundIndex_Already_In_Cart].weight;
+        temp_Cart[foundIndex_Already_In_Cart].weight;
 
       state.local_Cart_Array = temp_Cart; //[...temp_Cart];
 
       // state.product_State[foundIndex_read].temp__Quantity = 1;
       state.product_State[home_Item_Index].temp__Quantity =
-          temp_Cart[foundIndex_Already_In_Cart].quantity;
+        temp_Cart[foundIndex_Already_In_Cart].quantity;
 
       return;
     } else {
@@ -598,8 +809,8 @@ const increment_Single_Cart_Item_2__For_Home_Page = (
 };
 
 const decrement_Single_Cart_Item_2_For_Home_Page = (
-    state: any,
-    action: PayloadAction<number>,
+  state: any,
+  action: PayloadAction<number>,
 ) => {
   // const decrement_Payload = action.payload;
   // const temp_Product_ID = decrement_Payload.product_ID;
@@ -614,45 +825,43 @@ const decrement_Single_Cart_Item_2_For_Home_Page = (
   const temp_Product_ID = state.product_State[home_Item_Index]._id;
   const one_Item = state.product_State[home_Item_Index];
 
-
-
   let temp_Cart = state.local_Cart_Array;
 
   //  TEMP CART  LENGTH 0
 
   // SEARCH FIRST IN TEMP CART IF EXIST THEN INCREMENT
   const foundIndex_Already_In_Cart_Decrement = temp_Cart.findIndex(
-      (one_Product: local_Cart_Item) => one_Product.id === temp_Product_ID,
+    (one_Product: local_Cart_Item) => one_Product.id === temp_Product_ID,
   );
 
   // ORDER IS IMPORTANT ORDER:2
   // eslint-disable-next-line operator-assignment
   temp_Cart[foundIndex_Already_In_Cart_Decrement].quantity =
-      temp_Cart[foundIndex_Already_In_Cart_Decrement].quantity - 1;
+    temp_Cart[foundIndex_Already_In_Cart_Decrement].quantity - 1;
 
   // state.product_State[foundIndex_read].temp__Quantity = 1;
 
   // ORDER IS IMPORTANT ORDER:1
   // eslint-disable-next-line operator-assignment
   temp_Cart[foundIndex_Already_In_Cart_Decrement].weight =
-      temp_Cart[foundIndex_Already_In_Cart_Decrement].quantity *
-      temp_Cart[foundIndex_Already_In_Cart_Decrement].weight;
+    temp_Cart[foundIndex_Already_In_Cart_Decrement].quantity *
+    temp_Cart[foundIndex_Already_In_Cart_Decrement].weight;
 
   /* state.product_State[temp_Cart[foundIndex_Already_In_Cart].index].weight
-       = ((temp_Cart[foundIndex_Already_In_Cart].quantity) + 1)*(temp_Cart[foundIndex_Already_In_Cart].weight);*/
+         = ((temp_Cart[foundIndex_Already_In_Cart].quantity) + 1)*(temp_Cart[foundIndex_Already_In_Cart].weight);*/
 
   // price decrement begins
   state.local_Cart_Price_Total -=
-      temp_Cart[foundIndex_Already_In_Cart_Decrement].price;
+    temp_Cart[foundIndex_Already_In_Cart_Decrement].price;
 
   // price decrement ends
 
   state.local_Cart_Weight_Total -=
-      temp_Cart[foundIndex_Already_In_Cart_Decrement].weight;
+    temp_Cart[foundIndex_Already_In_Cart_Decrement].weight;
 
   // state.product_State[foundIndex_read].temp__Quantity = 1;
   state.product_State[home_Item_Index].temp__Quantity =
-      temp_Cart[foundIndex_Already_In_Cart_Decrement].quantity;
+    temp_Cart[foundIndex_Already_In_Cart_Decrement].quantity;
 
   if (temp_Cart[foundIndex_Already_In_Cart_Decrement].quantity === 0) {
     // const temp_local_Cart = state.local_Cart_Array;
@@ -683,16 +892,16 @@ const decrement_Single_Cart_Item_2_For_Home_Page = (
       // state.product_State[temp_Cart[foundIndex_Already_In_Cart_Decrement].index].btn_Pressed = false;
     } else if (temp_Cart.length > 2) {
       temp_Cart =
-          foundIndex_Already_In_Cart_Decrement === 0
-              ? temp_Cart.slice(1, temp_Cart.length)
-              : temp_Cart
-                  .slice(0, foundIndex_Already_In_Cart_Decrement)
-                  .concat(
-                      temp_Cart.slice(
-                          foundIndex_Already_In_Cart_Decrement + 1,
-                          temp_Cart.length,
-                      ),
-                  );
+        foundIndex_Already_In_Cart_Decrement === 0
+          ? temp_Cart.slice(1, temp_Cart.length)
+          : temp_Cart
+              .slice(0, foundIndex_Already_In_Cart_Decrement)
+              .concat(
+                temp_Cart.slice(
+                  foundIndex_Already_In_Cart_Decrement + 1,
+                  temp_Cart.length,
+                ),
+              );
 
       state.product_State[home_Item_Index].temp__Quantity = 0; //
       // state.product_State[temp_Cart[foundIndex_Already_In_Cart_Decrement].index].btn_Pressed = false;
@@ -701,7 +910,7 @@ const decrement_Single_Cart_Item_2_For_Home_Page = (
       state.local_Cart_Array = temp_Cart;
     }
   }
-      // state.local_Cart_Array= state.local_Cart_Array.concat(temp_Cart_Item);
+  // state.local_Cart_Array= state.local_Cart_Array.concat(temp_Cart_Item);
 
   // updated_Quantity
   else {
@@ -712,43 +921,43 @@ const decrement_Single_Cart_Item_2_For_Home_Page = (
 };
 
 const update_All_Products_Add_BTN_Pressed_State__And_Single_Product_Add_Btn_Pressed_State_2 =
-    (state: any, action: PayloadAction<number>) => {
-      // const yourData = useSelector(selectYourData);
-      // useSelector
-      // Access the query data using the RTK Query selector
-      /*  const queryState = productsApiSlice.endpoints.getProducts.select({limit:10});
+  (state: any, action: PayloadAction<number>) => {
+    // const yourData = useSelector(selectYourData);
+    // useSelector
+    // Access the query data using the RTK Query selector
+    /*  const queryState = productsApiSlice.endpoints.getProducts.select({limit:10});
 
-        // Check if the query was successful
-        if (queryState.isSuccess) {
-          // Access the data
-          const users = queryState.data;
+          // Check if the query was successful
+          if (queryState.isSuccess) {
+            // Access the data
+            const users = queryState.data;
 
-          // You can now perform logic with the data, like updating state
-          state.userCount = users.length;
-        }*/
-      /* if (queryState) {
-         // Access the data if the query was successful
-         // const users = queryState.data;
-         // console.log('Users data:', users);
-         // You can now modify your state or perform other logic with the query data
+            // You can now perform logic with the data, like updating state
+            state.userCount = users.length;
+          }*/
+    /* if (queryState) {
+           // Access the data if the query was successful
+           // const users = queryState.data;
+           // console.log('Users data:', users);
+           // You can now modify your state or perform other logic with the query data
 
 
-         console.log('action.payload: ', action.payload);
-         console.log('state.product_State: ', state.product_State);
-         console.log("queryState: ",queryState);
-         console.log("queryState.data: ",queryState);
+           console.log('action.payload: ', action.payload);
+           console.log('state.product_State: ', state.product_State);
+           console.log("queryState: ",queryState);
+           console.log("queryState.data: ",queryState);
 
-         // state.product_State[action.payload].temp__Quantity = 1;
-         state.product_State[action.payload].btn_Pressed = true;
-         state.product_State[action.payload].temp__Quantity = 0;
-       }
-  */
-      // 00
-    };
+           // state.product_State[action.payload].temp__Quantity = 1;
+           state.product_State[action.payload].btn_Pressed = true;
+           state.product_State[action.payload].temp__Quantity = 0;
+         }
+    */
+    // 00
+  };
 
 const product_detail_page_double_tap_navigation_displayed = (
-    state: any,
-    action: PayloadAction<null>,
+  state: any,
+  action: PayloadAction<null>,
 ) => {
   const displayed = state.detail_navigation_double_tap_message_displayed;
 
@@ -773,38 +982,38 @@ const product_detail_page_double_tap_navigation_displayed = (
 };
 
 const single_Product__Show_Details_Button_true_2 = (
-    state: any,
-    action: PayloadAction<number>,
+  state: any,
+  action: PayloadAction<number>,
 ) => {
   // FOUND THIS NOT WORKED.
 
   console.log(
-      'at << single_Product__Show_Details_Button_true_2 >> and index: ',
-      action.payload,
+    'at << single_Product__Show_Details_Button_true_2 >> and index: ',
+    action.payload,
   );
 
   // Use RTK Query's api.util.updateQueryData to update cached query data
-/*  productsApiSlice.util.updateQueryData(
-      'getProducts',
-      {limit: home_page_product_limit},
-      (draft_Products: MaybeDrafted<One_Product_for_Home_Page_Interface>[]) => {
-        if (draft_Products) {
-          console.log('// FOUND THIS NOT WORKED.\n');
-          console.log('// FOUND THIS NOT WORKED.\n');
-          console.log('// FOUND THIS NOT WORKED.\n');
+  /*  productsApiSlice.util.updateQueryData(
+          'getProducts',
+          {limit: home_page_product_limit},
+          (draft_Products: MaybeDrafted<One_Product_for_Home_Page_Interface>[]) => {
+            if (draft_Products) {
+              console.log('// FOUND THIS NOT WORKED.\n');
+              console.log('// FOUND THIS NOT WORKED.\n');
+              console.log('// FOUND THIS NOT WORKED.\n');
 
-          console.log('draft_Products.length: ', draft_Products.length);
+              console.log('draft_Products.length: ', draft_Products.length);
 
-          const prev_index = state.previous_Show_Detail_Button_Index_for_Item;
-          draft_Products[prev_index].show_Details_Btn = false;
-          state.previous_Show_Detail_Button_Index_for_Item = action.payload;
+              const prev_index = state.previous_Show_Detail_Button_Index_for_Item;
+              draft_Products[prev_index].show_Details_Btn = false;
+              state.previous_Show_Detail_Button_Index_for_Item = action.payload;
 
-          // draft.name = name;  // Example update: updating user's name in cache
-        } else {
-          console.log('at <<ELSE >>');
-        }
-      },
-  );*/
+              // draft.name = name;  // Example update: updating user's name in cache
+            } else {
+              console.log('at <<ELSE >>');
+            }
+          },
+      );*/
 
   return;
   // one_Product_Index
@@ -815,77 +1024,79 @@ export const product_Slice = createSlice({
 
   initialState,
   reducers: {
-      single_Product__Show_Details_Button_true:
-        single_Product__Show_Details_Button_true_2,
+    single_Product__Show_Details_Button_true:
+      single_Product__Show_Details_Button_true_2,
 
-      // added on may 8, 2023
-      update_All_Products_Add_BTN_Pressed_State__And_Single_Product_Add_Btn_Pressed_State:
-        update_All_Products_Add_BTN_Pressed_State__And_Single_Product_Add_Btn_Pressed_State_2,
+    // added on may 8, 2023
+    update_All_Products_Add_BTN_Pressed_State__And_Single_Product_Add_Btn_Pressed_State:
+      update_All_Products_Add_BTN_Pressed_State__And_Single_Product_Add_Btn_Pressed_State_2,
 
-      decrement_Item_From_Home: decrement_Single_Cart_Item_2_For_Home_Page,
-      increment_Item_From_Home: increment_Single_Cart_Item_2__For_Home_Page,
+    decrement_Item_From_Home: decrement_Single_Cart_Item_2_For_Home_Page,
+    increment_Item_From_Home: increment_Single_Cart_Item_2__For_Home_Page,
 
-      disable_Btn_Pressed_State_In_Home_Page_0:
-        disable_Btn_Pressed_State_In_Home_Page,
+    disable_Btn_Pressed_State_In_Home_Page_0:
+      disable_Btn_Pressed_State_In_Home_Page,
 
-      populateTag_data_for_multiple_Images:
-        populateTag_data_for_multiple_Images_2,
+    populateTag_data_for_multiple_Images:
+      populateTag_data_for_multiple_Images_2,
 
-      update_single_Product_Add_Btn_Pressed_State:
-        update_single_Product_Add_Btn_Pressed_State_2,
+    update_single_Product_Add_Btn_Pressed_State:
+      update_single_Product_Add_Btn_Pressed_State_2,
 
-      increment_Single_Product_For_Details_Page:
-        increment_Single_Product_2_For_Details_Page,
+    increment_Single_Product_For_Details_Page:
+      increment_Single_Product_2_For_Details_Page,
 
-      decrement_Single_Product_For_Details_Page:
-        decrement_Single_Product_2_For_Details_Page,
+    decrement_Single_Product_For_Details_Page:
+      decrement_Single_Product_2_For_Details_Page,
 
-      populate_all_product_data: populate_all_product_data_2,
+    populate_all_product_data: populate_all_product_data_2,
 
-      // added newly
-      store_temp_cart_object: store_temp_cart_object_2,
-      store_temp_cart_array: store_temp_cart_array_2,
+    // added newly
+    store_temp_cart_object: store_temp_cart_object_2,
+    store_temp_cart_array: store_temp_cart_array_2,
 
-      increment_cart_item_for_home_index_0: increment_cart_item_for_home_index_2,
-      decrement_cart_item_for_home_index_0: decrement_cart_item_for_home_index_0_2,
+    increment_cart_item_for_home_index_0: increment_cart_item_for_home_index_2,
+    decrement_cart_item_for_home_index_0:
+      decrement_cart_item_for_home_index_0_2,
 
-      product_detail_only_in_double_tap:
-        product_detail_page_double_tap_navigation_displayed,
+    product_detail_only_in_double_tap:
+    product_detail_page_double_tap_navigation_displayed,
 
-      update_product_detail_extra_data: update_product_detail_extra_data_2,
+    update_product_detail_extra_data: update_product_detail_extra_data_2,
+    delete_One_Cart_Item: delete_One_Cart_Item_2,
   },
   extraReducers: (builder) => {
     /* builder
-         .addMatcher(productsApiSlice.endpoints.getProducts.matchFulfilled, (
-             state, action) => {
+             .addMatcher(productsApiSlice.endpoints.getProducts.matchFulfilled, (
+                 state, action) => {
 
 
-             if (action.payload !== undefined) {
+                 if (action.payload !== undefined) {
 
 
 
 
-                 const local_Cart_IDs = (state.local_Cart_Array.length === 0)
-                     ? []
-                     : state.local_Cart_Array.map((one_Product: local_Cart_Item) => one_Product.id);
+                     const local_Cart_IDs = (state.local_Cart_Array.length === 0)
+                         ? []
+                         : state.local_Cart_Array.map((one_Product: local_Cart_Item) => one_Product.id);
 
-                 if(action.payload?.length>0){
-
-
-                     state.product_State =  action.payload.map((one_Product: One_Product_for_Home_Page_Interface, index:number) => (
+                     if(action.payload?.length>0){
 
 
-                         return_modified_Doc(
-                             one_Product,
-                             local_Cart_IDs,
-                             state.local_Cart_Array
-                         )
-                     ));
+                         state.product_State =  action.payload.map((one_Product: One_Product_for_Home_Page_Interface, index:number) => (
+
+
+                             return_modified_Doc(
+                                 one_Product,
+                                 local_Cart_IDs,
+                                 state.local_Cart_Array
+                             )
+                         ));
+                     }
+
                  }
-
-             }
-         });*/
-  }
+             });*/
+  },
 });
 
 export const {
@@ -908,27 +1119,39 @@ export const {
 
   product_detail_only_in_double_tap,
   update_product_detail_extra_data,
+  delete_One_Cart_Item,
 } = product_Slice.actions;
 
 // export const selectCount = (state: RootState) => state.products_Reducer.value; scan_Reducer
 
-export const select_single_product_extra_data = (state: RootState) => state.products_Reducer.single_product_extra_data;
+export const select_single_product_extra_data = (state: RootState) =>
+  state.products_Reducer.single_product_extra_data;
 
+export const export_Single_Product_Add_BTN_Pressed_State = (state: RootState) =>
+  state.products_Reducer.single_Product_State.single_Prod_Add_Btn_Pressed_State;
 
-export const export_Single_Product_Add_BTN_Pressed_State = (state: RootState) => state.products_Reducer.single_Product_State.single_Prod_Add_Btn_Pressed_State;
+export const export_Single_Product_Quantity_Value_State = (state: RootState) =>
+  state.products_Reducer.single_Product_State.single_Prod_Quantity;
 
-export const export_Single_Product_Quantity_Value_State = (state: RootState) => state.products_Reducer.single_Product_State.single_Prod_Quantity;
+export const export_Product_State = (state: RootState) =>
+  state.products_Reducer.product_State;
 
-export const export_Product_State = (state: RootState) => state.products_Reducer.product_State;
+export const select_Local_Cart = (state: RootState) =>
+  state.products_Reducer.local_Cart_Array;
+export const select_Local_Cart_Length = (state: RootState) =>
+  state.products_Reducer.local_Cart_Array.length;
 
-export const select_Local_Cart = (state: RootState) => state.products_Reducer.local_Cart_Array;
-export const select_Local_Cart_Length = (state: RootState) => state.products_Reducer.local_Cart_Array.length;
+export const select_Local_Cart_Price_Localized_Monetary_Unit = (
+  state: RootState,
+) => state.products_Reducer.local_Cart_Price_Total;
+export const export_Single_Product_Details = (state: RootState) =>
+  state.products_Reducer.single_Product_State;
 
-export const select_Local_Cart_Price_Localized_Monetary_Unit = (state: RootState) => state.products_Reducer.local_Cart_Price_Total;
-export const export_Single_Product_Details = (state: RootState) => state.products_Reducer.single_Product_State;
-
-export const multiple_image_route_data_through_redux = (state: RootState) => state.products_Reducer.two_Image__data_For_Tag_State;
-export const select_Shipped_From_State_Or_Delivery_Currency = (state: RootState) => state.products_Reducer.delivery_Currency;
+export const multiple_image_route_data_through_redux = (state: RootState) =>
+  state.products_Reducer.two_Image__data_For_Tag_State;
+export const select_Shipped_From_State_Or_Delivery_Currency = (
+  state: RootState,
+) => state.products_Reducer.delivery_Currency;
 
 
 // export default product_Slice;

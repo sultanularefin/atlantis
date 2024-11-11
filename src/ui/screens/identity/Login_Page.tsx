@@ -46,28 +46,11 @@ import {
     ukbd_red,
     ukbd_Text_Navy_Blue_color,
     very_light_blue_ukbd,
-    very_light_red_ukbd, map_overlay_Color_Blue
+    very_light_red_ukbd,
+    map_overlay_Color_Blue,
+    cac_green_success
 
 } from "../../ui_utils/important_Colors";
-/*import InputField_Email_Phone, {InputField_Email_Phone_Styles} from "../../components/identity/login_comps/InputField_Email_Phone";
-import InputField_Email_Phone_Original_Nayeem_Vai from "../../components/InputField_Email_Phone_Original_Nayeem_Vai";
-import {one_Country_Interface} from "../../components/identity/login_comps/login_interface";
-// import {Coutries_With_Phone_Flag} from "../components/login_comps/Coutries_With_Phone_Flag";
-import One_Country_Item_Phone_Input from "../../components/identity/login_comps/One_Country_Item_Phone_Input";
-
-import {Limited_Coutries_With_Phone_Flag} from "../../components/identity/login_comps/Limited_Coutries_With_Phone_Flag";
-import InputField_Password from "../../components/identity/login_comps/InputField_Password";
-import {
-    clear_Forget_Password_States,
-    clear_Reg_Page_State,
-    login_REquest_API__interface,
-    login_USER_INPUT__interface,
-    login_With_username_Password_Async,
-    select_Login_Data,
-    select_Map_Region_Respective_to_Driver_Location,
-    UKBD_App_Login_Response_With_Password
-} from "../../../lib/Reducers/authSlice";
-import {useAppDispatch, useAppSelector} from "../../../lib/app/hooks";*/
 
 
 export interface Login_Page_Props {
@@ -75,31 +58,19 @@ export interface Login_Page_Props {
 
 }
 
-
-// import NetInfo, {useNetInfo} from "@react-native-community/netinfo";
 import {CommonActions, useFocusEffect} from "@react-navigation/native";
 import {unwrapResult} from "@reduxjs/toolkit";
 import Snackbar from "react-native-snackbar";
-// import Just_Phone_Login from "../../components/identity/login_comps/Just_Phone_Login";
-// import Header_OF_Countries from "../../components/identity/reg_Page/Header_OF_Countries";
-// import {common_Container_in_Identity_Page_Styles} from "./Register_Page";
+
 import hairlineWidth = StyleSheet.hairlineWidth;
 
-/*
-import MapView, {Region} from "react-native-maps";
-import Show_Driver_Position_Home_Screen from "../../components/home/Show_Driver_Position_Home_Screen";
 
-import Show_OffLine from "../../components/Show_OffLine";
-import Loading_Comp from "../../components/loading_Comp/Loading_Comp";
-import Header_Login_Page from "../../headers/Header_Login_Page";
-import Header_Login_Absolute_With_Map_Page from "../../headers/Header_Login_Absolute_With_Map_Page";
-*/
 import MapView, {Region} from "react-native-maps";
 import {useSafeAreaInsets} from "react-native-safe-area-context";
 import {useAppDispatch, useAppSelector} from '../../../lib/app/hooks.ts';
 import {login_Request_API__interface, one_Country_Interface} from '../../../interfaces/user/login.ts';
 
-import NetInfo, {useNetInfo} from "@react-native-community/netinfo";
+
 import Header_Login_Absolute_With_Map_Page from '../../header/Header_Login_Absolute_With_Map_Page.tsx';
 import You_Are_Offline_Comp from '../../ui_utils/You_Are_Offline_Comp.tsx';
 import {Limited_Countries_With_Phone_Flag} from '../../comps/identity/Limited_Countries_With_Phone_Flag.ts';
@@ -113,7 +84,6 @@ const tempPhone_Countries_State:one_Country_Interface[] = Limited_Countries_With
 const Login_Page: React.FC<Login_Page_Props> = ({
                                                     navigation,
                                                 }) => {
-// const Login_Page = ({ navigation }) => {
 
 
     const [toggleCheckBox, setToggleCheckBox] = useState(false);
@@ -127,18 +97,11 @@ const Login_Page: React.FC<Login_Page_Props> = ({
     const password_Ref = useRef<TextInput>(null);
 
 
-    // const login_Data: login_USER_INPUT__interface = useAppSelector(select_Login_Data);
 
     const dispatch = useAppDispatch();
-   /* const map_Region_Respective_to_Driver_Location_2: Region
-      = useAppSelector(select_Map_Region_Respective_to_Driver_Location);
-
-    const map_View_Ref_At_Login_Page = useRef<MapView>(null);
 
 
-    */
-
-    const netInfo = useNetInfo();
+    // const netInfo = useNetInfo();
     const map_View_Ref_At_Login_Page = useRef<MapView>(null);
     const update_CheckBox = (new_Value: boolean) => {
 
@@ -257,22 +220,14 @@ const Login_Page: React.FC<Login_Page_Props> = ({
 
             console.log("ios navigationg to app stack");
 
-            navigate_To_Home_Screen();
+            if (navigation.canGoBack()){
+                navigation.goBack();
+            }
+            // navigate_To_Home_Screen();
             return true;
 
 
-
-
-
-
-        }
-
-
-
-
-
-
-
+        };
 
     };
 
@@ -334,12 +289,12 @@ const Login_Page: React.FC<Login_Page_Props> = ({
             () => {
 
                 set_LOading_State(false);
-                return navigation.dispatch(
+              /*  return navigation.dispatch(
                   CommonActions.reset({
                       index: 0,
                       routes: [{name: 'Catalog_Home_Page'}],
                   }),
-                );
+                );*/
 
 
 
@@ -374,7 +329,8 @@ const Login_Page: React.FC<Login_Page_Props> = ({
                     })
                 );*/
             },
-            1000
+            // 1000
+            1,
         );
     };
 
@@ -409,7 +365,7 @@ const Login_Page: React.FC<Login_Page_Props> = ({
     return (
 
 
-        <View
+        <SafeAreaView
             //SafeAreaView
             // SafeArea View and status bar(no effect) must be disabled in physical devcies, other wise map will
             // not rendered ON SAFEAREA PORTION ON phycical devices, checked on iOS physical device on may 16, 2023
@@ -421,116 +377,12 @@ const Login_Page: React.FC<Login_Page_Props> = ({
             alignItems: 'center',
             justifyContent: 'flex-start',
             width: displayWidth,//'100%',
-            backgroundColor: 'transparent',//map_overlay_Color_Blue,//'transparent',
+            backgroundColor: 'lemonchiffon',//'transparent',
+
 
         }}>
 
-            <StatusBar
-                animated={true}
-                backgroundColor={map_overlay_Color_Blue}
-                barStyle={statusBarStyle}
-                showHideTransition={statusBarTransition}
-                hidden={hidden}
-            />
 
-
-
-
-
-            <MapView
-                ref={map_View_Ref_At_Login_Page}
-                style={{
-                    width: displayWidth - 2,//displayWidth-26,
-                    // height: (displayHeight - (displayHeight / 15)),
-                    height: displayHeight,//(netInfo?.isConnected === false) ?(displayHeight -28):displayHeight,
-                    // height: (displayHeight - ((displayHeight / 15) + (displayHeight / 2))),
-                    // height: (displayHeight - ((displayHeight / 15) + (displayHeight / 2))),//(displayHeight / 2) - 2,//(displayHeight/2)-26,
-                    // margin: 10,
-                    flexDirection: "column",
-                    // flex: netInfo?.isConnected?9.2: 8.5,
-                    justifyContent: 'flex-start',
-                    alignItems: 'flex-start',
-                    alignSelf: 'flex-start',
-
-
-                }
-                }
-
-                region={{
-                    // ...user_Ordered_From_Location_Region__OR_Map_Center_Location,
-
-                    /* latitude: 23.810332,
-                     latitudeDelta: 112.968498,
-                     longitude: 45.145259,
-                     longitudeDelta: 135.80177700000002*/
-
-
-                    ...map_Region_Respective_to_Driver_Location_2,
-                    // longitude: 90.370961
-                    // latitude: 23.7938395,
-                    // longitudeDelta: 0.120153
-                    // latitudeDelta: 0.011358000000001311,
-
-                }}
-
-
-                /*     zoomEnabled={true}
-                     zoomTapEnabled={true}
-                     maxZoomLevel={20}
-                     maxDelta={260}*/
-
-                initialRegion={{
-
-
-                    longitude: 0,
-                    latitude: 20,
-                    longitudeDelta: 1400,
-                    latitudeDelta: 1400,
-
-                }}
-
-                // showsUserLocation={true}
-
-
-                onRegionChangeComplete={() => {
-
-                    console.log("region change completed");
-
-
-                    /*  return map_View_Ref_At_Active_Details.current?.animateToRegion({
-                          ...map_Region_Respective_to_Driver_Location_2,
-                      }, 2000);*/
-                    return;
-
-
-                    /*    map_View_Ref_At_Active_Details.current?.animateToRegion({
-                            longitude: 90.3709614,
-                            latitude: 23.7938395,
-                            longitudeDelta: 0.120153,
-                            latitudeDelta: 0.011358000000001311,
-                        }, 2000);*/
-
-
-                    /* map_View_Ref_At_Active_Details.current?.animateToRegion({
-                         ...user_Ordered_From_Location_Region__OR_Map_Center_Location,
-                     }, 2000);*/
-
-
-                }
-                }
-
-
-            >
-
-
-
-               {/* <Show_Driver_Position_Home_Screen
-
-                    comp_Height={displayHeight}
-                />*/}
-
-
-            </MapView>
 
 
             {/*absolute keyboard avoiding view in login screen begins here*/}
@@ -560,15 +412,7 @@ const Login_Page: React.FC<Login_Page_Props> = ({
 
                 }}
             >
-                {
-                    /*(!netInfo?.isConnected === false)*/
-                    (netInfo?.isConnected === false)?(
-                            <You_Are_Offline_Comp
-                                comp_width={displayWidth}
-                            />)
-                        :null
 
-                }
 
                 <Header_Login_Absolute_With_Map_Page
 
@@ -582,10 +426,14 @@ const Login_Page: React.FC<Login_Page_Props> = ({
                     zIndex_2={101}
                     left_Value={(displayWidth - modal_Width) / 2}
 
-                    top_Value={0 }// /*insets.top*/
+                    top_Value={0}// /*insets.top*/
                     // required for ios(iPhone) // may 08,2023
                     // not any more as added in keyboard avoiding view
-                />
+                 />
+
+
+
+
 
 
                 <ScrollView
@@ -671,26 +519,6 @@ const Login_Page: React.FC<Login_Page_Props> = ({
                                         borderColor: 'rgba(0,0,0,.25),',//'red',//list_Container_BG_Color,
 
 
-                                        /* background-color: #f9f9f9;
-                                         border-radius: 0 0 2px 2px; // border-radius: 10% 30% 50% 70%; (top-left, top-right, bottom-right, bottom-left)
-                                         box-shadow: 0 1px 3px rgba(0,0,0,.25), 0 4px 28px hsla(0,0%,71%,.25);
-
-                                         //offset-x | offset-y | blur-radius | spread-radius | color
-                                         // box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
-                                         display: none;
-                                         padding: 30px;
-                                         position: absolute;
-                                         top: 25px;
-                                         width: 100%;
-                                         z-index: 1;*/
-
-                                        /*borderRadius: 20,
-                                        paddingHorizontal: 15,
-
-
-                                        elevation: 5,*/
-
-
 
                                         width: modal_Width,//(displayWidth-(inner_Side_Width_For_Modal)),
                                         height: displayHeight / 2.5,
@@ -747,43 +575,6 @@ const Login_Page: React.FC<Login_Page_Props> = ({
                     </Modal>
 
 
-                    {/*Modal for Phone selection ends here*/}
-
-                    {/*   <View
-                            style={Login_Page_styles.loginPage}
-                        >
-                        <Pressable
-
-
-                            onPress={close_Button_Pressed}
-
-
-                            style={({pressed}) => [
-                                {
-                                    position: "absolute",
-                                    right: 30,
-                                    top: 20,
-                                    width: 30,
-                                    height: 30,
-                                    alignItems: "center",
-                                    justifyContent: "center",
-                                    // backgroundColor: "#fff",
-                                    borderRadius: 2,
-
-                                    backgroundColor: pressed
-                                        ? `${ukbd_navy_blue}`
-                                        // 'aliceblue'
-                                        : "transparent",
-
-                                }
-                            ]
-                            }
-
-                        >
-                            <EvilIcons name="close" color={"rgba(255, 0, 0, 0.2)"} size={30}/>
-                        </Pressable>*/}
-
-
                     <View
                         style={{
 
@@ -797,20 +588,7 @@ const Login_Page: React.FC<Login_Page_Props> = ({
 
 
                         <View style={Login_Page_styles.loginSection}>
-                            {/*<View style={{
 
-                                width: modal_Width,
-                                flexDirection: 'column',
-                                justifyContent: 'center',
-                                alignItems: 'flex-start',
-                                // backgroundColor: 'gold',
-                                // height: displayHeight/17,
-                                alignSelf: 'center',
-                                alignContent: 'flex-start',
-                            }
-                            }>
-                                <Text style={Login_Page_styles.pageTitle}>Sign In</Text>
-                            </View>*/}
                             <View style=
                                       {{
                                           // Login_Page_styles.inputsContainer
@@ -824,21 +602,6 @@ const Login_Page: React.FC<Login_Page_Props> = ({
                             >
 
 
-
-                                {/* <View style={{
-                                    ...InputField_Email_Phone_Login_Page_styles.second_Root_Wrapper,
-                                    width: comp_Width,//,
-                                    height: (comp_Height / 2.8),
-                                }}
-                                >
-
-                                    <View style={{
-                                        ...InputField_Email_Phone_Login_Page_styles.third_Final_wrapper_with_View,
-                                        height: (comp_Height / 4.3) + 1, // 6, hairline width now not 6 thus 1 -1} // 6, hairline width now not 6 thus 1,
-                                        width: comp_Width,//,
-
-                                    }}
-                                    >*/}
 
                                 <View style={{
                                     flexDirection: 'column',
@@ -876,42 +639,6 @@ const Login_Page: React.FC<Login_Page_Props> = ({
 
 
 
-
-
-
-
-                                {/*   <View style={{
-                                    width: '55%',
-                                    justifyContent: 'center',
-                                    alignItems: 'center',
-                                    alignSelf: 'flex-end',
-                                    flexDirection: 'column',
-                                    // backgroundColor: 'red',
-                                }}>
-                                    <Pressable
-
-                                        style={({pressed}) => [
-                                            {
-
-                                                backgroundColor: pressed
-                                                    ? 'aliceblue'
-                                                    // `${ukbd_overlay_Color}`
-                                                    // 'aliceblue'
-                                                    : "transparent",
-
-                                            }
-                                        ]
-                                        }
-                                        onPress={take_User_TO_Forgot_Password_Page}
-
-                                    >
-
-                                        <Text style={Login_Page_styles.forgotText}>Forgotten your password?</Text>
-
-
-                                    </Pressable>
-                                </View>*/}
-
                                 <View style={{
                                     // width: modal_Width,
 
@@ -932,13 +659,9 @@ const Login_Page: React.FC<Login_Page_Props> = ({
 
                                                     backgroundColor: pressed
                                                         ? 'aliceblue'
-                                                        // `${ukbd_overlay_Color}`
-                                                        // :'red',
+
                                                         : "transparent",
-                                                    /*
-                                                    borderBottomWidth: hairlineWidth,//1,
-                                                    borderBottomColor: ukbd_place_holder_TextColor,
-                                                    */
+
                                                     justifyContent: 'flex-end',
                                                     alignItems: 'center',
                                                     alignSelf: 'flex-end',
@@ -1006,12 +729,8 @@ const Login_Page: React.FC<Login_Page_Props> = ({
                                 justifyContent: 'flex-start',
                                 alignItems: 'center',
                                 alignSelf: 'center',
-                                }}>
-                            <Text style={Login_Page_styles.sectionTitle}>New to UKBD Customer App . . .</Text>
-                            <Text style={Login_Page_styles.sectionText}>Creating an account is quick and simple and
-                                allows you to
-                                track, change or
-                                return your order.</Text>
+                            }}>
+
 
                             <Pressable onPress={register_Button_Pressed}
 
@@ -1070,13 +789,14 @@ const Login_Page: React.FC<Login_Page_Props> = ({
 
 
 
+
             </KeyboardAvoidingView>
 
 
             {/*absolute keyboard avoiding view in loing screen ends here*/}
 
 
-        </View>
+        </SafeAreaView>
     );
 };
 

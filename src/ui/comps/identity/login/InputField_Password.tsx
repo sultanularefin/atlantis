@@ -106,33 +106,7 @@ const InputField_Password: React.FC<InputField_Password_Props> = (
 
         }}
         >
-              {/*  <View style={{
-                    ...InputField_Password_Styles.iconHolder,
-                    height: (comp_Width / 9),//text_Input_Comp_Height-10,//comp_Width / 9,
-                    width: (comp_Width / 9),//(comp_Width / 9)-10,
 
-
-                    borderWidth: 2,
-                    borderRadius: (text_Input_Comp_Height / 2),
-
-
-
-
-                }}>*/}
-
-                   {/* <Ionicons
-                        name="ios-lock-closed-outline"
-                        size={(comp_Width / 9)-3}
-
-                        color={ukbd_red}
-
-
-                        style={{}}
-                    >
-
-                    </Ionicons>*/}
-
-              {/*  </View>*/}
 
 
                 <TextInput
@@ -191,7 +165,7 @@ const InputField_Password: React.FC<InputField_Password_Props> = (
 
 
                         <Ionicons
-                            name="ios-eye-outline"
+                            name="eye-outline"
                             size={(comp_Width / 12) -6} // -1
 
                             color={pressed ? ukbd_Text_Navy_Blue_color : ukbd_navy_blue}

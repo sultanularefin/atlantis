@@ -13,16 +13,17 @@ import Love_Button_Home_Page from './Love_Button_Home_Page';
 
 import {useAppDispatch, useAppSelector} from '../../../../../lib/app/hooks.ts';
 import {
-  decrement_item_for_home_index,
-  decrement_Item_From_Home,
-  disable_Btn_Pressed_State_In_Home_Page_0,
-  increment_cart_item_for_home_index_0,
-  increment_Item_From_Home,
-  select_Local_Cart,
-  select_Local_Cart_Price_Localized_Monetary_Unit,
-  store_temp_cart_array,
-  store_temp_cart_object,
-  update_All_Products_Add_BTN_Pressed_State__And_Single_Product_Add_Btn_Pressed_State,
+    decrement_cart_item_for_home_index_0,
+
+    decrement_Item_From_Home,
+    disable_Btn_Pressed_State_In_Home_Page_0,
+    increment_cart_item_for_home_index_0,
+    increment_Item_From_Home,
+    select_Local_Cart,
+    select_Local_Cart_Price_Localized_Monetary_Unit,
+    store_temp_cart_array,
+    store_temp_cart_object,
+    update_All_Products_Add_BTN_Pressed_State__And_Single_Product_Add_Btn_Pressed_State,
 } from '../../../../../lib/features/products/product_Slice.ts';
 import {local_Cart_Item} from '../../../../../interfaces/products/product.ts';
 import {
@@ -225,7 +226,7 @@ const Add_Cart_OR_Favorite__Btn_Home_Page: React.FC<
 
             draft_Products[home_item_index].temp__Quantity -= 1;
 
-            dispatch(decrement_item_for_home_index(foundIndex_Already_In_Cart));
+            dispatch(decrement_cart_item_for_home_index_0(foundIndex_Already_In_Cart));
 
 
           },
