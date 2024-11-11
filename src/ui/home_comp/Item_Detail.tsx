@@ -7,7 +7,7 @@ import {ukbd_red, very_light_red_ukbd} from "../ui_utils/important_Colors.ts";
 
 
 
-export interface Item_Detail_Interface{
+interface Item_Detail_Interface{
     product_Details_Button_Pressed_2: ()=>void,
     comp_Height: number, //string,//number,
     comp_Width: number,
@@ -26,7 +26,7 @@ const Item_Detail: React.FC<Item_Detail_Interface> = (
 
     }) => {
 
-    console.log("at Item_Detail <<zIndex_1>> :", zIndex_1);
+    // console.log("at Item_Detail <<zIndex_1>> :", zIndex_1);
 
     return(
         <Pressable

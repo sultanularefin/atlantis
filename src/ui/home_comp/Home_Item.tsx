@@ -53,8 +53,11 @@ import Image_Pre_Fetch_1 from '../ui_utils/Image_Pre_Fetch_1.tsx';
 import Item_Price_Related_Comps from '../comps/Item_Price_Related_Comps.tsx';
 import {monetary_Unit_Interface} from '../ui_utils/localization_utils.ts';
 import {useAppDispatch} from '../../lib/app/hooks.ts';
-import {image_base_url} from '../../config/Config.ts';
-import {single_Product__Show_Details_Button_true} from '../../lib/features/products/productSlice.ts';
+
+import {
+  product_detail_only_in_double_tap,
+  single_Product__Show_Details_Button_true,
+} from '../../lib/features/products/productSlice.ts';
 import {One_Product_for_Home_Page_Interface} from '../../interfaces/products/product.ts';
 import Add_Cart_OR_Favorite__Btn_Home_Page from '../screens/details_page/add_button/home_page/Add_Cart_OR_Favorite__Btn_Home_Page.tsx';
 import Vertical_Divider_Full_Width_Active_Order from '../../divider/Vertical_Divider_Full_Width_Active_Order.tsx';
@@ -66,6 +69,8 @@ import {
   // useAnimatedStyle
 } from 'react-native-reanimated';
 import {productsApiSlice} from '../../lib/features/products/productsApiSlice.ts';
+import {home_page_product_limit} from '../../config/business_constants.ts';
+import Snackbar from 'react-native-snackbar';
 
 export interface Item_Interface {
   item_navigation: any;
@@ -110,8 +115,6 @@ const Home_Item: React.FC<Item_Interface> = ({
 
   const dispatch = useAppDispatch();
 
-  // runOnJS(externalLibraryFunction)(args);
-
   const product_Wish_Button_Pressed = (productID: string) => {
     // return;
 
@@ -146,40 +149,46 @@ const Home_Item: React.FC<Item_Interface> = ({
     });
     */
   };
-  const externalLibraryFunction = (index_Value_2: number) => {
-    // return dispatch(single_Product__Show_Details_Button_true(index_Value_2));
-
-    const one_Product_Index = index_Value_2;//action.payload; //state.editing_Product_Info;
-
-
+  const externalLibraryFunction = (one_Product_Index: number) => {
+    let value_boolean;
     dispatch(
-      productsApiSlice.util.updateQueryData('getProducts', {limit:10}, (draft_Products) => {
+      productsApiSlice.util.updateQueryData(
+        'getProducts',
+        {limit: home_page_product_limit},
+        (draft_Products) => {
+          // const temp_Product_ID = draft_Products[one_Product_Index].id;
+          // const one_Item = draft_Products[one_Product_Index];
+          // console.log("one_Item: ",one_Item);
 
+          value_boolean = draft_Products[one_Product_Index].show_Details_Btn;
 
-        // const temp_Product_ID = draft_Products[one_Product_Index].id;
-        const one_Item = draft_Products[one_Product_Index];
+          draft_Products[one_Product_Index].show_Details_Btn = !value_boolean;
 
+          // product_Details_Button_Pressed();
 
-        const value_boolean = draft_Products[one_Product_Index].show_Details_Btn;
+          // dispatch(if_any_remove_details_button_over_any_other_image(one_Product_Index));
 
-        draft_Products[one_Product_Index].show_Details_Btn = !value_boolean;
+          /* const prev_index = state.previous_Show_Detail_Button_Index_for_Item;
+         if (prev_index !== -1 && one_Product_Index !== prev_index) {
+           state.product_State[prev_index].show_Details_Btn = false;
+         }
 
-       /* const prev_index = state.previous_Show_Detail_Button_Index_for_Item;
-        if (prev_index !== -1 && one_Product_Index !== prev_index) {
-          state.product_State[prev_index].show_Details_Btn = false;
-        }
+         state.previous_Show_Detail_Button_Index_for_Item = one_Product_Index;*/
 
-        state.previous_Show_Detail_Button_Index_for_Item = one_Product_Index;*/
-
-
-
-      })
+          // if(value_boolean)
+        },
+      ),
     );
 
+    if (!value_boolean) {
+      // return product_Details_Button_Pressed();
+
+
+      dispatch(product_detail_only_in_double_tap(null));
+    }
+
+
     return;
-    // one_Product_Index
-
-
   };
 
   const singleTap = Gesture.Tap().onEnd((_event, success) => {
@@ -189,19 +198,21 @@ const Home_Item: React.FC<Item_Interface> = ({
       console.log('Yes single tap and index: ', index_Value);
 
       runOnJS(externalLibraryFunction)(index_Value);
-      // return runOnJS(dispatch(single_Product__Show_Details_Button_true))(index_Value);
-      //
-      // return;
-      // return dispatch(single_Product__Show_Details_Button_true(index_Value));
     } else {
       return;
     }
   });
 
+  const double_tap_2 = (index_Value_2: number) => {
+    return product_Details_Button_Pressed();
+  };
+
   const doubleTap = Gesture.Tap()
     .numberOfTaps(2)
     .onEnd((_event, success) => {
       if (success) {
+        runOnJS(double_tap_2)(index_Value);
+
         console.log('double tap!');
       }
     });
@@ -237,7 +248,10 @@ const Home_Item: React.FC<Item_Interface> = ({
 
         // scaleY: -1, // https://github.com/facebook/react-native/issues/30034
       }}>
-      <GestureDetector gesture={taps}>
+      <GestureDetector gesture={taps}
+
+
+      >
         <View
           style={{
             ...Item_Styles.item_Style_With_Gesture,
@@ -263,11 +277,10 @@ const Home_Item: React.FC<Item_Interface> = ({
             }}>
             <Ten_Off
               comp_Height={detail_BTN_10_P_Off_Height}
-
               comp_Width={detail_BTN_10_P_Off_Width}
             />
 
-            {item_Data.show_Details_Btn ? (
+            {/* {item_Data.show_Details_Btn ? (
               <Item_Detail
                 product_Details_Button_Pressed_2={
                   product_Details_Button_Pressed
@@ -277,7 +290,7 @@ const Home_Item: React.FC<Item_Interface> = ({
                 comp_Width={detail_BTN_10_P_Off_Width}
                 zIndex_1={15}
               />
-            ) : null}
+            ) : null}*/}
           </View>
 
           {/*Detail Button Section at top ends here*/}
@@ -290,8 +303,6 @@ const Home_Item: React.FC<Item_Interface> = ({
               height: gesture_Detector_Height / 3,
             }}>
             {!item_Data.image[0] ? null : item_Data.image[0] !== '' ? (
-
-
               <Image_Pre_Fetch_1
                 img_height={img_height}
                 img_width={inner_Comp_Width_2}
@@ -299,8 +310,6 @@ const Home_Item: React.FC<Item_Interface> = ({
                 // inner_Comp_Width_2
 
                 imageUrl={`${item_Data.image}`}
-                // imageUrl={`${image_base_url}${item_Data.image[0]}`}
-                // id_temp={`${props.index}+${props.index}+${props.item.oneURI}`}
                 id_temp={item_Data.image[0]}
                 resizeMode={Platform.OS === 'android' ? 'center' : 'contain'}
               />
@@ -357,11 +366,10 @@ const Home_Item: React.FC<Item_Interface> = ({
               comp_Height_2={gesture_Detector_Height / 16}
               content={'Delivers within 10 to 15 days'}
               comp_Width={inner_Comp_Width_2}
-              bg_Color=// {'tomato'}
-              {'transparent'}
+              bg_Color={ // {'tomato'}
+                'transparent'
+              }
             />
-
-
 
             {is_Small_Device ? null : (
               <Vertical_Divider_Full_Width_Active_Order
@@ -369,8 +377,6 @@ const Home_Item: React.FC<Item_Interface> = ({
                 compHeight={4}
               />
             )}
-
-
           </View>
 
           {item_Data.show_Details_Btn || item_Data.btn_Pressed ? (
@@ -399,11 +405,9 @@ const Home_Item: React.FC<Item_Interface> = ({
                 zIndex: 14,
               }}>
               <Svg
-
                 width={detail_BTN_10_P_Off_Height * 2}
                 height={detail_BTN_10_P_Off_Height * 2}
-                viewBox="0 0 52 52"
-              >
+                viewBox="0 0 52 52">
                 <G>
                   <Path
                     fill={bag_Bg_Color_From_HSLA}
@@ -424,13 +428,10 @@ const Home_Item: React.FC<Item_Interface> = ({
       {/*bottom favourite row begins here*/}
 
       <Add_Cart_OR_Favorite__Btn_Home_Page
-        //t_Height= {comp_Height / 30}
-        // t_Height={deail_BTN_10_P_Off_Height}
         t_Height={detail_BTN_10_P_Off_Height}
-        // t_Height={gesture_Detector_Height-deail_BTN_10_P_Off_Height}
         t_Width={width_Without_Padding} // padding 5*2,
         product_Id={item_Data.id}
-        index={index_Value}
+        home_item_index={index_Value}
         quantity={item_Data.temp_Cart_Quantity}
         add_Button_Pressed_State={item_Data.btn_Pressed}
         bg_Color={'transparent'}
@@ -449,10 +450,6 @@ export const favorite_Button_Styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#ffffff', //'white',//"#ffffff",
-    // borderTopWidth: 1,
-    // borderRightWidth: 1,
-    // borderColor: "rgba(255, 0, 0, 0.05)",
-    // borderStyle: "solid"
   },
   // item_Top_Portion
 

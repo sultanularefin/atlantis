@@ -71,7 +71,7 @@ import {
   ukbd_red_light,
 } from '../ui_utils/important_Colors.ts';
 import Header_Product_Details_Page from '../header/Header_Product_Details_Page.tsx';
-import {image_base_url} from '../../config/Config.ts';
+
 import Image_Pre_Fetch_1 from '../ui_utils/Image_Pre_Fetch_1.tsx';
 import Add_Favorite_Details_Btn from './details_page/add_button/details_Page/Add_Favorite_Details_Btn.tsx';
 
@@ -126,7 +126,7 @@ const Product_Details_Page = ({
       : 0,
   });
 
-  console.log('detail_of_product: ', detail_of_product);
+  // console.log('detail_of_product: ', detail_of_product);
   // console.log("is_detail_of_product_Loading: ",is_detail_of_product_Loading);
   // console.log("detail_of_product_load_Error: ",detail_of_product_load_Error);
 
@@ -379,7 +379,7 @@ const Product_Details_Page = ({
                       fontFamily: 'RobotoCondensed-Regular',
                       // textDecorationLine: "line-through"
                     }}>
-                    {MonetaryUnits[3].unicode} {detail_of_product.price}
+                    {MonetaryUnits[2].unicode} {detail_of_product.price}
                   </Text>
                 </View>
                 {/*new value ends here*/}
@@ -408,11 +408,11 @@ const Product_Details_Page = ({
                 }}>
                 <Ten_15_Days_Home
                   comp_Height_2={displayHeight / 40}
-                  content={'9999'}
+                  content={"Delivers in 10 to 15 days"}
                   comp_Width={inner_Width_withIN_Box}
                   bg_Color={'transparent'}
 
-                  //{'tomato'}
+
                 />
               </View>
 
@@ -434,7 +434,7 @@ const Product_Details_Page = ({
                     // fontWeight: "300",
                     fontFamily: 'RobotoCondensed-Regular',
                   }}>
-                  {MonetaryUnits[4].unicode}{' '}
+                  {MonetaryUnits[2].unicode}{' '}
                   {detail_of_product &&
                     priceConvertToAlternate(
                       detail_of_product.price,
@@ -486,7 +486,7 @@ const Product_Details_Page = ({
                 width: inner_Width_withIN_Box, //'100%',
                 justifyContent: 'center',
                 alignItems: 'flex-start',
-                backgroundColor: 'gold',
+                // backgroundColor: 'gold',
                 // height: displayHeight / 10, // // HEIGHT AUTO CALCULATE FORM CHILDREN'S HEIGHT.
               }}>
               <View
@@ -501,65 +501,14 @@ const Product_Details_Page = ({
                 }}>
                 {/*brand icon supplier icon begins here*/}
                 {/*1ST ROW ENDS HERE 40%, THIS 40% CONTAINS BRAND ICON(!) AND SUPPLIER ICON AND "SOURCE" TEXT*/}
-                <View
-                  style={{
-                    flexDirection: 'column',
-                    width: inner_Width_withIN_Box * 0.4, //'40%',//displayWidth * 0.40,//'50%',//'100%',
-                    // backgroundColor: 'violet',
-                    // height: displayHeight / 10, // // HEIGHT AUTO CALCULATE FORM CHILDREN'S HEIGHT.
-                    justifyContent: 'center',
-                    alignItems: 'flex-start',
-                    // paddingLeft: 20,
-                  }}>
-                  souce begins below
-                  <View
-                    style={{
-                      flexDirection: 'column',
-                      justifyContent: 'flex-start',
-                      // width: displayWidth *0.40,
-                    }}>
-                    <Text
-                      style={{
-                        color: ukbd_navy_blue,
-                        // fontSize: 10,
-                        fontSize: 12,
-                        fontWeight: '400',
-                        // fontWeight: "300",
-                        fontFamily: 'RobotoCondensed-Regular',
-                        textTransform: 'uppercase',
-                      }}>
-                      Source:
-                    </Text>
-                  </View>
-                  souce ends above
-                  <View
-                    style={{
-                      flexDirection: 'column',
-                      justifyContent: 'flex-start',
-                      width: '40%',
-                      // width: displayWidth * 0.40,
-                    }}>
-                    <View
-                      style={{
-                        flexDirection: 'row',
-                        width: '40%',
-                        // width: displayWidth * 0.40,//'50%',//'100%',
-                        // backgroundColor: 'tomato',
-                        // height: displayHeight / 20,
-                        justifyContent: 'flex-start',
-                      }}>
-                      supplier_icon above brand_icon below brand_icon ends above
-                    </View>
-                  </View>
-                  brand icon supplier icon ends here
-                </View>
+
                 {/*1ST ROW ENDS HERE 40%, THIS 40% CONTAINS BRAND ICON(!) AND SUPPLIER ICON AND "SOURCE" TEXT*/}
 
                 {/*2ND ROW BEGINS HERE 60% ABOVE IS 40%, THIS 60% CONTAINS IMAGES OF PAY WITH */}
                 <View
                   style={{
                     flexDirection: 'row',
-                    width: '60%', // IMPORTANT
+                    width: '100%', // IMPORTANT
                     // width: displayWidth * 0.50,//'100%',//'100%',
                     // backgroundColor: 'red',
                     // height: displayHeight / 11,
@@ -751,13 +700,7 @@ const Product_Details_Page = ({
                 width: inner_Width,
                 height: displayHeight / 4,
               }}>
-              {/* <Horizontal_First_Top_Tabs
-                comp_Width={inner_Width}
-                comp_Height={displayHeight / 17}
-                // current_Selected_Tab={selected_Tab_Product_Detail_Page_State}
 
-                // const selected_Tab_Product_Detail_Page_State: number = useAppSelector(select_product_Detail_Tab_Index);
-              />*/}
 
               <One_Horizontal_Comp_Custom_1
                 comp_width_1={inner_Width}

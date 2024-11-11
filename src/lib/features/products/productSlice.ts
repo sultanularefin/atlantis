@@ -15,6 +15,9 @@ import {
   // MultipleImageHeaderNull_route_date_interface,
   MultipleImageHeaderNull_route_date_interface,
 } from '../../../ui/screens/MultipleImageHeaderNull.tsx';
+import {home_page_product_limit} from '../../../config/business_constants.ts';
+import {MaybeDrafted} from '@reduxjs/toolkit/dist/query/core/buildThunks';
+import Snackbar from 'react-native-snackbar';
 
 interface products_State_Interface {
   // value: number
@@ -28,6 +31,8 @@ interface products_State_Interface {
 
   single_Product_State: One_Product_Item_For_Detail_Interface;
   two_Image__data_For_Tag_State: MultipleImageHeaderNull_route_date_interface;
+
+  detail_navigation_double_tap_message_displayed: boolean,
 }
 
 const initialState: products_State_Interface = {
@@ -51,22 +56,9 @@ const initialState: products_State_Interface = {
   single_Product_State: {} as One_Product_Item_For_Detail_Interface,
 
   two_Image__data_For_Tag_State: {
-    /*
-      date:  '',//string, //props.date,
-      feedOwnerName: '', //string,
-      */
-    some_uris: [], //string[],
-    tapIndex: 0, //number,
-    title: '', //string,//props.content,
-    //ADDED FOR TAGGING ON NOVEMBER__22_MONDAY_2021
-    /*
-      feedId: -1, //number,// string, // number
-      id : -1, //number,//string, // number,
-      loggerID: '',//string,
-      postUserID: '',// string,
+  } as MultipleImageHeaderNull_route_date_interface,
 
-       */
-  },
+  detail_navigation_double_tap_message_displayed:false,
 };
 
 const update_single_Product_Add_Btn_Pressed_State_2 = (
@@ -402,19 +394,61 @@ const disable_Btn_Pressed_State_In_Home_Page = (
 };
 
 
-const store_temp_Cart_2=(
+
+
+const decrement_item_for_home_index_2=(
+  state: any,
+  action: PayloadAction<number>,
+)=>{
+
+  state.local_Cart_Array[action.payload].quantity -=1;
+
+};
+
+const increment_item_for_home_index_2=(
+  state: any,
+  action: PayloadAction<number>,
+)=>{
+
+  state.local_Cart_Array[action.payload].quantity +=1;
+
+
+
+
+};
+
+
+const store_temp_cart_array_2 = (
   state: any,
   action: PayloadAction<local_Cart_Item[]>,
 )=>{
 
 
-  // 999
-
-  state.local_Cart_Array = action.payload;
+  // object for new item, or first item, then concat, for array no concat. array when incremented an existing item
 
 
+  console.log("action.payload: ",action.payload);
 
-  state.local_Cart_Price_Total = action.payload.reduce((accumulator:number, one_Cart_Item:local_Cart_Item) => accumulator + one_Cart_Item.price, 0);
+  // return;
+
+  state.local_Cart_Array = action.payload;//state.local_Cart_Array.concat(action.payload);
+
+  state.local_Cart_Price_Total = state.local_Cart_Array.reduce((accumulator:number, one_Cart_Item:local_Cart_Item) => accumulator + one_Cart_Item.price, 0);
+
+
+};
+
+const store_temp_cart_object_2=(
+  state: any,
+  action: PayloadAction<local_Cart_Item>,
+)=>{
+  // object for new item, or first item, then concat, for array no concat. array when incremented an existing item
+
+
+  state.local_Cart_Array = state.local_Cart_Array.concat(action.payload);//state.local_Cart_Array.concat(action.payload);
+
+  console.log("state.local_Cart_Array :  in << store_temp_cart_object_2 >>: ",state.local_Cart_Array);
+  state.local_Cart_Price_Total = state.local_Cart_Array.reduce((accumulator:number, one_Cart_Item:local_Cart_Item) => accumulator + one_Cart_Item.price, 0);
 
 
 
@@ -727,22 +761,75 @@ const update_All_Products_Add_BTN_Pressed_State__And_Single_Product_Add_Btn_Pres
 
   };
 
+const product_detail_page_double_tap_navigation_displayed = (
+  state: any,
+  action: PayloadAction<null>,
+) => {
+
+  const displayed= state.detail_navigation_double_tap_message_displayed;
+
+  if(!displayed) {
+
+    Snackbar.show({
+
+      text: 'Kindly double tap the product to view the product details.',
+      duration: Snackbar.LENGTH_INDEFINITE,
+      numberOfLines: 3,
+      action: {
+        text: 'close',
+        textColor: 'green',
+        onPress: () => {
+          Snackbar.dismiss();
+        },
+      },
+    });
+  }
+
+  state.detail_navigation_double_tap_message_displayed= true;
+
+  return;
+
+
+};
+
 const single_Product__Show_Details_Button_true_2 = (
   state: any,
   action: PayloadAction<number>,
 ) => {
-  const one_Product_Index = action.payload; //state.editing_Product_Info;
 
-  const value_boolean = state.product_State[one_Product_Index].show_Details_Btn;
+  // FOUND THIS NOT WORKED.
 
-  state.product_State[one_Product_Index].show_Details_Btn = !value_boolean;
 
-  const prev_index = state.previous_Show_Detail_Button_Index_for_Item;
-  if (prev_index !== -1 && one_Product_Index !== prev_index) {
-    state.product_State[prev_index].show_Details_Btn = false;
-  }
+  console.log("at << single_Product__Show_Details_Button_true_2 >> and index: ",action.payload);
 
-  state.previous_Show_Detail_Button_Index_for_Item = one_Product_Index;
+  // Use RTK Query's api.util.updateQueryData to update cached query data
+  productsApiSlice.util.updateQueryData('getProducts', {limit: home_page_product_limit}, (draft_Products:MaybeDrafted<One_Product_for_Home_Page_Interface>[]) => {
+    if (draft_Products) {
+
+      console.log("// FOUND THIS NOT WORKED.\n");
+      console.log("// FOUND THIS NOT WORKED.\n");
+      console.log("// FOUND THIS NOT WORKED.\n");
+
+
+
+
+      console.log("draft_Products.length: ",draft_Products.length);
+
+      const prev_index = state.previous_Show_Detail_Button_Index_for_Item;
+      draft_Products[prev_index].show_Details_Btn = false;
+      state.previous_Show_Detail_Button_Index_for_Item = action.payload;
+
+      // draft.name = name;  // Example update: updating user's name in cache
+    }
+    else{
+
+      console.log("at <<ELSE >>");
+    }
+
+  });
+
+
+
 
   return;
   // one_Product_Index
@@ -783,7 +870,14 @@ export const productSlice = createSlice({
     populate_all_product_data: populate_all_product_data_2,
 
     // added newly
-    store_temp_cart:store_temp_Cart_2,
+    store_temp_cart_object:store_temp_cart_object_2,
+    store_temp_cart_array: store_temp_cart_array_2,
+
+
+    increment_item_for_home_index: increment_item_for_home_index_2,
+    decrement_item_for_home_index: decrement_item_for_home_index_2,
+
+    product_detail_only_in_double_tap: product_detail_page_double_tap_navigation_displayed,
   },
   extraReducers: (builder) => {
     /* builder
@@ -832,7 +926,14 @@ export const {
   populate_all_product_data,
 
   // added on 10th november
-  store_temp_cart,
+  store_temp_cart_object,
+  store_temp_cart_array,
+  increment_item_for_home_index,
+  decrement_item_for_home_index,
+
+  product_detail_only_in_double_tap,
+
+
 } = productSlice.actions;
 
 // export const selectCount = (state: RootState) => state.products.value; scan_Reducer

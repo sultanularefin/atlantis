@@ -38,7 +38,7 @@ const One_Horizontal_Comp_Custom_1: React.FC<One_Horizontal_Comp_Custom_1_Interf
                     alignItems: 'center',
                     alignSelf: 'center',
                     flexDirection: 'column',
-                    paddingHorizontal: 2,
+                    paddingHorizontal: 6,
                     paddingVertical: 16,
 
 

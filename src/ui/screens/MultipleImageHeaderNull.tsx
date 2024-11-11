@@ -56,7 +56,7 @@ import Custom_Header__Multiple_Image_Header_Null_Page
 // import Header_Multiple_Image_Header_Null_Page from "../../headers/Header_Multiple_Image_Header_Null_Page";
 import {Native_Root_Stack_ParamList} from "../../App.tsx";
 import {useAppDispatch, useAppSelector} from "../../lib/app/hooks.ts";
-import {image_base_url} from "../../config/Config.ts";
+
 import {ukbd_navy_blue} from "../ui_utils/important_Colors.ts";
 import Header_Multiple_Image_Header_Null_Page from "../header/Header_Multiple_Image_Header_Null_Page.tsx";
 import OneOFManyImageItem from "./multiple_Image/OneOFManyImageItem.tsx";
@@ -82,7 +82,7 @@ export interface iImageURIStringWithKey {
 export interface MultipleImageHeaderNull_route_date_interface {
 
 
-    some_uris: string,//string[],
+    some_uris: string[],//string[],
     tapIndex: number,
     title: string,//props.content,
 
@@ -157,13 +157,15 @@ const MultipleImageHeaderNull = ({
             const fcfs2 = /*async*/ () => {
 
 
+
+              console.log("data_2_image_temp.some_uris.length: ",data_2_image_temp.some_uris.length);
                 if (data_2_image_temp.some_uris.length === 1) {
 
                     const superSetHorizontalImgs: iImageURIStringWithKey[] = data_2_image_temp.some_uris.map(
                         (oneImageURI: string, index: number) => (
                             {
                                 key: `${oneImageURI}__${index}`,
-                                oneURI: `${image_base_url}${oneImageURI}`,
+                                oneURI: `${oneImageURI}`,
 
                                 // \`${base_Image_URL}${
                             }
@@ -183,9 +185,7 @@ const MultipleImageHeaderNull = ({
                         (oneImageURI: string, index: number) => (
                             {
                                 key: `${oneImageURI}__${index}`,
-                                oneURI: `${image_base_url}${oneImageURI}`,
-
-                                // \`${image_base_url}${
+                                oneURI: `${oneImageURI}`,
                             }
                         ),
                     );
@@ -353,11 +353,11 @@ const MultipleImageHeaderNull = ({
                     : 1,
             }
             }>
-                {/*{(imageURIState.length === 1)
-                    ? (<Text>1</Text>) : (
-*/}
+
                 <VirtualizedList
                     data={imageURIState}
+                    keyExtractor={(item: iImageURIStringWithKey) => item.key}
+
                     getItemCount={(data) => data.length}
 
                     getItem={(data2, index) => {
@@ -412,7 +412,6 @@ const MultipleImageHeaderNull = ({
                         />
                     )}
 
-                    keyExtractor={(item: iImageURIStringWithKey) => item.key}
 
                     ref={multipleImageVLLRef}
                     onMomentumScrollEnd={onScrollEnd}

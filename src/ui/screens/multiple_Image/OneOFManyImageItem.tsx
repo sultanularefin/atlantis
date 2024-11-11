@@ -1,15 +1,11 @@
 // NHS OneOFManyImageItem begin__S HERE
 import React, {useCallback} from "react";
 
-// import ReactNativeZoomableView from "@dudigital/react-native-zoomable-view/src/ReactNativeZoomableView";
+
 import {LayoutChangeEvent, Platform, View} from "react-native";
-import {image_base_url} from "../../../config/Config.ts";
+
 import Image_Pre_Fetch_1 from "../../ui_utils/Image_Pre_Fetch_1.tsx";
 import {itemLayoutWidths} from "../MultipleImageHeaderNull.tsx";
-// import FastImage from "react-native-fast-image";
-// import {itemLayoutWidths} from "../stack_Screens/MultipleImageHeaderNull";
-
-// import {itemLayoutWidths} from "./MultipleImageHeaderNull";
 
 export interface iOneOFManyImageItemProps {
 
@@ -38,7 +34,7 @@ const OneOFManyImageItem: React.FC<iOneOFManyImageItemProps> = ({
 
         // const {enableZooming_on_OneImage,...a1 }={...props};
 
-        console.log("item: ", item);
+        console.log("item: at <<OneOFManyImageItem>>: ", item);
 
 
         return (

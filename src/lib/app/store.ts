@@ -58,6 +58,11 @@ export const store = configureStore({
     middleware: (getDefaultMiddleware) => {
         return getDefaultMiddleware().concat(productsApiSlice.middleware);
     },
+
+
+    // middleware: (getDefaultMiddleware) =>
+    //   getDefaultMiddleware().concat(api.middleware),
+
     // OPTOIN 01
     // middleware: [...getDefaultMiddleware()]
 
@@ -74,32 +79,13 @@ export const store = configureStore({
 
 
     // may be used to seed some values or good for logout...
-    preloadedState: {},
+    // preloadedState: {},
 
 
 });
 
 
-/*
-const rootReducer: Reducer<any, any> = (state: RootState, action: AnyAction) => {
-    if (action.type === "counter/logout") {
-        state = {} as RootState;
-    }
-    return combinedReducer(state, action);
-};
-*/
 
-
-/*
-const rootReducer = (state, action) => {
-    if (action.type === 'counter/logout') { // check for action type
-        state = undefined;
-    }
-    return combinedReducer(state, action);
-};
-
-
- */
 
 
 

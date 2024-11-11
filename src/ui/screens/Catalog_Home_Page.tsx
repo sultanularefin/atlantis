@@ -55,6 +55,7 @@ import Home_Item from '../home_comp/Home_Item.tsx';
 import {One_Product_for_Home_Page_Interface} from '../../interfaces/products/product.ts';
 import {select_Shipped_From_State_Or_Delivery_Currency} from '../../lib/features/products/productSlice.ts';
 import {monetary_Unit_Interface} from '../ui_utils/localization_utils.ts';
+import {home_page_product_limit} from '../../config/business_constants.ts';
 
 export interface Catalog_Home_Page_Props {
   navigation: any;
@@ -82,7 +83,7 @@ const Catalog_Home_Page: React.FC<Catalog_Home_Page_Props> = ({navigation}) => {
     isLoading: is_home_products_Loading,
     isError: home_products_load_Error,
   } = useGetProductsQuery({
-    limit: 1000,
+    limit: home_page_product_limit,
     // offset: 1,
   });
 
@@ -212,11 +213,11 @@ const Catalog_Home_Page: React.FC<Catalog_Home_Page_Props> = ({navigation}) => {
       }>
 
       {/*<StatusBar barStyle="light-content" backgroundColor="dodgerblue" />*/}
-      <Focus_Aware_Status_Bar
+     {/* <Focus_Aware_Status_Bar
         barStyle={statusBarStyle}
         backgroundColor={"deepskyblue"}
         // backgroundColor only available in android not in iOS
-      />
+      />*/}
 
       <View
         style={{
