@@ -48,7 +48,7 @@ import {
   store_temp_cart_object,
   update_product_detail_extra_data,
   update_single_Product_Add_Btn_Pressed_State,
-} from '../../../../../lib/features/products/productSlice.ts';
+} from '../../../../../lib/features/products/product_Slice.ts';
 import {
   local_Cart_Item,
   One_Product_Item_For_Detail_Interface,

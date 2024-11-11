@@ -13,9 +13,11 @@ import {
 // import Scan_Slice from "../features/scan/scan_Slice.ts";
 import {productsApiSlice} from "../features/products/productsApiSlice.ts";
 import { setupListeners } from '@reduxjs/toolkit/query';
-// import productSlice from "../features/products/productSlice.ts";
+import {product_Slice} from "../features/products/product_Slice.ts";
 import auth_Slice from "../features/auth/auth_Slice.ts";
-import {productSlice} from '../features/products/productSlice.ts';
+// import productSlice from "../features/products/productSlice.ts";
+// import auth_Slice from "../features/auth/auth_Slice.ts";
+// import {product_Slice} from '../features/products/product_Slice.ts';
 
 
 
@@ -44,8 +46,9 @@ const combinedReducer = combineReducers({
     // product_Reducer: productSlice,
     // auth_Reducer: auth_Slice,
     auth_Reducer: auth_Slice,
-    product_Reducer: productSlice,
+
     [productsApiSlice.reducerPath]: productsApiSlice.reducer,
+    products_Reducer:product_Slice.reducer,
 
 
 

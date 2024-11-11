@@ -53,7 +53,7 @@ import {
 import Header_DashBoard_Home from '../header/Header_DashBoard_Home.tsx';
 import Home_Item from '../home_comp/Home_Item.tsx';
 import {One_Product_for_Home_Page_Interface} from '../../interfaces/products/product.ts';
-import {select_Shipped_From_State_Or_Delivery_Currency} from '../../lib/features/products/productSlice.ts';
+import {select_Shipped_From_State_Or_Delivery_Currency} from '../../lib/features/products/product_Slice.ts';
 import {monetary_Unit_Interface} from '../ui_utils/localization_utils.ts';
 import {home_page_product_limit} from '../../config/business_constants.ts';
 

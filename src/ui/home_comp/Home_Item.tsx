@@ -57,7 +57,7 @@ import {useAppDispatch} from '../../lib/app/hooks.ts';
 import {
   product_detail_only_in_double_tap,
   single_Product__Show_Details_Button_true,
-} from '../../lib/features/products/productSlice.ts';
+} from '../../lib/features/products/product_Slice.ts';
 import {One_Product_for_Home_Page_Interface} from '../../interfaces/products/product.ts';
 import Add_Cart_OR_Favorite__Btn_Home_Page from '../screens/details_page/add_button/home_page/Add_Cart_OR_Favorite__Btn_Home_Page.tsx';
 import Vertical_Divider_Full_Width_Active_Order from '../../divider/Vertical_Divider_Full_Width_Active_Order.tsx';

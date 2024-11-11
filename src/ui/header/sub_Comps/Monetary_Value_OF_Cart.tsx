@@ -14,7 +14,7 @@ import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import {Monetary_Header_Text_Style} from "./Bag_Button";
 import {MonetaryUnits} from "../../ui_utils/localization_utils";
 import {useAppSelector} from "../../../lib/app/hooks.ts";
-import {select_Local_Cart_Price_Localized_Monetary_Unit} from "../../../lib/features/products/productSlice.ts";
+import {select_Local_Cart_Price_Localized_Monetary_Unit} from "../../../lib/features/products/product_Slice.ts";
 
 export interface Monetary_Value_OF_Cart_Props {
     // nav: any,

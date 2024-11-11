@@ -1,12 +1,8 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 
 import {RootState} from '../../app/store';
-import {baseInterface} from '../../../interfaces/baseInterface.ts';
+// import {baseInterface} from '../../../interfaces/baseInterface.ts';
 
-/*import {
-  Code,
-  CodeType,
-} from 'react-native-vision-camera/src/types/CodeScanner.ts';*/
 import {old_scan_result_data_interface} from '../../../interfaces/scan/scan_interfaces.ts';
 import {
   get_Detail_By_User_ID_server_Token,
@@ -18,7 +14,7 @@ import {
   longitude_Latitude_Delta_Interface,
 } from '../../../interfaces/location/location.ts';
 
-export interface todo__State_Interface extends baseInterface {
+export interface todo__State_Interface /*extends baseInterface*/ {
   user_Data_By_ID: get_Detail_By_User_ID_server_Token;
   map_Position_Respective_to_Driver: Region,
 }

@@ -14,7 +14,7 @@ import {
 import {RootState} from '../../app/store.ts';
 import // productSlice,
 // test_4_letters
-'./productSlice.ts';
+'./product_Slice.ts';
 import {
   BaseQueryMeta,
   BaseQueryResult,
@@ -91,9 +91,9 @@ export const productsApiSlice = createApi({
             const state: any = api.getState() as RootState;
 
             const local_Cart_IDs: number[] =
-              state.product_Reducer.local_Cart_Array.length === 0
+              state.products_Reducer.local_Cart_Array.length === 0
                 ? []
-                : state.product_Reducer.local_Cart_Array.map(
+                : state.products_Reducer.local_Cart_Array.map(
                     (one_Product: local_Cart_Item) => one_Product.id,
                   );
             const yourData = data.map(
@@ -104,7 +104,7 @@ export const productsApiSlice = createApi({
                 return_modified_Doc(
                   one_Product,
                   local_Cart_IDs,
-                  state.product_Reducer.local_Cart_Array,
+                  state.products_Reducer.local_Cart_Array,
                 ),
             );
 

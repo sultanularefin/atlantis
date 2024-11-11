@@ -39,7 +39,7 @@ import {
     select_Local_Cart_Price_Localized_Monetary_Unit,
     select_Shipped_From_State_Or_Delivery_Currency,
     // select_Shipped_From_State_Or_Delivery_Currency
-} from '../../../lib/features/products/productSlice.ts';
+} from '../../../lib/features/products/product_Slice.ts';
 import Vertical_Divider_Full_Width_Active_Order from "../../../divider/Vertical_Divider_Full_Width_Active_Order.tsx";
 import {
     convert_TO_BDT_From_GBP,

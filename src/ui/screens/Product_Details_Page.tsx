@@ -54,7 +54,7 @@ import {
   export_Single_Product_Details,
   populateTag_data_for_multiple_Images,
   select_Shipped_From_State_Or_Delivery_Currency, select_single_product_extra_data, update_product_detail_extra_data,
-} from '../../lib/features/products/productSlice.ts';
+} from '../../lib/features/products/product_Slice.ts';
 import {
   useGetOneProductQuery,
   // useGetProductsQuery

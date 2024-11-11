@@ -60,7 +60,7 @@ import {useAppDispatch, useAppSelector} from "../../lib/app/hooks.ts";
 import {ukbd_navy_blue} from "../ui_utils/important_Colors.ts";
 import Header_Multiple_Image_Header_Null_Page from "../header/Header_Multiple_Image_Header_Null_Page.tsx";
 import OneOFManyImageItem from "./multiple_Image/OneOFManyImageItem.tsx";
-import {multiple_image_route_data_through_redux} from "../../lib/features/products/productSlice.ts";
+import {multiple_image_route_data_through_redux} from "../../lib/features/products/product_Slice.ts";
 // import {ukbd_navy_blue} from "../../ui_utils/important_Colors";
 
 

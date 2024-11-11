@@ -21,7 +21,7 @@ import {ukbd_navy_blue, ukbd_red} from "../../../ui_utils/important_Colors";
 
 
 import {useAppDispatch} from '../../../../lib/app/hooks.ts';
-import {populateTag_data_for_multiple_Images} from '../../../../lib/features/products/productSlice.ts';
+import {populateTag_data_for_multiple_Images} from '../../../../lib/features/products/product_Slice.ts';
 
 interface OneImageProps {
     oneItem_url: string,
