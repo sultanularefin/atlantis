@@ -1127,6 +1127,6 @@ export const select_Shipped_From_State_Or_Delivery_Currency = (
 ) => state.products_Reducer.delivery_Currency;
 
 
-// export default product_Slice;
-
+export default product_Slice;
+// export default cart_order_Slice.reducer;
 // export default product_Slice.reducer;

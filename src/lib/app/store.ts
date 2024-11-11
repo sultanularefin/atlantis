@@ -15,6 +15,7 @@ import {productsApiSlice} from "../features/products/productsApiSlice.ts";
 import { setupListeners } from '@reduxjs/toolkit/query';
 import {product_Slice} from "../features/products/product_Slice.ts";
 import auth_Slice from "../features/auth/auth_Slice.ts";
+import cart_order_Slice from "../features/cart_order/cart_order_Slice.ts";
 // import productSlice from "../features/products/productSlice.ts";
 // import auth_Slice from "../features/auth/auth_Slice.ts";
 // import {product_Slice} from '../features/products/product_Slice.ts';
@@ -49,6 +50,7 @@ const combinedReducer = combineReducers({
 
     [productsApiSlice.reducerPath]: productsApiSlice.reducer,
     products_Reducer:product_Slice.reducer,
+    cart_order_Reducer: cart_order_Slice,
 
 
 

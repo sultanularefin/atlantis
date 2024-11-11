@@ -30,12 +30,14 @@ export interface User_Button_Props {
     nav: any,
     comp_Height: number,
     comp_Width: number,
+    bg_color: string,
 }
 
 const User_Button: React.FC<User_Button_Props> = ({
                                                       nav,
                                                       comp_Height,
                                                       comp_Width,
+                                                      bg_color,
                                                   }) => {
 // const User_Button = ()=>{
     const localStorage: get_Detail_By_User_ID_server_Token = useAppSelector(select_Logger_Data_BY_ID);
@@ -233,11 +235,7 @@ const User_Button: React.FC<User_Button_Props> = ({
 
             </Pressable>
 
-            {/*  <Text style={{
-                fontWeight: '400',//'bold',
-                fontSize: 12,
-                color: ukbd_navy_blue,
-            }}>Home</Text>*/}
+
 
         </View>
     );
@@ -312,7 +310,7 @@ const user_Button_Modal_Styles = StyleSheet.create({
 
     textStyle: {
         color: 'white',
-        fontWeight: 'bold',
+        fontWeight: 'normal',
         textAlign: 'center',
     },
     modalText: {

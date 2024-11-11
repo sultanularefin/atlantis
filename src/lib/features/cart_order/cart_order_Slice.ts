@@ -1054,7 +1054,7 @@ const clear_Previous_Single_Order_Data_2 = (
 };
 
 const cart_order_Slice = createSlice({
-  name: 'cart',
+  name: 'cart_order_Slice',
   initialState,
   reducers: {
     clear_Previous_Single_Order_Data_1: clear_Previous_Single_Order_Data_2,

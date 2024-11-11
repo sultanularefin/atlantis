@@ -12,25 +12,13 @@ import EvilIcons from "react-native-vector-icons/EvilIcons";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import Feather from "react-native-vector-icons/Feather";
-// import {ukbd_navy_blue, ukbd_red, ukbd_red_light} from "../ui_utils/important_Colors";
-/*import {
-    select_Logger_Data_BY_ID,
-    UKBD_App_Login_Response_With_Password
-} from "../../lib/Reducers/authSlice";
-import {useAppSelector} from "../../lib/app/hooks";*/
-// import {get_Detail_By_User_ID_server_Token} from "../../lib/interfaces_Slice/user_Related_Interfaces";
 import hairlineWidth = StyleSheet.hairlineWidth;
 import SimpleLineIcons from "react-native-vector-icons/SimpleLineIcons";
-// import AppStack from "../../navigation/AppStack";
+
 import Home_Button from "./sub_Comps/Home_Button";
 import Search_Button from "./sub_Comps/Search_Button";
-/*import Horizontal_Divider_Given_Height_Active_Order
-    from "../components/misc/Horizontal_Divider_Given_Height_Active_Order";*/
+
 import User_Button from "./sub_Comps/User_Button";
-/*import {
-    select_Local_Cart,
-    select_Local_Cart_Price_Localized_Monetary_Unit
-} from "../../lib/Reducers/product_Slice";*/
 
 import Bag_Button, {Monetary_Header_Text_Style} from "./sub_Comps/Bag_Button";
 import Monetary_Value_OF_Cart from "./sub_Comps/Monetary_Value_OF_Cart";
@@ -43,8 +31,6 @@ import {
   ukbd_red_light,
 } from '../ui_utils/important_Colors.ts';
 import Menu_Icon_SVG from '../../assets/svgs/menu/Menu_Icon_SVG.tsx';
-// import Driver_Icon_SVG from '../../assets/svgs/driver/Driver_Icon_SVG.tsx';
-// import {base_Image_URL} from "../../utils_server/server_settings";
 
 const Bag = require("../../assets/images/Bag.svg");
 const ukbd_image = require("../../assets/images/UKBD.png");
@@ -99,7 +85,7 @@ const Header_DashBoard_Home: React.FC<Header_Props> = ({
             <View
 
                 style={{
-                    flex: 5,
+                    flex: 2,
                     flexDirection: "row",
                     // backgroundColor: 'gold',
                 }}>
@@ -170,53 +156,14 @@ const Header_DashBoard_Home: React.FC<Header_Props> = ({
                 </View>
 
 
-                {/*home begins here*/}
 
-
-                <Home_Button
-                    nav={nav}
-                    comp_Height={comp_Height}
-                />
-
-                {/*home ends here*/}
-
-
-                {/* Search begins here*/}
-
-
-                <Horizontal_Divider_Given_Height_Active_Order
-                    comp_Width={10}
-                    comp_Height={comp_Height - 1}
-                    bg_Color={'white'}
-                />
-
-                <Search_Button
-                    nav={nav}
-                    comp_Height={comp_Height}
-                />
-
-
-                {/* Search ends here */}
-
-
-                {/*<View style={styles.headerItems}>
-                    <Ionicons name="search-outline" color="#012965" size={26}/>
-                </View>
-                <View style={styles.headerItems}>
-                    <Feather
-                        name="shopping-bag"
-                        color="#012965"
-                        size={24}
-                    />
-                </View>
-                */}
             </View>
 
             {/*1st flex 5 ends here*/}
 
             {/*2nd flex 5 begins here ---   cart length and cart amount and user icon */}
             <View style={{
-                flex: 5,
+                flex: 8,
                 justifyContent: "space-between",
                 flexDirection: "row",
                 height: comp_Height - 1,
@@ -231,6 +178,7 @@ const Header_DashBoard_Home: React.FC<Header_Props> = ({
                     nav={nav}
                     comp_Height={comp_Height - 1} // comp_Height - hairlineWidth in the bottom border.
                     comp_Width={comp_Width}
+                    bg_color={ukbd_navy_blue}
 
                 />
 
@@ -240,6 +188,7 @@ const Header_DashBoard_Home: React.FC<Header_Props> = ({
                     nav={nav}
                     comp_Height={comp_Height - 1}
                     comp_Width={comp_Width}
+                    bg_color={ukbd_navy_blue}
                 />
 
                 {/*user button ends here*/}

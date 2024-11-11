@@ -22,12 +22,7 @@ import SimpleLineIcons from "react-native-vector-icons/SimpleLineIcons";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import Foundation from "react-native-vector-icons/Foundation";
 
-/*import {
-    convert_TO_BDT_From_GBP,
-    monetary_Unit_Interface,
-    // MonetaryUnits,
 
-} from "../../ui_utils/localization_utils";*/
 import hairlineWidth = StyleSheet.hairlineWidth;
 import Single_Bag_Row from "./Single_Bag_Row";
 
@@ -50,6 +45,7 @@ interface Bag_Button_Props {
     comp_Height: number,
     // arrow_Pressed_2: (monetary_Unit_Text: string, value_Converted_To_String: string, length: number,)=>void,
     comp_Width: number,
+    bg_color: string,
 }
 
 
@@ -68,6 +64,7 @@ const Bag_Button: React.FC<Bag_Button_Props> = ({
                                                     nav,
                                                     comp_Height,
                                                     comp_Width,
+                                                    bg_color,
                                                     // arrow_Pressed_2,
                                                 }) => {
     // const Bag_Button = ()=>{
@@ -240,7 +237,7 @@ const Bag_Button: React.FC<Bag_Button_Props> = ({
                             <MaterialIcons
                                 name={"shopping-bag"}
                                 size={comp_Height / 2}
-                                color={pressed ? ukbd_red_light : ukbd_red} //"red"
+                                color={pressed ? ukbd_red_light : bg_color} //"red"
                                 style={{
                                     //paddingHorizontal: 4,
                                     fontWeight: '100',
