@@ -364,11 +364,75 @@ const disable_Btn_Pressed_State_In_Home_Page = (
   state.product_State[action.payload].temp__Quantity = 0;
 };
 
-const decrement_item_for_home_index_2 = (
+const decrement_cart_item_for_home_index_0_2 = (
     state: any,
     action: PayloadAction<number>,
 ) => {
-  state.local_Cart_Array[action.payload].quantity -= 1;
+
+  const foundIndex_Already_In_Cart_Decrement= action.payload;
+  // 999
+  state.local_Cart_Array[foundIndex_Already_In_Cart_Decrement].quantity -= 1;
+  // 999
+
+  // ---begins
+
+  if (state.local_Cart_Array[foundIndex_Already_In_Cart_Decrement].quantity === 0) {
+    // const temp_local_Cart = state.local_Cart_Array;
+
+    // console.log("temp_Cart: (when 0) ", temp_Cart);
+    if (state.local_Cart_Array.length === 1) {
+      // state.local_Cart_Array = [];
+
+      state.local_Cart_Array = [];
+      // state.product_State[home_Item_Index].temp__Quantity = 0;//
+      // state.product_State[home_Item_Index].btn_Pressed = false;
+      // (temp_Cart[foundIndex_Already_In_Cart_Decrement].quantity) - 1;
+      // state.local_Cart_Array = temp_Cart;
+    } else if (state.local_Cart_Array.length === 2) {
+      // extra [] added to save it as an array.
+
+      state.local_Cart_Array = [
+        state.local_Cart_Array[foundIndex_Already_In_Cart_Decrement === 1 ? 0 : 1],
+      ];
+
+      // state.product_State[home_Item_Index].temp__Quantity = 0;//
+      // state.product_State[home_Item_Index].btn_Pressed = false;
+
+      // console.log('temp_Cart when previous length was 2', temp_Cart);
+
+      // state.local_Cart_Array = temp_Cart;
+      // state.product_State[temp_Cart[foundIndex_Already_In_Cart_Decrement].index].temp__Quantity = 0;//
+      // state.product_State[temp_Cart[foundIndex_Already_In_Cart_Decrement].index].btn_Pressed = false;
+    } else if (state.local_Cart_Array.length > 2) {
+      state.local_Cart_Array =
+          foundIndex_Already_In_Cart_Decrement === 0
+              ? state.local_Cart_Array.slice(1, state.local_Cart_Array.length)
+              : state.local_Cart_Array
+                  .slice(0, foundIndex_Already_In_Cart_Decrement)
+                  .concat(
+                      state.local_Cart_Array.slice(
+                          foundIndex_Already_In_Cart_Decrement + 1,
+                          state.local_Cart_Array.length,
+                      ),
+                  );
+
+      // state.product_State[home_Item_Index].temp__Quantity = 0; //
+      // state.product_State[temp_Cart[foundIndex_Already_In_Cart_Decrement].index].btn_Pressed = false;
+      // state.product_State[home_Item_Index].btn_Pressed = false;
+
+      // state.local_Cart_Array = temp_Cart;
+    }
+  }
+      // state.local_Cart_Array= state.local_Cart_Array.concat(temp_Cart_Item);
+
+  // updated_Quantity
+ /* else {
+    // console.log("decrement_Single_Cart_Item_2_For_Home_Page >> [temp_Cart]: at else -- ", temp_Cart);
+
+    state.local_Cart_Array = temp_Cart;
+  }*/
+  // ---ends
+
 };
 
 const increment_cart_item_for_home_index_2 = (
@@ -550,26 +614,7 @@ const decrement_Single_Cart_Item_2_For_Home_Page = (
   const temp_Product_ID = state.product_State[home_Item_Index]._id;
   const one_Item = state.product_State[home_Item_Index];
 
-  /*
-  const decrement_Payload = action.payload;
-  const temp_Product_ID = decrement_Payload.product_ID;
-  const updated_Quantity = decrement_Payload.quantity_Single_Product;
 
-  */
-
-  /*
-  if (decrement_Payload.quantity_Single_Product === 0) {
-      // state.single_Product_Add_Btn_Pressed_State = false;
-
-      state.single_Product_State.item.single_Prod_Add_Btn_Pressed_State = false;// action.payload;
-
-  }
-
-  state.single_Product_State.item.single_Prod_Quantity = updated_Quantity;//  decrement_Payload.quantity_Single_Product;// action.payload;
-  // state.single_Product_Quantity__State = action.payload;
-
-
-  */
 
   let temp_Cart = state.local_Cart_Array;
 
@@ -802,7 +847,7 @@ export const product_Slice = createSlice({
       store_temp_cart_array: store_temp_cart_array_2,
 
       increment_cart_item_for_home_index_0: increment_cart_item_for_home_index_2,
-      decrement_item_for_home_index: decrement_item_for_home_index_2,
+      decrement_cart_item_for_home_index_0: decrement_cart_item_for_home_index_0_2,
 
       product_detail_only_in_double_tap:
         product_detail_page_double_tap_navigation_displayed,
@@ -859,7 +904,7 @@ export const {
   store_temp_cart_object,
   store_temp_cart_array,
   increment_cart_item_for_home_index_0,
-  decrement_item_for_home_index,
+  decrement_cart_item_for_home_index_0,
 
   product_detail_only_in_double_tap,
   update_product_detail_extra_data,

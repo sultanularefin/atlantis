@@ -16,7 +16,7 @@ import {
   decrement_item_for_home_index,
   decrement_Item_From_Home,
   disable_Btn_Pressed_State_In_Home_Page_0,
-  increment_item_for_home_index,
+  increment_cart_item_for_home_index_0,
   increment_Item_From_Home,
   select_Local_Cart,
   select_Local_Cart_Price_Localized_Monetary_Unit,
@@ -147,7 +147,7 @@ const Add_Cart_OR_Favorite__Btn_Home_Page: React.FC<
               draft_Products[home_item_index].temp__Quantity += 1;
 
               dispatch(
-                increment_item_for_home_index(foundIndex_Already_In_Cart),
+                increment_cart_item_for_home_index_0(foundIndex_Already_In_Cart),
               );
 
               return;

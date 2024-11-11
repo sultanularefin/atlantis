@@ -39,6 +39,7 @@ import {
 // import {Store} from "../../../../../lib/interfaces_Slice/product_Related_Interfaces";
 import {useAppDispatch, useAppSelector} from '../../../../../lib/app/hooks.ts';
 import {
+  decrement_cart_item_for_home_index_0,
   decrement_Single_Product_For_Details_Page,
   increment_cart_item_for_home_index_0,
   increment_Single_Product_For_Details_Page,
@@ -129,41 +130,6 @@ const Increment_Decrement_Favorite_BTN_In_Details_Page: React.FC<
 
 
 
-
-
-
-
-
-    /*const increment_Payload: increment_Decrement_Single_Item_Payload_Interface =
-      {
-        quantity_Single_Product: 1 + quantity, // not used...
-        product_ID: this_prod_id,
-      };
-
-    dispatch(increment_Single_Product_For_Details_Page(increment_Payload));*/
-
-
-    // 999
-   /* dispatch(
-      productsApiSlice.util.updateQueryData(
-        'getOneProduct',
-        {
-          product_Id: this_prod_id,
-          single_Prod_Quantity: quantity,
-          single_Prod_Add_Btn_Pressed_State: add_Button_Pressed_State,
-          },
-        (draft_One_Product:MaybeDrafted<One_Product_Item_For_Detail_Interface>) => {
-          // draft_One_Product.single_Prod_Add_Btn_Pressed_State = false;
-
-          console.log("draft_One_Product: ",draft_One_Product);
-          draft_One_Product.single_Prod_Quantity += 1;
-
-
-          console.log("draft_One_Product: ",draft_One_Product);
-        },
-      ),
-    );*/
-
     console.log("at << increment_button_Pressed>> ");
 
     const payload_one_product_additional_data:single_product_other_extra_data_interface={
@@ -171,8 +137,7 @@ const Increment_Decrement_Favorite_BTN_In_Details_Page: React.FC<
       single_Prod_Add_Btn_Pressed_State: true,//!(single_product_extra_data.single_Prod_Add_Btn_Pressed_State),
     };
 
-    // single_Prod_Quantity
-    // single_Prod_Add_Btn_Pressed_State
+
     dispatch(update_product_detail_extra_data(payload_one_product_additional_data));
 
 
@@ -212,7 +177,7 @@ const Increment_Decrement_Favorite_BTN_In_Details_Page: React.FC<
                 quantity: 1,
 
                 price: one_Item.price,
-                image: one_Item.image[0],
+                image: one_Item.image,
                 id: one_Item.id,
                 index: Index_among_all_products, //foundIndex_read,
               };
@@ -247,7 +212,7 @@ const Increment_Decrement_Favorite_BTN_In_Details_Page: React.FC<
                   quantity: 1,
 
                   price: one_Item.price,
-                  image: one_Item.image[0],
+                  image: one_Item.image,
                   id: one_Item.id,
                   index: Index_among_all_products,
                 };
@@ -281,56 +246,120 @@ const Increment_Decrement_Favorite_BTN_In_Details_Page: React.FC<
 
     if (quantity === 0) {
 
-    /*  dispatch(
-        productsApiSlice.util.updateQueryData(
-          'getOneProduct',
-          {
-            product_Id: this_prod_id,
-            single_Prod_Quantity: quantity,
-            single_Prod_Add_Btn_Pressed_State: add_Button_Pressed_State,
-          },
-          (draft_One_Product) => {
-            draft_One_Product.single_Prod_Add_Btn_Pressed_State = false;
-            draft_One_Product.single_Prod_Quantity = 0;
-          },
-        ),
-      );*/
-
-      /* state.single_Product_State.item.single_Prod_Add_Btn_Pressed_State =
-         action.payload; // false;// action.payload;
-
-       state.single_Product_State.item.single_Prod_Quantity = 0;
-
-         // dispatch(update_single_Product_Add_Btn_Pressed_State(false));
-
-         999*/
-      // return;
-
-
       const payload_one_product_additional_data:single_product_other_extra_data_interface={
         single_Prod_Quantity: 0,//single_product_extra_data.single_Prod_Quantity+1,
         single_Prod_Add_Btn_Pressed_State: false,//!(single_product_extra_data.single_Prod_Add_Btn_Pressed_State),
       };
 
-      // single_Prod_Quantity
-      // single_Prod_Add_Btn_Pressed_State
+
       dispatch(update_product_detail_extra_data(payload_one_product_additional_data));
 
 
+
+
+
+    }else{
+
+
+      // 999
+
+
+      if(single_product_extra_data.single_Prod_Quantity===0){
+
+        const payload_one_product_additional_data:single_product_other_extra_data_interface={
+          single_Prod_Quantity: 0,//single_product_extra_data.single_Prod_Quantity-1,
+          single_Prod_Add_Btn_Pressed_State: false,//!(single_product_extra_data.single_Prod_Add_Btn_Pressed_State),
+        };
+
+        dispatch(update_product_detail_extra_data(payload_one_product_additional_data));
+
+
+      }else{
+
+        const payload_one_product_additional_data:single_product_other_extra_data_interface={
+          single_Prod_Quantity: single_product_extra_data.single_Prod_Quantity-1,
+          single_Prod_Add_Btn_Pressed_State: true,//!(single_product_extra_data.single_Prod_Add_Btn_Pressed_State),
+        };
+
+        dispatch(update_product_detail_extra_data(payload_one_product_additional_data));
+
+
+      }
+
+
+
+
+
+      dispatch(
+          productsApiSlice.util.updateQueryData(
+              'getProducts',
+              {limit: home_page_product_limit},
+              // (draft_Products:MaybeDrafted<One_Product_for_Home_Page_Interface>) => {
+              (draft_Products) => {
+
+
+                const Index_among_all_products = draft_Products.findIndex((prod_item:One_Product_for_Home_Page_Interface,
+                                                                           index: number) => prod_item.id === this_prod_id);
+
+
+                console.log("Index_among_all_products: ",Index_among_all_products);
+
+                if (Index_among_all_products) {
+                  // state.home_State.paginate_data.docs[action.payload].temp__Quantity = 1;
+                  // draft_Products[Index_among_all_products].btn_Pressed = true;
+                  // draft_Products[Index_among_all_products].temp__Quantity += 1;
+
+                  // console.log("draft_Products[Index_among_all_products].temp__Quantity: ",draft_Products[Index_among_all_products].temp__Quantity);
+
+                  draft_Products[Index_among_all_products].temp__Quantity -= 1;
+                  // console.log("draft_Products[Index_among_all_products].temp__Quantity: ",draft_Products[Index_among_all_products].temp__Quantity);
+
+
+                  const one_Item = draft_Products[Index_among_all_products];
+
+
+
+                    console.log('___at TEMP CART  LENGTH  > 0 ');
+
+                    // SEARCH FIRST IN TEMP CART IF EXIST THEN INCREMENT
+                    const foundIndex_Already_In_Cart = local_Cart.findIndex(
+                        (cart_Product: local_Cart_Item) =>
+                            cart_Product.id === this_prod_id,
+                    );
+
+                    // console.log("__foundIndex_Already_In_Cart__: ", foundIndex_Already_In_Cart);
+                    if (foundIndex_Already_In_Cart !== -1) {
+                      // draft_Products[Index_among_all_products].temp__Quantity += 1;
+
+                      dispatch(
+                          decrement_cart_item_for_home_index_0(foundIndex_Already_In_Cart),
+                      );
+
+                      // return;
+
+                  }
+
+
+                }
+              },
+          ),
+      );
+
+      return;
+
+
+      /*const decrement_Payload: increment_Decrement_Single_Item_Payload_Interface =
+          {
+            quantity_Single_Product: quantity - 1, //used
+            product_ID: this_prod_id,
+          };
+
+      dispatch(decrement_Single_Product_For_Details_Page(decrement_Payload));*/
+
     }
 
-    const decrement_Payload: increment_Decrement_Single_Item_Payload_Interface =
-      {
-        quantity_Single_Product: quantity - 1, //used
-        product_ID: this_prod_id,
-      };
 
-    dispatch(decrement_Single_Product_For_Details_Page(decrement_Payload));
 
-    /*if(value_State===1){
-        dispatch(increment_Single_Product(value_State));
-        // set_Add_Button_Pressed_State(false);
-    }*/
   };
 
   const box_Height = comp_Height;

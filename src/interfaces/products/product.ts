@@ -58,7 +58,7 @@ interface local_Cart_Item /*extends Doc*/
     // price_Foreign_or_Delivery: number, // IMPORTANT
 
 
-    image: string,
+    image: string[],
     id: number,//string,
     index: number,
     // weight: number,
