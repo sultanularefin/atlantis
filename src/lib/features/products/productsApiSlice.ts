@@ -47,7 +47,7 @@ const return_modified_Doc = (
       show_Details_Btn: true,
       btn_Pressed: true,
       // offer_percentage: Number(one_Doc.offer_percentage),
-      temp_Cart_Quantity: local_Cart[foundIndex_Already_In_Cart].quantity,
+      temp__Quantity: local_Cart[foundIndex_Already_In_Cart].quantity,
     };
   } else {
     // console.log('at else');
@@ -123,6 +123,7 @@ export const productsApiSlice = createApi({
               ...item,
               show_Details_Btn: false,
               btn_Pressed: false,
+              temp__Quantity:0,
             }),
           );
         },
@@ -145,7 +146,7 @@ export const productsApiSlice = createApi({
             },
             show_Details_Btn: true,
 
-            temp_Cart_Quantity: 33,
+            temp__Quantity: 33,
             btn_Pressed: true,
           };
           // For the success case, the return type for the `data` property

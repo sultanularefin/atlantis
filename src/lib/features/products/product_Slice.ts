@@ -135,7 +135,7 @@ const decrement_Single_Product_2_For_Details_Page = (
   temp_Cart[foundIndex_Already_In_Cart_Decrement].quantity =
       temp_Cart[foundIndex_Already_In_Cart_Decrement].quantity - 1;
 
-  // state.product_State.[foundIndex_read].temp_Cart_Quantity = 1;
+  // state.product_State.[foundIndex_read].temp__Quantity = 1;
 
   // ORDER IS IMPORTANT ORDER:1
   // eslint-disable-next-line operator-assignment
@@ -155,10 +155,10 @@ const decrement_Single_Product_2_For_Details_Page = (
   state.local_Cart_Weight_Total -=
       temp_Cart[foundIndex_Already_In_Cart_Decrement].weight;
 
-  // state.product_State.[foundIndex_read].temp_Cart_Quantity = 1;
+  // state.product_State.[foundIndex_read].temp__Quantity = 1;
   state.product_State[
       temp_Cart[foundIndex_Already_In_Cart_Decrement].index
-      ].temp_Cart_Quantity =
+      ].temp__Quantity =
       temp_Cart[foundIndex_Already_In_Cart_Decrement].quantity;
 
   if (temp_Cart[foundIndex_Already_In_Cart_Decrement].quantity === 0) {
@@ -166,7 +166,7 @@ const decrement_Single_Product_2_For_Details_Page = (
       state.local_Cart_Array = [];
       state.product_State[
           temp_Cart[foundIndex_Already_In_Cart_Decrement].index
-          ].temp_Cart_Quantity = 0; //
+          ].temp__Quantity = 0; //
       state.product_State[
           temp_Cart[foundIndex_Already_In_Cart_Decrement].index
           ].btn_Pressed = false;
@@ -180,12 +180,12 @@ const decrement_Single_Product_2_For_Details_Page = (
 
       state.product_State[
           temp_Cart[foundIndex_Already_In_Cart_Decrement === 1 ? 0 : 1].index
-          ].temp_Cart_Quantity = 0; //
+          ].temp__Quantity = 0; //
       state.product_State[
           temp_Cart[foundIndex_Already_In_Cart_Decrement === 1 ? 0 : 1].index
           ].btn_Pressed = false;
 
-      // state.product_State.[temp_Cart[foundIndex_Already_In_Cart_Decrement].index].temp_Cart_Quantity = 0;//
+      // state.product_State.[temp_Cart[foundIndex_Already_In_Cart_Decrement].index].temp__Quantity = 0;//
       // state.product_State.[temp_Cart[foundIndex_Already_In_Cart_Decrement].index].btn_Pressed = false;
     } else if (temp_Cart.length > 2) {
       state.local_Cart_Array =
@@ -202,7 +202,7 @@ const decrement_Single_Product_2_For_Details_Page = (
 
       state.product_State[
           temp_Cart[foundIndex_Already_In_Cart_Decrement].index
-          ].temp_Cart_Quantity = 0; //
+          ].temp__Quantity = 0; //
       state.product_State[
           temp_Cart[foundIndex_Already_In_Cart_Decrement].index
           ].btn_Pressed = false;
@@ -261,7 +261,7 @@ const increment_Single_Product_2_For_Details_Page = (
       // weight: one_Item.item_weight,
     };
 
-    state.product_State[foundIndex_read].temp_Cart_Quantity = 1;
+    state.product_State[foundIndex_read].temp__Quantity = 1;
     state.product_State[foundIndex_read].btn_Pressed = true;
 
     // price begins
@@ -298,10 +298,10 @@ const increment_Single_Product_2_For_Details_Page = (
 
       state.local_Cart_Array = temp_Cart; //[...temp_Cart];
 
-      // state.product_State[foundIndex_read].temp_Cart_Quantity = 1;
+      // state.product_State[foundIndex_read].temp__Quantity = 1;
       state.product_State[
           temp_Cart[foundIndex_Already_In_Cart].index
-          ].temp_Cart_Quantity = temp_Cart[foundIndex_Already_In_Cart].quantity;
+          ].temp__Quantity = temp_Cart[foundIndex_Already_In_Cart].quantity;
       state.product_State[temp_Cart[foundIndex_Already_In_Cart].index].weight =
           temp_Cart[foundIndex_Already_In_Cart].quantity *
           temp_Cart[foundIndex_Already_In_Cart].weight;
@@ -331,7 +331,7 @@ const increment_Single_Product_2_For_Details_Page = (
         // weight: one_Item.item_weight,
       };
 
-      state.product_State[foundIndex_read].temp_Cart_Quantity = 1;
+      state.product_State[foundIndex_read].temp__Quantity = 1;
       state.product_State[foundIndex_read].btn_Pressed = true;
 
       state.local_Cart_Price_Total += one_Item.price;
@@ -359,9 +359,9 @@ const disable_Btn_Pressed_State_In_Home_Page = (
     state: any,
     action: PayloadAction<number>,
 ) => {
-  // state.product_State[action.payload].temp_Cart_Quantity = 1;
+  // state.product_State[action.payload].temp__Quantity = 1;
   state.product_State[action.payload].btn_Pressed = false;
-  state.product_State[action.payload].temp_Cart_Quantity = 0;
+  state.product_State[action.payload].temp__Quantity = 0;
 };
 
 const decrement_item_for_home_index_2 = (
@@ -371,7 +371,7 @@ const decrement_item_for_home_index_2 = (
   state.local_Cart_Array[action.payload].quantity -= 1;
 };
 
-const increment_item_for_home_index_2 = (
+const increment_cart_item_for_home_index_2 = (
     state: any,
     action: PayloadAction<number>,
 ) => {
@@ -441,7 +441,7 @@ const increment_Single_Cart_Item_2__For_Home_Page = (
       // weight: one_Item.item_weight,
     };
 
-    state.product_State[home_Item_Index].temp_Cart_Quantity = 1;
+    state.product_State[home_Item_Index].temp__Quantity = 1;
     state.product_State[home_Item_Index].btn_Pressed = true;
 
     // price begins
@@ -489,8 +489,8 @@ const increment_Single_Cart_Item_2__For_Home_Page = (
 
       state.local_Cart_Array = temp_Cart; //[...temp_Cart];
 
-      // state.product_State[foundIndex_read].temp_Cart_Quantity = 1;
-      state.product_State[home_Item_Index].temp_Cart_Quantity =
+      // state.product_State[foundIndex_read].temp__Quantity = 1;
+      state.product_State[home_Item_Index].temp__Quantity =
           temp_Cart[foundIndex_Already_In_Cart].quantity;
 
       return;
@@ -506,7 +506,7 @@ const increment_Single_Cart_Item_2__For_Home_Page = (
         // weight: one_Item.item_weight,
       };
 
-      state.product_State[home_Item_Index].temp_Cart_Quantity = 1;
+      state.product_State[home_Item_Index].temp__Quantity = 1;
 
       state.local_Cart_Price_Total += one_Item.price;
 
@@ -585,7 +585,7 @@ const decrement_Single_Cart_Item_2_For_Home_Page = (
   temp_Cart[foundIndex_Already_In_Cart_Decrement].quantity =
       temp_Cart[foundIndex_Already_In_Cart_Decrement].quantity - 1;
 
-  // state.product_State[foundIndex_read].temp_Cart_Quantity = 1;
+  // state.product_State[foundIndex_read].temp__Quantity = 1;
 
   // ORDER IS IMPORTANT ORDER:1
   // eslint-disable-next-line operator-assignment
@@ -605,8 +605,8 @@ const decrement_Single_Cart_Item_2_For_Home_Page = (
   state.local_Cart_Weight_Total -=
       temp_Cart[foundIndex_Already_In_Cart_Decrement].weight;
 
-  // state.product_State[foundIndex_read].temp_Cart_Quantity = 1;
-  state.product_State[home_Item_Index].temp_Cart_Quantity =
+  // state.product_State[foundIndex_read].temp__Quantity = 1;
+  state.product_State[home_Item_Index].temp__Quantity =
       temp_Cart[foundIndex_Already_In_Cart_Decrement].quantity;
 
   if (temp_Cart[foundIndex_Already_In_Cart_Decrement].quantity === 0) {
@@ -617,7 +617,7 @@ const decrement_Single_Cart_Item_2_For_Home_Page = (
       // state.local_Cart_Array = [];
 
       temp_Cart = [];
-      // state.product_State[home_Item_Index].temp_Cart_Quantity = 0;//
+      // state.product_State[home_Item_Index].temp__Quantity = 0;//
       state.product_State[home_Item_Index].btn_Pressed = false;
       // (temp_Cart[foundIndex_Already_In_Cart_Decrement].quantity) - 1;
       state.local_Cart_Array = temp_Cart;
@@ -628,13 +628,13 @@ const decrement_Single_Cart_Item_2_For_Home_Page = (
         temp_Cart[foundIndex_Already_In_Cart_Decrement === 1 ? 0 : 1],
       ];
 
-      // state.product_State[home_Item_Index].temp_Cart_Quantity = 0;//
+      // state.product_State[home_Item_Index].temp__Quantity = 0;//
       state.product_State[home_Item_Index].btn_Pressed = false;
 
       console.log('temp_Cart when previous length was 2', temp_Cart);
 
       state.local_Cart_Array = temp_Cart;
-      // state.product_State[temp_Cart[foundIndex_Already_In_Cart_Decrement].index].temp_Cart_Quantity = 0;//
+      // state.product_State[temp_Cart[foundIndex_Already_In_Cart_Decrement].index].temp__Quantity = 0;//
       // state.product_State[temp_Cart[foundIndex_Already_In_Cart_Decrement].index].btn_Pressed = false;
     } else if (temp_Cart.length > 2) {
       temp_Cart =
@@ -649,7 +649,7 @@ const decrement_Single_Cart_Item_2_For_Home_Page = (
                       ),
                   );
 
-      state.product_State[home_Item_Index].temp_Cart_Quantity = 0; //
+      state.product_State[home_Item_Index].temp__Quantity = 0; //
       // state.product_State[temp_Cart[foundIndex_Already_In_Cart_Decrement].index].btn_Pressed = false;
       state.product_State[home_Item_Index].btn_Pressed = false;
 
@@ -693,9 +693,9 @@ const update_All_Products_Add_BTN_Pressed_State__And_Single_Product_Add_Btn_Pres
          console.log("queryState: ",queryState);
          console.log("queryState.data: ",queryState);
 
-         // state.product_State[action.payload].temp_Cart_Quantity = 1;
+         // state.product_State[action.payload].temp__Quantity = 1;
          state.product_State[action.payload].btn_Pressed = true;
-         state.product_State[action.payload].temp_Cart_Quantity = 0;
+         state.product_State[action.payload].temp__Quantity = 0;
        }
   */
       // 00
@@ -801,7 +801,7 @@ export const product_Slice = createSlice({
       store_temp_cart_object: store_temp_cart_object_2,
       store_temp_cart_array: store_temp_cart_array_2,
 
-      increment_item_for_home_index: increment_item_for_home_index_2,
+      increment_cart_item_for_home_index_0: increment_cart_item_for_home_index_2,
       decrement_item_for_home_index: decrement_item_for_home_index_2,
 
       product_detail_only_in_double_tap:
@@ -858,7 +858,7 @@ export const {
   // added on 10th november
   store_temp_cart_object,
   store_temp_cart_array,
-  increment_item_for_home_index,
+  increment_cart_item_for_home_index_0,
   decrement_item_for_home_index,
 
   product_detail_only_in_double_tap,

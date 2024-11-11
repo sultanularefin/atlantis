@@ -33,7 +33,7 @@ interface One_Product_for_Home_Page_Interface extends One_Product_Base_Interface
     // short_details
     show_Details_Btn: boolean,
 
-    temp_Cart_Quantity: number,
+    temp__Quantity: number,
     btn_Pressed: boolean,
 
     // added locally ends here

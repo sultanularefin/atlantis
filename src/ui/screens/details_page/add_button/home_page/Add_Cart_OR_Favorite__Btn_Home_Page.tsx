@@ -74,7 +74,7 @@ const Add_Cart_OR_Favorite__Btn_Home_Page: React.FC<
           {limit: home_page_product_limit},
           (draftUsers) => {
             draftUsers[home_item_index].btn_Pressed = true;
-            draftUsers[home_item_index].temp_Cart_Quantity = 0;
+            draftUsers[home_item_index].temp__Quantity = 0;
           },
         ),
       );
@@ -127,7 +127,7 @@ const Add_Cart_OR_Favorite__Btn_Home_Page: React.FC<
               index: home_item_index, //foundIndex_read,
             };
 
-            draft_Products[home_item_index].temp_Cart_Quantity = 1;
+            draft_Products[home_item_index].temp__Quantity = 1;
             draft_Products[home_item_index].btn_Pressed = true;
 
             dispatch(store_temp_cart_object(cart_Item));
@@ -144,7 +144,7 @@ const Add_Cart_OR_Favorite__Btn_Home_Page: React.FC<
 
             // console.log("__foundIndex_Already_In_Cart__: ", foundIndex_Already_In_Cart);
             if (foundIndex_Already_In_Cart !== -1) {
-              draft_Products[home_item_index].temp_Cart_Quantity += 1;
+              draft_Products[home_item_index].temp__Quantity += 1;
 
               dispatch(
                 increment_item_for_home_index(foundIndex_Already_In_Cart),
@@ -162,7 +162,7 @@ const Add_Cart_OR_Favorite__Btn_Home_Page: React.FC<
                 index: home_item_index,
               };
 
-              draft_Products[home_item_index].temp_Cart_Quantity = 1;
+              draft_Products[home_item_index].temp__Quantity = 1;
 
               dispatch(store_temp_cart_object(cart_Item));
 
@@ -191,9 +191,9 @@ const Add_Cart_OR_Favorite__Btn_Home_Page: React.FC<
           'getProducts',
           {limit: home_page_product_limit},
           (draft_Products) => {
-            // state.home_State.paginate_data.docs[action.payload].temp_Cart_Quantity = 1;
+            // state.home_State.paginate_data.docs[action.payload].temp__Quantity = 1;
             draft_Products[home_item_index].btn_Pressed = false;
-            draft_Products[home_item_index].temp_Cart_Quantity = 0;
+            draft_Products[home_item_index].temp__Quantity = 0;
           },
         ),
       );
@@ -223,7 +223,7 @@ const Add_Cart_OR_Favorite__Btn_Home_Page: React.FC<
               foundIndex_Already_In_Cart,
             );
 
-            draft_Products[home_item_index].temp_Cart_Quantity -= 1;
+            draft_Products[home_item_index].temp__Quantity -= 1;
 
             dispatch(decrement_item_for_home_index(foundIndex_Already_In_Cart));
 

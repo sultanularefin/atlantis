@@ -57,7 +57,7 @@ export type Native_Root_Stack_ParamList = {
 
     // single_Product_ID: item_Data._id,
     add_Button_Pressed_State: boolean,//item_Data.btn_Pressed,
-    quantity: number,//item_Data.temp_Cart_Quantity,
+    quantity: number,//item_Data.temp__Quantity,
 
 
   };

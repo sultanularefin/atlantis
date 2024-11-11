@@ -40,7 +40,7 @@ import {
 import {useAppDispatch, useAppSelector} from '../../../../../lib/app/hooks.ts';
 import {
   decrement_Single_Product_For_Details_Page,
-  increment_item_for_home_index,
+  increment_cart_item_for_home_index_0,
   increment_Single_Product_For_Details_Page,
   select_Local_Cart,
   select_Local_Cart_Price_Localized_Monetary_Unit,
@@ -96,6 +96,8 @@ const Increment_Decrement_Favorite_BTN_In_Details_Page: React.FC<
     select_Logger_Data_BY_ID,
   );
 
+  console.log("quantity: ",quantity);
+
   const dispatch = useAppDispatch();
 
   const abc = () => {
@@ -108,41 +110,6 @@ const Increment_Decrement_Favorite_BTN_In_Details_Page: React.FC<
 
   const add_To_Cart_Pressed = () => {
     console.log('dispatch(add_To_Cart_Pressed pressed)');
-
-    // set_Add_Button_Pressed_State(true);
-
-
-    // 999
-    // dispatch(update_single_Product_Add_Btn_Pressed_State(true));
-
-
-  /*  state.single_Product_State.item.single_Prod_Add_Btn_Pressed_State =
-      action.payload; // false;// action.payload;
-
-    state.single_Product_State.item.single_Prod_Quantity = 0;*/
-
-
- /*   dispatch(
-      productsApiSlice.util.updateQueryData(
-        'getOneProduct',
-        {
-          product_Id: this_prod_id,
-          single_Prod_Quantity: quantity,
-          single_Prod_Add_Btn_Pressed_State: add_Button_Pressed_State,
-        },
-        (draft_One_Product:MaybeDrafted<One_Product_Item_For_Detail_Interface>) => {
-
-
-          // console.log("draft_One_Product: ",draft_One_Product);
-          draft_One_Product.single_Prod_Add_Btn_Pressed_State = true;
-          draft_One_Product.single_Prod_Quantity = 0;
-
-
-          // console.log("draft_One_Product: ",draft_One_Product);
-
-        },
-      ),
-    );*/
 
 
     const payload_one_product_additional_data:single_product_other_extra_data_interface={
@@ -215,41 +182,47 @@ const Increment_Decrement_Favorite_BTN_In_Details_Page: React.FC<
       productsApiSlice.util.updateQueryData(
         'getProducts',
         {limit: home_page_product_limit},
+          // (draft_Products:MaybeDrafted<One_Product_for_Home_Page_Interface>) => {
         (draft_Products) => {
 
 
-          const foundIndex_read = draft_Products.findIndex((prod_item:One_Product_for_Home_Page_Interface,
+          const Index_among_all_products = draft_Products.findIndex((prod_item:One_Product_for_Home_Page_Interface,
                                                                 index: number) => prod_item.id === this_prod_id);
 
 
-          console.log("foundIndex_read: ",foundIndex_read);
+          console.log("Index_among_all_products: ",Index_among_all_products);
 
-          if (foundIndex_read) {
-            // state.home_State.paginate_data.docs[action.payload].temp_Cart_Quantity = 1;
-            draft_Products[foundIndex_read].btn_Pressed = true;
-            draft_Products[foundIndex_read].temp_Cart_Quantity += 1;
+          if (Index_among_all_products) {
+            // state.home_State.paginate_data.docs[action.payload].temp__Quantity = 1;
+            draft_Products[Index_among_all_products].btn_Pressed = true;
+            // draft_Products[Index_among_all_products].temp__Quantity += 1;
+
+            console.log("draft_Products[Index_among_all_products].temp__Quantity: ",draft_Products[Index_among_all_products].temp__Quantity);
+
+            draft_Products[Index_among_all_products].temp__Quantity +=1;
+            console.log("draft_Products[Index_among_all_products].temp__Quantity: ",draft_Products[Index_among_all_products].temp__Quantity);
 
 
-            const one_Item = draft_Products[foundIndex_read];
+            const one_Item = draft_Products[Index_among_all_products];
 
 
             if (local_Cart.length === 0) {
               const cart_Item: local_Cart_Item = {
-                name: one_Item.title.toString(), // one_Item.name,
+                name: one_Item.title, // one_Item.name,
                 quantity: 1,
 
                 price: one_Item.price,
                 image: one_Item.image[0],
                 id: one_Item.id,
-                index: foundIndex_read, //foundIndex_read,
+                index: Index_among_all_products, //foundIndex_read,
               };
 
-              // draft_Products[home_item_index].temp_Cart_Quantity = 1;
+              // draft_Products[home_item_index].temp__Quantity = 1;
               // draft_Products[home_item_index].btn_Pressed = true;
 
               dispatch(store_temp_cart_object(cart_Item));
 
-              return;
+
             } else {
               console.log('___at TEMP CART  LENGTH  > 0 ');
 
@@ -261,36 +234,36 @@ const Increment_Decrement_Favorite_BTN_In_Details_Page: React.FC<
 
               // console.log("__foundIndex_Already_In_Cart__: ", foundIndex_Already_In_Cart);
               if (foundIndex_Already_In_Cart !== -1) {
-                draft_Products[foundIndex_read].temp_Cart_Quantity += 1;
+                // draft_Products[Index_among_all_products].temp__Quantity += 1;
 
                 dispatch(
-                  increment_item_for_home_index(foundIndex_Already_In_Cart),
+                  increment_cart_item_for_home_index_0(foundIndex_Already_In_Cart),
                 );
 
-                return;
+                // return;
               } else {
                 const cart_Item: local_Cart_Item = {
-                  name: one_Item.title.toString(), // one_Item.name,
+                  name: one_Item.title, // one_Item.name,
                   quantity: 1,
 
                   price: one_Item.price,
                   image: one_Item.image[0],
                   id: one_Item.id,
-                  index: foundIndex_read,
+                  index: Index_among_all_products,
                 };
 
-                draft_Products[foundIndex_read].temp_Cart_Quantity = 1;
+                // draft_Products[Index_among_all_products].temp__Quantity = 1;
 
                 dispatch(store_temp_cart_object(cart_Item));
 
-                return;
+                // return;
               }
             }
 
 
           }
 
-
+          console.log("draft_Products[Index_among_all_products].temp__Quantity: ",draft_Products[Index_among_all_products].temp__Quantity);
 
         },
       ),

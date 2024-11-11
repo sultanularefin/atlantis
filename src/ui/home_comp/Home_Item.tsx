@@ -137,7 +137,7 @@ const Home_Item: React.FC<Item_Interface> = ({
     return item_navigation.navigate('Product_Details_Page', {
       single_Product_ID: item_Data.id,
       add_Button_Pressed_State: item_Data.btn_Pressed,
-      quantity: item_Data.temp_Cart_Quantity,
+      quantity: item_Data.temp__Quantity,
     });
 
     /*
@@ -418,7 +418,7 @@ const Home_Item: React.FC<Item_Interface> = ({
         t_Width={width_Without_Padding} // padding 5*2,
         product_Id={item_Data.id}
         home_item_index={index_Value}
-        quantity={item_Data.temp_Cart_Quantity}
+        quantity={item_Data.temp__Quantity}
         add_Button_Pressed_State={item_Data.btn_Pressed}
         bg_Color={'transparent'}
         // {'cyan'}
