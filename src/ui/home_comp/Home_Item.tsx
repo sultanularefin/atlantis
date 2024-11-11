@@ -156,26 +156,12 @@ const Home_Item: React.FC<Item_Interface> = ({
         'getProducts',
         {limit: home_page_product_limit},
         (draft_Products) => {
-          // const temp_Product_ID = draft_Products[one_Product_Index].id;
-          // const one_Item = draft_Products[one_Product_Index];
-          // console.log("one_Item: ",one_Item);
 
           value_boolean = draft_Products[one_Product_Index].show_Details_Btn;
 
           draft_Products[one_Product_Index].show_Details_Btn = !value_boolean;
 
-          // product_Details_Button_Pressed();
 
-          // dispatch(if_any_remove_details_button_over_any_other_image(one_Product_Index));
-
-          /* const prev_index = state.previous_Show_Detail_Button_Index_for_Item;
-         if (prev_index !== -1 && one_Product_Index !== prev_index) {
-           state.product_State[prev_index].show_Details_Btn = false;
-         }
-
-         state.previous_Show_Detail_Button_Index_for_Item = one_Product_Index;*/
-
-          // if(value_boolean)
         },
       ),
     );

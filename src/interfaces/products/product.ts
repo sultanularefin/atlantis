@@ -6,9 +6,14 @@ interface One_Product_Item_For_Detail_Interface extends One_Product_Base_Interfa
 
     // locally added april 08, 2023
 
-    single_Prod_Quantity: number,
-    single_Prod_Add_Btn_Pressed_State: boolean,
-    mage: string[],
+    // single_Prod_Quantity: number,
+    // single_Prod_Add_Btn_Pressed_State: boolean,
+    // image: string[],
+}
+
+interface single_product_other_extra_data_interface{
+    single_Prod_Quantity:number,
+    single_Prod_Add_Btn_Pressed_State:boolean,
 }
 
 interface One_Product_Base_Interface{
@@ -17,7 +22,7 @@ interface One_Product_Base_Interface{
     price: number
     description: string
     category: string
-    image: string,//string,//string[],//string
+    image: string[],//string,//string[],//string
     rating: product_Rating_Interface
 }
 interface One_Product_for_Home_Page_Interface extends One_Product_Base_Interface{
@@ -79,5 +84,6 @@ export type {
     One_Product_Item_For_Detail_Interface,
     get_One_Product_Payload__Interface,
     One_Product_Base_Interface,
+    single_product_other_extra_data_interface,
 };
 

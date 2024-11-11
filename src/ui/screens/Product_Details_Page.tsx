@@ -1,4 +1,4 @@
-import React, {useCallback, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {
   View,
   Text,
@@ -11,7 +11,7 @@ import {
   ActivityIndicator,
   Image,
   Pressable,
-  Platform,
+  Platform, BackHandler,
 } from 'react-native';
 
 import {RouteProp, useFocusEffect} from '@react-navigation/native';
@@ -53,7 +53,7 @@ import {useAppDispatch, useAppSelector} from '../../lib/app/hooks.ts';
 import {
   export_Single_Product_Details,
   populateTag_data_for_multiple_Images,
-  select_Shipped_From_State_Or_Delivery_Currency,
+  select_Shipped_From_State_Or_Delivery_Currency, select_single_product_extra_data, update_product_detail_extra_data,
 } from '../../lib/features/products/productSlice.ts';
 import {
   useGetOneProductQuery,
@@ -73,7 +73,15 @@ import {
 import Header_Product_Details_Page from '../header/Header_Product_Details_Page.tsx';
 
 import Image_Pre_Fetch_1 from '../ui_utils/Image_Pre_Fetch_1.tsx';
-import Add_Favorite_Details_Btn from './details_page/add_button/details_Page/Add_Favorite_Details_Btn.tsx';
+import Increment_Decrement_Favorite_BTN_In_Details_Page from './details_page/add_button/details_Page/Increment_Decrement_Favorite_BTN_In_Details_Page.tsx';
+
+
+
+import {
+  One_Product_Item_For_Detail_Interface, single_product_other_extra_data_interface,
+} from '../../interfaces/products/product.ts';
+
+
 
 import Detail_Page_Image_VList_Comp from './details_page/image_part/Detail_Page_Image_VList_Comp.tsx';
 
@@ -115,34 +123,70 @@ const Product_Details_Page = ({
   // redux related codes ends here
 
   const {
-    data: detail_of_product,
+    data:detail_of_product,
     isLoading: is_detail_of_product_Loading,
     isError: detail_of_product_load_Error,
   } = useGetOneProductQuery({
-    product_Id: Number(route.params.single_Product_ID),
-    btn_Pressed_State: route.params.add_Button_Pressed_State,
-    prev_Quantity: route.params.add_Button_Pressed_State
-      ? route.params.quantity
-      : 0,
+    product_Id: Number(route.params.single_Product_ID)
   });
 
-  // console.log('detail_of_product: ', detail_of_product);
-  // console.log("is_detail_of_product_Loading: ",is_detail_of_product_Loading);
-  // console.log("detail_of_product_load_Error: ",detail_of_product_load_Error);
 
-  /*useFocusEffect(
-      useCallback(() => {
+  const single_product_extra_data:single_product_other_extra_data_interface = useAppSelector(select_single_product_extra_data);
 
 
+  useEffect(() => {
+
+    const f1=()=>{
+      const payload_one_product_additional_data:single_product_other_extra_data_interface={
+        single_Prod_Quantity: route.params.add_Button_Pressed_State
+          ? route.params.quantity
+           : 0,
+         single_Prod_Add_Btn_Pressed_State: route.params.add_Button_Pressed_State,
+      };
+
+      // single_Prod_Quantity
+      // single_Prod_Add_Btn_Pressed_State
+      dispatch(update_product_detail_extra_data(payload_one_product_additional_data));
 
 
-          main_F1();
+
+    };
+
+ f1();
+
+    // return () => backHandler.remove();
+  }, []);
 
 
-      }, [
-          // route.params.single_Product_ID,
-      ]),
-  );*/
+
+
+
+
+
+
+ /* let detail_of_product={
+
+  }
+  if(data){
+
+     detail_of_product = {
+      ...data,
+      // image:[response.image,response.image,response.image],// for more than one image test
+      image:[data.image],
+      single_Prod_Quantity: route.params.add_Button_Pressed_State
+        ? route.params.quantity
+        : 0,
+      single_Prod_Add_Btn_Pressed_State: route.params.add_Button_Pressed_State,
+
+      /!* btn_Pressed_State: route.params.add_Button_Pressed_State,
+       prev_Quantity: route.params.add_Button_Pressed_State
+       ? route.params.quantity
+          : 0,*!/
+    };
+
+  }
+  */
+
 
   // status bar related comps  ---begins here
   const STYLES = ['default', 'dark-content', 'light-content'] as const;
@@ -212,30 +256,6 @@ const Product_Details_Page = ({
         hidden={hidden}
       />
 
-      {/* <View style={{
-                // flex: 0.6,
-                height: displayHeight / 15,
-                flexDirection: "column",
-                justifyContent: "flex-start",
-                borderStyle: "solid", //'dashed', //'dotted',//'dashed',
-                borderBottomColor: ukbd_navy_blue,
-                borderBottomWidth: 0.6,//hairlineWidth,
-            }
-
-            }
-            >
-
-
-                <Header_DashBoard_Home
-                    comp_Height={displayHeight / 15}
-
-                    nav={navigation}
-                />
-
-
-            </View>
-            */}
-
       <Header_Product_Details_Page
         nav={navigation}
         comp_Height={displayHeight / 18}
@@ -285,15 +305,18 @@ const Product_Details_Page = ({
                 />
               </Pressable>
             ) : detail_of_product.image.length > 1 ? (
-              <Text>sss</Text>
-              /*<Detail_Page_Image_VList_Comp
-                images_OFThisFeed={[detail_of_product.image]}
+
+              <Detail_Page_Image_VList_Comp
+
+                images_OFThisFeed={detail_of_product.image}
                 // indexPrimary= {0}
                 comp_Width={inner_Width}
                 comp_Height={image_Container_Height} // marginVertical 5+5= 10
                 navigationProp={navigation}
-                feedContent={detail_of_product.title.toString()}
-              />*/
+
+                feedContent={detail_of_product.title}
+                //---- @ts-ignore
+              />
             ) : null}
           </View>
 
@@ -324,10 +347,7 @@ const Product_Details_Page = ({
             style={{
               ...Product_Detail_Page_Styles.box_Outer_View,
               width: inner_Width - 1,
-              // backgroundColor: ukbd_red_light,
-              // height: (displayHeight / 5), // HOW ==> 5 <= (displayHeight/10) * (displayHeight/30) *3
-              // padding: 10,
-              // (displayHeight / 10)  (displayHeight/30) *3
+
               paddingTop: (inner_Width - inner_Width_withIN_Box) / 2,
               paddingLeft: (inner_Width - inner_Width_withIN_Box) / 2,
               paddingRight: (inner_Width - inner_Width_withIN_Box) / 2,
@@ -348,15 +368,7 @@ const Product_Details_Page = ({
                   // backgroundColor: 'tomato',
                   height: displayHeight / 30,
                 }}>
-                {/* <WAS_Value
-                                // comp_Width= {displayWidth / 2.7}
-                                was_Val={previousPrice(
-                                    detail_of_product.price,
-                                    detail_of_product.item.offer_percentage
-                                )}
-                                monetary_Sign={MonetaryUnits[3].unicode}
-                                bg_Color={'transparent'}
-                            />*/}
+
 
                 {/*was strikethrough value value ends here*/}
 
@@ -376,7 +388,7 @@ const Product_Details_Page = ({
                       fontSize: 20,
                       fontWeight: '200',
                       // fontWeight: "300",
-                      fontFamily: 'RobotoCondensed-Regular',
+                      // fontFamily: 'RobotoCondensed-Regular',
                       // textDecorationLine: "line-through"
                     }}>
                     {MonetaryUnits[2].unicode} {detail_of_product.price}
@@ -434,7 +446,7 @@ const Product_Details_Page = ({
                     // fontWeight: "300",
                     fontFamily: 'RobotoCondensed-Regular',
                   }}>
-                  {MonetaryUnits[2].unicode}{' '}
+                  {`${MonetaryUnits[2].unicode} `}
                   {detail_of_product &&
                     priceConvertToAlternate(
                       detail_of_product.price,
@@ -644,16 +656,17 @@ const Product_Details_Page = ({
               // marginHorizontal: 10,
               // backgroundColor: 'white',
             }}>
-            {detail_of_product && (
-              <Add_Favorite_Details_Btn
+
+
+
+              <Increment_Decrement_Favorite_BTN_In_Details_Page
                 // update_UI={is_Item_Added_To_Cart_Previously}
                 comp_Height={30}
                 t_Width={displayWidth / 2.4}
-                product_Id={Number(route.params.single_Product_ID)}
-                quantity={detail_of_product.single_Prod_Quantity}
-                add_Button_Pressed_State={
-                  detail_of_product.single_Prod_Add_Btn_Pressed_State
-                }
+                this_prod_id={detail_of_product.id}
+                // quantity={detail_of_product.single_Prod_Quantity}
+                quantity={single_product_extra_data.single_Prod_Quantity}
+                add_Button_Pressed_State={single_product_extra_data.single_Prod_Add_Btn_Pressed_State}
 
                 // DON'T DELETE BELOW CODES.... APRIL 29
                 /*quantity={
@@ -665,7 +678,7 @@ const Product_Details_Page = ({
                       ? true
                       : (detail_of_product.item.single_Prod_Add_Btn_Pressed_State)}*/
               />
-            )}
+
           </View>
 
           {/*Add and favorite button ends here*/}

@@ -13,8 +13,9 @@ import {
 // import Scan_Slice from "../features/scan/scan_Slice.ts";
 import {productsApiSlice} from "../features/products/productsApiSlice.ts";
 import { setupListeners } from '@reduxjs/toolkit/query';
-import productSlice from "../features/products/productSlice.ts";
+// import productSlice from "../features/products/productSlice.ts";
 import auth_Slice from "../features/auth/auth_Slice.ts";
+import {productSlice} from '../features/products/productSlice.ts';
 
 
 
@@ -40,8 +41,10 @@ const combinedReducer = combineReducers({
     // todo_Reducer: toDoSlice,
     // scan_Reducer: Scan_Slice,
 
-    product_Reducer: productSlice,
+    // product_Reducer: productSlice,
+    // auth_Reducer: auth_Slice,
     auth_Reducer: auth_Slice,
+    product_Reducer: productSlice,
     [productsApiSlice.reducerPath]: productsApiSlice.reducer,
 
 

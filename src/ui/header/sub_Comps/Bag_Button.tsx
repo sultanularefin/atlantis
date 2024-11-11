@@ -36,8 +36,10 @@ import {useSafeAreaInsets} from "react-native-safe-area-context";
 import {useAppSelector} from "../../../lib/app/hooks.ts";
 import {
     select_Local_Cart_Length,
-    select_Local_Cart_Price_Localized_Monetary_Unit, select_Shipped_From_State_Or_Delivery_Currency
-} from "../../../lib/features/products/productSlice.ts";
+    select_Local_Cart_Price_Localized_Monetary_Unit,
+    select_Shipped_From_State_Or_Delivery_Currency,
+    // select_Shipped_From_State_Or_Delivery_Currency
+} from '../../../lib/features/products/productSlice.ts';
 import Vertical_Divider_Full_Width_Active_Order from "../../../divider/Vertical_Divider_Full_Width_Active_Order.tsx";
 import {
     convert_TO_BDT_From_GBP,
