@@ -3102,9 +3102,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"M75Dash3@workspace:.":
+"AwesomeProject@workspace:.":
   version: 0.0.0-use.local
-  resolution: "M75Dash3@workspace:."
+  resolution: "AwesomeProject@workspace:."
   dependencies:
     "@babel/core": ^7.25.2
     "@babel/preset-env": ^7.25.3
@@ -3143,8 +3143,8 @@ __metadata:
     react-native-pager-view: ^6.4.0
     react-native-permissions: ^4.1.5
     react-native-reanimated: ^3.16.1
-    react-native-safe-area-context: ^4.10.9
-    react-native-screens: ^3.34.0
+    react-native-safe-area-context: ^4.14.0
+    react-native-screens: ^4.0.0
     react-native-snackbar: ^2.3.2
     react-native-svg: ^15.8.0
     react-native-vector-icons: ^10.1.0
@@ -8526,26 +8526,26 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-safe-area-context@npm:^4.10.9":
-  version: 4.10.9
-  resolution: "react-native-safe-area-context@npm:4.10.9"
+"react-native-safe-area-context@npm:^4.14.0":
+  version: 4.14.0
+  resolution: "react-native-safe-area-context@npm:4.14.0"
   peerDependencies:
     react: "*"
     react-native: "*"
-  checksum: 150bf4fa7607e8de565cce0c45d321048a3c982f4c82cc2a49eb342def968559f538d4554c30c20fa8b2e6dc716c24846745b129dc25396e083d98c2a29962a2
+  checksum: 394523434f3c447ff7ace6fddb00fb976b14a1e7bed378eb8ea684a73153962ebcdb51445d9c2052d0d4211f5a69354aafc05875989b7e79bf1c5b592e490438
   languageName: node
   linkType: hard
 
-"react-native-screens@npm:^3.34.0":
-  version: 3.34.0
-  resolution: "react-native-screens@npm:3.34.0"
+"react-native-screens@npm:^4.0.0":
+  version: 4.0.0
+  resolution: "react-native-screens@npm:4.0.0"
   dependencies:
     react-freeze: ^1.0.0
     warn-once: ^0.1.0
   peerDependencies:
     react: "*"
     react-native: "*"
-  checksum: 28c1f6e556c318ffcbd79d153b9612cc8a0b8d8b70f909d3cde2fd6d0586a7c151a449e57400d8996f4ee6c3b5140c5c4f643a427e974f6dc573b2bcd8eb7356
+  checksum: 9da0f394fa26b7ec30f52fc758d6289b7e5123c7e6446bbce654ae31e07ab6d5488e51c0882a906cddc305b18e3cc96f9bc5631671f4fded38da5ef138b53cfa
   languageName: node
   linkType: hard
 

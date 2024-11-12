@@ -14,7 +14,7 @@ class MainActivity : ReactActivity() {
    * Returns the name of the main component registered from JavaScript. This is used to schedule
    * rendering of the component.
    */
-  override fun getMainComponentName(): String = "M75Dash3"
+  override fun getMainComponentName(): String = "AwesomeProject"
 
   /**
    * Returns the instance of the [ReactActivityDelegate]. We use [DefaultReactActivityDelegate]
@@ -25,8 +25,13 @@ class MainActivity : ReactActivity() {
 
 
        //react-native-screens override
-  override fun onCreate(savedInstanceState: Bundle?) {
-            super.onCreate(null);
-  }
+  //override fun onCreate(savedInstanceState: Bundle?) {
+       //     super.onCreate(null);
+  //}
+
+  //react-native-screens override
+      override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(null);
+      }
 
 }
