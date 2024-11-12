@@ -29,7 +29,7 @@ interface products_State_Interface {
   previous_Show_Detail_Button_Index_for_Item: number;
   local_Cart_Array: local_Cart_Item[];
   local_Cart_Price_Total: number;
-  local_Cart_Weight_Total: number;
+  // local_Cart_Weight_Total: number;
 
   single_Product_State: One_Product_Item_For_Detail_Interface;
   two_Image__data_For_Tag_State: MultipleImageHeaderNull_route_date_interface;
@@ -55,7 +55,7 @@ const initialState: products_State_Interface = {
   // added on april 07, 2023
   local_Cart_Array: [],
   local_Cart_Price_Total: 0,
-  local_Cart_Weight_Total: 0,
+  // local_Cart_Weight_Total: 0,
 
   single_Product_State: {} as One_Product_Item_For_Detail_Interface,
 
@@ -95,252 +95,7 @@ const populate_all_product_data_2 = (
   state.product_State = action.payload;
 };
 
-const decrement_Single_Product_2_For_Details_Page = (
-  state: any,
-  action: PayloadAction<increment_Decrement_Single_Item_Payload_Interface>,
-) => {
-  const decrement_Payload = action.payload;
-  const temp_Product_ID = decrement_Payload.product_ID;
-  const updated_Quantity = decrement_Payload.quantity_Single_Product;
 
-  if (decrement_Payload.quantity_Single_Product === 0) {
-    // state.single_Product_Add_Btn_Pressed_State = false;
-
-    state.single_Product_State.item.single_Prod_Add_Btn_Pressed_State = false; // action.payload;
-  }
-
-  state.single_Product_State.item.single_Prod_Quantity = updated_Quantity; //  decrement_Payload.quantity_Single_Product;// action.payload;
-  // state.single_Product_Quantity__State = action.payload;
-
-  const temp_Cart = state.local_Cart_Array;
-
-  //  TEMP CART  LENGTH 0
-
-  // SEARCH FIRST IN TEMP CART IF EXIST THEN INCREMENT
-  const foundIndex_Already_In_Cart_Decrement = temp_Cart.findIndex(
-    (one_Product: local_Cart_Item) => one_Product.id === temp_Product_ID,
-  );
-
-  // console.log("__foundIndex_Already_In_Cart_Decrement__: ", foundIndex_Already_In_Cart_Decrement);
-
-  // console.log("(temp_Cart[foundIndex_Already_In_Cart_Decrement].quantity): ",(temp_Cart[foundIndex_Already_In_Cart_Decrement].quantity));
-
-  // temp_Cart[foundIndex_Already_In_Cart].quantity= (temp_Cart[foundIndex_Already_In_Cart].quantity) + 1;
-
-  // ORDER IS IMPORTANT ORDER:2
-  // eslint-disable-next-line operator-assignment
-  temp_Cart[foundIndex_Already_In_Cart_Decrement].quantity =
-    temp_Cart[foundIndex_Already_In_Cart_Decrement].quantity - 1;
-
-  // state.product_State.[foundIndex_read].temp__Quantity = 1;
-
-  // ORDER IS IMPORTANT ORDER:1
-  // eslint-disable-next-line operator-assignment
-  temp_Cart[foundIndex_Already_In_Cart_Decrement].weight =
-    temp_Cart[foundIndex_Already_In_Cart_Decrement].quantity *
-    temp_Cart[foundIndex_Already_In_Cart_Decrement].weight;
-
-  /* state.product_State.[temp_Cart[foundIndex_Already_In_Cart].index].weight
-         = ((temp_Cart[foundIndex_Already_In_Cart].quantity) + 1)*(temp_Cart[foundIndex_Already_In_Cart].weight);*/
-
-  // price decrement begins
-  state.local_Cart_Price_Total -=
-    temp_Cart[foundIndex_Already_In_Cart_Decrement].price;
-
-  // price decrement ends
-
-  state.local_Cart_Weight_Total -=
-    temp_Cart[foundIndex_Already_In_Cart_Decrement].weight;
-
-  // state.product_State.[foundIndex_read].temp__Quantity = 1;
-  state.product_State[
-    temp_Cart[foundIndex_Already_In_Cart_Decrement].index
-  ].temp__Quantity = temp_Cart[foundIndex_Already_In_Cart_Decrement].quantity;
-
-  if (temp_Cart[foundIndex_Already_In_Cart_Decrement].quantity === 0) {
-    if (temp_Cart.length === 1) {
-      state.local_Cart_Array = [];
-      state.product_State[
-        temp_Cart[foundIndex_Already_In_Cart_Decrement].index
-      ].temp__Quantity = 0; //
-      state.product_State[
-        temp_Cart[foundIndex_Already_In_Cart_Decrement].index
-      ].btn_Pressed = false;
-      // (temp_Cart[foundIndex_Already_In_Cart_Decrement].quantity) - 1;
-    } else if (temp_Cart.length === 2) {
-      // extra [] added to save it as an array.
-
-      state.local_Cart_Array = [
-        temp_Cart[foundIndex_Already_In_Cart_Decrement === 1 ? 0 : 1],
-      ];
-
-      state.product_State[
-        temp_Cart[foundIndex_Already_In_Cart_Decrement === 1 ? 0 : 1].index
-      ].temp__Quantity = 0; //
-      state.product_State[
-        temp_Cart[foundIndex_Already_In_Cart_Decrement === 1 ? 0 : 1].index
-      ].btn_Pressed = false;
-
-      // state.product_State.[temp_Cart[foundIndex_Already_In_Cart_Decrement].index].temp__Quantity = 0;//
-      // state.product_State.[temp_Cart[foundIndex_Already_In_Cart_Decrement].index].btn_Pressed = false;
-    } else if (temp_Cart.length > 2) {
-      state.local_Cart_Array =
-        foundIndex_Already_In_Cart_Decrement === 0
-          ? temp_Cart.slice(1, temp_Cart.length)
-          : temp_Cart
-              .slice(0, foundIndex_Already_In_Cart_Decrement)
-              .concat(
-                temp_Cart.slice(
-                  foundIndex_Already_In_Cart_Decrement + 1,
-                  temp_Cart.length,
-                ),
-              );
-
-      state.product_State[
-        temp_Cart[foundIndex_Already_In_Cart_Decrement].index
-      ].temp__Quantity = 0; //
-      state.product_State[
-        temp_Cart[foundIndex_Already_In_Cart_Decrement].index
-      ].btn_Pressed = false;
-    }
-  }
-  // state.local_Cart_Array= state.local_Cart_Array.concat(temp_Cart_Item);
-
-  // updated_Quantity
-  else {
-    console.log(
-      'decrement_Single_Product_2_For_Details_Page>>>> [temp_Cart]: -- ',
-      temp_Cart,
-    );
-
-    state.local_Cart_Array = temp_Cart;
-  }
-};
-
-const increment_Single_Product_2_For_Details_Page = (
-  state: any,
-  action: PayloadAction<increment_Decrement_Single_Item_Payload_Interface>,
-) => {
-  const increment_Payload = action.payload;
-  const temp_Product_ID = increment_Payload.product_ID;
-
-  state.single_Product_State.single_Prod_Quantity += 1; //action.payload;
-
-  const temp_Cart = state.local_Cart_Array;
-
-  // console.log("temp_Cart: >>>",temp_Cart);
-
-  if (temp_Cart.length === 0) {
-    // const temp_Cart_Item:local_Cart_Item= add_Item_To_Cart_33(/*state.product_State, */temp_Product_ID);
-
-    // common code -----------------------------add temp_cart_item___begins here
-    //  TEMP CART  LENGTH 0
-    const foundIndex_read = state.product_State.findIndex(
-      (one_Product: One_Product_Item_For_Detail_Interface) =>
-        one_Product.id === temp_Product_ID,
-    );
-
-    // state.product_State[one_Product_Index].
-
-    // if (foundIndex_read){
-
-    const one_Item = state.product_State[foundIndex_read];
-
-    const cart_Item: local_Cart_Item = {
-      name: one_Item.name.toString(), // one_Item.name,
-      quantity: 1,
-      // price: one_Item.view_price,
-      price: one_Item.price,
-      image: one_Item.image_url[0],
-      id: one_Item._id,
-      index: foundIndex_read,
-      // weight: one_Item.item_weight,
-    };
-
-    state.product_State[foundIndex_read].temp__Quantity = 1;
-    state.product_State[foundIndex_read].btn_Pressed = true;
-
-    // price begins
-    // state.local_Cart_Price_Total = one_Item.view_price;
-    state.local_Cart_Price_Total = one_Item.price;
-
-    state.local_Cart_Array = state.local_Cart_Array.concat(cart_Item);
-
-    return;
-  } else {
-    // SEARCH FIRST IN TEMP CART IF EXIST THEN INCREMENT
-    const foundIndex_Already_In_Cart = temp_Cart.findIndex(
-      (one_Product: local_Cart_Item) => one_Product.id === temp_Product_ID,
-    );
-
-    // console.log("__foundIndex_Already_In_Cart__: ", foundIndex_Already_In_Cart);
-    if (foundIndex_Already_In_Cart !== -1) {
-      // const one_Item =  temp_Cart[foundIndex_Already_In_Cart];
-
-      // console.log("at __foundIndex_Already_In_Cart: ");
-
-      // eslint-disable-next-line operator-assignment
-      temp_Cart[foundIndex_Already_In_Cart].quantity =
-        temp_Cart[foundIndex_Already_In_Cart].quantity + 1;
-
-      // price begins
-      state.local_Cart_Price_Total +=
-        temp_Cart[foundIndex_Already_In_Cart].price;
-
-      // price ends
-
-      state.local_Cart_Weight_Total +=
-        temp_Cart[foundIndex_Already_In_Cart].weight;
-
-      state.local_Cart_Array = temp_Cart; //[...temp_Cart];
-
-      // state.product_State[foundIndex_read].temp__Quantity = 1;
-      state.product_State[
-        temp_Cart[foundIndex_Already_In_Cart].index
-      ].temp__Quantity = temp_Cart[foundIndex_Already_In_Cart].quantity;
-      state.product_State[temp_Cart[foundIndex_Already_In_Cart].index].weight =
-        temp_Cart[foundIndex_Already_In_Cart].quantity *
-        temp_Cart[foundIndex_Already_In_Cart].weight;
-
-      return;
-    } else {
-      //  TEMP CART  LENGTH 0
-      const foundIndex_read = state.product_State.findIndex(
-        (one_Product: One_Product_Item_For_Detail_Interface) =>
-          one_Product.id === temp_Product_ID,
-      );
-
-      // state.product_State[one_Product_Index].
-
-      // if (foundIndex_read){
-
-      const one_Item = state.product_State[foundIndex_read];
-
-      const cart_Item: local_Cart_Item = {
-        name: one_Item.name.toString(), // one_Item.name,
-        quantity: 1,
-        // price: one_Item.view_price,
-        price: one_Item.price,
-        image: one_Item.image_url[0],
-        id: one_Item._id,
-        index: foundIndex_read,
-        // weight: one_Item.item_weight,
-      };
-
-      state.product_State[foundIndex_read].temp__Quantity = 1;
-      state.product_State[foundIndex_read].btn_Pressed = true;
-
-      state.local_Cart_Price_Total += one_Item.price;
-      // price ends
-
-      state.local_Cart_Weight_Total += one_Item.item_weight;
-
-      state.local_Cart_Array = state.local_Cart_Array.concat(cart_Item);
-
-      return;
-    }
-  }
-};
 
 const populateTag_data_for_multiple_Images_2 = (
   state: any,
@@ -445,103 +200,26 @@ export const populate_Cart_Data_to_realm = createAsyncThunk(
   },
 );
 
+
+const add_price_to_total_cart_price_2 =  (state: any, action: PayloadAction<number>) => {
+
+  // console.log("price: <<add_price_to_total_cart_price_2>>: ::",action.payload);
+  state.local_Cart_Price_Total += action.payload;
+
+
+};
+
+const deduct_price_to_total_cart_price_2 =  (state: any, action: PayloadAction<number>) => {
+
+  // console.log("price: <<deduct_price_to_total_cart_price_2>>: ::",action.payload);
+  state.local_Cart_Price_Total -= action.payload;
+
+
+};
+
+
 const delete_One_Cart_Item_2 = (state: any, action: PayloadAction<number>) => {
   const cart_index = action.payload;
-
-  /*
-
-  const temp_Cart = state.local_Cart_Array;
-
-  const deleted_Item = temp_Cart[cart_index];
-
-  state.local_Cart_Array = temp_Cart.filter(
-    (item: local_Cart_Item, index: number) => index !== cart_index,
-  );
-
-  const temp_weight_to_Be_deducted =
-    deleted_Item.quantity * deleted_Item.weight;
-
-  const temp_Price_to_Be_deducted = deleted_Item.quantity * deleted_Item.price;
-
-
-    // console.log("__temp_weight_to_Be_deducted__: ",temp_weight_to_Be_deducted);
-    // console.log("__temp_Price_to_Be_deducted__: ",temp_Price_to_Be_deducted);
-
-
-
-  // IF HOME STATE CONTAINS THE DELETE D ITEM REMOVE IT. TOO.
-
-  // IF HOME STATE CONTAINS THE DELETE D ITEM REMOVE IT. TOO.
-
-  // IF HOME STATE CONTAINS THE DELETE D ITEM REMOVE IT. TOO.
-
-  const foundIndex_read = state.home_State.paginate_data.docs.findIndex(
-    (one_Product: Doc) => one_Product._id === deleted_Item.id,
-  );
-
-  if (foundIndex_read !== -1) {
-    // it may nOT BE PRESENT IF ,PRESENT THEN DO THIS, OTHER WISE DON'T DO THIS
-
-    state.home_State.paginate_data.docs[foundIndex_read].btn_Pressed = false;
-    state.home_State.paginate_data.docs[foundIndex_read].temp_Cart_Quantity = 0;
-    state.home_State.paginate_data.docs[foundIndex_read].show_Details_Btn = 0;
-  }
-
-  let old_total_Price = state.local_Cart_Price_Total;
-  let old_total_Weight = state.local_Cart_Weight_Total;
-
-
-
-
-
-    // IMP PLEASE DON'T UNCOMMENT THEM.
-
-    // state.local_Cart_Price_Total = state.local_Cart_Price_Total - temp_Price_to_Be_deducted;
-    // state.local_Cart_Weight_Total = state.local_Cart_Weight_Total- temp_weight_to_Be_deducted;
-
-
-
-
-
-  if (temp_Cart.length === 1) {
-    // now 0 then return absolute value
-    // 4.999998 -4.999999 === -0.000001
-
-    // IMPORTANT DON'T UNCOMMENT THIS LOGS  BELOW
-
-    // LOG  __temp_weight_to_Be_deducted__:  0.76
-    // LOG  __temp_Price_to_Be_deducted__:  5
-    // LOG  old_total_Price:  4.999999999999998
-    // LOG  old_total_Weight:  0.7600000000000003
-
-    // IMPORTANT DON'T UNCOMMENT THIS LOGS  ABOVE
-
-    old_total_Price = Math.floor(
-      Math.abs(old_total_Price - temp_Price_to_Be_deducted),
-    ); //state.local_Cart_Price_Total;
-    old_total_Weight = Math.floor(
-      Math.abs(old_total_Weight - temp_weight_to_Be_deducted),
-    ); // state.local_Cart_Weight_Total;
-
-
-
-    state.local_Cart_Price_Total = old_total_Price;
-    state.local_Cart_Weight_Total = old_total_Weight;
-
-    // https://stackoverflow.com/questions/1685680/how-to-avoid-scientific-notation-for-large-numbers-in-javascript
-
-    return;
-  } else {
-    old_total_Price -= temp_Price_to_Be_deducted; //state.local_Cart_Price_Total;
-    old_total_Weight -= temp_weight_to_Be_deducted; // state.local_Cart_Weight_Total;
-
-
-    state.local_Cart_Price_Total = old_total_Price;
-    state.local_Cart_Weight_Total = old_total_Weight;
-
-    return;
-  }
-  */
 
 
 };
@@ -551,6 +229,9 @@ const decrement_cart_item_for_home_index_0_2 = (
   action: PayloadAction<number>,
 ) => {
   const foundIndex_Already_In_Cart_Decrement = action.payload;
+
+  console.log("foundIndex_Already_In_Cart_Decrement: ",foundIndex_Already_In_Cart_Decrement);
+  console.log("state.local_Cart_Array: ",state.local_Cart_Array.length);
   // 999
   state.local_Cart_Array[foundIndex_Already_In_Cart_Decrement].quantity -= 1;
   // 999
@@ -608,15 +289,7 @@ const decrement_cart_item_for_home_index_0_2 = (
       // state.local_Cart_Array = temp_Cart;
     }
   }
-  // state.local_Cart_Array= state.local_Cart_Array.concat(temp_Cart_Item);
 
-  // updated_Quantity
-  /* else {
-       // console.log("decrement_Single_Cart_Item_2_For_Home_Page >> [temp_Cart]: at else -- ", temp_Cart);
-
-       state.local_Cart_Array = temp_Cart;
-     }*/
-  // ---ends
 };
 
 const increment_cart_item_for_home_index_2 = (
@@ -657,241 +330,14 @@ const store_temp_cart_object_2 = (
     'state.local_Cart_Array :  in << store_temp_cart_object_2 >>: ',
     state.local_Cart_Array,
   );
-  state.local_Cart_Price_Total = state.local_Cart_Array.reduce(
+/*  state.local_Cart_Price_Total = state.local_Cart_Array.reduce(
     (accumulator: number, one_Cart_Item: local_Cart_Item) =>
       accumulator + one_Cart_Item.price,
     0,
-  );
-};
-const increment_Single_Cart_Item_2__For_Home_Page = (
-  state: any,
-  action: PayloadAction<number>,
-) => {
-  // ----..
-
-  // ----...
-  const home_Item_Index = action.payload;
-
-  const temp_Cart = state.local_Cart_Array;
-
-  const temp_Product_ID = state.product_State[home_Item_Index]._id;
-  const one_Item = state.product_State[home_Item_Index];
-
-  if (temp_Cart.length === 0) {
-    const cart_Item: local_Cart_Item = {
-      name: one_Item.name.toString(), // one_Item.name,
-      quantity: 1,
-      // price: one_Item.view_price,
-      price: one_Item.price,
-      image: one_Item.image_url[0],
-      id: one_Item._id,
-      index: home_Item_Index, //foundIndex_read,
-      // weight: one_Item.item_weight,
-    };
-
-    state.product_State[home_Item_Index].temp__Quantity = 1;
-    state.product_State[home_Item_Index].btn_Pressed = true;
-
-    // price begins
-    // state.local_Cart_Price_Total = one_Item.view_price;
-
-    state.local_Cart_Price_Total = one_Item.price;
-
-    state.local_Cart_Weight_Total = one_Item.item_weight;
-
-    state.local_Cart_Array = state.local_Cart_Array.concat(cart_Item);
-
-    return;
-  } else {
-    // else if (temp_Cart.length > 0) {
-    //  TEMP CART  LENGTH  > 0
-
-    console.log('___at TEMP CART  LENGTH  > 0 ');
-
-    // console.log("__temp_Product_ID__: ",temp_Product_ID);
-    // console.log("temp_Cart: ", temp_Cart);
-
-    // SEARCH FIRST IN TEMP CART IF EXIST THEN INCREMENT
-    const foundIndex_Already_In_Cart = temp_Cart.findIndex(
-      (one_Product: local_Cart_Item) => one_Product.id === temp_Product_ID,
-    );
-
-    // console.log("__foundIndex_Already_In_Cart__: ", foundIndex_Already_In_Cart);
-    if (foundIndex_Already_In_Cart !== -1) {
-      // const one_Item =  temp_Cart[foundIndex_Already_In_Cart];
-
-      // console.log("at __foundIndex_Already_In_Cart: ");
-
-      // eslint-disable-next-line operator-assignment
-      temp_Cart[foundIndex_Already_In_Cart].quantity =
-        temp_Cart[foundIndex_Already_In_Cart].quantity + 1;
-
-      // price begins
-      state.local_Cart_Price_Total +=
-        temp_Cart[foundIndex_Already_In_Cart].price;
-
-      // price ends
-
-      state.local_Cart_Weight_Total +=
-        temp_Cart[foundIndex_Already_In_Cart].weight;
-
-      state.local_Cart_Array = temp_Cart; //[...temp_Cart];
-
-      // state.product_State[foundIndex_read].temp__Quantity = 1;
-      state.product_State[home_Item_Index].temp__Quantity =
-        temp_Cart[foundIndex_Already_In_Cart].quantity;
-
-      return;
-    } else {
-      const cart_Item: local_Cart_Item = {
-        name: one_Item.name.toString(), // one_Item.name,
-        quantity: 1,
-        // price: one_Item.view_price,
-        price: one_Item.price,
-        image: one_Item.image_url[0],
-        id: one_Item._id,
-        index: home_Item_Index,
-        // weight: one_Item.item_weight,
-      };
-
-      state.product_State[home_Item_Index].temp__Quantity = 1;
-
-      state.local_Cart_Price_Total += one_Item.price;
-
-      // state.local_Cart_Price_Total = one_Item.price;
-
-      // price ends
-
-      // state.local_Cart_Weight_Total += one_Item.item_weight;
-
-      // common code ----------------add temp_cart_item__ends here
-
-      // const temp_Cart_Item:local_Cart_Item= add_New_Item_In_Cart(state.product_State,temp_Product_ID);
-
-      // temp_Cart.concat(temp_Cart_Item);
-      state.local_Cart_Array = state.local_Cart_Array.concat(cart_Item);
-      // temp_Cart.concat(cart_Item);
-
-      // foundIndex_Already_In_Cart
-
-      // state.local_Cart_Array=[...temp_Cart];
-
-      return;
-    }
-  }
+  );*/
 };
 
-const decrement_Single_Cart_Item_2_For_Home_Page = (
-  state: any,
-  action: PayloadAction<number>,
-) => {
-  // const decrement_Payload = action.payload;
-  // const temp_Product_ID = decrement_Payload.product_ID;
-  // const previous_Cart_Qtity = decrement_Payload.single_Cart_Item_Qtity;
 
-  const home_Item_Index = action.payload;
-
-  // const temp_Cart = state.local_Cart_Array;
-
-  // console.log("temp_Cart: >>>",temp_Cart);
-
-  const temp_Product_ID = state.product_State[home_Item_Index]._id;
-  const one_Item = state.product_State[home_Item_Index];
-
-  let temp_Cart = state.local_Cart_Array;
-
-  //  TEMP CART  LENGTH 0
-
-  // SEARCH FIRST IN TEMP CART IF EXIST THEN INCREMENT
-  const foundIndex_Already_In_Cart_Decrement = temp_Cart.findIndex(
-    (one_Product: local_Cart_Item) => one_Product.id === temp_Product_ID,
-  );
-
-  // ORDER IS IMPORTANT ORDER:2
-  // eslint-disable-next-line operator-assignment
-  temp_Cart[foundIndex_Already_In_Cart_Decrement].quantity =
-    temp_Cart[foundIndex_Already_In_Cart_Decrement].quantity - 1;
-
-  // state.product_State[foundIndex_read].temp__Quantity = 1;
-
-  // ORDER IS IMPORTANT ORDER:1
-  // eslint-disable-next-line operator-assignment
-  temp_Cart[foundIndex_Already_In_Cart_Decrement].weight =
-    temp_Cart[foundIndex_Already_In_Cart_Decrement].quantity *
-    temp_Cart[foundIndex_Already_In_Cart_Decrement].weight;
-
-  /* state.product_State[temp_Cart[foundIndex_Already_In_Cart].index].weight
-         = ((temp_Cart[foundIndex_Already_In_Cart].quantity) + 1)*(temp_Cart[foundIndex_Already_In_Cart].weight);*/
-
-  // price decrement begins
-  state.local_Cart_Price_Total -=
-    temp_Cart[foundIndex_Already_In_Cart_Decrement].price;
-
-  // price decrement ends
-
-  state.local_Cart_Weight_Total -=
-    temp_Cart[foundIndex_Already_In_Cart_Decrement].weight;
-
-  // state.product_State[foundIndex_read].temp__Quantity = 1;
-  state.product_State[home_Item_Index].temp__Quantity =
-    temp_Cart[foundIndex_Already_In_Cart_Decrement].quantity;
-
-  if (temp_Cart[foundIndex_Already_In_Cart_Decrement].quantity === 0) {
-    // const temp_local_Cart = state.local_Cart_Array;
-
-    // console.log("temp_Cart: (when 0) ", temp_Cart);
-    if (temp_Cart.length === 1) {
-      // state.local_Cart_Array = [];
-
-      temp_Cart = [];
-      // state.product_State[home_Item_Index].temp__Quantity = 0;//
-      state.product_State[home_Item_Index].btn_Pressed = false;
-      // (temp_Cart[foundIndex_Already_In_Cart_Decrement].quantity) - 1;
-      state.local_Cart_Array = temp_Cart;
-    } else if (temp_Cart.length === 2) {
-      // extra [] added to save it as an array.
-
-      temp_Cart = [
-        temp_Cart[foundIndex_Already_In_Cart_Decrement === 1 ? 0 : 1],
-      ];
-
-      // state.product_State[home_Item_Index].temp__Quantity = 0;//
-      state.product_State[home_Item_Index].btn_Pressed = false;
-
-      console.log('temp_Cart when previous length was 2', temp_Cart);
-
-      state.local_Cart_Array = temp_Cart;
-      // state.product_State[temp_Cart[foundIndex_Already_In_Cart_Decrement].index].temp__Quantity = 0;//
-      // state.product_State[temp_Cart[foundIndex_Already_In_Cart_Decrement].index].btn_Pressed = false;
-    } else if (temp_Cart.length > 2) {
-      temp_Cart =
-        foundIndex_Already_In_Cart_Decrement === 0
-          ? temp_Cart.slice(1, temp_Cart.length)
-          : temp_Cart
-              .slice(0, foundIndex_Already_In_Cart_Decrement)
-              .concat(
-                temp_Cart.slice(
-                  foundIndex_Already_In_Cart_Decrement + 1,
-                  temp_Cart.length,
-                ),
-              );
-
-      state.product_State[home_Item_Index].temp__Quantity = 0; //
-      // state.product_State[temp_Cart[foundIndex_Already_In_Cart_Decrement].index].btn_Pressed = false;
-      state.product_State[home_Item_Index].btn_Pressed = false;
-
-      state.local_Cart_Array = temp_Cart;
-    }
-  }
-  // state.local_Cart_Array= state.local_Cart_Array.concat(temp_Cart_Item);
-
-  // updated_Quantity
-  else {
-    // console.log("decrement_Single_Cart_Item_2_For_Home_Page >> [temp_Cart]: at else -- ", temp_Cart);
-
-    state.local_Cart_Array = temp_Cart;
-  }
-};
 
 const update_All_Products_Add_BTN_Pressed_State__And_Single_Product_Add_Btn_Pressed_State_2 =
   (state: any, action: PayloadAction<number>) => {
@@ -1004,8 +450,6 @@ export const product_Slice = createSlice({
     update_All_Products_Add_BTN_Pressed_State__And_Single_Product_Add_Btn_Pressed_State:
       update_All_Products_Add_BTN_Pressed_State__And_Single_Product_Add_Btn_Pressed_State_2,
 
-    decrement_Item_From_Home: decrement_Single_Cart_Item_2_For_Home_Page,
-    increment_Item_From_Home: increment_Single_Cart_Item_2__For_Home_Page,
 
     disable_Btn_Pressed_State_In_Home_Page_0:
       disable_Btn_Pressed_State_In_Home_Page,
@@ -1016,11 +460,11 @@ export const product_Slice = createSlice({
     update_single_Product_Add_Btn_Pressed_State:
       update_single_Product_Add_Btn_Pressed_State_2,
 
-    increment_Single_Product_For_Details_Page:
-      increment_Single_Product_2_For_Details_Page,
+    // increment_Single_Product_For_Details_Page:
+    //   increment_Single_Product_2_For_Details_Page,
 
-    decrement_Single_Product_For_Details_Page:
-      decrement_Single_Product_2_For_Details_Page,
+    // decrement_Single_Product_For_Details_Page:
+    //   decrement_Single_Product_2_For_Details_Page,
 
     populate_all_product_data: populate_all_product_data_2,
 
@@ -1037,6 +481,8 @@ export const product_Slice = createSlice({
 
     update_product_detail_extra_data: update_product_detail_extra_data_2,
     delete_One_Cart_Item: delete_One_Cart_Item_2,
+    add_price_to_total_cart_price: add_price_to_total_cart_price_2,
+    deduct_price_to_total_cart_price: deduct_price_to_total_cart_price_2,
   },
   extraReducers: (builder) => {
     /* builder
@@ -1075,13 +521,11 @@ export const product_Slice = createSlice({
 export const {
   single_Product__Show_Details_Button_true,
   update_All_Products_Add_BTN_Pressed_State__And_Single_Product_Add_Btn_Pressed_State,
-  decrement_Item_From_Home,
-  increment_Item_From_Home,
+
   disable_Btn_Pressed_State_In_Home_Page_0,
   populateTag_data_for_multiple_Images,
   update_single_Product_Add_Btn_Pressed_State,
-  increment_Single_Product_For_Details_Page,
-  decrement_Single_Product_For_Details_Page,
+
   populate_all_product_data,
 
   // added on 10th november
@@ -1090,9 +534,14 @@ export const {
   increment_cart_item_for_home_index_0,
   decrement_cart_item_for_home_index_0,
 
+  add_price_to_total_cart_price,
+  deduct_price_to_total_cart_price,
+
+
   product_detail_only_in_double_tap,
   update_product_detail_extra_data,
   delete_One_Cart_Item,
+
 } = product_Slice.actions;
 
 // export const selectCount = (state: RootState) => state.products_Reducer.value; scan_Reducer
@@ -1117,6 +566,8 @@ export const select_Local_Cart_Length = (state: RootState) =>
 export const select_Local_Cart_Price_Localized_Monetary_Unit = (
   state: RootState,
 ) => state.products_Reducer.local_Cart_Price_Total;
+
+
 export const export_Single_Product_Details = (state: RootState) =>
   state.products_Reducer.single_Product_State;
 

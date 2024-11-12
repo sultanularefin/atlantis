@@ -13,17 +13,18 @@ import Love_Button_Home_Page from './Love_Button_Home_Page';
 
 import {useAppDispatch, useAppSelector} from '../../../../../lib/app/hooks.ts';
 import {
-    decrement_cart_item_for_home_index_0,
-
-    decrement_Item_From_Home,
-    disable_Btn_Pressed_State_In_Home_Page_0,
-    increment_cart_item_for_home_index_0,
-    increment_Item_From_Home,
-    select_Local_Cart,
-    select_Local_Cart_Price_Localized_Monetary_Unit,
-    store_temp_cart_array,
-    store_temp_cart_object,
-    update_All_Products_Add_BTN_Pressed_State__And_Single_Product_Add_Btn_Pressed_State,
+  decrement_cart_item_for_home_index_0,
+  // decrement_Item_From_Home,
+  disable_Btn_Pressed_State_In_Home_Page_0,
+  increment_cart_item_for_home_index_0,
+  // increment_Item_From_Home,
+  select_Local_Cart,
+  select_Local_Cart_Price_Localized_Monetary_Unit,
+  store_temp_cart_array,
+  store_temp_cart_object,
+  add_price_to_total_cart_price,
+  update_All_Products_Add_BTN_Pressed_State__And_Single_Product_Add_Btn_Pressed_State,
+  deduct_price_to_total_cart_price,
 } from '../../../../../lib/features/products/product_Slice.ts';
 import {local_Cart_Item} from '../../../../../interfaces/products/product.ts';
 import {
@@ -65,7 +66,7 @@ const Add_Cart_OR_Favorite__Btn_Home_Page: React.FC<
   };
 
   const add_To_Cart_Pressed = () => {
-    console.log('dispatch(add_To_Cart_Pressed pressed For Item in Home)');
+    // console.log('dispatch(add_To_Cart_Pressed pressed For Item in Home)');
 
     if (!add_Button_Pressed_State) {
       // Manually update the query cache
@@ -86,15 +87,20 @@ const Add_Cart_OR_Favorite__Btn_Home_Page: React.FC<
 
     /*  else if(add_Button_Pressed_State){
 
-          console.log
+                          console.log
 
 
-      }*/
+                      }*/
   };
 
-  const local_Cart_Price = useAppSelector(
-    select_Local_Cart_Price_Localized_Monetary_Unit,
-  );
+  /* const local_Cart_Price = useAppSelector(
+         select_Local_Cart_Price_Localized_Monetary_Unit,
+       );
+
+       let temp_cart_price= local_Cart_Price;
+
+
+       console.log("local_Cart_Price: ",local_Cart_Price);*/
 
   const temp_Cart: local_Cart_Item[] = useAppSelector(select_Local_Cart);
 
@@ -103,23 +109,23 @@ const Add_Cart_OR_Favorite__Btn_Home_Page: React.FC<
 
     // increment_from_home(home_item_index);
 
-    console.log('at << increment_from_home >> : ', home_item_index);
+    // console.log('at << increment_from_home >> : ', home_item_index);
 
     dispatch(
       productsApiSlice.util.updateQueryData(
         'getProducts',
         {limit: home_page_product_limit},
         (draft_Products) => {
-          const temp_Product_ID = draft_Products[home_item_index].id;
+          // const temp_Product_ID = draft_Products[home_item_index].id;
           const one_Item = draft_Products[home_item_index];
-          console.log(
-            'temp_Cart.length at << increment_from_home >>:',
-            temp_Cart.length,
-          );
+          /*  console.log(
+                        'temp_Cart.length at << increment_from_home >>:',
+                        temp_Cart.length,
+                      );*/
 
           if (temp_Cart.length === 0) {
             const cart_Item: local_Cart_Item = {
-              name: one_Item.title.toString(), // one_Item.name,
+              name: one_Item.title, // one_Item.name,
               quantity: 1,
 
               price: one_Item.price,
@@ -133,14 +139,13 @@ const Add_Cart_OR_Favorite__Btn_Home_Page: React.FC<
 
             dispatch(store_temp_cart_object(cart_Item));
 
-            return;
+            // return;
           } else {
             console.log('___at TEMP CART  LENGTH  > 0 ');
 
             // SEARCH FIRST IN TEMP CART IF EXIST THEN INCREMENT
             const foundIndex_Already_In_Cart = temp_Cart.findIndex(
-              (one_Product: local_Cart_Item) =>
-                one_Product.id === temp_Product_ID,
+              (one_Product: local_Cart_Item) => one_Product.id === one_Item.id,
             );
 
             // console.log("__foundIndex_Already_In_Cart__: ", foundIndex_Already_In_Cart);
@@ -148,13 +153,15 @@ const Add_Cart_OR_Favorite__Btn_Home_Page: React.FC<
               draft_Products[home_item_index].temp__Quantity += 1;
 
               dispatch(
-                increment_cart_item_for_home_index_0(foundIndex_Already_In_Cart),
+                increment_cart_item_for_home_index_0(
+                  foundIndex_Already_In_Cart,
+                ),
               );
 
-              return;
+              // return;
             } else {
               const cart_Item: local_Cart_Item = {
-                name: one_Item.title.toString(), // one_Item.name,
+                name: one_Item.title, // one_Item.name,
                 quantity: 1,
 
                 price: one_Item.price,
@@ -164,12 +171,22 @@ const Add_Cart_OR_Favorite__Btn_Home_Page: React.FC<
               };
 
               draft_Products[home_item_index].temp__Quantity = 1;
+              // console.log("local_Cart_Price: <before>> ",temp_cart_price);
+              /*  console.log(
+                                'draft_Products[home_item_index].price: ',
+                                draft_Products[home_item_index].price,
+                              );*/
+              const item_temp_cart_price =
+                draft_Products[home_item_index].price;
 
-              dispatch(store_temp_cart_object(cart_Item));
+              // console.log("local_Cart_Price: << after >> ",temp_cart_price);
 
-              return;
+              // return;
             }
           }
+
+          const item_temp_cart_price = draft_Products[home_item_index].price;
+          dispatch(add_price_to_total_cart_price(item_temp_cart_price));
         },
       ),
     );
@@ -177,14 +194,14 @@ const Add_Cart_OR_Favorite__Btn_Home_Page: React.FC<
 
   const decrement_button_Pressed = () => {
     /* if (quantity === 0) {
-       // dispatch(diable_Btn_Pressed_State_In_Home_Page_0(index));
+                       // dispatch(diable_Btn_Pressed_State_In_Home_Page_0(index));
 
-       dispatch(disable_Btn_Pressed_State_In_Home_Page_0(index));
-       return;
-     } else {
-       dispatch(decrement_Item_From_Home(index));
-       return;
-     }*/
+                       dispatch(disable_Btn_Pressed_State_In_Home_Page_0(index));
+                       return;
+                     } else {
+                       dispatch(decrement_Item_From_Home(index));
+                       return;
+                     }*/
 
     if (quantity === 0) {
       dispatch(
@@ -219,16 +236,28 @@ const Add_Cart_OR_Favorite__Btn_Home_Page: React.FC<
                 one_Product.id === temp_Product_ID,
             );
 
-            console.log(
-              '__foundIndex_Already_In_Cart__: ',
-              foundIndex_Already_In_Cart,
-            );
+            /*    console.log(
+                              `temp_Product_ID: ${typeof temp_Product_ID} value: ${temp_Product_ID}`,
+                            );
+                            console.log(`temp_Cart: ${typeof temp_Cart} value: ${JSON.stringify(temp_Cart)}`);
 
-            draft_Products[home_item_index].temp__Quantity -= 1;
+                            console.log(
+                              '__foundIndex_Already_In_Cart__: ',
+                              foundIndex_Already_In_Cart,
+                            );*/
 
-            dispatch(decrement_cart_item_for_home_index_0(foundIndex_Already_In_Cart));
+            if (foundIndex_Already_In_Cart !== -1) {
+              draft_Products[home_item_index].temp__Quantity -= 1;
+              const item_temp_cart_price =
+                draft_Products[home_item_index].price;
+              dispatch(deduct_price_to_total_cart_price(item_temp_cart_price));
 
-
+              dispatch(
+                decrement_cart_item_for_home_index_0(
+                  foundIndex_Already_In_Cart,
+                ),
+              );
+            }
           },
         ),
       );

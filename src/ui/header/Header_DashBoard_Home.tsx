@@ -178,7 +178,8 @@ const Header_DashBoard_Home: React.FC<Header_Props> = ({
                     nav={nav}
                     comp_Height={comp_Height - 1} // comp_Height - hairlineWidth in the bottom border.
                     comp_Width={comp_Width}
-                    bg_color={ukbd_navy_blue}
+                    bg_color={'deepskyblue'}
+                    flex_val={6}
 
                 />
 
@@ -189,6 +190,7 @@ const Header_DashBoard_Home: React.FC<Header_Props> = ({
                     comp_Height={comp_Height - 1}
                     comp_Width={comp_Width}
                     bg_color={ukbd_navy_blue}
+                    flex_val={2}
                 />
 
                 {/*user button ends here*/}

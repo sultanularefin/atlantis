@@ -31,6 +31,7 @@ export interface User_Button_Props {
     comp_Height: number,
     comp_Width: number,
     bg_color: string,
+    flex_val: number,
 }
 
 const User_Button: React.FC<User_Button_Props> = ({
@@ -38,6 +39,7 @@ const User_Button: React.FC<User_Button_Props> = ({
                                                       comp_Height,
                                                       comp_Width,
                                                       bg_color,
+    flex_val,
                                                   }) => {
 // const User_Button = ()=>{
     const localStorage: get_Detail_By_User_ID_server_Token = useAppSelector(select_Logger_Data_BY_ID);
@@ -77,138 +79,33 @@ const User_Button: React.FC<User_Button_Props> = ({
         // return nav.navigate("Order_List_Page");
     };
 
-    const logout_Button_Pressed = () => {
-        set_Modal_Visible_State(false);
-        // return nav.navigate("Profile");
-        console.log("__Logout Button Pressed");
-    };
+
 
     return (
 
         <View style={{
-            flexDirection: 'column',
-            height: comp_Height - 1,
-            justifyContent: 'center',
-            alignItems: 'center',
+
+            flex: flex_val,
+            display: 'flex',
+            flexDirection: 'row-reverse',
         }
 
         }>
 
             {/*modal begins here*/}
 
-            <Modal
-                animationType="slide"
-                transparent={true}
-                visible={modal_Visible_State}
-                onRequestClose={() => {
-                    // Alert.alert('Modal has been closed.');
-                    set_Modal_Visible_State(!modal_Visible_State);
-                }}>
-                <View style={{
-                    ...user_Button_Modal_Styles.centeredView,
 
-                    // imp code.. april 11,2023
-                    paddingTop: insets.top + comp_Height + 2,
-                    // paddingRight: comp_Width / 16,
-
-
-                }}>
-                    <View
-                        style={{
-                            ...user_Button_Modal_Styles.modalView,
-                            width: comp_Width / 3.2,
-                            marginRight: (comp_Width - ((comp_Width / 2.1) * 2)) / 1.3,
-                            // ===> IMP===> const Home_Each_Item_Width = (displayWidth / 2.1);
-
-                        }}
-
-                    >
-
-
-                        {/* <Single_Bag_Row
-                            comp_Height={comp_Height}
-                            local_Cart_Length_2={local_Cart_Length}
-                            local_Cart_Price_2={local_Cart_Price}
-                            currency_Sign={local_Monetary_Unit.text}
-                            with_Commas={true}
-                            comp_Width_Single_ROw={comp_Width / 2.5}
-                        />*/}
-
-                        <Pressable
-                            onPress={Profile_Button_Pressed}
-
-
-                            style={({pressed}) => [
-                                {
-                                    ...user_Button_Modal_Styles.notificationBox,
-                                    // width: d_width * 0.93,
-                                    width: comp_Width / 5,
-                                    height: 30,
-                                    backgroundColor: pressed? very_light_red_ukbd :'transparent',
-                                }]
-                            }
-                        >
-
-                            <Text style={user_Button_Modal_Styles.description}>Profile</Text>
-
-                        </Pressable>
-
-                        <Vertical_Divider_Full_Width_Active_Order
-                            compHeight={10}
-                        />
-                        <Pressable
-                            onPress={logout_Button_Pressed}
-                            style={({pressed}) => [
-                                {
-                                    ...user_Button_Modal_Styles.notificationBox,
-                                    // width: d_width * 0.93,
-                                    width: comp_Width / 5,
-                                    height: 30,
-                                    backgroundColor: pressed? very_light_red_ukbd :'transparent',
-                                }]
-                            }
-                        >
-
-
-                            <Text style={user_Button_Modal_Styles.description}>Sign Out</Text>
-
-                        </Pressable>
-
-
-                        {/*<Text style={user_Button_Modal_Styles.modalText}>Hello World!</Text>*/}
-
-
-                        <Vertical_Divider_Full_Width_Active_Order
-                            compHeight={20}
-                        />
-
-
-                        <View style={{
-                            flexDirection: 'column',
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                            height: 50,
-                            // paddingVertical: 10,
-                        }}>
-                            <Pressable
-                                style={{
-                                    ...user_Button_Modal_Styles.button,
-                                    width: comp_Width / 5,
-                                }}
-                                onPress={() => set_Modal_Visible_State(!modal_Visible_State)}>
-                                <Text style={user_Button_Modal_Styles.textStyle}>Close</Text>
-                            </Pressable>
-
-                        </View>
-                    </View>
-                </View>
-            </Modal>
 
             {/*modal ends here*/}
 
             <Pressable
                 style={({pressed}) => [
-                    {}]
+                    {
+                        flexDirection: 'column',
+                        height: comp_Height - 1,
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                    }]
                 }
 
                 onPress={User_Button_Pressed}

@@ -39,10 +39,11 @@ import {
 // import {Store} from "../../../../../lib/interfaces_Slice/product_Related_Interfaces";
 import {useAppDispatch, useAppSelector} from '../../../../../lib/app/hooks.ts';
 import {
-  decrement_cart_item_for_home_index_0,
-  decrement_Single_Product_For_Details_Page,
+  add_price_to_total_cart_price,
+  decrement_cart_item_for_home_index_0, deduct_price_to_total_cart_price,
+  // decrement_Single_Product_For_Details_Page,
   increment_cart_item_for_home_index_0,
-  increment_Single_Product_For_Details_Page,
+  // increment_Single_Product_For_Details_Page,
   select_Local_Cart,
   select_Local_Cart_Price_Localized_Monetary_Unit,
   select_single_product_extra_data,
@@ -97,7 +98,7 @@ const Increment_Decrement_Favorite_BTN_In_Details_Page: React.FC<
     select_Logger_Data_BY_ID,
   );
 
-  console.log("quantity: ",quantity);
+  // console.log("quantity: ",quantity);
 
   const dispatch = useAppDispatch();
 
@@ -110,7 +111,7 @@ const Increment_Decrement_Favorite_BTN_In_Details_Page: React.FC<
 
 
   const add_To_Cart_Pressed = () => {
-    console.log('dispatch(add_To_Cart_Pressed pressed)');
+    // console.log('dispatch(add_To_Cart_Pressed pressed)');
 
 
     const payload_one_product_additional_data:single_product_other_extra_data_interface={
@@ -155,17 +156,17 @@ const Increment_Decrement_Favorite_BTN_In_Details_Page: React.FC<
                                                                 index: number) => prod_item.id === this_prod_id);
 
 
-          console.log("Index_among_all_products: ",Index_among_all_products);
+          // console.log("Index_among_all_products: ",Index_among_all_products);
 
           if (Index_among_all_products) {
             // state.home_State.paginate_data.docs[action.payload].temp__Quantity = 1;
             draft_Products[Index_among_all_products].btn_Pressed = true;
             // draft_Products[Index_among_all_products].temp__Quantity += 1;
 
-            console.log("draft_Products[Index_among_all_products].temp__Quantity: ",draft_Products[Index_among_all_products].temp__Quantity);
+            // console.log("draft_Products[Index_among_all_products].temp__Quantity: ",draft_Products[Index_among_all_products].temp__Quantity);
 
             draft_Products[Index_among_all_products].temp__Quantity +=1;
-            console.log("draft_Products[Index_among_all_products].temp__Quantity: ",draft_Products[Index_among_all_products].temp__Quantity);
+            // console.log("draft_Products[Index_among_all_products].temp__Quantity: ",draft_Products[Index_among_all_products].temp__Quantity);
 
 
             const one_Item = draft_Products[Index_among_all_products];
@@ -228,7 +229,10 @@ const Increment_Decrement_Favorite_BTN_In_Details_Page: React.FC<
 
           }
 
-          console.log("draft_Products[Index_among_all_products].temp__Quantity: ",draft_Products[Index_among_all_products].temp__Quantity);
+          // console.log("draft_Products[Index_among_all_products].temp__Quantity: ",draft_Products[Index_among_all_products].temp__Quantity);
+
+          const item_temp_cart_price = draft_Products[Index_among_all_products].price;
+          dispatch(add_price_to_total_cart_price(item_temp_cart_price));
 
         },
       ),
@@ -302,14 +306,9 @@ const Increment_Decrement_Favorite_BTN_In_Details_Page: React.FC<
                                                                            index: number) => prod_item.id === this_prod_id);
 
 
-                console.log("Index_among_all_products: ",Index_among_all_products);
+                // console.log("Index_among_all_products: ",Index_among_all_products);
 
                 if (Index_among_all_products) {
-                  // state.home_State.paginate_data.docs[action.payload].temp__Quantity = 1;
-                  // draft_Products[Index_among_all_products].btn_Pressed = true;
-                  // draft_Products[Index_among_all_products].temp__Quantity += 1;
-
-                  // console.log("draft_Products[Index_among_all_products].temp__Quantity: ",draft_Products[Index_among_all_products].temp__Quantity);
 
                   draft_Products[Index_among_all_products].temp__Quantity -= 1;
                   // console.log("draft_Products[Index_among_all_products].temp__Quantity: ",draft_Products[Index_among_all_products].temp__Quantity);
@@ -319,7 +318,7 @@ const Increment_Decrement_Favorite_BTN_In_Details_Page: React.FC<
 
 
 
-                    console.log('___at TEMP CART  LENGTH  > 0 ');
+                    // console.log('___at TEMP CART  LENGTH  > 0 ');
 
                     // SEARCH FIRST IN TEMP CART IF EXIST THEN INCREMENT
                     const foundIndex_Already_In_Cart = local_Cart.findIndex(
@@ -335,14 +334,23 @@ const Increment_Decrement_Favorite_BTN_In_Details_Page: React.FC<
                           decrement_cart_item_for_home_index_0(foundIndex_Already_In_Cart),
                       );
 
+                      const item_temp_cart_price = draft_Products[foundIndex_Already_In_Cart].price;
+                      dispatch(deduct_price_to_total_cart_price(item_temp_cart_price));
+
                       // return;
 
                   }
 
 
                 }
+
+
+
               },
           ),
+
+
+
       );
 
       return;
