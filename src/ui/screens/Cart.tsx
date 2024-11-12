@@ -356,7 +356,7 @@ const Cart: React.FC<Cart_Props> = ({
 
 
 
-                    keyExtractor={(item: local_Cart_Item, index) => `${index}${item.id}${item.index}`}
+                    keyExtractor={(item: local_Cart_Item, index) => `${index}${item.product_ID}${item.product_Index}`}
 
                     // required ends here___
 

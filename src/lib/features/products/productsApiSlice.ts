@@ -32,7 +32,7 @@ const return_modified_Doc = (
     // local_Cart.findIndex()
 
     const foundIndex_Already_In_Cart = local_Cart.findIndex(
-      (one_Product: local_Cart_Item) => one_Product.id === one_Doc.id,
+      (one_Product: local_Cart_Item) => one_Product.product_ID === one_Doc.id,
     );
 
     /*  console.log(
@@ -94,7 +94,7 @@ export const productsApiSlice = createApi({
               state.products_Reducer.local_Cart_Array.length === 0
                 ? []
                 : state.products_Reducer.local_Cart_Array.map(
-                    (one_Product: local_Cart_Item) => one_Product.id,
+                    (one_Product: local_Cart_Item) => one_Product.product_ID,
                   );
             const yourData = data.map(
               (

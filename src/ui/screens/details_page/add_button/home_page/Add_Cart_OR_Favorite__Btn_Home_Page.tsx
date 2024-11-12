@@ -130,8 +130,8 @@ const Add_Cart_OR_Favorite__Btn_Home_Page: React.FC<
 
               price: one_Item.price,
               image: one_Item.image,
-              id: one_Item.id,
-              index: home_item_index, //foundIndex_read,
+              product_ID: one_Item.id,
+              product_Index: home_item_index, //foundIndex_read,
             };
 
             draft_Products[home_item_index].temp__Quantity = 1;
@@ -159,7 +159,7 @@ const Add_Cart_OR_Favorite__Btn_Home_Page: React.FC<
 
             // SEARCH FIRST IN TEMP CART IF EXIST THEN INCREMENT
             const foundIndex_Already_In_Cart = temp_Cart.findIndex(
-              (one_Product: local_Cart_Item) => one_Product.id === one_Item.id,
+              (one_cart_Item: local_Cart_Item) => one_cart_Item.product_ID === one_Item.id,
             );
 
             // console.log("__foundIndex_Already_In_Cart__: ", foundIndex_Already_In_Cart);
@@ -187,8 +187,8 @@ const Add_Cart_OR_Favorite__Btn_Home_Page: React.FC<
 
                 price: one_Item.price,
                 image: one_Item.image,
-                id: one_Item.id,
-                index: home_item_index,
+                product_ID: one_Item.id,
+                product_Index: home_item_index,
               };
 
               draft_Products[home_item_index].temp__Quantity = 1;
@@ -255,8 +255,8 @@ const Add_Cart_OR_Favorite__Btn_Home_Page: React.FC<
 
             // SEARCH FIRST IN TEMP CART IF EXIST THEN INCREMENT
             const foundIndex_Already_In_Cart = temp_Cart.findIndex(
-              (one_Product: local_Cart_Item) =>
-                one_Product.id === temp_Product_ID,
+              (one_cart_Item: local_Cart_Item) =>
+                one_cart_Item.product_ID === temp_Product_ID,
             );
 
             /*    console.log(

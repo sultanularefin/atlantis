@@ -179,8 +179,8 @@ const Increment_Decrement_Favorite_BTN_In_Details_Page: React.FC<
 
                 price: one_Item.price,
                 image: one_Item.image,
-                id: one_Item.id,
-                index: Index_among_all_products, //foundIndex_read,
+                product_ID: one_Item.id,
+                product_Index: Index_among_all_products, //foundIndex_read,
               };
 
               // draft_Products[home_item_index].temp__Quantity = 1;
@@ -195,7 +195,7 @@ const Increment_Decrement_Favorite_BTN_In_Details_Page: React.FC<
               // SEARCH FIRST IN TEMP CART IF EXIST THEN INCREMENT
               const foundIndex_Already_In_Cart = local_Cart.findIndex(
                 (cart_Product: local_Cart_Item) =>
-                  cart_Product.id === this_prod_id,
+                  cart_Product.product_ID === this_prod_id,
               );
 
               // console.log("__foundIndex_Already_In_Cart__: ", foundIndex_Already_In_Cart);
@@ -214,8 +214,8 @@ const Increment_Decrement_Favorite_BTN_In_Details_Page: React.FC<
 
                   price: one_Item.price,
                   image: one_Item.image,
-                  id: one_Item.id,
-                  index: Index_among_all_products,
+                  product_ID: one_Item.id,
+                  product_Index: Index_among_all_products,
                 };
 
                 // draft_Products[Index_among_all_products].temp__Quantity = 1;
@@ -323,7 +323,7 @@ const Increment_Decrement_Favorite_BTN_In_Details_Page: React.FC<
                     // SEARCH FIRST IN TEMP CART IF EXIST THEN INCREMENT
                     const foundIndex_Already_In_Cart = local_Cart.findIndex(
                         (cart_Product: local_Cart_Item) =>
-                            cart_Product.id === this_prod_id,
+                            cart_Product.product_ID === this_prod_id,
                     );
 
                     // console.log("__foundIndex_Already_In_Cart__: ", foundIndex_Already_In_Cart);

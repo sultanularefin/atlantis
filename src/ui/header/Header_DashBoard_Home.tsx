@@ -180,6 +180,7 @@ const Header_DashBoard_Home: React.FC<Header_Props> = ({
                     comp_Height={comp_Height - 1} // comp_Height - hairlineWidth in the bottom border.
                     comp_Width={comp_Width}
                     bg_color={'deepskyblue'}
+                    press_color={"lightsteelblue"}
                     flex_val={6}
 
                 />

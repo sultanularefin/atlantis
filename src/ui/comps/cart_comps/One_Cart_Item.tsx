@@ -115,7 +115,7 @@ const One_Cart_Item: React.FC<One_Cart_Item_Props> = ({
 
 
         return navigation_Atribute.navigate('Product_Details_Page', {
-            single_Product_ID: one_Cart.id,
+            single_Product_ID: one_Cart.product_ID,
             add_Button_Pressed_State: true,//one_Cart.btn_Pressed,
             quantity: one_Cart.quantity,
 
@@ -397,8 +397,9 @@ const One_Cart_Item: React.FC<One_Cart_Item_Props> = ({
                                         <Single_Cart_Item_Increment_Decrement_Root
                                             comp_Height_3={comp_Height_2 / 2}
                                             comp_Width_3={one_comp_Width - (price_Width)}
-                                            this_product_id={one_Cart.id}
+                                            this_product_id={one_Cart.product_ID}
                                             quantity={one_Cart.quantity}
+                                            product_index={one_Cart.product_Index}
                                             cart_item_Index={index}
                                         />
                                     </View>

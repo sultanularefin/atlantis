@@ -40,6 +40,7 @@ interface Bag_Button_Props {
   // arrow_Pressed_2: (monetary_Unit_Text: string, value_Converted_To_String: string, length: number,)=>void,
   comp_Width: number;
   bg_color: string;
+  press_color: string,
   flex_val: number;
 }
 
@@ -58,6 +59,7 @@ const Bag_Button: React.FC<Bag_Button_Props> = ({
   comp_Height,
   comp_Width,
   bg_color,
+                                                  press_color,
   flex_val,
   // arrow_Pressed_2,
 }) => {
@@ -120,7 +122,7 @@ const Bag_Button: React.FC<Bag_Button_Props> = ({
                 justifyContent: 'center',
                 alignItems: 'center',
                 backgroundColor: pressed
-                  ? bg_Color_List_And_Phone_BG
+                  ? press_color
                   : 'transparent', //'white',
                   flex: flex_val,
               }}>

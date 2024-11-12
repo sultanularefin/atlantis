@@ -261,9 +261,7 @@ const decrement_cart_item_for_home_index_0_2 = (
 ) => {
   const foundIndex_Already_In_Cart_Decrement = action.payload;
 
-  // console.log("foundIndex_Already_In_Cart_Decrement: ",foundIndex_Already_In_Cart_Decrement);
-  // console.log("state.local_Cart_Array.length: ",state.local_Cart_Array.length);
-  // 999
+
   state.local_Cart_Array[foundIndex_Already_In_Cart_Decrement].quantity -= 1;
   // 999
 

@@ -42,9 +42,11 @@ import {productsApiSlice} from '../../../../lib/features/products/productsApiSli
 import {home_page_product_limit} from '../../../../config/business_constants.ts';
 import {local_Cart_Item} from '../../../../interfaces/products/product.ts';
 import {
-    add_price_to_total_cart_price, decrement_cart_item_for_home_index_0, deduct_price_to_total_cart_price,
-    increment_cart_item_for_home_index_0,
-    store_temp_cart_object,
+  add_price_to_total_cart_price,
+  decrement_cart_item_for_home_index_0,
+  deduct_price_to_total_cart_price,
+  increment_cart_item_for_home_index_0,
+  store_temp_cart_object,
 } from '../../../../lib/features/products/product_Slice.ts';
 
 interface Single_Cart_Item_Increment_Decrement_Root_Props {
@@ -53,6 +55,7 @@ interface Single_Cart_Item_Increment_Decrement_Root_Props {
   this_product_id: number; //string,
 
   quantity: number;
+  product_index: number;
   cart_item_Index: number;
   // add_Button_Pressed_State: boolean,
 }
@@ -64,6 +67,7 @@ const Single_Cart_Item_Increment_Decrement_Root: React.FC<
   comp_Width_3,
   this_product_id,
   quantity,
+  product_index,
   cart_item_Index,
   // add_Button_Pressed_State
 }) => {
@@ -84,12 +88,20 @@ const Single_Cart_Item_Increment_Decrement_Root: React.FC<
         draft_Products => {
           // const temp_this_product_id = draft_Products[home_item_index].id;
           // const one_Item = draft_Products[this_product_id];
+          // const one_Item_by_product_index = draft_Products[product_index];
 
-          draft_Products[this_product_id].temp__Quantity += 1;
+          /*console.log('one_Item_by_product_index: ', one_Item_by_product_index);
+          console.log('product_index: ', product_index);
+
+          console.log('one_Item: ', one_Item);
+          console.log('this_product_id: ', this_product_id);
+          console.log('cart_item_Index', cart_item_Index);*/
+
+          draft_Products[product_index].temp__Quantity += 1;
 
           dispatch(increment_cart_item_for_home_index_0(cart_item_Index));
 
-          const item_temp_cart_price = draft_Products[this_product_id].price;
+          const item_temp_cart_price = draft_Products[product_index].price;
           dispatch(add_price_to_total_cart_price(item_temp_cart_price));
         },
       ),
@@ -103,29 +115,44 @@ const Single_Cart_Item_Increment_Decrement_Root: React.FC<
   };
 
   const one_cart__item_decrement_button_pressed = () => {
+    // 999
 
+    /*  if (quantity === 0) {
+                      dispatch(
+                          productsApiSlice.util.updateQueryData(
+                              'getProducts',
+                              {limit: home_page_product_limit},
+                              draft_Products => {
+                                  // state.home_State.paginate_data.docs[action.payload].temp__Quantity = 1;
+                                  draft_Products[this_product_id].btn_Pressed = false;
+                                  draft_Products[this_product_id].temp__Quantity = 0;
+                              },
+                          ),
+                      );
 
-      // 999
+                      return;
+                  } else {*/
 
-      dispatch(
-          productsApiSlice.util.updateQueryData(
-              'getProducts',
-              {limit: home_page_product_limit},
-              draft_Products => {
-                  // const temp_this_product_id = draft_Products[home_item_index].id;
-                  // const one_Item = draft_Products[this_product_id];
+    dispatch(
+      productsApiSlice.util.updateQueryData(
+        'getProducts',
+        {limit: home_page_product_limit},
+        draft_Products => {
+          // const temp_this_product_id = draft_Products[home_item_index].id;
+          // const one_Item = draft_Products[this_product_id];
 
-                  draft_Products[this_product_id].temp__Quantity -= 1;
+          draft_Products[product_index].temp__Quantity -= 1;
 
-                  dispatch(decrement_cart_item_for_home_index_0(cart_item_Index));
+          dispatch(decrement_cart_item_for_home_index_0(cart_item_Index));
 
-                  const item_temp_cart_price = draft_Products[this_product_id].price;
-                  // dispatch(add_price_to_total_cart_price(item_temp_cart_price));
+          const item_temp_cart_price = draft_Products[product_index].price;
 
-                  dispatch(deduct_price_to_total_cart_price(item_temp_cart_price));
-              },
-          ),
-      );
+          dispatch(deduct_price_to_total_cart_price(item_temp_cart_price));
+        },
+      ),
+    );
+
+    // }
   };
 
   const box_Height = comp_Height_3; //comp_Height_3 / 2;

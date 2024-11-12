@@ -59,8 +59,8 @@ interface local_Cart_Item /*extends Doc*/
 
 
     image: string[],
-    id: number,//string,
-    index: number,
+    product_ID: number,//string,
+    product_Index: number,
     // weight: number,
 
 };
