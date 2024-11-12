@@ -25,7 +25,7 @@
     "array-element-newline": "off",
     "@typescript-eslint/ban-ts-comment": "off",
     "arrow-body-style": "off",
-    "arrow-parens": "error",
+    "arrow-parens": "warn",
     "arrow-spacing": "off",
     "block-scoped-var": "error",
     "block-spacing": "error",

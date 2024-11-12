@@ -74,7 +74,7 @@ const Add_Cart_OR_Favorite__Btn_Home_Page: React.FC<
         productsApiSlice.util.updateQueryData(
           'getProducts',
           {limit: home_page_product_limit},
-          (draftUsers) => {
+          draftUsers => {
             draftUsers[home_item_index].btn_Pressed = true;
             draftUsers[home_item_index].temp__Quantity = 0;
           },
@@ -87,20 +87,20 @@ const Add_Cart_OR_Favorite__Btn_Home_Page: React.FC<
 
     /*  else if(add_Button_Pressed_State){
 
-                          console.log
+                                  console.log
 
 
-                      }*/
+                              }*/
   };
 
   /* const local_Cart_Price = useAppSelector(
-         select_Local_Cart_Price_Localized_Monetary_Unit,
-       );
+             select_Local_Cart_Price_Localized_Monetary_Unit,
+           );
 
-       let temp_cart_price= local_Cart_Price;
+           let temp_cart_price= local_Cart_Price;
 
 
-       console.log("local_Cart_Price: ",local_Cart_Price);*/
+           console.log("local_Cart_Price: ",local_Cart_Price);*/
 
   const temp_Cart: local_Cart_Item[] = useAppSelector(select_Local_Cart);
 
@@ -115,13 +115,13 @@ const Add_Cart_OR_Favorite__Btn_Home_Page: React.FC<
       productsApiSlice.util.updateQueryData(
         'getProducts',
         {limit: home_page_product_limit},
-        (draft_Products) => {
+        draft_Products => {
           // const temp_Product_ID = draft_Products[home_item_index].id;
           const one_Item = draft_Products[home_item_index];
           /*  console.log(
-                        'temp_Cart.length at << increment_from_home >>:',
-                        temp_Cart.length,
-                      );*/
+                                            'temp_Cart.length at << increment_from_home >>:',
+                                            temp_Cart.length,
+                                          );*/
 
           if (temp_Cart.length === 0) {
             const cart_Item: local_Cart_Item = {
@@ -143,13 +143,34 @@ const Add_Cart_OR_Favorite__Btn_Home_Page: React.FC<
           } else {
             console.log('___at TEMP CART  LENGTH  > 0 ');
 
+
+
+              console.log(
+                  `temp_Product_ID: ${typeof one_Item.id} value: ${one_Item.id}`,
+              );
+              console.log(
+                  `temp_Cart: ${typeof temp_Cart} value: ${JSON.stringify(
+                      temp_Cart,
+                  )}`,
+              );
+
+
+
+
             // SEARCH FIRST IN TEMP CART IF EXIST THEN INCREMENT
             const foundIndex_Already_In_Cart = temp_Cart.findIndex(
               (one_Product: local_Cart_Item) => one_Product.id === one_Item.id,
             );
 
             // console.log("__foundIndex_Already_In_Cart__: ", foundIndex_Already_In_Cart);
+
+              console.log(
+                  '__foundIndex_Already_In_Cart__: ',
+                  foundIndex_Already_In_Cart,
+              );
+
             if (foundIndex_Already_In_Cart !== -1) {
+              console.log('same item found');
               draft_Products[home_item_index].temp__Quantity += 1;
 
               dispatch(
@@ -173,11 +194,13 @@ const Add_Cart_OR_Favorite__Btn_Home_Page: React.FC<
               draft_Products[home_item_index].temp__Quantity = 1;
               // console.log("local_Cart_Price: <before>> ",temp_cart_price);
               /*  console.log(
-                                'draft_Products[home_item_index].price: ',
-                                draft_Products[home_item_index].price,
-                              );*/
-              const item_temp_cart_price =
-                draft_Products[home_item_index].price;
+                                                            'draft_Products[home_item_index].price: ',
+                                                            draft_Products[home_item_index].price,
+                                                          );*/
+             /* const item_temp_cart_price =
+                draft_Products[home_item_index].price;*/
+
+                dispatch(store_temp_cart_object(cart_Item));
 
               // console.log("local_Cart_Price: << after >> ",temp_cart_price);
 
@@ -194,21 +217,21 @@ const Add_Cart_OR_Favorite__Btn_Home_Page: React.FC<
 
   const decrement_button_Pressed = () => {
     /* if (quantity === 0) {
-                       // dispatch(diable_Btn_Pressed_State_In_Home_Page_0(index));
+                               // dispatch(diable_Btn_Pressed_State_In_Home_Page_0(index));
 
-                       dispatch(disable_Btn_Pressed_State_In_Home_Page_0(index));
-                       return;
-                     } else {
-                       dispatch(decrement_Item_From_Home(index));
-                       return;
-                     }*/
+                               dispatch(disable_Btn_Pressed_State_In_Home_Page_0(index));
+                               return;
+                             } else {
+                               dispatch(decrement_Item_From_Home(index));
+                               return;
+                             }*/
 
     if (quantity === 0) {
       dispatch(
         productsApiSlice.util.updateQueryData(
           'getProducts',
           {limit: home_page_product_limit},
-          (draft_Products) => {
+          draft_Products => {
             // state.home_State.paginate_data.docs[action.payload].temp__Quantity = 1;
             draft_Products[home_item_index].btn_Pressed = false;
             draft_Products[home_item_index].temp__Quantity = 0;
@@ -223,7 +246,7 @@ const Add_Cart_OR_Favorite__Btn_Home_Page: React.FC<
         productsApiSlice.util.updateQueryData(
           'getProducts',
           {limit: home_page_product_limit},
-          (draft_Products) => {
+          draft_Products => {
             const temp_Product_ID = draft_Products[home_item_index].id;
             // const one_Item = draft_Products[home_item_index];
             // console.log("temp_Cart.length at << increment_from_home >>:",temp_Cart.length);
@@ -237,14 +260,14 @@ const Add_Cart_OR_Favorite__Btn_Home_Page: React.FC<
             );
 
             /*    console.log(
-                              `temp_Product_ID: ${typeof temp_Product_ID} value: ${temp_Product_ID}`,
-                            );
-                            console.log(`temp_Cart: ${typeof temp_Cart} value: ${JSON.stringify(temp_Cart)}`);
+                                                      `temp_Product_ID: ${typeof temp_Product_ID} value: ${temp_Product_ID}`,
+                                                    );
+                                                    console.log(`temp_Cart: ${typeof temp_Cart} value: ${JSON.stringify(temp_Cart)}`);
 
-                            console.log(
-                              '__foundIndex_Already_In_Cart__: ',
-                              foundIndex_Already_In_Cart,
-                            );*/
+                                                    console.log(
+                                                      '__foundIndex_Already_In_Cart__: ',
+                                                      foundIndex_Already_In_Cart,
+                                                    );*/
 
             if (foundIndex_Already_In_Cart !== -1) {
               draft_Products[home_item_index].temp__Quantity -= 1;

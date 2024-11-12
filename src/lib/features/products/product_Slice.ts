@@ -29,6 +29,7 @@ interface products_State_Interface {
   previous_Show_Detail_Button_Index_for_Item: number;
   local_Cart_Array: local_Cart_Item[];
   local_Cart_Price_Total: number;
+  local_Cart_Price_Total_string: string;
   // local_Cart_Weight_Total: number;
 
   single_Product_State: One_Product_Item_For_Detail_Interface;
@@ -55,6 +56,7 @@ const initialState: products_State_Interface = {
   // added on april 07, 2023
   local_Cart_Array: [],
   local_Cart_Price_Total: 0,
+  local_Cart_Price_Total_string: "0",
   // local_Cart_Weight_Total: 0,
 
   single_Product_State: {} as One_Product_Item_For_Detail_Interface,
@@ -204,15 +206,44 @@ export const populate_Cart_Data_to_realm = createAsyncThunk(
 const add_price_to_total_cart_price_2 =  (state: any, action: PayloadAction<number>) => {
 
   // console.log("price: <<add_price_to_total_cart_price_2>>: ::",action.payload);
+  // state.local_Cart_Price_Total += action.payload;
+
   state.local_Cart_Price_Total += action.payload;
+  // console.log("state.local_Cart_Price_Total: ((add)): ",state.local_Cart_Price_Total);
 
 
+// console.log("state.local_Cart_Price_Total_string: ((add)): ",state.local_Cart_Price_Total_string);
+
+
+
+
+  state.local_Cart_Price_Total_string= (Number(state.local_Cart_Price_Total_string)+action.payload).toFixed(2);
 };
 
 const deduct_price_to_total_cart_price_2 =  (state: any, action: PayloadAction<number>) => {
 
-  // console.log("price: <<deduct_price_to_total_cart_price_2>>: ::",action.payload);
+  console.log("price: <<deduct_price_to_total_cart_price_2>>: ::",action.payload);
+  // state.local_Cart_Price_Total -= action.payload;
+
   state.local_Cart_Price_Total -= action.payload;
+
+
+/*  if(state.local_Cart_Price_Total<0){
+
+    console.log("at less than zeoo o local cart total price");
+    state.local_Cart_Price_Total= 0;
+  }else{
+
+    console.log(" not less than zeor ... state.local_Cart_Price_Total: ",state.local_Cart_Price_Total);
+
+  }*/
+
+
+
+  state.local_Cart_Price_Total_string= (Number(state.local_Cart_Price_Total_string)-action.payload).toFixed(2);
+
+  console.log("state.local_Cart_Price_Total_string: ((deduct)): ",state.local_Cart_Price_Total_string);
+
 
 
 };
@@ -230,8 +261,8 @@ const decrement_cart_item_for_home_index_0_2 = (
 ) => {
   const foundIndex_Already_In_Cart_Decrement = action.payload;
 
-  console.log("foundIndex_Already_In_Cart_Decrement: ",foundIndex_Already_In_Cart_Decrement);
-  console.log("state.local_Cart_Array: ",state.local_Cart_Array.length);
+  // console.log("foundIndex_Already_In_Cart_Decrement: ",foundIndex_Already_In_Cart_Decrement);
+  // console.log("state.local_Cart_Array.length: ",state.local_Cart_Array.length);
   // 999
   state.local_Cart_Array[foundIndex_Already_In_Cart_Decrement].quantity -= 1;
   // 999
@@ -311,11 +342,11 @@ const store_temp_cart_array_2 = (
 
   state.local_Cart_Array = action.payload; //state.local_Cart_Array.concat(action.payload);
 
-  state.local_Cart_Price_Total = state.local_Cart_Array.reduce(
+  /*state.local_Cart_Price_Total = state.local_Cart_Array.reduce(
     (accumulator: number, one_Cart_Item: local_Cart_Item) =>
       accumulator + one_Cart_Item.price,
     0,
-  );
+  );*/
 };
 
 const store_temp_cart_object_2 = (
