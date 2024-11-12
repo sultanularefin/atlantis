@@ -34,7 +34,7 @@ import {unwrapResult} from "@reduxjs/toolkit";
 import {
     ukbd_navy_blue,
     ukbd_place_holder_TextColor,
-    ukbd_red,
+    ukbd_red, ukbd_red_light,
     very_light_red_ukbd
 } from "../../ui_utils/important_Colors";
 import moment from "moment/moment";
@@ -219,6 +219,22 @@ const One_Cart_Item: React.FC<One_Cart_Item_Props> = ({
 
                                 resizeMode={"center"}
                             />
+
+                                <View
+                                    style={{
+                                        flexDirection: "column",
+                                        // backgroundColor: 'gold',
+                                        // width: one_comp_Width,
+                                        // height: comp_Height_2,
+
+                                    }}
+
+                                ><Text style={{
+                                    fontSize: 12,
+                                    color: ukbd_red_light,
+                                }}>{delivery_Currency_Sign}/U: {one_Cart.price}</Text>
+                                </View>
+
                             </View>
                         ) : (<View
 
@@ -226,20 +242,13 @@ const One_Cart_Item: React.FC<One_Cart_Item_Props> = ({
                                     justifyContent: 'center',
                                     flexDirection: 'column',
                                     alignItems: 'center',
-                                    /*
-                                    // backgroundColor: 'violet',
-                                    paddingLeft: 3, // 10 padding horizontal
-                                    paddingRight: 7,
-                                    */
+
                                 }}
 
                             ><Image
                                 style={{
 
-                                    /*
-                                    width: image_Width_Height,  // 10 (padding Horizontal) + (image_Width_Height) (img width)
-                                    height: comp_Height_2 / 1.5,
-                                    */
+
 
                                     width: image_Width_Height,
                                     height: image_Width_Height,
@@ -258,10 +267,18 @@ const One_Cart_Item: React.FC<One_Cart_Item_Props> = ({
                         )
                     }
 
+               {/*     <View style={{
+                        paddingLeft: 4,
+                        borderLeftColor: 'deepskyblue',
+                        borderLeftWidth: hairlineWidth,
+                        backgroundColor: 'teal',
+                        height: "90%",
+                    }}></View>*/}
+
 
                     <View style={{
                         flexWrap: 'wrap',
-                        height: comp_Height_2,
+                        minHeight: comp_Height_2,
 
                         width: (one_comp_Width - ((image_Width_Height))),
                         // 10 (padding Horizontal) + (one_comp_Width / 3) (img width)
@@ -271,11 +288,14 @@ const One_Cart_Item: React.FC<One_Cart_Item_Props> = ({
                         alignItems: 'flex-start',
                         paddingLeft: 4,
                         paddingRight: 4,
+
+
                     }}>
 
                         <Text style={One_Cart_Item_Styles.title_}
-                              numberOfLines={3}
+                              // numberOfLines={4}
                               ellipsizeMode="tail"
+                              numberOfLines={5}
 
                         >
                             {one_Cart.name}
@@ -377,9 +397,9 @@ const One_Cart_Item: React.FC<One_Cart_Item_Props> = ({
                                         <Single_Cart_Item_Increment_Decrement_Root
                                             comp_Height_3={comp_Height_2 / 2}
                                             comp_Width_3={one_comp_Width - (price_Width)}
-                                            product_Id={one_Cart.id}
+                                            this_product_id={one_Cart.id}
                                             quantity={one_Cart.quantity}
-                                            index={index}
+                                            cart_item_Index={index}
                                         />
                                     </View>
                                 </View>
@@ -492,7 +512,7 @@ const One_Cart_Item_Styles = StyleSheet.create({
         title_:
             {
                 color: ukbd_navy_blue,
-                fontSize: 14,
+                fontSize: 12,
                 // lineHeight: 14,
                 // fontWeight: "300",
                 // fontFamily: "RobotoCondensed-Regular",

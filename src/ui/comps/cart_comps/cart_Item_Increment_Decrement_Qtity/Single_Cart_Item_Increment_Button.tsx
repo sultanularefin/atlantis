@@ -65,7 +65,7 @@ const Single_Cart_Item_Increment_Button: React.FC<Increment_Button_Props> = (
 
 
             <Ionicons
-                name={"ios-add-sharp"}
+                name={"add-sharp"}
                 size={comp_Height_2 / 2}
                 color={icon_Color} //"red"
                 style={{

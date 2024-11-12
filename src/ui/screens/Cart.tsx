@@ -25,70 +25,15 @@ import {
 // import {Doc, home_API_Root_Object_Interface} from "../../../appStore/interfaces_Slice/product_Related_Interfaces";
 
 
-import NetInfo, {useNetInfo} from "@react-native-community/netinfo";
+// import NetInfo, {useNetInfo} from "@react-native-community/netinfo";
 
 import Snackbar from 'react-native-snackbar';
 import {useFocusEffect} from "@react-navigation/native";
 
 
-// import {useAppDispatch, useAppSelector} from "../../../appStore/app/hooks";
-/*import {
-    fetch_All_Products_Home_Page_Anonymous,
-    fetch_All_Products_Home_Page_With_Credentials,
-    get_20_not_popular_item_Home_Page,
-    // get_not_popular_item_Home_Page,
-    get_Popular_20_Paginated_Data_Home_Page,
-    get_Unique_Cart_ID,
-    local_Cart_Item,
-    // load_More_Products,
-    one_User_Payload_data_For_All_Product_Interface,
-    paginated_Popular_Products_Payload,
-    paginated_Regular_Or_Currnet_Product_Payload,
-    populate_Cart_Data_to_realm,
-    // select_Delivery_Currency_Code,
-    select_Exchange_Rate,
-    select_Local_Cart,
-    select_Local_Cart_Price_Localized_Monetary_Unit,
-    select_Local_Currency,
-    select_logger_Home_State,
-    select_Shipped_From_State_Or_Delivery_Currency
-} from "../../../appStore/Reducers/product_Slice";*/
-/*import List_Empty__Comp from "../../components/List_Empty__Comp";
-import No_More_Products_Available from "../../components/No_More_Products_Available";
-import {get_Detail_By_User_ID_server_Token} from "../../../appStore/interfaces_Slice/user_Related_Interfaces";
-import {select_Logger_Data_BY_ID} from "../../../appStore/Reducers/authSlice";
-import Loading_Comp from "../../components/loading_Comp/Loading_Comp";
-import {bg_Color_List_And_Phone_BG, ukbd_navy_blue, ukbd_red, very_light_red_ukbd} from "../../ui_utils/important_Colors";
-import Header_Product_Details_Page from "../../headers/Header_Product_Details_Page";
-import Header_Shopping_Cart_Page from "../../headers/Header_Shopping_Cart_Page";
-import {OrderList} from "../../../appStore/interfaces_Slice/order_Related_Interfaces";*/
-
-// import One_Order from "../components/order_List/One_Order";
-// import {RootState} from "../../../appStore/app/store";
-// import One_Cart_Item from "../../components/cart_comps/One_Cart_Item";
-
-/*
-import List_Empty__Search_Activity_Member_Comments
-    from "../../components/order_List/List_Empty__Search_Activity_Member_Comments";
-import No_Feedz_Available_2 from "../../components/order_List/No_Feedz_Available_2";
-
-*/
 
 import hairlineWidth = StyleSheet.hairlineWidth;
-/*import Cart_Box_UKBD from "../../components/cart_comps/cart_Boxes/Cart_Box_UKBD";
-import Cart_Box_Delivery from "../../components/cart_comps/cart_Boxes/Cart_Box_Delivery";
-import Cart_Box_Returns from "../../components/cart_comps/cart_Boxes/Cart_Box_Returns";
-import Vertical_Devider_Full_Width_Active_Order from "../../components/misc/Vertical_Devider_Full_Width_Active_Order";
 
-
-
-
-import Order_Summary_Cart from "../../components/cart_comps/Order_Summary_Cart";
-import {monetary_Unit_Interface} from "../../ui_utils/localization_utils";
-import Horizontal_First_Top_Tabs from "../details_page/Horizontal_First_Top_Tabs";
-import Cart_Tab_First_Column from "../../components/cart_comps/tab_Comp/Cart_Tab_First_Column";
-import Horizontal_Second_and_Last_Tab_View from "../details_page/Horizontal_Second_and_Last_Tab_View";
-import Cart_Tab_Second_Column from "../../components/cart_comps/tab_Comp/Cart_Tab_Second_Column";*/
 import Header_DashBoard_Home from "../header/Header_DashBoard_Home.tsx";
 import {useAppDispatch, useAppSelector} from "../../lib/app/hooks.ts";
 import One_Cart_Item from "../comps/cart_comps/One_Cart_Item.tsx";
@@ -134,13 +79,7 @@ const Cart: React.FC<Cart_Props> = ({
     const dispatch = useAppDispatch();
 
 
-    // const Home_State_Data_Loaded_State: boolean = useAppSelector(select_Home_Data_Loaded_State);
 
-
-    // export const select_Delivery_Currency_Code = (state: RootState) => state.product_Reducer.delivery_currency_code;
-    // export const select_Exchange_Rate = (state: RootState) => state.product_Reducer.exchange_rate_website;
-
-    // redux related codes ends here
 
 
     const [masterLoadingState, setMasterLoadingState] = useState(false);
@@ -310,207 +249,22 @@ const Cart: React.FC<Cart_Props> = ({
                 <No_More_Items
                     first_String={'No More '}
                     last_String={' Found.'}
-                    highlighted_String={'Order Items'}
+                    highlighted_String={'Cart Items'}
                     // content_Text={'No More Tripz Later found.'}
                 />
             );
         }
     };
 
-  /*  const List_Footer_Component = () => (
 
 
-        (local_Cart.length === 0) ? null
-            : (
-                <No_Feedz_Available_2
-                    content_Text={"No More Order Found."}
-                    backGround_Color={"lightsteelblue"}
-                    // displayWidth={props.displayWidth}
-                />
-            )
-    );*/
 
-    const checkout_Button_Pressed = () => {
 
-        console.log("at__ checkout_Button_Pressed");
 
 
-        if (localStorage.user._id !== "") {
-            // if (localStorage.user_id !== 0) {
-            return navigation.navigate("Delivery_Address_Payment__OR_Checkout_Page");
 
-
-        } else {
-
-
-            return navigation.navigate("Login_Page");
-
-
-        }
-
-    };
-
-
-
-    const Cart_Header = ()=>(
-        <Header_Shopping_Cart_Page
-            nav={navigation}
-            comp_Height={displayHeight / 15}
-            comp_Width={inner_Comp_Width}
-            header_Title={"Shopping bag"}
-            Z_Index={102}
-        />
-    );
-
-    const Tabs_And_Summary= ()=>(
-        <View
-            // alwaysBounceVertical={false}
-            // bounces={false}
-
-            /*
-            horizontal={false}
-            // alwaysBounceHorizontal={false}
-            alwaysBounceVertical={false}
-            bounces={false}
-            // alwaysBounceVertical={false}
-
-            */
-
-            style={{
-                width: displayWidth,
-
-                justifyContent: 'flex-start',
-                alignItems: 'center',
-
-                // height: (displayHeight * 1.8),
-                // HEIGHT IS DYNAMIC,
-
-
-                // 28 for "You are offline"
-                // 170 in the bottom check fruits which is ommitted.
-                flexDirection: "column",
-                // backgroundColor: 'transparent',//light_White_Overlay_Color,//'transparent',//`${chocolate_Color}`
-                // backgroundColor: 'gold',
-                marginTop: (local_Cart.length<3)? 90: 20,
-
-            }}
-            // better not to use them
-
-
-
-
-        >
-            {/*2nd bottom View for test begisn here*/}
-            {/*Cart V List ends here*/}
-
-
-            {/*3 boxes begins here*/}
-
-
-
-
-
-            {/*3 boxes ends here*/}
-
-
-            {/*Top_Tab components begins here*/
-            }
-
-
-            <View
-
-
-                style={{
-
-                    // flex: 2,
-                    flexDirection: 'column',
-                    justifyContent: 'flex-start',
-                    alignItems: 'flex-start',
-                    width: displayWidth,//'100%',
-                    // backgroundColor: 'brown',
-                    // height: 200,
-
-
-                }}>
-
-                {/* <Cart_Tab__s begins here */}
-
-
-                <View
-                    style={{
-                        // ...Product_Detail_Page_Styles.box_Outer_View,
-                        // flex: 2,
-                        flexDirection: 'column',
-                        justifyContent: 'flex-start',
-                        alignItems: 'center',
-
-                        alignSelf: 'center',
-
-
-                        borderWidth: hairlineWidth,
-                        borderColor: ukbd_navy_blue,
-
-
-                        width: inner_Comp_Width,
-                        height: tab_Height,
-
-                    }}
-
-                >
-
-
-                    <Cart_Tab_First_Column
-                        comp_Width={inner_Comp_Width}
-
-                        comp_Height={tabs_Pressable_Part_Height}
-                        // current_Selected_Tab={selected_Tab_Product_Detail_Page_State}
-
-                        // const selected_Tab_Product_Detail_Page_State: number = useAppSelector(select_product_Detail_Tab_Index);
-                    />
-
-
-                    <Cart_Tab_Second_Column
-
-                        comp_Width={inner_Comp_Width}
-                        // current_Selected_Tab= {selected_Tab_Product_Detail_Page_State}
-
-                        // tab_Pressed= {update_Selected_Tab}
-
-                        comp_Height={(tab_Height)-(tabs_Pressable_Part_Height)}
-
-                    />
-
-
-                </View>
-
-
-            </View>
-
-
-            {/*Top_Tab components --ends-- here*/}
-
-
-            <Order_Summary_Cart
-                inner_Comp_Width = {inner_Comp_Width}
-                order_Summary_Inner_Comp_Width= {order_Summary_Inner_Comp_Width}
-                checkout_Button_Pressed_0= {checkout_Button_Pressed}
-                nav={navigation}
-                proceed_Btn_Visible={(local_Cart.length>0) && (local_Cart_Price>0)}
-            />
-
-
-            {
-                ((masterLoadingState /*|| !Home_State_Data_Loaded_State*/) && (<Indicator_Common
-
-                        // t_Height={displayHeight}
-                        color={ukbd_navy_blue}
-                    />)
-                )
-            }
-
-        </View>
-    );
-
+    const header_Height= displayHeight / 15;
+    const VList_Height= displayHeight-(header_Height +100);
     return (
 
         <SafeAreaView
@@ -521,6 +275,7 @@ const Cart: React.FC<Cart_Props> = ({
                     flexDirection: "column",
                     justifyContent: "flex-start",
                     backgroundColor: 'white',
+                    height: displayHeight,
 
                 }
             }
@@ -528,7 +283,7 @@ const Cart: React.FC<Cart_Props> = ({
 
 
             <View style={{
-                height: displayHeight / 15,
+                height: header_Height,
                 flexDirection: "column",
                 justifyContent: "flex-start",
             }
@@ -537,7 +292,7 @@ const Cart: React.FC<Cart_Props> = ({
             >
 
                 <Header_DashBoard_Home
-                    comp_Height={displayHeight / 15}
+                    comp_Height={header_Height}
 
                     nav={navigation}
                     comp_Width={displayWidth}
@@ -555,10 +310,8 @@ const Cart: React.FC<Cart_Props> = ({
 
 
                 style={{
-
-                    //height: displayHeight,// (displayHeight- (displayHeight / 15)),
                     flexDirection: "column",
-                    // flex: 9,
+
                     justifyContent: "flex-start",
                     alignItems: 'center',
                     alignSelf: 'center',
@@ -566,9 +319,9 @@ const Cart: React.FC<Cart_Props> = ({
                     borderBottomColor: ukbd_navy_blue,
                     borderBottomWidth: hairlineWidth,// 0.6,//hairlineWidth,
                     // backgroundColor: 'aliceblue',
-                    paddingBottom: 10,
+
                     width: inner_Comp_Width,
-                    height: displayHeight/2,
+                    height: VList_Height,
 
                 }
 
@@ -579,18 +332,13 @@ const Cart: React.FC<Cart_Props> = ({
 
                 <VirtualizedList
                     style={{
-                        // marginTop: 20,
-                        backgroundColor: 'white',//ukbd_place_holder_TextColor,//ukbd_red,//ukbd_place_holder_TextColor,//"lightsalmon",
-                        // marginHorizontal: displayWidth / 15,
+
 
                     }}
 
                     contentContainerStyle={{
-                        height: displayHeight/2,//displayHeight * 1.6,//displayHeight,//400,//
-                        // backgroundColor: 'tomato',
+                        height: VList_Height,//displayHeight * 1.6,//displayHeight,//400,//
                         justifyContent: 'flex-start',//'space-between',
-                        // displayHeight,
-                        // minHeight: displayHeight/2.1,
                         paddingBottom: 20,
                         width: inner_Comp_Width,
                     }}
@@ -613,16 +361,12 @@ const Cart: React.FC<Cart_Props> = ({
                     // required ends here___
 
                     data={local_Cart}
-                    // renderItem = {OneChatPreviewItem}
 
-                    // <Text>{item._id}</Text>
                     renderItem={({
                                      item,
                                      // item:one_Product__interface,
                                      index,
                                  }) => (
-
-
 
                         <One_Cart_Item
 
@@ -634,12 +378,6 @@ const Cart: React.FC<Cart_Props> = ({
                             comp_Height_2={displayHeight / 8}
                             navigation_Atribute={navigation}
                             delivery_Currency_Sign={Home_State_Delivery_Currency.text}
-                            // with_Commas={With_Commas}
-                            // logger_ID={localStorage.user._id}
-
-
-                            // http_running_State_or__Master_Loading_State= {master_Loading_State}
-
 
                         />
 
@@ -677,7 +415,7 @@ const Cart: React.FC<Cart_Props> = ({
                     // windowSize={3} // default 21
                     ListEmptyComponent={listEmpty}
                     ListFooterComponent={List_Footer_Component}
-                    ListHeaderComponent={Cart_Header}
+                    // ListHeaderComponent={Cart_Header}
                     // ListFooterComponent={Tabs_And_Summary}
 
                     ItemSeparatorComponent={item_Sperator_Component}
@@ -700,163 +438,6 @@ const Cart: React.FC<Cart_Props> = ({
                 />
 
             </View>
-
-
-            <ScrollView
-                // alwaysBounceVertical={false}
-                // bounces={false}
-
-                horizontal={false}
-                // alwaysBounceHorizontal={false}
-                alwaysBounceVertical={false}
-                bounces={false}
-                // alwaysBounceVertical={false}
-
-                style={{
-                    width: displayWidth,
-                }}
-                // better not to use them
-
-                contentContainerStyle={{
-
-                    justifyContent: 'flex-start',
-                    alignItems: 'center',
-
-                    // height: (displayHeight * 1.8),
-                    // HEIGHT IS DYNAMIC,
-
-
-                    // 28 for "You are offline"
-                    // 170 in the bottom check fruits which is ommitted.
-                    flexDirection: "column",
-                    // backgroundColor: 'transparent',//light_White_Overlay_Color,//'transparent',//`${chocolate_Color}`
-                    // backgroundColor: 'gold',
-
-                }}
-
-
-            >
-                {/*2nd bottom View for test begisn here*/}
-                {/*Cart V List ends here*/}
-
-
-                {/*3 boxes begins here*/}
-
-
-
-
-
-                {/*3 boxes ends here*/}
-
-
-                {/*Top_Tab components begins here*/
-                }
-
-
-                <View
-
-
-                    style={{
-
-                        flex: 2,
-                        flexDirection: 'column',
-                        justifyContent: 'flex-start',
-                        alignItems: 'flex-start',
-                        width: displayWidth,//'100%',
-                        // backgroundColor: 'brown',
-                        // height: 200,
-
-
-                    }}>
-
-                    {/* <Cart_Tab__s begins here */}
-
-
-                    <View
-                        style={{
-                            // ...Product_Detail_Page_Styles.box_Outer_View,
-                            // flex: 2,
-                            flexDirection: 'column',
-                            justifyContent: 'flex-start',
-                            alignItems: 'center',
-
-                            alignSelf: 'center',
-
-
-                            borderWidth: hairlineWidth,
-                            borderColor: ukbd_navy_blue,
-
-
-                            width: inner_Comp_Width,
-                            height: tab_Height,
-
-                        }}
-
-                    >
-
-
-                        <Cart_Tab_First_Column
-                            comp_Width={inner_Comp_Width}
-
-                            comp_Height={tabs_Pressable_Part_Height}
-                            // current_Selected_Tab={selected_Tab_Product_Detail_Page_State}
-
-                            // const selected_Tab_Product_Detail_Page_State: number = useAppSelector(select_product_Detail_Tab_Index);
-                        />
-
-
-                        <Cart_Tab_Second_Column
-
-                            comp_Width={inner_Comp_Width}
-                            // current_Selected_Tab= {selected_Tab_Product_Detail_Page_State}
-
-                            // tab_Pressed= {update_Selected_Tab}
-
-                            comp_Height={(tab_Height)-(tabs_Pressable_Part_Height)}
-
-                        />
-
-
-                    </View>
-
-
-                </View>
-
-
-                {/*Top_Tab components --ends-- here*/}
-
-
-                <Order_Summary_Cart
-                    inner_Comp_Width = {inner_Comp_Width}
-                    order_Summary_Inner_Comp_Width= {order_Summary_Inner_Comp_Width}
-                    checkout_Button_Pressed_0= {checkout_Button_Pressed}
-                    nav={navigation}
-                    proceed_Btn_Visible={(local_Cart.length>0) && (local_Cart_Price>0)}
-                />
-
-
-                {
-                    ((masterLoadingState /*|| !Home_State_Data_Loaded_State*/) && (<Indicator_Common
-
-                            // t_Height={displayHeight}
-                            color={ukbd_navy_blue}
-                        />)
-                    )
-                }
-
-            </ScrollView>
-
-
-
-
-
-
-
-
-
-
-
-
 
         </SafeAreaView>
 

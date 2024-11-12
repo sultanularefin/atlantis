@@ -59,6 +59,7 @@ const Header_DashBoard_Home: React.FC<Header_Props> = ({
 
 
         console.log("at nav_Icon_Pressed");
+        return nav.goBack();
 
     };
 
