@@ -55,7 +55,7 @@ export interface One_Cart_Item_Props {
     index: number;
     comp_Width_2: number;
     comp_Height_2: number;
-    navigation_Atribute: any;
+    navigation_Attribute: any;
 
     delivery_Currency_Sign: string,
     // with_Commas: boolean,
@@ -68,7 +68,7 @@ const One_Cart_Item: React.FC<One_Cart_Item_Props> = ({
                                                           index,
                                                           comp_Width_2,
                                                           comp_Height_2,
-                                                          navigation_Atribute,
+                                                          navigation_Attribute,
 
                                                           delivery_Currency_Sign,
                                                           // with_Commas,
@@ -114,7 +114,7 @@ const One_Cart_Item: React.FC<One_Cart_Item_Props> = ({
         // console.log("one_Cart >> ",one_Cart);
 
 
-        return navigation_Atribute.navigate('Product_Details_Page', {
+        return navigation_Attribute.navigate('Product_Details_Page', {
             single_Product_ID: one_Cart.product_ID,
             add_Button_Pressed_State: true,//one_Cart.btn_Pressed,
             quantity: one_Cart.quantity,
@@ -267,15 +267,6 @@ const One_Cart_Item: React.FC<One_Cart_Item_Props> = ({
                         )
                     }
 
-               {/*     <View style={{
-                        paddingLeft: 4,
-                        borderLeftColor: 'deepskyblue',
-                        borderLeftWidth: hairlineWidth,
-                        backgroundColor: 'teal',
-                        height: "90%",
-                    }}></View>*/}
-
-
                     <View style={{
                         flexWrap: 'wrap',
                         minHeight: comp_Height_2,
@@ -300,18 +291,7 @@ const One_Cart_Item: React.FC<One_Cart_Item_Props> = ({
                         >
                             {one_Cart.name}
                         </Text>
-                        {/*
-                        <Text style={
-                            One_Cart_Item_Styles.title_}>
 
-
-
-                            {(one_Cart.name.length < 45)
-                                ? one_Cart.name
-                                : `${one_Cart.name.substring(0, 43)}...`
-                            }
-                        </Text>
-                        */}
 
                     </View>
 

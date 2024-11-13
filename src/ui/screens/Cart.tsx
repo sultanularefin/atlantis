@@ -376,22 +376,12 @@ const Cart: React.FC<Cart_Props> = ({
 
                             comp_Width_2={inner_Comp_Width}
                             comp_Height_2={displayHeight / 8}
-                            navigation_Atribute={navigation}
+                            navigation_Attribute={navigation}
                             delivery_Currency_Sign={Home_State_Delivery_Currency.text}
 
                         />
 
                     )}
-
-
-                    /*
-                    columnWrapperStyle={{
-                        borderWidth: 3,//hairlineWidth,
-                        borderColor: 'cyan',
-                        height: displayHeight/2.4,
-
-                    }}
-                    */
 
 
                     indicatorStyle={"black"}
@@ -415,26 +405,10 @@ const Cart: React.FC<Cart_Props> = ({
                     // windowSize={3} // default 21
                     ListEmptyComponent={listEmpty}
                     ListFooterComponent={List_Footer_Component}
-                    // ListHeaderComponent={Cart_Header}
-                    // ListFooterComponent={Tabs_And_Summary}
+
 
                     ItemSeparatorComponent={item_Sperator_Component}
 
-
-                    /*
-                    ListFooterComponentStyle={{
-                        justifyContent: 'flex-end',
-                        // backgroundColor: 'red',
-
-                    }}
-                    */
-
-                    /* refreshControl={
-                         <RefreshControl
-                             refreshing={refreshingState}
-                             onRefresh={onRefresh}
-                         />
-                     }*/
                 />
 
             </View>

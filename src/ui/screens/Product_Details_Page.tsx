@@ -746,17 +746,10 @@ const Product_Detail_Page_Styles = StyleSheet.create({
   },
 
   outer_supplier_brand_View_Style: {
-    // backgroundColor: 'teal',
     flexDirection: 'row',
-    /* borderRightColor: 'grey',
-      borderRightWidth: 0.4,*/
     justifyContent: 'flex-start',
 
-    /* flexDirection: 'column',
-      borderRightColor: 'grey',
-      borderRightWidth: 1,
-      justifyContent: 'center',
-      alignItems: 'flex-start',*/
+
   },
 
   local_Price_Section: {

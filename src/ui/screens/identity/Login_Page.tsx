@@ -78,6 +78,14 @@ import Indicator_Common from '../../indicator/Indicator_Common.tsx';
 import InputField_Email_Phone from '../../comps/identity/login/InputField_Email_Phone.tsx';
 import One_Country_Item_Phone_Input from '../../comps/identity/login/One_Country_Item_Phone_Input.tsx';
 import {select_Map_Region_Respective_to_Driver_Location} from '../../../lib/features/auth/auth_Slice.ts';
+// import {useNetInfo} from "@react-native-community/netinfo";
+
+import NetInfo, {
+    NetInfoState,
+    useNetInfo,
+} from '@react-native-community/netinfo';
+
+
 const tempPhone_Countries_State:one_Country_Interface[] = Limited_Countries_With_Phone_Flag;
 
 
@@ -101,7 +109,7 @@ const Login_Page: React.FC<Login_Page_Props> = ({
     const dispatch = useAppDispatch();
 
 
-    // const netInfo = useNetInfo();
+    const netInfo = useNetInfo();
     const map_View_Ref_At_Login_Page = useRef<MapView>(null);
     const update_CheckBox = (new_Value: boolean) => {
 
@@ -194,10 +202,12 @@ const Login_Page: React.FC<Login_Page_Props> = ({
 
         if (Platform.OS==='android') {
 
-            if (navigation.canGoBack()) {
-                // navigation.goBack();
 
-                navigate_To_Home_Screen();
+            console.log("at here");
+            if (navigation.canGoBack()) {
+                 navigation.goBack();
+
+                // navigate_To_Home_Screen();
 
                 return true;
             }
@@ -282,57 +292,7 @@ const Login_Page: React.FC<Login_Page_Props> = ({
         return () => backHandler.remove();
     }, []);
 
-    const navigate_To_Home_Screen = ()=>{
 
-
-        return setTimeout(
-            () => {
-
-                set_LOading_State(false);
-              /*  return navigation.dispatch(
-                  CommonActions.reset({
-                      index: 0,
-                      routes: [{name: 'Catalog_Home_Page'}],
-                  }),
-                );*/
-
-
-
-                // navigate_To_Login_Screen();
-                /* navigation.dispatch(
-                    CommonActions.reset({
-                        index: 0,
-                        routes: [
-                            {
-                            name: 'AppStack'
-                            },
-
-                           {
-                                name: 'Test_Map_1'
-                            }
-
-
-                            ],
-
-                       routes: [
-
-
-                            {
-                                name: 'Order_Tracking_Page',
-                                params: {
-                                    // orderID: "63592fa6b0671f16818bb82e"
-                                    orderID: " 63592e4fb0671f16818bb692", //orderID: "63687e3ae57307541c0ec767",
-                                },
-                            },
-
-                        ],
-                    })
-                );*/
-            },
-            // 1000
-            1,
-        );
-    };
 
 
 

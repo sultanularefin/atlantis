@@ -15,7 +15,7 @@ import {
 import Identity_Circle_Button from "./sub_Comps/Identity_Circle_Button.tsx";
 import {
     // close_Button_Color,
-    bg_Color_List_And_Phone_BG,
+    bg_Color_List_And_Phone_BG, cac_light_skyblue,
     close_Button_Color,
     ukbd_navy_blue, ukbd_red,
     ukbd_red_light
@@ -82,39 +82,12 @@ const Header_Product_Details_Page: React.FC<Header_Product_Details_Page_Props> =
                     paddingLeft: 10,
                     // back
                 }}>
-                {/*<View style={styles.headerItems}>*/}
-
-
-
-
-
-                {/*title begins here*/}
-
-
-
-
-                {/*title ends here*/}
-
-
-                {/*Reject Button begins here*/}
-              {/*  <Identity_Circle_Button
-                    border_Color={ukbd_navy_blue}
-                    bg_Color={"white"}
-                    icon_Color={ukbd_red}
-                    comp_initial_Color={"white"}
-                    on_Pressed_Color={ukbd_navy_blue}
-
-                    icon_Name={"window-close"}
-                    on_Press={reject_this_Order}
-                    comp_Height_5={comp_Height / 1.8}
-                    comp_Width_5={comp_Height / 1.8}
-                />*/}
 
 
 
 
                 <Identity_Circle_Button
-                    bg_Color={bg_Color_List_And_Phone_BG}
+                    bg_Color={cac_light_skyblue}
                     icon_Color={close_Button_Color}
                     comp_initial_Color={"transparent"}
                     on_Pressed_Color={ukbd_red_light}

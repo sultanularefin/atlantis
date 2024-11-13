@@ -40,7 +40,7 @@ export interface Header_Props {
     comp_Height: number,
     comp_Width: number,
 
-    // bg_Color: string,
+    bg_Color: string,
 
 }
 
@@ -48,7 +48,7 @@ const Header_DashBoard_Home: React.FC<Header_Props> = ({
                                                            nav,
                                                            comp_Height,
                                                            comp_Width,
-                                                           // bg_Color,
+                                                           bg_Color,
                                                        }) => {
 
 
@@ -59,14 +59,17 @@ const Header_DashBoard_Home: React.FC<Header_Props> = ({
 
 
         console.log("at nav_Icon_Pressed");
-        return nav.goBack();
+        if (nav.canGoBack()){
+            nav.goBack();
+        }
+        // return nav.goBack();
 
     };
 
     return (
         <View style={{
             height: comp_Height,
-            backgroundColor: 'white',//'teal',//"#fff",
+            backgroundColor: bg_Color,//'teal',//"#fff",
             flexDirection: "row",
             alignItems: "center",
             justifyContent: "space-between",
@@ -88,13 +91,14 @@ const Header_DashBoard_Home: React.FC<Header_Props> = ({
                 style={{
                     flex: 2,
                     flexDirection: "row",
-                    // backgroundColor: 'gold',
+                    backgroundColor: bg_Color,
                 }}>
                 <View
                     style={{
                         ...styles.headerItems,
                         height: comp_Height,
                         paddingLeft: 5,
+                        // backgroundColor: ukbd_red_light,
 
                     }}>
 
@@ -168,8 +172,9 @@ const Header_DashBoard_Home: React.FC<Header_Props> = ({
                 justifyContent: "space-between",
                 flexDirection: "row",
                 height: comp_Height - 1,
-                backgroundColor: 'white',//'tomato',// 'white',//'orange',// 'transparent',//ukbd_red_light,//'red',
+                backgroundColor: bg_Color,//'tomato',// 'white',//'orange',// 'transparent',//ukbd_red_light,//'red',
                 alignItems: 'center',
+
 
 
             }}>
@@ -179,9 +184,10 @@ const Header_DashBoard_Home: React.FC<Header_Props> = ({
                     nav={nav}
                     comp_Height={comp_Height - 1} // comp_Height - hairlineWidth in the bottom border.
                     comp_Width={comp_Width}
-                    bg_color={'deepskyblue'}
+                    icon_color={bg_Color}
                     press_color={"lightsteelblue"}
                     flex_val={6}
+                    bg_color={bg_Color}
 
                 />
 

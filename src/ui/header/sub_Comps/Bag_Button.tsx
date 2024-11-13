@@ -3,12 +3,15 @@ import React, {useState} from 'react';
 import {Pressable, StyleSheet, Text, View, Modal} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {
-    bg_Color_List_And_Phone_BG, tripzchat_lightsteelblue, tripzchat_Top_BarBG_Color,
-    ukbd_navy_blue,
-    ukbd_overlay_Color,
-    ukbd_place_holder_TextColor,
-    ukbd_red,
-    ukbd_red_light, ukbd_Text_Navy_Blue_color,
+  bg_Color_List_And_Phone_BG, cac_green_success,
+  tripzchat_lightsteelblue,
+  tripzchat_Top_BarBG_Color,
+  ukbd_navy_blue,
+  ukbd_overlay_Color,
+  ukbd_place_holder_TextColor,
+  ukbd_red,
+  ukbd_red_light,
+  ukbd_Text_Navy_Blue_color,
 } from '../../ui_utils/important_Colors';
 // import {Header_Props} from "../Header_DashBoard_Home";
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
@@ -39,8 +42,9 @@ interface Bag_Button_Props {
   comp_Height: number;
   // arrow_Pressed_2: (monetary_Unit_Text: string, value_Converted_To_String: string, length: number,)=>void,
   comp_Width: number;
+  icon_color: string;
   bg_color: string;
-  press_color: string,
+  press_color: string;
   flex_val: number;
 }
 
@@ -58,8 +62,9 @@ const Bag_Button: React.FC<Bag_Button_Props> = ({
   nav,
   comp_Height,
   comp_Width,
+  icon_color,
   bg_color,
-                                                  press_color,
+  press_color,
   flex_val,
   // arrow_Pressed_2,
 }) => {
@@ -104,88 +109,81 @@ const Bag_Button: React.FC<Bag_Button_Props> = ({
   return (
     <View
       style={{
-
-          flexDirection: 'row',
-          height: comp_Height - 1,
-          justifyContent: 'center',
-          alignItems: 'center',
-          display: 'flex',
-          flex: flex_val,
+        flexDirection: 'row',
+        height: comp_Height - 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        display: 'flex',
+        flex: flex_val,
+        backgroundColor: 'transparent',
       }}>
+      <Pressable onPress={bag_Button_Pressed}>
+        {({pressed}) => (
+          <View
+              style={pressed ? Monetary_Header_Text_Style.pressedButton : Monetary_Header_Text_Style.button}
+              // pressedButton
+              // button
+              // Monetary_Header_Text_Style
+           /* style={{
+              flexDirection: 'row',
+              height: comp_Height - 1,
+              justifyContent: 'center',
+              alignItems: 'center',
+              // backgroundColor: pressed ? 'deepskyblue' : 'transparent', //'white',
+              flex: flex_val,
+            }}*/>
+            <MaterialIcons
+              name={'shopping-bag'}
+              size={comp_Height / 2}
+              color={"dodgerblue"} //"red"
+              style={{
+                //paddingHorizontal: 4,
+                fontWeight: '100',
+                // paddingRight: 5,
+                // backgroundColor: ukbd_red,
+              }}
+            />
 
-        <Pressable onPress={bag_Button_Pressed}>
-          {({pressed}) => (
             <View
               style={{
-                flexDirection: 'row',
-                height: comp_Height - 1,
+                // ...Monetary_Header_Text_Style.monetary_text_wrapper_view_style,
+                // height: comp_Height,
+                borderWidth: hairlineWidth,
+                borderColor: 'deepskyblue',
+                height: comp_Height / 2,
+                flexDirection: 'column',
+                width: comp_Height,
+
                 justifyContent: 'center',
                 alignItems: 'center',
-                backgroundColor: pressed
-                  ? press_color
-                  : 'transparent', //'white',
-                  flex: flex_val,
+                // paddingLeft: 15,
               }}>
-              <MaterialIcons
-                name={'shopping-bag'}
-                size={comp_Height / 2}
-                color={pressed ? ukbd_red_light : bg_color} //"red"
+              <Text
                 style={{
-                  //paddingHorizontal: 4,
-                  fontWeight: '100',
-                  // paddingRight: 5,
-                  // backgroundColor: ukbd_red,
-                }}
-              />
-
-
-
-
-                <View
-                    style={{
-                        // ...Monetary_Header_Text_Style.monetary_text_wrapper_view_style,
-                        // height: comp_Height,
-                        borderWidth: hairlineWidth,
-                        borderColor: 'deepskyblue',
-                        height: comp_Height/2,
-                        flexDirection: 'column',
-                        width: comp_Height,
-
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        // paddingLeft: 15,
-
-                    }}>
-                    <Text style={{
-                        ...Monetary_Header_Text_Style.monetary_Text_Style,
-                        color: 'dodgerblue',
-                    }}>
-                        {local_Cart_Length}
-                    </Text>
-                </View>
-
-
-
-                <View
-                    style={{
-                        ...Monetary_Header_Text_Style.monetary_text_wrapper_view_style,
-                        height: comp_Height
-
-                    }}>
-                <Text
-                  style={{
-                    ...Monetary_Header_Text_Style.monetary_Text_Style,
-
-                  }}>
-                  {Home_State_Delivery_Currency.text}{' '}
-                  {parseFloat(local_Cart_Price).toFixed(2)}
-
-                </Text>
-              </View>
+                  ...Monetary_Header_Text_Style.monetary_Text_Style,
+                  color: 'dodgerblue',
+                }}>
+                {local_Cart_Length}
+              </Text>
             </View>
-          )}
-        </Pressable>
-       {/* <View
+
+            <View
+              style={{
+                ...Monetary_Header_Text_Style.monetary_text_wrapper_view_style,
+                height: comp_Height,
+              }}>
+              <Text
+                style={{
+                  ...Monetary_Header_Text_Style.monetary_Text_Style,
+                }}>
+                {Home_State_Delivery_Currency.text}{' '}
+                {parseFloat(local_Cart_Price).toFixed(2)}
+              </Text>
+            </View>
+          </View>
+        )}
+      </Pressable>
+      {/* <View
           style={{
             paddingLeft: 15,
               display: 'flex',
@@ -218,10 +216,11 @@ const Bag_Button: React.FC<Bag_Button_Props> = ({
             )}
           </Pressable>
         </View>*/}
-
     </View>
   );
 };
+
+
 
 export default Bag_Button;
 
@@ -232,64 +231,58 @@ export const Monetary_Header_Text_Style = StyleSheet.create({
     color: ukbd_navy_blue, //ukbd_navy_blue,
   },
 
-    monetary_text_wrapper_view_style:{
-        flexDirection: 'column',
-
-        justifyContent: 'center',
-        alignItems: 'center',
-        paddingLeft: 15,
-        // paddingTop: 4,
-    }
-});
-
-const modal_Styles = StyleSheet.create({
-  centeredView: {
-    flex: 1,
+  monetary_text_wrapper_view_style: {
     flexDirection: 'column',
-    justifyContent: 'flex-start', //'flex-start',
-    alignItems: 'flex-end',
-  },
-  modalView: {
-    marginHorizontal: 20,
-    backgroundColor: 'white',
-    // borderRadius: 20,
-    padding: 25,
+
+    justifyContent: 'center',
     alignItems: 'center',
-    shadowColor: '#000',
+    paddingLeft: 15,
+    // paddingTop: 4,
+  },
+
+  button: {
+    // backgroundColor: '#4CAF50',
+    // paddingVertical: 15,
+    paddingHorizontal: 30,
+    borderRadius: 8,
+
+    flexDirection: 'row',
+
+    justifyContent: 'center',
+    alignItems: 'center',
+    // backgroundColor: pressed ? 'deepskyblue' : 'transparent', //'white',
+    height: '100%',//comp_Height - 1,
+    // flex: flex_val,
+    shadowColor: 'grey',
     shadowOffset: {
       width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 5,
+      height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 2,
+    elevation: 5, // For Android shadow
   },
-  button: {
-    borderRadius: 2, //20,
-    // padding: 10,
-    elevation: 2,
-    height: 30,
-    backgroundColor: ukbd_navy_blue, //ukbd_place_holder_TextColor,//'#2196F3',
+  pressedButton: {
+    // backgroundColor: '#45a049', // Slight color change on press
+    // paddingVertical: 15,
+    paddingHorizontal: 30,
+    borderRadius: 8,
+
+    flexDirection: 'row',
+
     justifyContent: 'center',
-    flexDirection: 'column',
     alignItems: 'center',
-  },
-  /*   buttonOpen: {
-           backgroundColor: '#F194FF',
-       },*/
+    // backgroundColor: pressed ? 'deepskyblue' : 'transparent', //'white',
+    height: '100%',//comp_Height - 1,
 
-  textStyle: {
-    color: 'white',
-    // fontWeight: 'bold',
-    textAlign: 'center',
-  },
 
-  /*   modalText: {
-           marginBottom: 15,
-           textAlign: 'center',
-           fontWeight: '400',//'bold',
-           fontSize: 14,
-           color: ukbd_red,//ukbd_navy_blue,
-       },
-       */
+    shadowColor: 'green',
+    shadowOffset: {
+      width: 0,
+      height: 2
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 2,
+    elevation: 2, // Higher shadow elevation on press
+  },
 });
+
