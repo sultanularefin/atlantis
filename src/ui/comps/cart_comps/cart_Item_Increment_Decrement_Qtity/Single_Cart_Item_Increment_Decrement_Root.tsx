@@ -86,16 +86,7 @@ const Single_Cart_Item_Increment_Decrement_Root: React.FC<
         'getProducts',
         {limit: home_page_product_limit},
         draft_Products => {
-          // const temp_this_product_id = draft_Products[home_item_index].id;
-          // const one_Item = draft_Products[this_product_id];
-          // const one_Item_by_product_index = draft_Products[product_index];
 
-          /*console.log('one_Item_by_product_index: ', one_Item_by_product_index);
-          console.log('product_index: ', product_index);
-
-          console.log('one_Item: ', one_Item);
-          console.log('this_product_id: ', this_product_id);
-          console.log('cart_item_Index', cart_item_Index);*/
 
           draft_Products[product_index].temp__Quantity += 1;
 
@@ -117,21 +108,6 @@ const Single_Cart_Item_Increment_Decrement_Root: React.FC<
   const one_cart__item_decrement_button_pressed = () => {
     // 999
 
-    /*  if (quantity === 0) {
-                      dispatch(
-                          productsApiSlice.util.updateQueryData(
-                              'getProducts',
-                              {limit: home_page_product_limit},
-                              draft_Products => {
-                                  // state.home_State.paginate_data.docs[action.payload].temp__Quantity = 1;
-                                  draft_Products[this_product_id].btn_Pressed = false;
-                                  draft_Products[this_product_id].temp__Quantity = 0;
-                              },
-                          ),
-                      );
-
-                      return;
-                  } else {*/
 
     dispatch(
       productsApiSlice.util.updateQueryData(

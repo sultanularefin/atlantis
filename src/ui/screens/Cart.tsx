@@ -69,11 +69,11 @@ const Cart: React.FC<Cart_Props> = ({
                                         navigation,
                                     }) => {
 
-    // const localStorage: get_Detail_By_User_ID_server_Token = useAppSelector(select_Logger_Data_BY_ID);
+
     const localStorage: get_Detail_By_User_ID_server_Token = useAppSelector(select_Logger_Data_BY_ID);
 
 
-    console.log("at Cart");
+    // console.log("at Cart");
 
 
     const dispatch = useAppDispatch();
@@ -296,6 +296,7 @@ const Cart: React.FC<Cart_Props> = ({
 
                     nav={navigation}
                     comp_Width={displayWidth}
+                    bg_Color={'white'}
                     // exchang_Rage={exchange_Rate}
                 />
             </View>

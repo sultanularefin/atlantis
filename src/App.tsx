@@ -72,121 +72,125 @@ export interface Props {
 }
 
 const App: React.FC<Props> = (props) => {
+
+    console.log("at app");
+
     return (
         <GestureHandlerRootView style={{
             flex: 1,
+            // height: '100%',
         }}>
-            <Provider store={store}>
-                <SafeAreaProvider>
+                <Provider store={store}>
+                    <SafeAreaProvider>
 
 
-                    <ActionSheetProvider>
-                        <NavigationContainer>
-                            <StatusBar barStyle="dark-content"
-                                       backgroundColor="#00bfff"/>
-                            <Native_Root_Stack.Navigator
-                                initialRouteName={
-                                    'SplashScreen'
-                                }
-                                screenOptions={{
-                                    // cardOverlayEnabled: true,
+                        <ActionSheetProvider>
+                            <NavigationContainer>
+                                <StatusBar barStyle="dark-content"
+                                           backgroundColor="#00bfff"/>
+                                <Native_Root_Stack.Navigator
+                                    initialRouteName={
+                                        'SplashScreen'
+                                    }
+                                    screenOptions={{
+                                        // cardOverlayEnabled: true,
 
-                                    headerStyle: {
-                                        backgroundColor: '#6a51ae', // This will affect the StatusBar background on iOS
-                                    },
-                                    headerTitleStyle: {
-                                        fontWeight: 'bold',
-                                        // fontSize: rdx_dimension.width>360? 16:14,
-                                        fontSize: 16,
-                                    },
-                                    headerTitleAlign: 'center',
-                                }}>
-
-                                <Native_Root_Stack.Screen
-                                    name="SplashScreen"
-                                    component={SplashScreen}
-
-                                    options={{
                                         headerStyle: {
                                             backgroundColor: '#6a51ae', // This will affect the StatusBar background on iOS
                                         },
-
-                                        headerShown: false,
-
-                                    }}
-
-                                />
-
-
-                                <Native_Root_Stack.Screen
-                                    name="Cart"
-                                    component={Cart}
-
-                                    options={{
-                                        headerStyle: {
-                                            backgroundColor: '#6a51ae', // This will affect the StatusBar background on iOS
+                                        headerTitleStyle: {
+                                            fontWeight: 'bold',
+                                            // fontSize: rdx_dimension.width>360? 16:14,
+                                            fontSize: 16,
                                         },
+                                        headerTitleAlign: 'center',
+                                    }}>
 
-                                        headerShown: false,
+                                    <Native_Root_Stack.Screen
+                                        name="SplashScreen"
+                                        component={SplashScreen}
 
-                                    }}
+                                        options={{
+                                            headerStyle: {
+                                                backgroundColor: '#6a51ae', // This will affect the StatusBar background on iOS
+                                            },
 
-                                />
+                                            headerShown: false,
 
+                                        }}
 
-                                <Native_Root_Stack.Screen
-                                    name="MultipleImageHeaderNull"
-                                    component={MultipleImageHeaderNull}
-
-                                    options={{
-                                        headerStyle: {
-                                            backgroundColor: '#6a51ae', // This will affect the StatusBar background on iOS
-                                        },
-                                        // screenOptions={{
-                                        headerShown: false,
-                                    }}
-                                />
+                                    />
 
 
-                                <Native_Root_Stack.Screen
-                                    name="Product_Details_Page"
-                                    component={Product_Details_Page}
-                                    options={{
-                                        headerStyle: {
-                                            backgroundColor: '#6a51ae', // This will affect the StatusBar background on iOS
-                                        },
-                                        headerShown: false,
+                                    <Native_Root_Stack.Screen
+                                        name="Cart"
+                                        component={Cart}
+
+                                        options={{
+                                            headerStyle: {
+                                                backgroundColor: '#6a51ae', // This will affect the StatusBar background on iOS
+                                            },
+
+                                            headerShown: false,
+
+                                        }}
+
+                                    />
 
 
-                                        // presentation: 'transparentModal',
-                                    }}
+                                    <Native_Root_Stack.Screen
+                                        name="MultipleImageHeaderNull"
+                                        component={MultipleImageHeaderNull}
 
-                                    // initialParams={{single_Product_ID: "635f742ff26b331cb5dcf6ab"}}
-
-                                />
-
-
-                                <Native_Root_Stack.Screen
-                                    name="Catalog_Home_Page"
-                                    component={Catalog_Home_Page}
-                                    options={{
-                                        headerStyle: {
-                                            backgroundColor: '#6a51ae', // This will affect the StatusBar background on iOS
-                                        },
-                                        headerShown: false,
-                                        // headerShown: true,
-                                    }}
-                                />
-
-                                {/*    <Native_Root_Stack.Screen
-                                    name="Logger_Scan_Page"
-                                    component={Logger_Scan_Page}
-                                    options={{
-                                        headerShown: false,
+                                        options={{
+                                            headerStyle: {
+                                                backgroundColor: '#6a51ae', // This will affect the StatusBar background on iOS
+                                            },
+                                            // screenOptions={{
+                                            headerShown: false,
+                                        }}
+                                    />
 
 
-                                    }}
-                                />*/}
+                                    <Native_Root_Stack.Screen
+                                        name="Product_Details_Page"
+                                        component={Product_Details_Page}
+                                        options={{
+                                            headerStyle: {
+                                                backgroundColor: '#6a51ae', // This will affect the StatusBar background on iOS
+                                            },
+                                            headerShown: false,
+
+
+                                            // presentation: 'transparentModal',
+                                        }}
+
+                                        // initialParams={{single_Product_ID: "635f742ff26b331cb5dcf6ab"}}
+
+                                    />
+
+
+                                    <Native_Root_Stack.Screen
+                                        name="Catalog_Home_Page"
+                                        component={Catalog_Home_Page}
+                                        options={{
+                                            headerStyle: {
+                                                backgroundColor: '#6a51ae', // This will affect the StatusBar background on iOS
+                                            },
+                                            headerShown: false,
+                                            // headerShown: true,
+                                        }}
+                                    />
+
+                                    {/*    <Native_Root_Stack.Screen
+                                        name="Logger_Scan_Page"
+                                        component={Logger_Scan_Page}
+                                        options={{
+                                            headerShown: false,
+
+
+                                        }}
+                                    />*/}
 
 
                                 <Native_Root_Stack.Screen
@@ -211,6 +215,7 @@ const App: React.FC<Props> = (props) => {
                     </ActionSheetProvider>
                 </SafeAreaProvider>
             </Provider>
+
         </GestureHandlerRootView>
     );
 };

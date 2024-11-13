@@ -96,7 +96,7 @@ const Header_DashBoard_Home: React.FC<Header_Props> = ({
                 <View
                     style={{
                         ...styles.headerItems,
-                        height: comp_Height,
+                        height: comp_Height-2,
                         paddingLeft: 5,
                         // backgroundColor: ukbd_red_light,
 
@@ -147,8 +147,6 @@ const Header_DashBoard_Home: React.FC<Header_Props> = ({
 
                             }
                         ]}>
-
-
 
                       <Menu_Icon_SVG
                       width= {40}
@@ -214,23 +212,6 @@ const Header_DashBoard_Home: React.FC<Header_Props> = ({
 const styles = StyleSheet.create({
     container: {
 
-        /*
-        shadowColor: "#000",
-        shadowOffset: {
-          width: 1,
-          height: 1
-        },
-        shadowOpacity: 0.4,
-        shadowRadius: 3,
-
-
-        elevation: 5,
-
-        borderWidth: 1,
-
-        borderStyle: "solid",
-        borderColor: "rgba(1, 41, 101, 0.03)"
-            */
     },
     headerItems: {
 

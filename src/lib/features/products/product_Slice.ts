@@ -250,7 +250,19 @@ const deduct_price_to_total_cart_price_2 =  (state: any, action: PayloadAction<n
 
 
 const delete_One_Cart_Item_2 = (state: any, action: PayloadAction<number>) => {
+  // const cart_index = action.payload;
+
+
   const cart_index = action.payload;
+
+  const temp_Cart = state.local_Cart_Array;
+
+  const deleted_Item = temp_Cart[cart_index];
+
+  state.local_Cart_Array = temp_Cart.filter((item: local_Cart_Item, index: number) => index !== cart_index);
+
+
+
 
 
 };

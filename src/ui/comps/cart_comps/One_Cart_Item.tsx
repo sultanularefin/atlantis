@@ -44,7 +44,12 @@ import Single_Cart_Item_Increment_Decrement_Root
 import hairlineWidth = StyleSheet.hairlineWidth;
 import {local_Cart_Item} from "../../../interfaces/products/product.ts";
 import {useAppDispatch} from "../../../lib/app/hooks.ts";
-import {delete_One_Cart_Item} from "../../../lib/features/products/product_Slice.ts";
+import {
+    decrement_cart_item_for_home_index_0, deduct_price_to_total_cart_price,
+    delete_One_Cart_Item
+} from "../../../lib/features/products/product_Slice.ts";
+import {productsApiSlice} from "../../../lib/features/products/productsApiSlice.ts";
+import {home_page_product_limit} from "../../../config/business_constants.ts";
 // import {numberWithCommas} from "../../headers/sub_Comps/Bag_Button";
 
 // import {OrderList} from "../../../appStore/interfaces_Slice/order_Related_Interfaces";
@@ -99,7 +104,31 @@ const One_Cart_Item: React.FC<One_Cart_Item_Props> = ({
 
     const cart_Item_Delete_BTN_Pressed = () => {
 
-        console.log("__at __cart_Item_Delete_BTN_Pressed");
+
+
+
+        dispatch(
+            productsApiSlice.util.updateQueryData(
+                'getProducts',
+                {limit: home_page_product_limit},
+                draft_Products => {
+                    // const temp_this_product_id = draft_Products[home_item_index].id;
+                    // const one_Item = draft_Products[this_product_id];
+
+                    draft_Products[one_Cart.product_Index].temp__Quantity = 0;
+
+
+                },
+            ),
+        );
+
+
+        // dispatch(decrement_cart_item_for_home_index_0(cart_item_Index));
+
+        const all_single_cart_item_price = one_Cart.price*one_Cart.quantity;
+
+        dispatch(deduct_price_to_total_cart_price(all_single_cart_item_price));
+        // console.log("__at __cart_Item_Delete_BTN_Pressed");
         return dispatch(delete_One_Cart_Item(index));
 
     };
